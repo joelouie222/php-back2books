@@ -1,0 +1,282 @@
+/* --------------------------------- G L O B A L S ------------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background-image: url(./images/background_image.png);
+}
+
+li {
+    list-style: none;
+}
+
+/* --------------------------------- H E A D E R ------------------------------------------ */
+.header {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height: 142px;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.logo-container {
+  flex-grow: 1;
+}
+
+.search-container {
+  padding: 8px;
+  margin: 8px;
+  align-self: flex-end;
+}
+
+.search-container input[type=text] {
+  border: none;
+  font-size: 17px;
+  padding: 11px 0px 8px 8px;
+}
+
+.search-container button {
+  padding: 6px;
+  background-color: lightpink;
+  border: none;
+}
+
+.search-container button:hover {
+  background-color: hotpink;
+}
+
+.favorites-container {
+  padding: 8px;
+  margin: 8px;
+  align-self: flex-end;
+}
+
+.cart-container {
+  padding: 8px;
+  margin: 8px 2% 8px 8px;
+  align-self: flex-end;
+}
+
+
+
+/* -----------------------------------  S I D E B A R -------------------------------------------- */
+/* Style the sidebar - fixed full height */
+.sidebar {
+  position: fixed;
+  top: 142x;
+  left:0;
+  width:200px;
+  height:100%;
+  background-color: antiquewhite;
+}
+
+/* Style sidebar links */
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+/* Style links on mouse-over */
+.sidebar a:hover {
+  color: black;
+  background-color: pink;
+}
+
+
+
+/* ---------------------------- M A I N   L A Y O U T ----------------------------------------------*/
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 142px 0 0 200px;
+}
+
+/* Style the main content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+@media screen{
+  body>div#header{
+   position:fixed;
+  }
+  body>div#sidebar{
+   position:fixed;
+  }
+ }
+
+ * html body{
+  overflow:hidden;
+ } 
+ 
+ * html div#content{
+  height:100%;
+  overflow:auto;
+ }
+
+
+/* --------------------------------------------------------------------------------------- */
+
+
+/* FORMS */
+
+.hidden {
+  display: none !important;
+}
+
+/* ELEMENTS */
+
+.user-menu {
+    background-color: antiquewhite;
+    margin: 20px;
+    padding: 10px 24px;
+    display: block;
+    text-align: center;
+    border-radius: 16px;
+}
+
+.products {
+    background-color: antiquewhite;
+    margin: 20px;
+    padding: 10px;
+}
+
+.about-us {
+    background-color: antiquewhite;
+    margin: 20px;
+    padding: 10px;
+}
+
+.contact-us {
+    background-color: antiquewhite;
+    margin: 20px;
+    padding: 10px;
+}
+
+.gallery{
+    display: flex;
+    flex-wrap:wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.prod-content{
+    width:20%;
+    margin: 15px;
+    box-sizing: border-box;
+    float: left;
+    text-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+    padding-top: 10px;
+    /*box-shadow: 0 14px 28px rgba(0, 0, 0,0.25), 0 10px 10px rgba(0, 0, 0,0.25);*/
+    transition: .4s;
+    background: antiquewhite;
+}
+
+.prod-content:hover{
+    /* box-shadow: 0 3px 6px rgba(0, 0, 0,0.16), 0 10px 10px rgba(0, 0, 0,0.23); */
+    transform: translate(0px, -4px);
+}
+
+h6{
+  font-size: 26px;
+  text-align: center;
+  color:#000000 ;
+  margin: 0;
+}
+
+/* NAVBAR STYLING STARTS */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: antiquewhite;
+}
+
+.navbar img {
+  height: 25%;
+  width: 15%;
+}
+.nav-links a {
+  color: #000000;
+}
+
+/* LOGO */
+/* .logo {
+  font-size: 32px;
+} */
+
+/* NAVBAR MENU */
+.menu {
+  display: flex;
+  gap: 1em;
+  font-size: 18px;
+}
+
+.menu li:hover {
+  background-color: #4c9e9e;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+
+.menu li {
+  padding: 5px 14px;
+}
+
+/* DROPDOWN MENU */
+.services {
+  position: relative; 
+}
+
+.dropdown {
+  background-color: rgb(1, 139, 139);
+  padding: 1em 0;
+  position: absolute; /*WITH RESPECT TO PARENT*/
+  display: none;
+  border-radius: 8px;
+  top: 35px;
+}
+
+.dropdown li + li {
+  margin-top: 10px;
+}
+
+.dropdown li {
+  padding: 0.5em 1em;
+  width: 8em;
+  text-align: center;
+}
+
+.dropdown li:hover {
+  background-color: #4c9e9e;
+}
+
+.services:hover .dropdown {
+  display: block;
+}
+
+
