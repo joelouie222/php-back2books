@@ -20,10 +20,10 @@
 </head>
 
 <body id="home">
-// <?php
+ <?php
     // Include the configuration file
     // include('config.php');
-// ?>
+ ?>
     <div class="container">
         <header class="header">
             <div class="logo-container">
