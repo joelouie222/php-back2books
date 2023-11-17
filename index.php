@@ -20,11 +20,12 @@
 </head>
 
 <body id="home">
- <?php
-    // Include the configuration file
-    include('config.php');
- ?>
+    <?php
+        // Include the configuration file
+        //include('config.php');
+    ?>
     <div class="container">
+    
         <header class="header">
             <div class="logo-container">
             <a href="/"><img src="/images/b2b-logo-header.png" width="549" height="142" alt="Back to Books Logo"></a>
@@ -71,6 +72,7 @@
                 <?php
                     $name = 'HELLO WORLD TESTING PHP 8.2';
                     echo "<h3> {$name} <h3>";
+                    include('config.php');
                 ?>
                 
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
