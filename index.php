@@ -26,7 +26,7 @@
     ?>
     <div class="container">
     
-        <?php include('layout.php');<?>
+        <?php include('layout.php');?>
 
         
         <div class = "gallery">
