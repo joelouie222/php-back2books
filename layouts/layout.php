@@ -7,8 +7,8 @@
     echo '    <input type="text" placeholder="Search..." name="search" size="40">';
     echo '    <button type="submit"><i class="fa fa-search fa-2x"></i></button>';
     echo '</div>';
-    echo '  <div class="favorites-container"><a href="/pages/favorites.html"><i class="fa fa-heart fa-4x"></i></a></div>';
-    echo '  <div class="cart-container"><a href="/pages/cart.html"><i class="fa fa-cart-arrow-down fa-4x"></i></a></div>';
+    echo '  <div class="favorites-container"><a href="/pages/favorites.php"><i class="fa fa-heart fa-4x"></i></a></div>';
+    echo '  <div class="cart-container"><a href="/pages/cart.php"><i class="fa fa-cart-arrow-down fa-4x"></i></a></div>';
     echo '</header>';
 
     echo '<div class="sidebar">';

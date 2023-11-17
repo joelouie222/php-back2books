@@ -20,7 +20,7 @@
 
 <body id="home">
     <div class="container">
-        <?php include('/layouts/layout.php');
+        <?php include('layouts/layout.php');
         ?>  
         <section class="vh-100">
             <div class="container py-5 h-100">
@@ -35,23 +35,22 @@
 
                   <!-- Email input -->
                   
-                  <div class="form-outline mb-4">
-                    <input type="email" id="form1Example13" class="form-control form-control-lg"style=" margin-left: auto; margin-right: auto; margin-top: 5px" />
-                    
-                    <label class="form-label" for="form1Example13">Email Address</label>
+                  <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input name="loginEmail" type="email" class="form-control" id="email" placeholder="Email">
+                    <p id="loginEmailStatus"></p>
                   </div>
-                  
+                      
                   <!-- Password input -->
-                  <div class="form-outline mb-4">
-                    <input type="password" id="form1Example23" class="form-control form-control-lg"style=" margin-left: auto; margin-right: auto; margin-top: 5px" />
-                    <label class="form-label" for="form1Example23">Password</label>
+                  <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input name="loginPassword" type="password" class="form-control" id="loginPassword" placeholder="Password">
+                    <p id="loginPasswordStatus"></p>
                   </div>
                   
-        
-      
                   <!-- Submit button -->
                   <div>
-                  <button type="submit" class="btn btn-primary btn-lg btn-block"style=" margin-left: auto; margin-right: auto; margin-top: 5px">Login</button>
+                  <button name="submit" type="submit" value="submit">Submit</button>
                   </div>
         
                 </form>
