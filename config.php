@@ -27,7 +27,7 @@ try {
             </p>";
 
 
-    $conn = new PDO("sqlsrv:server = tcp:php-b2b-db-srvr.database.windows.net,1433; Database = php-b2b-db", "phpb2badmin", "{your_password_here}");
+    $conn = new PDO("sqlsrv:server = tcp:php-b2b-db-srvr.database.windows.net,1433; Database = $AZURE_SQL_DATABASE", $AZURE_SQL_UID, $AZURE_SQL_PWD);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e) {
@@ -36,7 +36,7 @@ catch (PDOException $e) {
 }
 
 // SQL Server Extension Sample Code:
-$connectionInfo = array("UID" => "phpb2badmin", "pwd" => "{your_password_here}", "Database" => "php-b2b-db", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$connectionInfo = array("UID" => $AZURE_SQL_UID, "pwd" => $AZURE_SQL_PWD, "Database" => $AZURE_SQL_DATABASE, "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
 $serverName = "tcp:php-b2b-db-srvr.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
