@@ -23,12 +23,9 @@
     <?php
         // Include the configuration file
         //include('config.php');
+        include('layout.php');
     ?>
     <div class="container">
-    
-        <?php include('layout.php');?>
-
-        
         <div class = "gallery">
                             <?php
                             // $select_prod="SELECT * from products";
