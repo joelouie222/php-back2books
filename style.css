@@ -72,7 +72,7 @@ li {
 /* Style the sidebar - fixed full height */
 .sidebar {
   position: fixed;
-  top: 142x;
+  top: 142px;
   left:0;
   width:200px;
   height:100%;
