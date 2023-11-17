@@ -18,21 +18,16 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
-<body id="home">
+<body>
     <div class="container">
-        <?php include('./layouts/layout.php');
+        <?php include('../layouts/layout.php');
         ?>  
-        <section class="vh-100">
-            <div class="container py-5 h-100">
-              <div class="row d-flex align-items-center justify-content-center h-100">
-                <div class="col-md-8 col-lg-7 col-xl-6">
-        <div class="about-us">
-            
+        
+        <div>
+          <center>
                 <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
-           
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <div>
                 <form>
-
                   <!-- Email input -->
                   
                   <div class="form-group">
@@ -52,9 +47,9 @@
                   <div>
                   <button name="submit" type="submit" value="submit">Submit</button>
                   </div>
-        
                 </form>
             </div>
+          </center>
         </div>
     </div>
 </div>
