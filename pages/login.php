@@ -20,7 +20,7 @@
 
 <body id="home">
     <div class="container">
-        <?php include('layouts/layout.php');
+        <?php include('./layouts/layout.php');
         ?>  
         <section class="vh-100">
             <div class="container py-5 h-100">
