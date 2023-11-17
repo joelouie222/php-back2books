@@ -51,17 +51,17 @@
         
         <div class = "gallery">
                             <?php
-                            $select_prod="SELECT * from products";
-                            $result_prod=mysqli_query($db_conn,$select_prod);
-                            while($row_data=mysqli_fetch_assoc($result_prod)){
-                                $prod_name=$row_data['prod_name'];
-                                $prod_price=$row_data['prod_price'];
-                                echo '<div class="prod-content">';
-                                echo '<img src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-retro-book-free-material-png-image_4481187.jpg" alt="Product 2" width="100" height="100">';
-                                echo "<h3>$prod_name</h3>";
-                                echo "<h6>$prod_price</h6>";
-                                echo "</div>";
-                            }
+                            // $select_prod="SELECT * from products";
+                            // $result_prod=mysqli_query($db_conn,$select_prod);
+                            // while($row_data=mysqli_fetch_assoc($result_prod)){
+                            //     $prod_name=$row_data['prod_name'];
+                            //     $prod_price=$row_data['prod_price'];
+                            //     echo '<div class="prod-content">';
+                            //     echo '<img src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-retro-book-free-material-png-image_4481187.jpg" alt="Product 2" width="100" height="100">';
+                            //     echo "<h3>$prod_name</h3>";
+                            //     echo "<h6>$prod_price</h6>";
+                            //     echo "</div>";
+                            // }
                             ?>
                             
             
