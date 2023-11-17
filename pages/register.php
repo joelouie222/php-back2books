@@ -19,7 +19,7 @@
 </head>
 
 <body id="home">
-    <?php include('layout.php');
+    <?php include('/layouts/layout.php');
     ?>  
       
     <div class="container">

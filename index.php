@@ -23,7 +23,7 @@
     <?php
         // Include the configuration file
         //include('config.php');
-        include('layout.php');
+        include('/layouts/layout.php');
     ?>
     <div class="container">
         <div class = "gallery">

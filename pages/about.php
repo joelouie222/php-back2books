@@ -19,9 +19,9 @@
 </head>
 
 <body id="home">
-    <?php include('layout.php');
-    ?>    
     <div class="container">
+        <?php include('/layouts/layout.php');
+        ?>  
 
         <div class="about-us">
             <center>
