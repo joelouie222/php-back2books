@@ -19,12 +19,7 @@ try {
     $AZURE_SQL_SERVERNAME = getenv('AZURE_SQL_PWD');
     $AZURE_SQL_UID = getenv('AZURE_SQL_UID');
 
-    $echo "<p>
-                AZURE_SQL_DATABASE: $AZURE_SQL_DATABASE </br>
-                AZURE_SQL_PWD: $AZURE_SQL_PWD </br>
-                AZURE_SQL_SERVERNAME: $AZURE_SQL_SERVERNAME </br>
-                AZURE_SQL_UID: $AZURE_SQL_UID </br>
-            </p>";
+    echo "<h3> AZURE_SQL_DATABASE: $AZURE_SQL_DATABASE </br> AZURE_SQL_PWD: $AZURE_SQL_PWD </br> AZURE_SQL_SERVERNAME: $AZURE_SQL_SERVERNAME </br> AZURE_SQL_UID: $AZURE_SQL_UID </br></h3>";
 
 
     $conn = new PDO("sqlsrv:server = tcp:php-b2b-db-srvr.database.windows.net,1433; Database = $AZURE_SQL_DATABASE", $AZURE_SQL_UID, $AZURE_SQL_PWD);
