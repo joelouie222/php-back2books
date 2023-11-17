@@ -14,6 +14,11 @@
 
 // PHP Data Objects(PDO) Sample Code:
 try {
+    $AZURE_SQL_DATABASE = getenv('AZURE_SQL_DATABASE');
+    $AZURE_SQL_PWD = getenv('AZURE_SQL_PWD');
+    $AZURE_SQL_SERVERNAME = getenv('AZURE_SQL_SERVERNAME');
+    $AZURE_SQL_UID = getenv('AZURE_SQL_UID');
+
     $conn = new PDO("sqlsrv:server = tcp:$AZURE_SQL_SERVERNAME; Database = $AZURE_SQL_DATABASE", $AZURE_SQL_UID, $AZURE_SQL_PWD);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
