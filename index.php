@@ -22,7 +22,7 @@
 <body id="home">
  <?php
     // Include the configuration file
-    // include('config.php');
+    include('config.php');
  ?>
     <div class="container">
         <header class="header">
