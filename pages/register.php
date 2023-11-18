@@ -19,7 +19,7 @@
 </head>
 
 <body id="home">
-    <?php include('layouts/layout.php');
+    <?php include('../layouts/layout.php');
     ?>  
       
     <div class="container">
@@ -31,49 +31,40 @@
             
                 <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
            
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <div>
                 <form>
-
-
-                     <!-- Courtesy Title input -->
-                  <div class="form-outline mb-4">
-                    <input type="courtesy-title" id="form1Example23" class="form-control form-control-lg"style=" margin-left: auto; margin-right: auto; margin-top: 5px" />
-                    <label class="form-label" for="form1Example23">Courtesy Title</label>
-                  </div>
-
-                    <!-- First Name Input -->
-                  
-                    <div class="form-outline mb-4">
-                        <input type="first-name" id="form1Example13" class="form-control form-control-lg"style=" margin-left: auto; margin-right: auto; margin-top: 5px" />
-                        
-                        <label class="form-label" for="form1Example13">First Name</label>
-                      </div>
-                      
-                      <!-- Last Name Input -->
-                      <div class="form-outline mb-4">
-                        <input type="last-name" id="form1Example23" class="form-control form-control-lg" style=" margin-left: auto; margin-right: auto; margin-top: 5px" />
-                        <label class="form-label" for="form1Example23">Last Name</label>
-                      </div>
-
                   <!-- Email input -->
-                  
-                  <div class="form-outline mb-4">
-                    <input type="email" id="form1Example13" class="form-control form-control-lg"style=" margin-left: auto; margin-right: auto; margin-top: 5px" />
-                    
-                    <label class="form-label" for="form1Example13">Email Address</label>
+                
+                  <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <input name="registerEmail" type="email" class="form-control" id="registerEmail" placeholder="Email">
+                    <p id="registerEmailStatus"></p>
                   </div>
                   
+                  <!-- Confirm Email input -->
+                  <div class="form-group">
+                    <label for="registerEmail2">Confirm Email Address</label>
+                    <input name="registerEmail2" type="email" class="form-control" id="registerEmail2" placeholder="Confirm Email">
+                    <p id="registerEmailStatus2"></p>
+                  </div>
+
                   <!-- Password input -->
-                  <div class="form-outline mb-4">
-                    <input type="password" id="form1Example23" class="form-control form-control-lg"style=" margin-left: auto; margin-right: auto; margin-top: 5px" />
-                    <label class="form-label" for="form1Example23">Password</label>
+                  <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input name="registerPassword" type="password" class="form-control" id="registerPassword" placeholder="Password">
+                    <p id="registerPasswordStatus"></p>
                   </div>
                   
-        
-      
+                  <!-- Confirm Password input -->
+                  <div class="form-group">
+                    <label for="registerPassword2">Password</label>
+                    <input name="registerPassword2" type="password" class="form-control" id="registerPassword2" placeholder="Confirm Password">
+                    <p id="registerPasswordStatus2"></p>
+                  </div>
+
                   <!-- Submit button -->
                   <div>
-                  <button type="submit" class="btn btn-primary btn-lg btn-block"style=" margin-left: auto; margin-right: auto; margin-top: 5px">Register</button>
+                  <button name="submit" type="submit" value="submit">Submit</button>
                   </div>
         
                 </form>

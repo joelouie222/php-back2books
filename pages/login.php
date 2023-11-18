@@ -23,7 +23,7 @@
         <?php include('../layouts/layout.php');
         ?>  
         
-        <div class="about-us>
+        <div class="about-us">
           <center>
                 <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
             <div>
@@ -32,7 +32,7 @@
                   
                   <div class="form-group">
                     <label for="loginEmail">Email Address</label>
-                    <input name="loginEmail" type="email" class="form-control" id="email" placeholder="Email">
+                    <input name="loginEmail" type="email" class="form-control" id="loginEmail" placeholder="Email">
                     <p id="loginEmailStatus"></p>
                   </div>
                       
