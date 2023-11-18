@@ -120,14 +120,6 @@ li {
 
 
 
-
-
-
-
-
-
-
-
 /* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
@@ -184,6 +176,7 @@ button, input, optgroup, select, textarea {
     font-family: inherit;
     margin: 0;
 }
+
 
 /* ELEMENTS */
 .hidden {

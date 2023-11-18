@@ -23,60 +23,48 @@
     ?>  
       
     <div class="container">
-        <section class="vh-100">
-            <div class="container py-5 h-100">
-              <div class="row d-flex align-items-center justify-content-center h-100">
-                <div class="col-md-8 col-lg-7 col-xl-6">
         <div class="about-us">
-            
-                <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
-           
+        <center>
+            <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
             <div>
                 <form>
-                  <!-- Email input -->
-                
-                  <div class="form-group">
-                    <label for="registerEmail">Email Address</label>
-                    <input name="registerEmail" type="email" class="form-control" id="registerEmail" placeholder="Email">
-                    <p id="registerEmailStatus"></p>
-                  </div>
-                  
-                  <!-- Confirm Email input -->
-                  <div class="form-group">
-                    <label for="registerEmail2">Confirm Email Address</label>
-                    <input name="registerEmail2" type="email" class="form-control" id="registerEmail2" placeholder="Confirm Email">
-                    <p id="registerEmailStatus2"></p>
-                  </div>
+                      <!-- Email input -->
+                      <div class="form-group">
+                        <label for="registerEmail">Email Address</label>
+                        <input name="registerEmail" type="email" class="form-control" id="registerEmail" placeholder="Email">
+                        <p id="registerEmailStatus"></p>
+                      </div>
+                      
+                      <!-- Confirm Email input -->
+                      <div class="form-group">
+                        <label for="registerEmail2">Confirm Email Address</label>
+                        <input name="registerEmail2" type="email" class="form-control" id="registerEmail2" placeholder="Confirm Email">
+                        <p id="registerEmailStatus2"></p>
+                      </div>
 
-                  <!-- Password input -->
-                  <div class="form-group">
-                    <label for="registerPassword">Password</label>
-                    <input name="registerPassword" type="password" class="form-control" id="registerPassword" placeholder="Password">
-                    <p id="registerPasswordStatus"></p>
-                  </div>
-                  
-                  <!-- Confirm Password input -->
-                  <div class="form-group">
-                    <label for="registerPassword2">Password</label>
-                    <input name="registerPassword2" type="password" class="form-control" id="registerPassword2" placeholder="Confirm Password">
-                    <p id="registerPasswordStatus2"></p>
-                  </div>
+                      <!-- Password input -->
+                      <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input name="registerPassword" type="password" class="form-control" id="registerPassword" placeholder="Password">
+                        <p id="registerPasswordStatus"></p>
+                      </div>
+                      
+                      <!-- Confirm Password input -->
+                      <div class="form-group">
+                        <label for="registerPassword2">Password</label>
+                        <input name="registerPassword2" type="password" class="form-control" id="registerPassword2" placeholder="Confirm Password">
+                        <p id="registerPasswordStatus2"></p>
+                      </div>
 
-                  <!-- Submit button -->
-                  <div>
-                  <button name="submit" type="submit" value="submit">Submit</button>
-                  </div>
-        
+                      <!-- Submit button -->
+                      <div>
+                      <button name="submit" type="submit" value="submit">Submit</button>
+                      </div>
                 </form>
             </div>
-        </div>
-    </div>
-</div>
-</div>
-</section>
-        
-           
-                
+        </center>
+      </div>
+    </div>       
 </body>
 
 </html>
