@@ -47,7 +47,7 @@
             <div class="about-us">
                 <?php
                     $name = 'HELLO WORLD TESTING PHP 8.2';
-                    echo "<h3> {$name} <h3>";
+                    echo "<h3> {$name} </h3>";
                     include('config.php');
                 ?>
                 

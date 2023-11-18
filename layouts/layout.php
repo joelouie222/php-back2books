@@ -13,9 +13,9 @@
 
     echo '<div class="sidebar">';
     echo '  <a href="/pages/login.php"><i class="fa fa-fw fa-sign-in"></i> Sign In</a>';
-    echo '  <a href="/pages/register.php" onclick="scripts()"><i class="fa fa-fw fa-address-card"></i> Register </a>';
-    echo '  <a href="/index.php"><i class="fa fa-fw fa-book"></i> Catalog </a>';
-    echo '  <a href="/pages/products.php"><i class="fa fa-fw fa-usd"></i> Marketplace </a>';
+    echo '  <a href="/pages/register.php"><i class="fa fa-fw fa-address-card"></i> Register </a>';
+    echo '  <a href="/pages/catalog.php"><i class="fa fa-fw fa-book"></i> Catalog </a>';
+    echo '  <a href="/pages/marketplace.php"><i class="fa fa-fw fa-usd"></i> Marketplace </a>';
     echo '  <a href="/pages/selling.php"><i class="fa fa-fw fa-money"></i> Selling</a>';
     echo '  <a href="/pages/promotion.php"><i class="fa fa-fw fa-tag"></i> Promotions</a>';
     echo '  <a href="/pages/about.php"><i class="fa fa-fw fa-info-circle"></i> About Us </a>';
