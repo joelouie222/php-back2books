@@ -216,17 +216,6 @@ button, input, optgroup, select, textarea {
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
 }
 
-
-
-.user-menu {
-    background-color: antiquewhite;
-    margin: 20px;
-    padding: 10px 24px;
-    display: block;
-    text-align: center;
-    border-radius: 16px;
-}
-
 .products {
     background-color: antiquewhite;
     margin: 20px;

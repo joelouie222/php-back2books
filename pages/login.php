@@ -23,7 +23,7 @@
         <?php include('../layouts/layout.php');
         ?>  
         
-        <div>
+        <div class="about-us>
           <center>
                 <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
             <div>
