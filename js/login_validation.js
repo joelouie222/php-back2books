@@ -13,7 +13,7 @@ function validateEmail(email){
 	else{
 		elEmailStatus.classList.remove("alert-success");
 		elEmailStatus.classList.add("alert-danger");
-		elEmailStatus.innerHTML="Email is NOT valid!";
+		elEmailStatus.innerHTML="Email is not valid!";
 	}
 }
 var elEmail=document.getElementById('loginEmail');
@@ -30,7 +30,7 @@ function validatePassword(password){
 	if (password.value.match(validRegex)){
 		elPasswordStatus.classList.remove("alert-danger");
 		//elCommentStatus.classList.add("alert-success");
-		//elCommentStatus.innerHTML="Password is valid!";
+		elCommentStatus.innerHTML="";
 	}
 	else{
 		elPasswordStatus.classList.remove("alert-success");
