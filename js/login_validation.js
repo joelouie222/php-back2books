@@ -30,10 +30,10 @@ function validatePassword(password){
 	if (password.value.match(validRegex)){
 		elPasswordStatus.classList.remove("alert-danger");
 		//elCommentStatus.classList.add("alert-success");
-		elCommentStatus.innerHTML="";
+		elCommentStatus.innerHTML=" ";
 	}
 	else{
-		elPasswordStatus.classList.remove("alert-success");
+		//elPasswordStatus.classList.remove("alert-success");
 		elPasswordStatus.classList.add("alert-danger");
 		elPasswordStatus.innerHTML="Password cannot be blank!";
 	}

@@ -208,6 +208,12 @@ button, input, optgroup, select, textarea {
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
 }
 
+.alert {
+  padding:15px;
+  margin-bottom:20px;
+  border:1px solid transparent;
+  border-radius:4px
+}
 
 .alert-danger {
   color:#a94442;
