@@ -61,3 +61,4 @@
 </body>
 
 </html>
+<script src="js/validation.js"></script>  

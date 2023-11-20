@@ -209,6 +209,31 @@ button, input, optgroup, select, textarea {
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
 }
 
+
+.alert-danger {
+  color:#a94442;
+  background-color:#f2dede;
+  border-color:#ebccd1
+}
+
+.alert-success {
+  color:#3c763d;
+  background-color:#dff0d8;
+  border-color:#d6e9c6
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .products {
     background-color: antiquewhite;
     margin: 20px;
