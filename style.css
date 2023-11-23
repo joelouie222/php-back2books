@@ -254,6 +254,7 @@ h6{
   background-color: #01e4dd;
   border-radius: 10px;
   /* cursor: pointer; */
+  margin: 10px;
 }
 
 .promo-card .promo-card-box{
