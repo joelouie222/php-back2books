@@ -24,10 +24,10 @@
     ?>
     <div class="container">
         <div class="about-us">
-            <center>
-                <img src="/images/patrick-star-dumb.gif" width="300" height="150">
-                </br>
-                <h1> PAGE UNDER CONSTRUCTION</h1>
+            <center style="border: double;">
+                <div><img src="https://images.pexels.com/photos/5650026/pexels-photo-5650026.jpeg" width="300" height="150"></div>
+                <!-- <img src="/images/patrick-star-dumb.gif" width="300" height="150"> -->
+                <div><h1 style="font-size: xxx-large;"> P R O M O T I O N S </h1><div>
             </center>
 
             <article class="promo-card">
@@ -44,9 +44,8 @@
 
                     <div class="promo-code-box">
                         <div class="coupon-code">
-                            <input type="text" id="couponCode" value="COUPON CODE">
+                            <input type="text" id="couponCode" value="COUPON CODE1">
                         </div>
-                        <div><button onclick="copyCoupon()">COPY CODE</button></div>
                     <div>
                 </div>
             </article>
@@ -65,9 +64,8 @@
 
                     <div class="promo-code-box">
                         <div class="coupon-code">
-                            <input type="text" id="couponCode" value="COUPON CODE">
+                            <input type="text" id="couponCode" value="COUPON CODE2">
                         </div>
-                        <div><button onclick="copyCoupon()">COPY CODE</button></div>
                     <div>
                 </div>
             </article>
@@ -86,29 +84,15 @@
 
                     <div class="promo-code-box">
                         <div class="coupon-code">
-                            <input type="text" id="couponCode" value="COUPON CODE">
+                            <input type="text" id="couponCode" value="COUPON CODE2">
                         </div>
-                        <div><button onclick="copyCoupon()">COPY CODE</button></div>
                     <div>
                 </div>
             </article>
         </div>
 
 <script>
-    function copyCoupon() {
-    // Get the text field
-    var copyText = document.getElementById('couponCode');
-  
-    // Select the text field
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // For mobile devices
-  
-     // Copy the text inside the text field
-    navigator.clipboard.writeText(copyText.value);
-  
-    // Alert the copied text
-    alert("Copied: " + copyText.value);
-   }
+    
 </script>
 
 
