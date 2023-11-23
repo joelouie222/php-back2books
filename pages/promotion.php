@@ -42,7 +42,7 @@
                         <h3 class="coupon-desc"> COUPON DESCRIPTION HERE </h3>
                     </div>
 
-                    <div class="discount-box">
+                    <div class="promo-code-box">
                         <div class="coupon-code">
                             <h3 id="couponCode">COUPON CODE</h3>
                         </div>
@@ -53,6 +53,21 @@
         </div>
 </body>
 
-<script src="/js/copy_coupon.js"></script>
+<script>
+    function copyCoupon() {
+    // Get the text field
+    var copyText = document.getElementById('couponCode');
+  
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+  
+     // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+  
+    // Alert the copied text
+    alert("Copied: " + copyText.value);
+   }
+</script>
 
 </html>
