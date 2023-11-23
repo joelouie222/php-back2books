@@ -49,14 +49,14 @@
                 }
 
                 while($row = sqlsrv_fetch_array($getDiscounts, SQLSRV_FETCH_ASSOC)) {
-                    // echo "($row[DISCOUNT_ID])</br>";
-                    // echo "($row[DISCOUNT_CODE])</br>";
-                    // echo "($row[DISCOUNT_VALUE])</br>";
-                    // echo "($row[ACTIVE])</br>";
-                    // echo "($row[DISCOUNT_NAME])</br>";
-                    // echo "($row[DISCOUNT_DESC])</br>";
-                    // echo "($row[DISCOUNT_TAG])</br>";
-                    // echo "<hr>";
+                    echo "($row[DISCOUNT_ID])</br>";
+                    echo "($row[DISCOUNT_CODE])</br>";
+                    echo "($row[DISCOUNT_VALUE])</br>";
+                    echo "($row[ACTIVE])</br>";
+                    echo "($row[DISCOUNT_NAME])</br>";
+                    echo "($row[DISCOUNT_DESC])</br>";
+                    echo "($row[DISCOUNT_TAG])</br>";
+                    echo "<hr>";
 
                     echo '<article class="promo-card">';
                     echo '    <div class="promo-card-box">';
