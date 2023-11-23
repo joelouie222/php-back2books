@@ -26,14 +26,14 @@
     ?>
     <div class="container">
         <div class="about-us">
-            <center style="border: double; padding: 10px; ">
+            <center style="border: double; padding: 10px; background-color: #e0d3c4;">
                 <div><img src="https://images.pexels.com/photos/5650026/pexels-photo-5650026.jpeg" width="450" height="225"></div>
                 <!-- <img src="/images/patrick-star-dumb.gif" width="300" height="150"> -->
                 <div><h1 style="font-size: xxx-large;"> P R O M O T I O N S </h1><div>
             </center>
 
             <?php
-                $tsql = "SELECT * FROM DISCOUNT";
+                $tsql = "SELECT DISCOUNT_TAG, DISCOUNT_NAME, DISCOUNT_CODE, DISCOUNT_DESC FROM DISCOUNT WHERE ACTIVE = 1";
                 $getDiscounts = sqlsrv_query($conn, $tsql);
 
                 // echo "connectionInfo: ($connectionInfo)";
