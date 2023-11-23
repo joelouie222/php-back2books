@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- OUR CSS -->
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
@@ -33,8 +33,8 @@
             <article class="promo-card">
                 <div class="promo-card-box">
                     <div class="discount-box">
-                        <div> SAVE 20% </div>
-                        <div> WITH COUPON CODE </div>
+                        <div> ENTER COUPON CODE</div>
+                        <div> AT CHECK OUT</div>
                     </div>
 
                     <div class="promo-details">
@@ -42,14 +42,17 @@
                         <h3 class="coupon-desc"> COUPON DESCRIPTION HERE </h3>
                     </div>
 
-                    <div class="coupon-code">
-                        <h3> COUPON CODE </h3>
-                    </div>
+                    <div class="discount-box">
+                        <div class="coupon-code">
+                            <h3 id="couponCode">COUPON CODE</h3>
+                        </div>
+                        <div><button onclick="copyCoupon()">COPY CODE</button></div>
+                    <div>
                 </div>
             </article>
         </div>
 </body>
 
-<script src="js/scripts.js"></script>
+<script src="js/copy_coupon.js"></script>
 
 </html>
