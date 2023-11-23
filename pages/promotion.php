@@ -23,13 +23,30 @@
     <?php include('../layouts/layout.php');
     ?>
     <div class="container">
-                         
         <div class="about-us">
             <center>
                 <img src="/images/patrick-star-dumb.gif" width="300" height="150">
                 </br>
                 <h1> PAGE UNDER CONSTRUCTION</h1>
             </center>
+
+            <article class="promo-card">
+                <div class="promo-card-box">
+                    <div class="discount-box">
+                        <div> SAVE 20% </div>
+                        <div> WITH COUPON CODE </div>
+                    </div>
+
+                    <div class="promo-details">
+                        <div class="promo-name"><span> COUPON NAME </span></div>
+                        <h3 class="coupon-desc"> COUPON DESCRIPTION HERE </h3>
+                    </div>
+
+                    <div class="coupon-code">
+                        <h3> COUPON CODE </h3>
+                    </div>
+                </div>
+            </article>
         </div>
 </body>
 

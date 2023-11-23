@@ -29,8 +29,8 @@ function validatePassword(password){
 	
 	if (password.value.match(validRegex)){
 		elPasswordStatus.classList.remove("alert-danger");
-		//elCommentStatus.classList.add("alert-success");
-		elCommentStatus.innerHTML=" ";
+		//elPasswordStatus.classList.add("alert-success");
+		elPasswordStatus.innerHTML=" ";
 	}
 	else{
 		//elPasswordStatus.classList.remove("alert-success");
