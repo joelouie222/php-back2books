@@ -45,7 +45,7 @@
 
                 if( $getDiscounts === false ) {  
                     echo "Error in statement preparation/execution.\n";  
-                    die(FormatErrors(sqlsrv_errors()));
+                    die( print_r( sqlsrv_errors(), true));
                 }
 
                 while($row = sqlsrv_fetch_array($getDiscounts, SQLSRV_FETCH_ASSOC)) {
