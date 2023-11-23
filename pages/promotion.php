@@ -62,12 +62,12 @@
                     echo '    <div class="promo-card-box">';
                     echo '        <div class="discount-box">';
                     echo '        <div> SAVE ';
-                    echo "($row[DISCOUNT_TAG])";
+                    echo "$row[DISCOUNT_TAG]";
                     echo '% OFF</div>';
                     echo '        <div> AT CHECK OUT</div>';
                     echo '    </div>';
                     echo '<div class="promo-details">';
-                    echo '    <div class="promo-name"><span> $row["DISCOUNT_NAME"] </span></div>';
+                    echo '    <div class="promo-name"><span> '.$row["DISCOUNT_NAME"].'</span></div>';
                     echo '    <h3 class="coupon-desc"> `$row[DISCOUNT_DESC]` </h3>';
                     echo '</div>';
                     echo '<div class="promo-code-box">';
