@@ -33,7 +33,7 @@
             </center>
 
             <?php
-                $tsql = "SELECT * FROM dbo.DISCOUNT WHERE 1";
+                $tsql = "SELECT * FROM DISCOUNT WHERE 1";
                 $getDiscounts = sqlsrv_query($conn, $tsql);
 
                 echo "connectionInfo: ($connectionInfo)";
