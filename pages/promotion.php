@@ -33,7 +33,7 @@
             </center>
 
             <?php
-                $tsql = "SELECT * FROM DISCOUNT WHERE 1";
+                $tsql = "SELECT * FROM DISCOUNT";
                 $getDiscounts = sqlsrv_query($conn, $tsql);
 
                 echo "connectionInfo: ($connectionInfo)";
@@ -43,7 +43,7 @@
                 echo "conn: ($conn)";
                 echo "</br>";
 
-                if( $getDiscounts === false ) {  
+                if( $getDiscounts == false ) {  
                     echo "Error in statement preparation/execution.\n";  
                     die( print_r( sqlsrv_errors(), true));
                 }
