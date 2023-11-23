@@ -36,12 +36,12 @@
                 $tsql = "SELECT * FROM DISCOUNT";
                 $getDiscounts = sqlsrv_query($conn, $tsql);
 
-                echo "connectionInfo: ($connectionInfo)";
-                echo "</br>";
-                echo "serverName: ($serverName)";
-                echo "</br>";
-                echo "conn: ($conn)";
-                echo "</br>";
+                // echo "connectionInfo: ($connectionInfo)";
+                // echo "</br>";
+                // echo "serverName: ($serverName)";
+                // echo "</br>";
+                // echo "conn: ($conn)";
+                // echo "</br>";
 
                 if( $getDiscounts == false ) {  
                     echo "Error in statement preparation/execution.\n";  
@@ -49,14 +49,31 @@
                 }
 
                 while($row = sqlsrv_fetch_array($getDiscounts, SQLSRV_FETCH_ASSOC)) {
-                    echo "($row[DISCOUNT_ID])</br>";
-                    echo "($row[DISCOUNT_CODE])</br>";
-                    echo "($row[DISCOUNT_VALUE])</br>";
-                    echo "($row[ACTIVE])</br>";
-                    echo "($row[DISCOUNT_NAME])</br>";
-                    echo "($row[DISCOUNT_DESC])</br>";
-                    echo "($row[DISCOUNT_TAG])</br>";
-                    echo "<hr>";
+                    // echo "($row[DISCOUNT_ID])</br>";
+                    // echo "($row[DISCOUNT_CODE])</br>";
+                    // echo "($row[DISCOUNT_VALUE])</br>";
+                    // echo "($row[ACTIVE])</br>";
+                    // echo "($row[DISCOUNT_NAME])</br>";
+                    // echo "($row[DISCOUNT_DESC])</br>";
+                    // echo "($row[DISCOUNT_TAG])</br>";
+                    // echo "<hr>";
+
+                    echo "<article class="promo-card">";
+                    echo "    <div class="promo-card-box">";
+                    echo "        <div class="discount-box">";
+                    echo "        <div> SAVE $row[TAG] OFF</div>";
+                    echo "        <div> AT CHECK OUT</div>";
+                    echo "    </div>";
+                    echo "<div class="promo-details">";
+                    echo "    <div class="promo-name"><span> $row[DISCOUNT_NAME] </span></div>";
+                    echo "    <h3 class="coupon-desc"> $row[DISCOUNT_DESC] </h3>";
+                    echo "</div>";
+                    echo "<div class="promo-code-box">";
+                    echo "    <div class="coupon-code">";
+                    echo "        <input type="text" value="$row[DISCOUNT_CODE]">";
+                    echo "    </div>";
+                    echo "    <div></div>";
+                    echo "</article>";
                 }
                 sqlsrv_free_stmt($getDiscounts);
             ?>
