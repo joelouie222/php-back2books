@@ -36,6 +36,10 @@
                 $tsql = "SELECT * FROM dbo.DISCOUNT WHERE 1";
                 $getDiscounts = sqlsrv_query($conn, $tsql);
 
+                echo ($connectionInfo);
+                echo ($serverName);
+                echo ($conn);
+
                 if( $getDiscounts === false ) {  
                     echo "Error in statement preparation/execution.\n";  
                     die(FormatErrors(sqlsrv_errors()));
