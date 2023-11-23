@@ -20,7 +20,9 @@
 </head>
 
 <body id="home">
-    <?php include('../layouts/layout.php');
+    <?php
+        include('../layouts/layout.php');
+        include('../config.php');
     ?>
     <div class="container">
         <div class="about-us">
@@ -30,61 +32,44 @@
                 <div><h1 style="font-size: xxx-large;"> P R O M O T I O N S </h1><div>
             </center>
 
-            <article class="promo-card">
-                <div class="promo-card-box">
-                    <div class="discount-box">
-                        <div> ENTER COUPON CODE</div>
-                        <div> AT CHECK OUT</div>
-                    </div>
+            <?php
+                $tsql = "SELECT * FROM dbo.DISCOUNT WHERE 1";
+                $getDiscounts = sqlsrv_query($conn, $tsql);
 
-                    <div class="promo-details">
-                        <div class="promo-name"><span> COUPON NAME </span></div>
-                        <h3 class="coupon-desc"> COUPON DESCRIPTION HERE </h3>
-                    </div>
+                if( $stmt === false ) {  
+                    echo "Error in statement preparation/execution.\n";  
+                    die( print_r( sqlsrv_errors(), true));  
+                }
 
-                    <div class="promo-code-box">
-                        <div class="coupon-code">
-                            <input type="text" id="couponCode" value="COUPON CODE1">
-                        </div>
-                    <div>
-                </div>
-            </article>
+                while($row = sqlsrv_fetch_array($getDiscounts, SQLSRV_FETCH_ASSOC)) {
+                    echo ($row[DISCOUNT_ID]); echo("<br/>");
+                    echo ($row[DISCOUNT_CODE]); echo("<br/>");
+                    echo ($row[DISCOUNT_VALUE]); echo("<br/>");
+                    echo ($row[ACTIVE]); echo("<br/>");
+                    echo ($row[DISCOUNT_NAME]); echo("<br/>");
+                    echo ($row[DISCOUNT_DESC]); echo("<br/>");
+                    echo ($row[DISCOUNT_TAG]); echo("<br/>");
+                    echo "<hr>";
+                }
+                sqlsrv_free_stmt($getDiscounts);
+            ?>
 
-            <article class="promo-card">
-                <div class="promo-card-box">
-                    <div class="discount-box">
-                        <div> ENTER COUPON CODE</div>
-                        <div> AT CHECK OUT</div>
-                    </div>
-
-                    <div class="promo-details">
-                        <div class="promo-name"><span> COUPON NAME </span></div>
-                        <h3 class="coupon-desc"> COUPON DESCRIPTION HERE </h3>
-                    </div>
-
-                    <div class="promo-code-box">
-                        <div class="coupon-code">
-                            <input type="text" id="couponCode" value="COUPON CODE2">
-                        </div>
-                    <div>
-                </div>
-            </article>
 
             <article class="promo-card">
                 <div class="promo-card-box">
                     <div class="discount-box">
-                        <div> ENTER COUPON CODE</div>
+                        <div> SAVE [TAG]% OFF</div>
                         <div> AT CHECK OUT</div>
                     </div>
 
                     <div class="promo-details">
-                        <div class="promo-name"><span> COUPON NAME </span></div>
-                        <h3 class="coupon-desc"> COUPON DESCRIPTION HERE </h3>
+                        <div class="promo-name"><span> [NAME] </span></div>
+                        <h3 class="coupon-desc"> [DESCRIPTION] </h3>
                     </div>
 
                     <div class="promo-code-box">
                         <div class="coupon-code">
-                            <input type="text" id="couponCode" value="COUPON CODE2">
+                            <input type="text" value="[CODE]">
                         </div>
                     <div>
                 </div>
