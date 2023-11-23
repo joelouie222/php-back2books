@@ -65,12 +65,12 @@
                     echo '        <div> AT CHECK OUT</div>';
                     echo '    </div>';
                     echo '<div class="promo-details">';
-                    echo '    <div class="promo-name"><span> '.$row["DISCOUNT_NAME"].'</span></div>';
+                    echo '    <div class="promo-name"><span> '.$row[DISCOUNT_NAME].'</span></div>';
                     echo '    <h3 class="coupon-desc">'.$row[DISCOUNT_DESC].'</h3>';
                     echo '</div>';
                     echo '<div class="promo-code-box">';
                     echo '    <div class="coupon-code">';
-                    echo '        <input type="text" value="'.$row["DISCOUNT_CODE"].'">';
+                    echo '        <input type="text" value="'.$row[DISCOUNT_CODE].'">';
                     echo '    </div>';
                     echo '    <div></div>';
                     echo '</article>';
