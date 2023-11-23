@@ -53,6 +53,6 @@
         </div>
 </body>
 
-<script src="js/copy_coupon.js"></script>
+<script src="/js/copy_coupon.js"></script>
 
 </html>
