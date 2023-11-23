@@ -49,30 +49,28 @@
                 }
 
                 while($row = sqlsrv_fetch_array($getDiscounts, SQLSRV_FETCH_ASSOC)) {
-                    echo "($row[DISCOUNT_ID])</br>";
-                    echo "($row[DISCOUNT_CODE])</br>";
-                    echo "($row[DISCOUNT_VALUE])</br>";
-                    echo "($row[ACTIVE])</br>";
-                    echo "($row[DISCOUNT_NAME])</br>";
-                    echo "($row[DISCOUNT_DESC])</br>";
-                    echo "($row[DISCOUNT_TAG])</br>";
-                    echo "<hr>";
+                    // echo "($row[DISCOUNT_ID])</br>";
+                    // echo "($row[DISCOUNT_CODE])</br>";
+                    // echo "($row[DISCOUNT_VALUE])</br>";
+                    // echo "($row[ACTIVE])</br>";
+                    // echo "($row[DISCOUNT_NAME])</br>";
+                    // echo "($row[DISCOUNT_DESC])</br>";
+                    // echo "($row[DISCOUNT_TAG])</br>";
+                    // echo "<hr>";
 
                     echo '<article class="promo-card">';
                     echo '    <div class="promo-card-box">';
                     echo '        <div class="discount-box">';
-                    echo '        <div> SAVE ';
-                    echo "$row[DISCOUNT_TAG]";
-                    echo '% OFF</div>';
+                    echo '        <div> SAVE <strong>'.$row[DISCOUNT_TAG].'% OFF</strong></div>';
                     echo '        <div> AT CHECK OUT</div>';
                     echo '    </div>';
                     echo '<div class="promo-details">';
                     echo '    <div class="promo-name"><span> '.$row["DISCOUNT_NAME"].'</span></div>';
-                    echo '    <h3 class="coupon-desc"> `$row[DISCOUNT_DESC]` </h3>';
+                    echo '    <h3 class="coupon-desc">'.$row[DISCOUNT_DESC].'</h3>';
                     echo '</div>';
                     echo '<div class="promo-code-box">';
                     echo '    <div class="coupon-code">';
-                    echo '        <input type="text" value=" `$row["DISCOUNT_CODE"]` ">';
+                    echo '        <input type="text" value="'.$row["DISCOUNT_CODE"].'">';
                     echo '    </div>';
                     echo '    <div></div>';
                     echo '</article>';
