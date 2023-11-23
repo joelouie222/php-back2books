@@ -12,6 +12,7 @@
 //     die("Connection failed: " . $conn->connect_error);
 // }
 
+
 // PHP Data Objects(PDO) Sample Code:
 // try {
 //     $AZURE_SQL_DATABASE = getenv('AZURE_SQL_DATABASE');
@@ -36,8 +37,10 @@ $AZURE_SQL_UID = getenv('AZURE_SQL_UID');
 
 $connectionInfo = array("UID" => $AZURE_SQL_UID, "pwd" => $AZURE_SQL_PWD, "Database" => $AZURE_SQL_DATABASE, "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
 $serverName = "tcp:$AZURE_SQL_SERVERNAME";
-$conn = sqlsrv_connect($serverName, $connectionInfo);
+//$conn = sqlsrv_connect($serverName, $connectionInfo);
 
+$connectionOptions = array("Database"=>$AZURE_SQL_DATABASE,"Uid"=>$AZURE_SQL_UID, "PWD"=>$AZURE_SQL_PWD);
+$conn = sqlsrv_connect($serverName, $connectionOptions);
 
 
 
