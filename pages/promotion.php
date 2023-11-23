@@ -44,14 +44,55 @@
 
                     <div class="promo-code-box">
                         <div class="coupon-code">
-                            <h3 id="couponCode">COUPON CODE</h3>
+                            <input type="text" id="couponCode" value="COUPON CODE">
+                        </div>
+                        <div><button onclick="copyCoupon()">COPY CODE</button></div>
+                    <div>
+                </div>
+            </article>
+
+            <article class="promo-card">
+                <div class="promo-card-box">
+                    <div class="discount-box">
+                        <div> ENTER COUPON CODE</div>
+                        <div> AT CHECK OUT</div>
+                    </div>
+
+                    <div class="promo-details">
+                        <div class="promo-name"><span> COUPON NAME </span></div>
+                        <h3 class="coupon-desc"> COUPON DESCRIPTION HERE </h3>
+                    </div>
+
+                    <div class="promo-code-box">
+                        <div class="coupon-code">
+                            <input type="text" id="couponCode" value="COUPON CODE">
+                        </div>
+                        <div><button onclick="copyCoupon()">COPY CODE</button></div>
+                    <div>
+                </div>
+            </article>
+
+            <article class="promo-card">
+                <div class="promo-card-box">
+                    <div class="discount-box">
+                        <div> ENTER COUPON CODE</div>
+                        <div> AT CHECK OUT</div>
+                    </div>
+
+                    <div class="promo-details">
+                        <div class="promo-name"><span> COUPON NAME </span></div>
+                        <h3 class="coupon-desc"> COUPON DESCRIPTION HERE </h3>
+                    </div>
+
+                    <div class="promo-code-box">
+                        <div class="coupon-code">
+                            <input type="text" id="couponCode" value="COUPON CODE">
                         </div>
                         <div><button onclick="copyCoupon()">COPY CODE</button></div>
                     <div>
                 </div>
             </article>
         </div>
-</body>
 
 <script>
     function copyCoupon() {
@@ -69,5 +110,10 @@
     alert("Copied: " + copyText.value);
    }
 </script>
+
+
+</body>
+
+
 
 </html>

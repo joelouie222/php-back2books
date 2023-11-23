@@ -323,6 +323,10 @@ h6{
   border-radius: 8px;
 }
 
+.promo-code-box input {
+  text-align: center;
+}
+
 .promo-card .coupon-code {
   display: flex;
   flex-direction: column;
