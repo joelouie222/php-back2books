@@ -61,7 +61,7 @@
                     echo '<article class="promo-card">';
                     echo '    <div class="promo-card-box">';
                     echo '        <div class="discount-box">';
-                    echo '        <div> SAVE `$row[TAG]` OFF</div>';
+                    echo '        <div> SAVE'; echo ($row[TAG]); echo 'OFF</div>';
                     echo '        <div> AT CHECK OUT</div>';
                     echo '    </div>';
                     echo '<div class="promo-details">';
