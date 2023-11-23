@@ -112,40 +112,6 @@ li {
 
 
 
-
-
-
-
-
-
-
-
-/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-}
-
-@media screen{
-  body>div#header{
-   position:fixed;
-  }
-  body>div#sidebar{
-   position:fixed;
-  }
- }
-
- * html body{
-  overflow:hidden;
- } 
- 
- * html div#content{
-  height:100%;
-  overflow:auto;
- }
-
-
-
 /* ------------------------------------- F O R M S ----------------------------------------*/
 
 /* GLOBALS */
@@ -361,13 +327,6 @@ h6{
   gap: 1rem;
   align-items: flex-end;
 }
-
-
-
-
-
-
-
 
 
 
