@@ -21,7 +21,9 @@
 </head>
 
 <body id="home">
-    <?php include('../layouts/layout.php');
+    <?php 
+        include('../layouts/layout.php');
+        include('../config.php');
     ?>  
       
     <div class="container">
@@ -70,6 +72,28 @@
         </div>
 
         <div class="products">
+            <?php
+                $tsql = "SELECT TOP 10 FROM BOOKS";
+                $getBooks = sqlsrv_query($conn, $tsql);
+
+                echo "connectionInfo: ($connectionInfo)";
+                echo "</br>";
+                echo "serverName: ($serverName)";
+                echo "</br>";
+                echo "conn: ($conn)";
+                echo "</br>";
+                echo "</hr>"
+
+                if($getBooks == false ) {  
+                    echo "Error in statement preparation/execution.\n";  
+                    die( print_r( sqlsrv_errors(), true));
+                }
+
+
+            ?>
+        </div>
+
+        <div class="products">
             <ol class="book-list-view">
                 <li style="border: solid; margin: 5px;">
                     <div style="margin-left: 0; margin-right: 0; display: flex;">
@@ -108,7 +132,7 @@
                                 </div>
                                 <div style="display: flex; align-items: flex-end;">
                                     <div><input type="hidden" value="[ISBN]"></div>
-                                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart"></i></button></div>
+                                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>
                                     <div style="cursor: pointer;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>
                                 </div>
                             </div>
