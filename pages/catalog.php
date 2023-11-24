@@ -79,8 +79,8 @@
                         echo '            <div><span style="margin-right: 10px;">Author: <strong>'.$row['author_fname'].' '.$row['author_lname'].'</strong></span><span>Publisher: <strong>'.$row['PUBLISHER_NAME'].'</strong></span></div>';
                         echo '            <div style="margin: 10px 0 10px 0; height: 200px; overflow-x: hidden; overflow-y: auto;">'.$row['PROD_DESC'].'</div>';
                         echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between; align-items: flex-end;">';
-                        echo '                <div width: 50%>';
-                        echo '                    <table width: 100%>';
+                        echo '                <div style="width: 50%;">';
+                        echo '                    <table style="width: 100%;">';
                         echo '                        <thead>';
                         echo '                            <tr style="border-bottom: 1px solid; border-top: 1px solid;">';
                         echo '                                <th>ISBN</th>';
