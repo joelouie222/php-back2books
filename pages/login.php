@@ -86,6 +86,7 @@
               redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
             }
           }
+          redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
         ?>  
         
         <div class="about-us">
@@ -100,7 +101,7 @@
             </div>
 
             <div>
-                <form method="post">
+                <form method="post" action="">
                   <!-- Email input -->
                   <div class="form-group">
                     <label for="loginEmail">Email Address</label>
