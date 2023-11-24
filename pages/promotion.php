@@ -61,7 +61,7 @@
                     echo '</div>';
                     echo '<div class="promo-code-box">';
                     echo '    <div class="coupon-code">';
-                    echo '        <input type="text" value="'.$row["DISCOUNT_CODE"].'">';
+                    echo '        <h3>'.$row["DISCOUNT_CODE"].'</h3>';
                     echo '    </div>';
                     echo '    <div></div>';
                     echo '</article>';

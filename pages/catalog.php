@@ -84,8 +84,8 @@
                         <div style="width: 70%; display: flex; flex-direction: column;">
                             <div style="margin: 5px 0 5px 0;"><h3><a>[BOOK TITLE]</a><span>(BOOK_PUBDATE)</span></h3></div>
                             <div>Author: [AUTHOR] </div>
-                            <div style="margin: 10px 0 10px 0;">[PRODUCT_DESC: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.]</div>
-                            <div style="display: flex;">
+                            <div style="margin: 10px 0 10px 0; overflow: scroll;">[PRODUCT_DESC: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.]</div>
+                            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">
                                 <div>
                                     <table>
                                         <thead>
@@ -106,10 +106,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div style="display: flex; flex-direction: column;">
+                                <div style="display: flex; align-items: flex-end;">
                                     <div><input type="hidden" value="[ISBN]"></div>
-                                    <div style="float: right; cursor: pointer;"><button type="submit" value="ADDTOFAV"> ADD TO FAV </button></div>
-                                    <div style="float: right; cursor: pointer;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>
+                                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart"></i></button></div>
+                                    <div style="cursor: pointer;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>
                                 </div>
                             </div>
                         </div>
