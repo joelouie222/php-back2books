@@ -36,28 +36,28 @@ session_start();
           
           include('../config.php');
           
-          $user_email = "";
-          $user_password = "";
-          $email_err = "";
-          $password_err = "";
-          $login_err = "";
+          $userEmail = "";
+          $userPassword = "";
+          $emailErr = "";
+          $passwordErr = "";
+          $loginErr = "";
           
           if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(empty(trim($_POST["loginEmail"]))){
-              $email_err = "emptyEmail";
+              $emailErr = "emptyEmail";
             } else {
-              $user_email = trim($_POST["loginEmail"]);
+              $userEmail = trim($_POST["loginEmail"]);
             }
           
             if(empty(trim($_POST["loginPassword"]))){
-              $password_err = "emptyPassword";
+              $passwordErr = "emptyPassword";
             } else {
-              $user_password = trim($_POST["loginPassword"]);
+              $userPassword = trim($_POST["loginPassword"]);
             }
           
-            if(empty($email_err) && empty($password_err)){
+            if(empty($emailErr) && empty($passwordErr)){
               $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM USER 
-                      WHERE ACTIVE = 1 AND USER_PASSWORD = $user_email AND USER_PASSWORD = md5($user_password)";
+                      WHERE ACTIVE = 1 AND USER_PASSWORD = $userEmail AND USER_PASSWORD = md5($userPassword)";
           
               $getUser = sqlsrv_query($conn, $tsql);
           
