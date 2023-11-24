@@ -27,55 +27,10 @@
     ?>  
       
     <div class="container">
-        <section id="products" class="products">
-            <table width="100%">
-                <tr>
-                    <td colspan="2">
-                        <h2>Products</h2>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-retro-book-free-material-png-image_4481187.jpg"
-                            alt="Product 1" alt="Temporary Product 1" width="100" height="100">
-                        <h3>Product 1</h3>
-                        <p>This is a product description.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde magni repellendus nemo? Sit
-                            rerum unde rem
-                            enim commodi repellat laboriosam, dolore delectus velit molestiae, pariatur eius
-                            necessitatibus, officiis
-                            excepturi ab?
-                        </p>
-                        <button>Add to Cart</button>
-                    </td>
-
-                    <td>
-                        <img src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-retro-book-free-material-png-image_4481187.jpg"
-                            alt="Product 2" alt="Temporary Product 2" width="100" height="100">
-                        <h3>Product 2</h3>
-                        <p>This is another product description. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Deserunt
-                            modi, accusantium perferendis vitae eos fugiat expedita repudiandae impedit omnis! Fugit
-                            ipsam amet
-                            debitis accusantium a atque nostrum, deleniti exercitationem odit?</p>
-                        <button>Add to Cart</button>
-                    </td>
-
-                </tr>        
-            </table>
-        </section>
-
         <div class="products">
             <center>
                 <h1> Book Catalog </h1>
             </center>
-        </div>
-
-        <div class="products">
-            
-        </div>
-
-        <div class="products">
             <ol class="book-list-view">
                 <?php
                     $tsql = "SELECT TOP (10) *
@@ -85,14 +40,6 @@
                             INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
                             INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID";
                     $getBooks = sqlsrv_query($conn, $tsql);
-
-                    echo "connectionInfo: ($connectionInfo)";
-                    echo "</br>";
-                    echo "serverName: ($serverName)";
-                    echo "</br>";
-                    echo "conn: ($conn)";
-                    echo "</br>";
-                    echo "</hr>";
 
                     if($getBooks == false ) {  
                         echo "Error in statement preparation/execution.\n";  
@@ -128,9 +75,9 @@
                         echo '            </div>';
                         echo '        </div>';
                         echo '        <div style="width: 70%; display: flex; flex-direction: column;">';
-                        echo '            <div style="margin: 5px 0 5px 0;"><h3><a>'.$row['BOOK_TITLE'].'</a><span style="margin-left: 10px;">('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
+                        echo '            <div style="margin: 5px 0 5px 0;"><h1>'.$row['BOOK_TITLE'].'</h1><span style="margin-left: 10px;">('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
                         echo '            <div><span style="margin-right: 10px;">Author: <strong>'.$row['author_fname'].' '.$row['author_lname'].'</strong></span><span>Publisher: <strong>'.$row['PUBLISHER_NAME'].'</strong></span></div>';
-                        echo '            <div style="margin: 10px 0 10px 0; height: 200px; overflow: scroll;">'.$row['PROD_DESC'].'</div>';
+                        echo '            <div style="margin: 10px 0 10px 0; height: 200px; overflow-x: hidden; overflow-y: auto;">'.$row['PROD_DESC'].'</div>';
                         echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between; align-items: flex-end;">';
                         echo '                <div>';
                         echo '                    <table>';
@@ -168,54 +115,6 @@
                     }
                     sqlsrv_free_stmt($getBooks);
                 ?>
-
-
-                <li style="border: solid; margin: 5px;">
-                    <div style="margin-left: 0; margin-right: 0; display: flex;">
-                        <div style="align-items: center; width: 30%; display: flex">
-                            <div style="margin: 10px"><h3>1</h3></div>
-                            <div style="margin: 10px">
-                                <a href="">
-                                    <img src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-retro-book-free-material-png-image_4481187.jpg" alt="Product 1" width="100" height="100">
-                                </a>
-                            </div>
-                        </div>
-                        <div style="width: 70%; display: flex; flex-direction: column;">
-                            <div style="margin: 5px 0 5px 0;"><h3><a>[BOOK TITLE]</a><span>(BOOK_PUBDATE)</span></h3></div>
-                            <div><span style="margin-right: 10px;">Author: [AUTHOR]</span><span>Publisher: [PUBLISHER_NAME]</span></div>
-                            <div style="margin: 10px 0 10px 0; overflow-y: scroll; overflow-x: hidden;">[PRODUCT_DESC: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.]</div>
-                            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">
-                                <div>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>ISBN</th>
-                                                <th>Format</th>
-                                                <th>Pages</th>
-                                                <th>Stock</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>[ISBN]</td> 
-                                                <td>[FORMAT]</td>
-                                                <td>[PAGES]</td>
-                                                <td>[AVAIL]</td>
-                                                <td>[PRICE]</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div style="display: flex; align-items: flex-end;">
-                                    <div><input type="hidden" value="[ISBN]"></div>
-                                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>
-                                    <div style="cursor: pointer;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                </li>
             </ol>
         </div>
 
