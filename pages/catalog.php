@@ -82,7 +82,7 @@
                 echo "</br>";
                 echo "conn: ($conn)";
                 echo "</br>";
-                echo "</hr>"
+                echo "</hr>";
 
                 if($getBooks == false ) {  
                     echo "Error in statement preparation/execution.\n";  
