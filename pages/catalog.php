@@ -89,6 +89,17 @@
                     die( print_r( sqlsrv_errors(), true));
                 }
 
+                while($row = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
+                    echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
+                    echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
+                    echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
+                    echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE'].'</p>';
+                    echo '<p>[PRICE]: '.$row['PRICE'].'</p>';
+                    echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
+                    echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
+                    echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
+                    echo '</hr>';
+                }
 
             ?>
         </div>
