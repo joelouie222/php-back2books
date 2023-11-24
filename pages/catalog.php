@@ -101,26 +101,26 @@
                     $count = 1;
                     while($row = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
                         
-                        echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
-                        echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
-                        echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
-                        // $date = $row['BOOK_PUBLISHED_DATE'];
-                        // $formattedDate = date("Y-m-d", strtotime($date));
-                        echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').'</p>';
-                        echo '<p>[PRICE]: '.$row['PRICE'].'</p>';
-                        echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
-                        echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
-                        echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
-                        echo '<p>[IMAGE_LINK]: '.$row['IMAGE_LINK'].'</p>';
-                        echo '<p>[INV_QUANTITY]: '.$row['INV_QUANTITY'].'</p>';
-                        echo '<p>[Author_fname]: '.$row['author_fname'].'</p>';
-                        echo '<p>[author_lname]: '.$row['author_lname'].'</p>';
-                        echo '</br></br>';
+                        // echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
+                        // echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
+                        // echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
+                        // // $date = $row['BOOK_PUBLISHED_DATE'];
+                        // // $formattedDate = date("Y-m-d", strtotime($date));
+                        // echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').'</p>';
+                        // echo '<p>[PRICE]: '.$row['PRICE'].'</p>';
+                        // echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
+                        // echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
+                        // echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
+                        // echo '<p>[IMAGE_LINK]: '.$row['IMAGE_LINK'].'</p>';
+                        // echo '<p>[INV_QUANTITY]: '.$row['INV_QUANTITY'].'</p>';
+                        // echo '<p>[Author_fname]: '.$row['author_fname'].'</p>';
+                        // echo '<p>[author_lname]: '.$row['author_lname'].'</p>';
+                        // echo '</br></br>';
 
                         echo '<li style="border: solid; margin: 5px;">';
                         echo '    <div style="margin-left: 0; margin-right: 0; display: flex;">';
                         echo '        <div style="align-items: center; width: 30%; display: flex">';
-                        echo '            <div style="margin: 10px"><h3>'$count'</h3></div>';
+                        echo '            <div style="margin: 10px"><h3>'.$count.'</h3></div>';
                         echo '            <div style="margin: 10px">';
                         echo '                <a href="">';
                         echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" width="200" height="200">';
