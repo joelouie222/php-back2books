@@ -91,7 +91,7 @@ session_start();
               $_SESSION["loggedIn"] = true;
               $_SESSION["fname"] = $user["USER_FNAME"];
               $_SESSION['lname'] = $user["USER_LNAME"];
-              $_SESSION["admin"] = $user["USER_ADMIN"]
+              $_SESSION["admin"] = $user["USER_ADMIN"];
 
               echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
               echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
