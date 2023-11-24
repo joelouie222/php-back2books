@@ -120,23 +120,25 @@
                         </div>
                         <div style="width: 70%; display: flex; flex-direction: column;">
                             <div style="margin: 5px 0 5px 0;"><h3><a>[BOOK TITLE]</a><span>(BOOK_PUBDATE)</span></h3></div>
-                            <div>Author: [AUTHOR] </div>
+                            <div><span>Author: [AUTHOR]</span><span>Publisher: [PUBLISHER_NAME]</span></div>
                             <div style="margin: 10px 0 10px 0; overflow: scroll;">[PRODUCT_DESC: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.]</div>
                             <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">
                                 <div>
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Format</th>
                                                 <th>ISBN</th>
+                                                <th>Format</th>
+                                                <th>Pages</th>
                                                 <th>Stock</th>
                                                 <th>Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
+                                                <td>[ISBN]</td> 
                                                 <td>[FORMAT]</td>
-                                                <td>[ISBN]</td>                                                
+                                                <td>[PAGES]</td>
                                                 <td>[AVAIL]</td>
                                                 <td>[PRICE]</td>
                                             </tr>
