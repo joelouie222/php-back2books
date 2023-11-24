@@ -73,7 +73,7 @@
 
         <div class="products">
             <?php
-                $tsql = "SELECT TOP [10] FROM BOOKS";
+                $tsql = "SELECT TOP (10) * FROM BOOKS";
                 $getBooks = sqlsrv_query($conn, $tsql);
 
                 echo "connectionInfo: ($connectionInfo)";
