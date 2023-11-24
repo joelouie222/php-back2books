@@ -93,9 +93,9 @@
                     echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
                     echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
                     echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
-                    $date = $row['BOOK_PUBLISHED_DATE'];
-                    $formattedDate = date("Y-m-d", strtotime($date));
-                    echo '<p>[BOOK_PUBLISHED_DATE]: '.$formattedDate.'</p>';
+                    // $date = $row['BOOK_PUBLISHED_DATE'];
+                    // $formattedDate = date("Y-m-d", strtotime($date));
+                    echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').'</p>';
                     echo '<p>[PRICE]: '.$row['PRICE'].'</p>';
                     echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
                     echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
