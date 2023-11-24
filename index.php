@@ -43,6 +43,10 @@
                     else
                         echo '<h3> You are NOT an admin! </h3>';
 
+                    echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
+                    echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
+                    echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
+                    echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
                     include('config.php');
                 ?>
                 
