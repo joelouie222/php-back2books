@@ -31,22 +31,24 @@
           include('../config.php');
           include('../functions.php');
           
-          $userEmail = "";
-          $userPassword = "";
-          $emailErr = "";
-          $passwordErr = "";
-          $loginErr = "";
-          
           if($_SERVER["REQUEST_METHOD"] == "POST")
           { 
+            $userEmail = "";
+            $userPassword = "";
+            $emailErr = "";
+            $passwordErr = "";
+            $loginErr = "";
+
             if(empty(trim($_POST["loginEmail"]))){
               $emailErr = "emptyEmail";
+              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
             } else {
               $userEmail = trim($_POST["loginEmail"]);
             }
           
             if(empty(trim($_POST["loginPassword"]))){
               $passwordErr = "emptyPassword";
+              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
             } else {
               $userPassword = trim($_POST["loginPassword"]);
             }
@@ -59,6 +61,7 @@
                       WHERE USER_ACTIVE = 1
                       AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
               $getUser = sqlsrv_query($conn, $tsql);
+
               if( $getUser == false ) { 
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
               }
@@ -82,11 +85,8 @@
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                   }
                 }
-            } else {
-              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
             }
           }
-          redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
         ?>  
         
         <div class="about-us">
