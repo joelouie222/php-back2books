@@ -346,14 +346,3 @@ h6{
   margin: 0!important;
   list-style-type: none;
 }
-
-.book-list-view table {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-.book-list-view th td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  padding: 10px;
-}
