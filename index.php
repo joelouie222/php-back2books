@@ -35,15 +35,15 @@
             <div class="about-us">
                 <?php
                     if (isset($_SESSION["loggedin"]) AND $_SESSION["loggedin"] == true)
-                        echo "<h3> Wecome to Back 2 Books, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</h3>";
+                        echo '<h3> Wecome to Back 2 Books, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</h3>';
                     else
-                        echo "<h3> Wecome to Back 2 Books!</h3>";
+                        echo '<h3> Wecome to Back 2 Books!</h3>';
 
                     if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1)
-                        echo "<h3> You're an ADMIN! </h3>";
+                        echo '<h3> You are an ADMIN! </h3>';
                     else
-                        echo "<h3> You're NOT an admin! </h3>";
-                    
+                        echo '<h3> You are NOT an admin! </h3>';
+
                     include('config.php');
                 ?>
                 
