@@ -12,8 +12,25 @@
     echo '</header>';
 
     echo '<div class="sidebar">';
-    echo '  <a href="/pages/login.php"><i class="fa fa-fw fa-sign-in"></i> Sign In</a>';
-    echo '  <a href="/pages/register.php"><i class="fa fa-fw fa-address-card"></i> Register </a>';
+    
+    if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true){
+        if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1) {
+            echo '<a Welcome Back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
+            echo '<a href=""><i class=""></i> VIEW ALL ORDERS </a>';
+            echo '<a href=""><i class=""></i> VIEW ALL USERS </a>';
+            echo '<a href=""><i class=""></i> VIEW ALL USERS </a>';
+            echo '<a href=""><i class=""></i> VIEW ALL COUPONS </a>';
+            echo '<a href=""><i class=""></i> Log Out </a>';
+        } else {
+            echo '<a Wecome back, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
+            echo '<a href=""><i class=""></i> Edit Profile </a>';
+            echo '<a href=""><i class=""></i> My Orders </a>';
+            echo '<a href=""><i class=""></i> Log Out </a>';
+        }
+    } else {
+        echo '  <a href="/pages/login.php"><i class="fa fa-fw fa-sign-in"></i> Sign In</a>';
+        echo '  <a href="/pages/register.php"><i class="fa fa-fw fa-address-card"></i> Register </a>';
+    }
     echo '  <a href="/pages/catalog.php"><i class="fa fa-fw fa-book"></i> Catalog </a>';
     echo '  <a href="/pages/marketplace.php"><i class="fa fa-fw fa-usd"></i> Marketplace </a>';
     echo '  <a href="/pages/selling.php"><i class="fa fa-fw fa-money"></i> Selling</a>';
