@@ -129,8 +129,8 @@
                         echo '        </div>';
                         echo '        <div style="width: 70%; display: flex; flex-direction: column;">';
                         echo '            <div style="margin: 5px 0 5px 0;"><h3><a>'.$row['BOOK_TITLE'].'</a><span style="margin-left: 10px;">('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
-                        echo '            <div><span style="margin-right: 10px;">Author: [AUTHOR]</span><span>Publisher: '.$row['PUBLISHER_NAME'].'</span></div>';
-                        echo '            <div style="margin: 10px 0 10px 0; overflow: scroll;">'.$row['PROD_DESC'].'</div>';
+                        echo '            <div><span style="margin-right: 10px;">Author: '.$row['author_fname'].' '.$row['author_lname'].'</span><span>Publisher: '.$row['PUBLISHER_NAME'].'</span></div>';
+                        echo '            <div style="margin: 10px 0 10px 0; height: 200px; overflow: scroll;">'.$row['PROD_DESC'].'</div>';
                         echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">';
                         echo '                <div>';
                         echo '                    <table>';
@@ -148,13 +148,13 @@
                         echo '                                <td>'.$row['BOOK_ISBN'].'</td> ';
                         echo '                                <td>'.$row['BOOK_FORMAT'].'</td>';
                         echo '                                <td>'.$row['NUM_PAGES'].'</td>';
-                        echo '                                <td>[AVAIL]</td>';
+                        echo '                                <td>'.$row['INV_QUANTITY'].'</td>';
                         // echo '                                <td>'.$row['PRICE'].'</td>';
                         echo '                            </tr>';
                         echo '                        </tbody>';
                         echo '                    </table>';
                         echo '                </div>';
-                        echo '                <div><h3>'.$row['PRICE'].'</h3></div>  ';
+                        echo '                <div><h2>$ '.$row['PRICE'].'</h2></div>  ';
                         echo '                <div style="display: flex; align-items: flex-end;">';
                         echo '                   <div><input type="hidden" value="'.$row['BOOK_ID'].'"></div>';
                         echo '                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>';
