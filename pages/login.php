@@ -42,7 +42,8 @@ session_start();
           $passwordErr = "";
           $loginErr = "";
           
-          if($_SERVER["REQUEST_METHOD"] == "POST"){
+          if($_SERVER["REQUEST_METHOD"] == "POST")
+          { 
             if(empty(trim($_POST["loginEmail"]))){
               $emailErr = "emptyEmail";
             } else {
@@ -97,7 +98,7 @@ session_start();
               echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
               echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
               echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
-          
+            }
           }
         ?>  
         
