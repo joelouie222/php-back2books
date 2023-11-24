@@ -75,9 +75,9 @@
                         echo '            </div>';
                         echo '        </div>';
                         echo '        <div style="width: 80%; display: flex; flex-direction: column;">';
-                        echo '            <div style="margin: 5px 0 5px 0;"><span><h1>'.$row['BOOK_TITLE'].'</h1></span><span style="margin-left: 10px;">('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
-                        echo '            <div><span style="margin-right: 10px;">Author:&nbsp;&nbsp;&nbsp;<strong>'.$row['author_fname'].' '.$row['author_lname'].'</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>Publisher:&nbsp;&nbsp;&nbsp;<strong>'.$row['PUBLISHER_NAME'].'</strong></span></div>';
-                        echo '            <div style="margin: 10px 0 10px 0; height: 150px; overflow-x: hidden; overflow-y: auto;">'.$row['PROD_DESC'].'</div>';
+                        echo '            <div style="margin: 5px 0 5px 0;"><span><h1>'.$row['BOOK_TITLE'].'</h1></span><span>('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
+                        echo '            <div><span style="margin-right: 20px;">Author:&nbsp;&nbsp;&nbsp;<strong>'.$row['author_fname'].' '.$row['author_lname'].'</strong></span><span>Publisher:&nbsp;&nbsp;&nbsp;<strong>'.$row['PUBLISHER_NAME'].'</strong></span></div>';
+                        echo '            <div style="margin: 5px 0px 0px 0px; height: 150px; overflow-x: hidden; overflow-y: auto;">'.$row['PROD_DESC'].'</div>';
                         echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between; align-items: flex-end;">';
                         echo '                <div style="width: 60%;">';
                         echo '                    <table style="width: 100%;">';
