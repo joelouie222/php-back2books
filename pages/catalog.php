@@ -71,98 +71,50 @@
 
         <div class="products">
             <ol class="book-list-view">
-                <li style="border: solid;">
-                    <div style="margin-left: 0; margin-right: 0;">
-                        <div style="align-items: flex-start; width: 30%;">
-                            <div>1</div>
-                            <div style="display: flex;">
+                <li style="border: solid; margin: 5px;">
+                    <div style="margin-left: 0; margin-right: 0; display: flex;">
+                        <div style="align-items: center; width: 30%; display: flex">
+                            <div style="margin: 10px"><h3>1</h3></div>
+                            <div style="margin: 10px">
                                 <a href="">
                                     <img src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-retro-book-free-material-png-image_4481187.jpg" alt="Product 1" width="100" height="100">
                                 </a>
                             </div>
                         </div>
-                        <div style="width: 70%">
-                            <div><h3><a>[BOOK TITLE]</a><span>(BOOK_PUBDATE)</span></h3></div>
+                        <div style="width: 70%; display: flex; flex-direction: column;">
+                            <div style="margin: 5px 0 5px 0;"><h3><a>[BOOK TITLE]</a><span>(BOOK_PUBDATE)</span></h3></div>
                             <div>Author: [AUTHOR] </div>
-                            <div>[PRODUCT_DESC]</div>
-                            <div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Format</th>
-                                            <th>ISBN</th>
-                                            <th>Price</th>
-                                            <th>Stock</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>[FORMAT]</td>
-                                            <td>[ISBN]</td>
-                                            <td>[PRICE]</td>
-                                            <td>[AVAIL]</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div style="margin: 10px 0 10px 0;">[PRODUCT_DESC: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.]</div>
                             <div style="display: flex;">
-                                <div><input type="hidden" value="[ISBN]"></div>
-                                <div style="float: right; cursor: pointer;"><button type="submit" value="ADDTOFAV"> ADD TO FAV </button></div>
-                                <div style="float: right; cursor: pointer;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>
+                                <div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Format</th>
+                                                <th>ISBN</th>
+                                                <th>Stock</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>[FORMAT]</td>
+                                                <td>[ISBN]</td>                                                
+                                                <td>[AVAIL]</td>
+                                                <td>[PRICE]</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <div><input type="hidden" value="[ISBN]"></div>
+                                    <div style="float: right; cursor: pointer;"><button type="submit" value="ADDTOFAV"> ADD TO FAV </button></div>
+                                    <div style="float: right; cursor: pointer;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>
+                                </div>
                             </div>
                         </div>
                     </div> 
                 </li>
-                
-                <li style="border: solid;">
-                    <div style="margin-left: 0; margin-right: 0;">
-                        <div style="align-items: flex-start; width: 30%;">
-                            <div>1</div>
-                            <div style="display: flex;">
-                                <a href="">
-                                    <img src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-retro-book-free-material-png-image_4481187.jpg" alt="Product 1" width="100" height="100">
-                                </a>
-                            </div>
-                        </div>
-                        <div style="width: 70%">
-                            <div><h3><a>[BOOK TITLE]</a><span>(BOOK_PUBDATE)</span></h3></div>
-                            <div>Author: [AUTHOR] </div>
-                            <div>[PRODUCT_DESC]</div>
-                            <div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Format</th>
-                                            <th>ISBN</th>
-                                            <th>Price</th>
-                                            <th>Stock</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>[FORMAT]</td>
-                                            <td>[ISBN]</td>
-                                            <td>[PRICE]</td>
-                                            <td>[AVAIL]</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div style="display: flex;">
-                                <div><input type="hidden" value="[ISBN]"></div>
-                                <div style="float: right; cursor: pointer;"><button type="submit" value="ADDTOFAV"> ADD TO FAV </button></div>
-                                <div style="float: right; cursor: pointer;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>
-                            </div>
-                        </div>
-                    </div> 
-                </li>
-
-
-
-
-
-
-
             </ol>
         </div>
 

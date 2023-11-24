@@ -52,7 +52,7 @@
                     echo '<article class="promo-card">';
                     echo '    <div class="promo-card-box">';
                     echo '        <div class="discount-box">';
-                    echo '        <div> SAVE <h3>'.$row["DISCOUNT_TAG"].'% OFF</h3></div>';
+                    echo '        <div> SAVE <h2>'.$row["DISCOUNT_TAG"].'% OFF</h2></div>';
                     echo '        <div> AT CHECK OUT</div>';
                     echo '    </div>';
                     echo '<div class="promo-details">';
