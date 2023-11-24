@@ -120,7 +120,7 @@
                         echo '<li style="border: solid; margin: 5px;">';
                         echo '    <div style="margin-left: 0; margin-right: 0; display: flex;">';
                         echo '        <div style="align-items: center; width: 30%; display: flex">';
-                        echo '            <div style="margin: 10px"><h3>1</h3></div>';
+                        echo '            <div style="margin: 10px"><h3>'$count'</h3></div>';
                         echo '            <div style="margin: 10px">';
                         echo '                <a href="">';
                         echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" width="200" height="200">';
@@ -129,9 +129,9 @@
                         echo '        </div>';
                         echo '        <div style="width: 70%; display: flex; flex-direction: column;">';
                         echo '            <div style="margin: 5px 0 5px 0;"><h3><a>'.$row['BOOK_TITLE'].'</a><span style="margin-left: 10px;">('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
-                        echo '            <div><span style="margin-right: 10px;">Author: '.$row['author_fname'].' '.$row['author_lname'].'</span><span>Publisher: '.$row['PUBLISHER_NAME'].'</span></div>';
+                        echo '            <div><span style="margin-right: 10px;">Author: <strong>'.$row['author_fname'].' '.$row['author_lname'].'</strong></span><span>Publisher: <strong>'.$row['PUBLISHER_NAME'].'</strong></span></div>';
                         echo '            <div style="margin: 10px 0 10px 0; height: 200px; overflow: scroll;">'.$row['PROD_DESC'].'</div>';
-                        echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">';
+                        echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between; align-items: flex-end;">';
                         echo '                <div>';
                         echo '                    <table>';
                         echo '                        <thead>';
@@ -154,7 +154,7 @@
                         echo '                        </tbody>';
                         echo '                    </table>';
                         echo '                </div>';
-                        echo '                <div><h2>$ '.$row['PRICE'].'</h2></div>  ';
+                        echo '                <div><h1>$ '.$row['PRICE'].'</h1></div>  ';
                         echo '                <div style="display: flex; align-items: flex-end;">';
                         echo '                   <div><input type="hidden" value="'.$row['BOOK_ID'].'"></div>';
                         echo '                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>';
@@ -183,7 +183,7 @@
                         <div style="width: 70%; display: flex; flex-direction: column;">
                             <div style="margin: 5px 0 5px 0;"><h3><a>[BOOK TITLE]</a><span>(BOOK_PUBDATE)</span></h3></div>
                             <div><span style="margin-right: 10px;">Author: [AUTHOR]</span><span>Publisher: [PUBLISHER_NAME]</span></div>
-                            <div style="margin: 10px 0 10px 0; overflow: scroll;">[PRODUCT_DESC: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.]</div>
+                            <div style="margin: 10px 0 10px 0; overflow-y: scroll; overflow-x: hidden;">[PRODUCT_DESC: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.]</div>
                             <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">
                                 <div>
                                     <table>
