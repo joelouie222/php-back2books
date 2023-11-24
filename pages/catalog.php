@@ -66,17 +66,17 @@
 
                         echo '<li style="border: solid; margin: 15px 10px; padding: 5px">';
                         echo '    <div style="margin-left: 0; margin-right: 0; display: flex;">';
-                        echo '        <div style="align-items: center; width: 30%; display: flex">';
-                        echo '            <div style="margin: 10px"><h3>'.$count.'</h3></div>';
+                        echo '        <div style="align-items: center; width: 20%; display: flex">';
+                        echo '            <div style="margin: 10px"><h2>'.$count.'</h2></div>';
                         echo '            <div style="margin: 10px">';
                         echo '                <a href="">';
                         echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" height="200" width="150" >';
                         echo '                </a>';
                         echo '            </div>';
                         echo '        </div>';
-                        echo '        <div style="width: 70%; display: flex; flex-direction: column;">';
+                        echo '        <div style="width: 80%; display: flex; flex-direction: column;">';
                         echo '            <div style="margin: 5px 0 5px 0;"><span><h1>'.$row['BOOK_TITLE'].'</h1></span><span style="margin-left: 10px;">('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
-                        echo '            <div><span style="margin-right: 10px;">Author:   <strong>'.$row['author_fname'].' '.$row['author_lname'].'</strong>     </span><span>Publisher:   <strong>'.$row['PUBLISHER_NAME'].'</strong></span></div>';
+                        echo '            <div><span style="margin-right: 10px;">Author:&nbsp;&nbsp;&nbsp;<strong>'.$row['author_fname'].' '.$row['author_lname'].'</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>Publisher:&nbsp;&nbsp;&nbsp;<strong>'.$row['PUBLISHER_NAME'].'</strong></span></div>';
                         echo '            <div style="margin: 10px 0 10px 0; height: 150px; overflow-x: hidden; overflow-y: auto;">'.$row['PROD_DESC'].'</div>';
                         echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between; align-items: flex-end;">';
                         echo '                <div style="width: 60%;">';
