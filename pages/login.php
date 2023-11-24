@@ -35,6 +35,7 @@
           // }
           
           include('../config.php');
+          include('../functions.php');
           
           echo '<div class="about-us">';
           echo "connectionInfo: ($connectionInfo)";
@@ -130,7 +131,7 @@
               sqlsrv_free_stmt($getUser);
 
               if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
-                header("location: /index.php");
+                redirect("https://php-back2books.azurewebsites.net/");
                 exit;
               } else {
                 echo "<h1> Login failed. :( </h1>";
