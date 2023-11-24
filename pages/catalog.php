@@ -73,7 +73,7 @@
 
         <div class="products">
             <?php
-                $tsql = "SELECT TOP (10) * FROM BOOKS";
+                $tsql = "SELECT TOP (10) * FROM BOOKS B INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID";
                 $getBooks = sqlsrv_query($conn, $tsql);
 
                 echo "connectionInfo: ($connectionInfo)";
@@ -100,6 +100,7 @@
                     echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
                     echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
                     echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
+                    echo '<p>[IMAGE_LINK]: '.$row['IMAGE_LINK'].'</p>';
                     echo '</br></br>';
                 }
                 sqlsrv_free_stmt($getBooks);
