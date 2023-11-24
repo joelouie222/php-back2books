@@ -340,4 +340,9 @@ h6{
 }
 
 
-
+/* ------------------------------------- C A T A L O G ----------------------------------------*/
+.book-list-view {
+  padding: 0!important;
+  margin: 0!important;
+  list-style-type: none;
+}
