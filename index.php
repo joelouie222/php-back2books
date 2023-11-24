@@ -47,8 +47,8 @@
                     echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
                     echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
                     echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
-                    echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"] = $userEmail.'<p>';
-                    echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"] = $hashedPassword.'<p>';
+                    echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"].'<p>';
+                    echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"].'<p>';
                     include('config.php');
                 ?>
                 

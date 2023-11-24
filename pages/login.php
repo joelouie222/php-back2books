@@ -58,51 +58,32 @@
               $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM B2BUSER 
                       WHERE USER_ACTIVE = 1
                       AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
-
-              echo '<p> $tsql: '.$tsql.'<p>';
               
-              $getUser = sqlsrv_query($conn, $tsql);
-
               if( $getUser == false ) {  
-                echo "Error in statement preparation/execution.\n";  
-                die( print_r( sqlsrv_errors(), true));
-              }
-              
-              while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
-                echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
-                echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
-                echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
-
-
-                $_SESSION["loggedIn"] = true;
-                $_SESSION["fname"] = $user["USER_FNAME"];
-                $_SESSION['lname'] = $user["USER_LNAME"];
-                $_SESSION["admin"] = $user["USER_ADMIN"];
-                $_SESSION["loginEmail"] = $userEmail;
-                $_SESSION["hashedPassword"] = $hashedPassword;
-
-                sqlsrv_free_stmt($getUser);
-                if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
-                  redirect("https://php-back2books.azurewebsites.net/");
-                  exit;
-                } else {
-                  echo "<h1> Unable to verify email/password. Please try again!. </h1>";
+                echo "Error in statement preparation/execution.\n";
+                redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+              } else {
+                while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
+                  echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
+                  echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
+                  echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
+  
+                  $_SESSION["loggedIn"] = true;
+                  $_SESSION["fname"] = $user["USER_FNAME"];
+                  $_SESSION['lname'] = $user["USER_LNAME"];
+                  $_SESSION["admin"] = $user["USER_ADMIN"];
+                  $_SESSION["loginEmail"] = $userEmail;
+                  $_SESSION["hashedPassword"] = $hashedPassword;
+  
+                  sqlsrv_free_stmt($getUser);
+                  if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
+                    redirect("https://php-back2books.azurewebsites.net/");
+                    exit;
+                  } else {
+                    redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+                  }
                 }
               }
-
-              // echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
-              // echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
-              // echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
-              // echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
-
-              // sqlsrv_free_stmt($getUser);
-
-              // if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
-              //   redirect("https://php-back2books.azurewebsites.net/");
-              //   exit;
-              // } else {
-              //   echo "<h1> Login failed. Please try again!. </h1>";
-              // }
             } else {
               echo "<h1> Login failed. Please try again!. </h1>";
             }
@@ -112,6 +93,14 @@
         <div class="about-us">
           <center>
                 <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
+            <div>
+                <?php
+                  if(isset($_GET['verify']) && ($_GET['verify']) == "failed"){
+                    echo "<h1> Login failed. Unable to verify email/password. Please try again! </h1>";
+                  }
+                ?>
+            </div>
+
             <div>
                 <form method="post">
                   <!-- Email input -->
