@@ -154,7 +154,7 @@
                         echo '                        </tbody>';
                         echo '                    </table>';
                         echo '                </div>';
-                        echo '                <div><h3>'.$row['PRICE'].'</h3></div>  '
+                        echo '                <div><h3>'.$row['PRICE'].'</h3></div>  ';
                         echo '                <div style="display: flex; align-items: flex-end;">';
                         echo '                   <div><input type="hidden" value="'.$row['BOOK_ID'].'"></div>';
                         echo '                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>';
