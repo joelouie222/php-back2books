@@ -129,7 +129,7 @@
 
               sqlsrv_free_stmt($getUser);
 
-              if(isset($_SESSION["loggedin"]) && $_SESSION["loggedIn"] === true){
+              if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
                 header("location: /index.php");
                 exit;
               } else {

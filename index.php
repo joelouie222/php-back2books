@@ -33,7 +33,7 @@
         <div class="content">
             <div class="about-us">
                 <?php
-                    if (isset($_SESSION["loggedin"]) AND $_SESSION["loggedin"] == true)
+                    if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true)
                         echo '<h3> Wecome to Back 2 Books, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</h3>';
                     else
                         echo '<h3> Wecome to Back 2 Books!</h3>';
