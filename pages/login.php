@@ -59,8 +59,7 @@
                       WHERE USER_ACTIVE = 1
                       AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
               $getUser = sqlsrv_query($conn, $tsql);
-              if( $getUser == false ) {  
-                echo "Error in statement preparation/execution.\n";
+              if( $getUser == false ) { 
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
               }
                 while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {

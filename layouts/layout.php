@@ -16,16 +16,16 @@
     if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true){
         if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1) {
             echo '<a Welcome Back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
-            echo '<a href=""><i class=""></i> VIEW ALL ORDERS </a>';
-            echo '<a href=""><i class=""></i> VIEW ALL USERS </a>';
-            echo '<a href=""><i class=""></i> VIEW ALL USERS </a>';
-            echo '<a href=""><i class=""></i> VIEW ALL COUPONS </a>';
-            echo '<a href=""><i class=""></i> Log Out </a>';
+            echo '<a href=""><i class=""></i> VIEW ORDERS </a>';
+            echo '<a href=""><i class=""></i> VIEW USERS </a>';
+            echo '<a href=""><i class=""></i> VIEW PRODUCTS </a>';
+            echo '<a href=""><i class=""></i> VIEW COUPONS </a>';
+            echo '<a href="/logout.php"><i class=""></i> Log Out </a>';
         } else {
             echo '<a Wecome back, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
             echo '<a href=""><i class=""></i> Edit Profile </a>';
             echo '<a href=""><i class=""></i> My Orders </a>';
-            echo '<a href=""><i class=""></i> Log Out </a>';
+            echo '<a href="/logout.php"><i class=""></i> Log Out </a>';
         }
     } else {
         echo '  <a href="/pages/login.php"><i class="fa fa-fw fa-sign-in"></i> Sign In</a>';
