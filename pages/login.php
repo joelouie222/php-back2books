@@ -1,5 +1,10 @@
 <?php
-session_start();
+  session_start();
+
+  if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: /index.php");
+    exit;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -29,10 +34,10 @@ session_start();
         <?php
           include('../layouts/layout.php');
 
-          if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-            header("location: welcome.php");
-            exit;
-          }
+          // if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+          //   header("location: welcome.php");
+          //   exit;
+          // }
           
           include('../config.php');
           
