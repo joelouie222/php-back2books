@@ -78,7 +78,7 @@ session_start();
                 die( print_r( sqlsrv_errors(), true));
               }
               
-              while($user = sqlsrv_fetch_array($getDiscounts, SQLSRV_FETCH_ASSOC)) {
+              while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
                 echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
                 echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
                 echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
