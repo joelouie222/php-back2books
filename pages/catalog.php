@@ -72,43 +72,46 @@
         </div>
 
         <div class="products">
-            <?php
-                $tsql = "SELECT TOP (10) * FROM BOOKS B INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID";
-                $getBooks = sqlsrv_query($conn, $tsql);
-
-                echo "connectionInfo: ($connectionInfo)";
-                echo "</br>";
-                echo "serverName: ($serverName)";
-                echo "</br>";
-                echo "conn: ($conn)";
-                echo "</br>";
-                echo "</hr>";
-
-                if($getBooks == false ) {  
-                    echo "Error in statement preparation/execution.\n";  
-                    die( print_r( sqlsrv_errors(), true));
-                }
-
-                while($row = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
-                    echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
-                    echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
-                    echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
-                    // $date = $row['BOOK_PUBLISHED_DATE'];
-                    // $formattedDate = date("Y-m-d", strtotime($date));
-                    echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').'</p>';
-                    echo '<p>[PRICE]: '.$row['PRICE'].'</p>';
-                    echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
-                    echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
-                    echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
-                    echo '<p>[IMAGE_LINK]: '.$row['IMAGE_LINK'].'</p>';
-                    echo '</br></br>';
-                }
-                sqlsrv_free_stmt($getBooks);
-            ?>
+            
         </div>
 
         <div class="products">
             <ol class="book-list-view">
+                <?php
+                    $tsql = "SELECT TOP (10) * FROM BOOKS B INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID";
+                    $getBooks = sqlsrv_query($conn, $tsql);
+
+                    echo "connectionInfo: ($connectionInfo)";
+                    echo "</br>";
+                    echo "serverName: ($serverName)";
+                    echo "</br>";
+                    echo "conn: ($conn)";
+                    echo "</br>";
+                    echo "</hr>";
+
+                    if($getBooks == false ) {  
+                        echo "Error in statement preparation/execution.\n";  
+                        die( print_r( sqlsrv_errors(), true));
+                    }
+
+                    while($row = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
+                        echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
+                        echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
+                        echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
+                        // $date = $row['BOOK_PUBLISHED_DATE'];
+                        // $formattedDate = date("Y-m-d", strtotime($date));
+                        echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').'</p>';
+                        echo '<p>[PRICE]: '.$row['PRICE'].'</p>';
+                        echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
+                        echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
+                        echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
+                        echo '<p>[IMAGE_LINK]: '.$row['IMAGE_LINK'].'</p>';
+                        echo '</br></br>';
+                    }
+                    sqlsrv_free_stmt($getBooks);
+                ?>
+
+                
                 <li style="border: solid; margin: 5px;">
                     <div style="margin-left: 0; margin-right: 0; display: flex;">
                         <div style="align-items: center; width: 30%; display: flex">
@@ -121,7 +124,7 @@
                         </div>
                         <div style="width: 70%; display: flex; flex-direction: column;">
                             <div style="margin: 5px 0 5px 0;"><h3><a>[BOOK TITLE]</a><span>(BOOK_PUBDATE)</span></h3></div>
-                            <div><span>Author: [AUTHOR]</span><span>Publisher: [PUBLISHER_NAME]</span></div>
+                            <div><span style="margin-right: 10px;">Author: [AUTHOR]</span><span>Publisher: [PUBLISHER_NAME]</span></div>
                             <div style="margin: 10px 0 10px 0; overflow: scroll;">[PRODUCT_DESC: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.]</div>
                             <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">
                                 <div>
