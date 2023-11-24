@@ -15,7 +15,7 @@
     
     if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true){
         if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1) {
-            echo '<a Welcome Back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
+            echo '<a Welcome back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
             echo '<a href=""><i class=""></i> VIEW ORDERS </a>';
             echo '<a href=""><i class=""></i> VIEW USERS </a>';
             echo '<a href=""><i class=""></i> VIEW PRODUCTS </a>';
