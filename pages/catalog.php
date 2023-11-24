@@ -93,8 +93,9 @@
                         echo "Error in statement preparation/execution.\n";  
                         die( print_r( sqlsrv_errors(), true));
                     }
-
+                    $count = 1
                     while($row = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
+                        
                         echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
                         echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
                         echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
@@ -114,12 +115,12 @@
                         echo '            <div style="margin: 10px"><h3>1</h3></div>';
                         echo '            <div style="margin: 10px">';
                         echo '                <a href="">';
-                        echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Product 1" width="100" height="100">';
+                        echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" width="200" height="200">';
                         echo '                </a>';
                         echo '            </div>';
                         echo '        </div>';
                         echo '        <div style="width: 70%; display: flex; flex-direction: column;">';
-                        echo '            <div style="margin: 5px 0 5px 0;"><h3><a>'.$row['BOOK_TITLE'].'</a><span style="margin-left: 5px;">'.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').'</span></h3></div>';
+                        echo '            <div style="margin: 5px 0 5px 0;"><h3><a>'.$row['BOOK_TITLE'].'</a><span style="margin-left: 10px;">('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
                         echo '            <div><span style="margin-right: 10px;">Author: [AUTHOR]</span><span>Publisher: '.$row['PUBLISHER_NAME'].'</span></div>';
                         echo '            <div style="margin: 10px 0 10px 0; overflow: scroll;">'.$row['PROD_DESC'].'</div>';
                         echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">';
@@ -131,7 +132,7 @@
                         echo '                                <th>Format</th>';
                         echo '                                <th>Pages</th>';
                         echo '                                <th>Stock</th>';
-                        echo '                                <th>Price</th>';
+                        // echo '                                <th>Price</th>';
                         echo '                            </tr>';
                         echo '                        </thead>';
                         echo '                        <tbody>';
@@ -140,11 +141,12 @@
                         echo '                                <td>'.$row['BOOK_FORMAT'].'</td>';
                         echo '                                <td>'.$row['NUM_PAGES'].'</td>';
                         echo '                                <td>[AVAIL]</td>';
-                        echo '                                <td>'.$row['PRICE'].'</td>';
+                        // echo '                                <td>'.$row['PRICE'].'</td>';
                         echo '                            </tr>';
                         echo '                        </tbody>';
                         echo '                    </table>';
                         echo '                </div>';
+                        echo '                <div><h3>'.$row['PRICE'].'</h3></div>  '
                         echo '                <div style="display: flex; align-items: flex-end;">';
                         echo '                   <div><input type="hidden" value="'.$row['BOOK_ID'].'"></div>';
                         echo '                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>';
@@ -154,6 +156,7 @@
                         echo '        </div>';
                         echo '    </div> ';
                         echo '</li>';
+                        $count++;
                     }
                     sqlsrv_free_stmt($getBooks);
                 ?>
