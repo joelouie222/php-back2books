@@ -78,7 +78,12 @@
         <div class="products">
             <ol class="book-list-view">
                 <?php
-                    $tsql = "SELECT TOP (10) * FROM BOOKS B INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID";
+                    $tsql = "SELECT TOP (10) *
+                            FROM BOOKS B
+                            INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+                            INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
+                            INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
+                            INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID";
                     $getBooks = sqlsrv_query($conn, $tsql);
 
                     echo "connectionInfo: ($connectionInfo)";
@@ -93,7 +98,7 @@
                         echo "Error in statement preparation/execution.\n";  
                         die( print_r( sqlsrv_errors(), true));
                     }
-                    $count = 1
+                    $count = 1;
                     while($row = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
                         
                         echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
@@ -107,6 +112,9 @@
                         echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
                         echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
                         echo '<p>[IMAGE_LINK]: '.$row['IMAGE_LINK'].'</p>';
+                        echo '<p>[INV_QUANTITY]: '.$row['INV_QUANTITY'].'</p>';
+                        echo '<p>[Author_fname]: '.$row['author_fname'].'</p>';
+                        echo '<p>[author_lname]: '.$row['author_lname'].'</p>';
                         echo '</br></br>';
 
                         echo '<li style="border: solid; margin: 5px;">';
