@@ -70,14 +70,14 @@
                         echo '            <div style="margin: 10px"><h3>'.$count.'</h3></div>';
                         echo '            <div style="margin: 10px">';
                         echo '                <a href="">';
-                        echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" width="200" height="150">';
+                        echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" height="200" width="150" >';
                         echo '                </a>';
                         echo '            </div>';
                         echo '        </div>';
                         echo '        <div style="width: 70%; display: flex; flex-direction: column;">';
                         echo '            <div style="margin: 5px 0 5px 0;"><span><h1>'.$row['BOOK_TITLE'].'</h1></span><span style="margin-left: 10px;">('.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').')</span></h3></div>';
                         echo '            <div><span style="margin-right: 10px;">Author: <strong>'.$row['author_fname'].' '.$row['author_lname'].'</strong></span><span>Publisher: <strong>'.$row['PUBLISHER_NAME'].'</strong></span></div>';
-                        echo '            <div style="margin: 10px 0 10px 0; height: 200px; overflow-x: hidden; overflow-y: auto;">'.$row['PROD_DESC'].'</div>';
+                        echo '            <div style="margin: 10px 0 10px 0; height: 150px; overflow-x: hidden; overflow-y: auto;">'.$row['PROD_DESC'].'</div>';
                         echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between; align-items: flex-end;">';
                         echo '                <div style="width: 60%;">';
                         echo '                    <table style="width: 100%;">';
@@ -104,7 +104,7 @@
                         echo '                <div><h1>$ '.$row['PRICE'].'</h1></div>  ';
                         echo '                <div style="display: flex; align-items: flex-end;">';
                         echo '                   <div><input type="hidden" value="'.$row['BOOK_ID'].'"></div>';
-                        echo '                    <div style="margin-right: 10px; cursor: pointer; border: none; background: antiquewhite;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>';
+                        echo '                    <div style="margin-right: 10px; cursor: pointer; border: none; background-color: antiquewhite;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>';
                         echo '                   <div style="cursor: pointer; padding: 5px;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>';
                         echo '                </div>';
                         echo '            </div>';
