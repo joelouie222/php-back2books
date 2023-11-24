@@ -64,7 +64,7 @@
                         // echo '<p>[author_lname]: '.$row['author_lname'].'</p>';
                         // echo '</br></br>';
 
-                        echo '<li style="border: solid; margin: 5px;">';
+                        echo '<li style="border: solid; margin: 15px 10px; padding: 5px">';
                         echo '    <div style="margin-left: 0; margin-right: 0; display: flex;">';
                         echo '        <div style="align-items: center; width: 30%; display: flex">';
                         echo '            <div style="margin: 10px"><h3>'.$count.'</h3></div>';
