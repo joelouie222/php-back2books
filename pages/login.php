@@ -67,6 +67,8 @@ session_start();
           
             echo '<p> $userEmail: '.$userEmail.'<p>';
             echo '<p> $userPassword: '.$userPassword.'<p>';
+            echo '<p> $userPassword: '.md5($userPassword).'<p>';
+            echo '<p> $userPassword: '.md5($userPassword, 1).'<p>';
 
             if(empty($emailErr) && empty($passwordErr)){
               $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM [USER] 
