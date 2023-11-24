@@ -91,7 +91,7 @@ session_start();
               //   echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
               // }
 
-              $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
+              $user = sqlsrv_fetch($getUser, SQLSRV_FETCH_ASSOC);
 
               if( $getUser == false ) {  
                 echo "Error in fetching user.\n";  
