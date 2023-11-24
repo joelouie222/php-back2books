@@ -36,8 +36,11 @@ session_start();
           
           include('../config.php');
           
-          $user_email = $user_password = "";
-          $email_err = $password_err = $login_err = "";
+          $user_email = "";
+          $user_password = "";
+          $email_err = "";
+          $password_err = "";
+          $login_err = "";
           
           if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(empty(trim($_POST["loginEmail"]))){
