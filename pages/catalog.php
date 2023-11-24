@@ -107,11 +107,58 @@
                         echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
                         echo '<p>[IMAGE_LINK]: '.$row['IMAGE_LINK'].'</p>';
                         echo '</br></br>';
+
+                        echo '<li style="border: solid; margin: 5px;">';
+                        echo '    <div style="margin-left: 0; margin-right: 0; display: flex;">';
+                        echo '        <div style="align-items: center; width: 30%; display: flex">';
+                        echo '            <div style="margin: 10px"><h3>1</h3></div>';
+                        echo '            <div style="margin: 10px">';
+                        echo '                <a href="">';
+                        echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Product 1" width="100" height="100">';
+                        echo '                </a>';
+                        echo '            </div>';
+                        echo '        </div>';
+                        echo '        <div style="width: 70%; display: flex; flex-direction: column;">';
+                        echo '            <div style="margin: 5px 0 5px 0;"><h3><a>'.$row['BOOK_TITLE'].'</a><span style="margin-left: 5px;">'.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').'</span></h3></div>';
+                        echo '            <div><span style="margin-right: 10px;">Author: [AUTHOR]</span><span>Publisher: '.$row['PUBLISHER_NAME'].'</span></div>';
+                        echo '            <div style="margin: 10px 0 10px 0; overflow: scroll;">'.$row['PROD_DESC'].'</div>';
+                        echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between">';
+                        echo '                <div>';
+                        echo '                    <table>';
+                        echo '                        <thead>';
+                        echo '                            <tr>';
+                        echo '                                <th>ISBN</th>';
+                        echo '                                <th>Format</th>';
+                        echo '                                <th>Pages</th>';
+                        echo '                                <th>Stock</th>';
+                        echo '                                <th>Price</th>';
+                        echo '                            </tr>';
+                        echo '                        </thead>';
+                        echo '                        <tbody>';
+                        echo '                            <tr>';
+                        echo '                                <td>'.$row['BOOK_ISBN'].'</td> ';
+                        echo '                                <td>'.$row['BOOK_FORMAT'].'</td>';
+                        echo '                                <td>'.$row['NUM_PAGES'].'</td>';
+                        echo '                                <td>[AVAIL]</td>';
+                        echo '                                <td>'.$row['PRICE'].'</td>';
+                        echo '                            </tr>';
+                        echo '                        </tbody>';
+                        echo '                    </table>';
+                        echo '                </div>';
+                        echo '                <div style="display: flex; align-items: flex-end;">';
+                        echo '                   <div><input type="hidden" value="'.$row['BOOK_ID'].'"></div>';
+                        echo '                    <div style="margin-right: 10px; cursor: pointer;"><button type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>';
+                        echo '                   <div style="cursor: pointer;"><button type="submit" value="ADDTOCART"> ADD TO CART </button></div>';
+                        echo '                </div>';
+                        echo '            </div>';
+                        echo '        </div>';
+                        echo '    </div> ';
+                        echo '</li>';
                     }
                     sqlsrv_free_stmt($getBooks);
                 ?>
 
-                
+
                 <li style="border: solid; margin: 5px;">
                     <div style="margin-left: 0; margin-right: 0; display: flex;">
                         <div style="align-items: center; width: 30%; display: flex">
