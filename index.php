@@ -30,7 +30,6 @@
         include('layouts/layout.php');
     ?>
     <div class="container">
-        </div>
         <div class="content">
             <div class="about-us">
                 <?php
