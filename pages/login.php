@@ -27,25 +27,10 @@
 <body>
     <div class="container">
         <?php
-          include('../layouts/layout.php');
-
-          // if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-          //   header("location: welcome.php");
-          //   exit;
-          // }
-          
+          include('../layouts/layout.php');          
           include('../config.php');
           include('../functions.php');
           
-          echo '<div class="about-us">';
-          echo "connectionInfo: ($connectionInfo)";
-          echo "</br>";
-          echo "serverName: ($serverName)";
-          echo "</br>";
-          echo "conn: ($conn)";
-          echo "</br>";
-          echo '</div>';
-
           $userEmail = "";
           $userPassword = "";
           $emailErr = "";
@@ -67,10 +52,7 @@
             }
           
             $hashedPassword = md5($userPassword);
-            echo '<p> $userEmail: '.$userEmail.'<p>';
-            echo '<p> $userPassword: '.$userPassword.'<p>';
-            echo '<p> $hashedPassword: '.$hashedPassword.'<p>';
-
+            
 
             if(empty($emailErr) && empty($passwordErr)){
               $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM B2BUSER 
@@ -91,51 +73,38 @@
                 echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
                 echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
 
+
                 $_SESSION["loggedIn"] = true;
                 $_SESSION["fname"] = $user["USER_FNAME"];
                 $_SESSION['lname'] = $user["USER_LNAME"];
                 $_SESSION["admin"] = $user["USER_ADMIN"];
-              
-              
+                $_SESSION["loginEmail"] = $userEmail;
+                $_SESSION["hashedPassword"] = $hashedPassword;
+
+                sqlsrv_free_stmt($getUser);
+                if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
+                  redirect("https://php-back2books.azurewebsites.net/");
+                  exit;
+                } else {
+                  echo "<h1> Unable to verify email/password. Please try again!. </h1>";
+                }
               }
-
-              // $user = sqlsrv_fetch($getUser, SQLSRV_FETCH_ASSOC);
-
-              // if( $getUser == false ) {  
-              //   echo "Error in fetching user.\n";  
-              //   die( print_r( sqlsrv_errors(), true));
-              // }
-
-              // echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
-              // echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
-              // echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
-
-              // session_start();
-
-              // $_SESSION["loggedIn"] = true;
-              // $_SESSION["fname"] = $user["USER_FNAME"];
-              // $_SESSION['lname'] = $user["USER_LNAME"];
-              // $_SESSION["admin"] = $user["USER_ADMIN"];
 
               // echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
               // echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
               // echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
               // echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
 
+              // sqlsrv_free_stmt($getUser);
 
-              echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
-              echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
-              echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
-              echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
-
-              sqlsrv_free_stmt($getUser);
-
-              if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
-                redirect("https://php-back2books.azurewebsites.net/");
-                exit;
-              } else {
-                echo "<h1> Login failed. :( </h1>";
-              }
+              // if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
+              //   redirect("https://php-back2books.azurewebsites.net/");
+              //   exit;
+              // } else {
+              //   echo "<h1> Login failed. Please try again!. </h1>";
+              // }
+            } else {
+              echo "<h1> Login failed. Please try again!. </h1>";
             }
           }
         ?>  
