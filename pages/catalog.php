@@ -83,7 +83,7 @@
                         echo '                    <table style="width: 100%;">';
                         echo '                        <thead>';
                         echo '                            <tr style="border-bottom: 1px solid; border-top: 1px solid;">';
-                        echo '                                <th>ISBN</th>';
+                        echo '                                <th>ISBN-13</th>';
                         echo '                                <th>Format</th>';
                         echo '                                <th>Pages</th>';
                         echo '                                <th>Stock</th>';

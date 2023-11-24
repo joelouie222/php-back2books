@@ -36,6 +36,15 @@ session_start();
           
           include('../config.php');
           
+          echo '<div class="about-us">';
+          echo "connectionInfo: ($connectionInfo)";
+          echo "</br>";
+          echo "serverName: ($serverName)";
+          echo "</br>";
+          echo "conn: ($conn)";
+          echo "</br>";
+          echo '</div>';
+
           $userEmail = "";
           $userPassword = "";
           $emailErr = "";
@@ -58,46 +67,49 @@ session_start();
           
             if(empty($emailErr) && empty($passwordErr)){
               $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM USER 
-                      WHERE ACTIVE = 1 AND USER_PASSWORD = $userEmail AND USER_PASSWORD = $userPassword";
-          
+                      WHERE ACTIVE = 1
+                      -- AND USER_PASSWORD = $userEmail AND USER_PASSWORD = $userPassword
+                      ";
+
               $getUser = sqlsrv_query($conn, $tsql);
-          
+
               if( $getUser == false ) {  
                 echo "Error in statement preparation/execution.\n";  
                 die( print_r( sqlsrv_errors(), true));
               }
-            
-              echo '<div class="about-us">';
-              echo "connectionInfo: ($connectionInfo)";
-              echo "</br>";
-              echo "serverName: ($serverName)";
-              echo "</br>";
-              echo "conn: ($conn)";
-              echo "</br>";
-              echo '</div>';
-
-              $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
-
-              if( $getUser == false ) {  
-                echo "Error in fetching user.\n";  
-                die( print_r( sqlsrv_errors(), true));
+              
+              while($user = sqlsrv_fetch_array($getDiscounts, SQLSRV_FETCH_ASSOC)) {
+                echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
+                echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
+                echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
               }
 
-              echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
-              echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
-              echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
+              
 
-              session_start();
+              // $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
 
-              $_SESSION["loggedIn"] = true;
-              $_SESSION["fname"] = $user["USER_FNAME"];
-              $_SESSION['lname'] = $user["USER_LNAME"];
-              $_SESSION["admin"] = $user["USER_ADMIN"];
+              // if( $getUser == false ) {  
+              //   echo "Error in fetching user.\n";  
+              //   die( print_r( sqlsrv_errors(), true));
+              // }
 
-              echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
-              echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
-              echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
-              echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
+              // echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
+              // echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
+              // echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
+
+              // session_start();
+
+              // $_SESSION["loggedIn"] = true;
+              // $_SESSION["fname"] = $user["USER_FNAME"];
+              // $_SESSION['lname'] = $user["USER_LNAME"];
+              // $_SESSION["admin"] = $user["USER_ADMIN"];
+
+              // echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
+              // echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
+              // echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
+              // echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
+
+              sqlsrv_free_stmt($getUser);
             }
           }
         ?>  
