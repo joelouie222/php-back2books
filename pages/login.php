@@ -58,7 +58,7 @@
               $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM B2BUSER 
                       WHERE USER_ACTIVE = 1
                       AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
-              
+              $getUser = sqlsrv_query($conn, $tsql);
               if( $getUser == false ) {  
                 echo "Error in statement preparation/execution.\n";
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
@@ -84,7 +84,7 @@
                   }
                 }
             } else {
-              echo "<h1> Login failed. Please try again!. </h1>";
+              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
             }
           }
         ?>  
