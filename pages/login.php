@@ -62,7 +62,7 @@
               if( $getUser == false ) {  
                 echo "Error in statement preparation/execution.\n";
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
-              } else {
+              }
                 while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
                   echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
                   echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
@@ -83,7 +83,6 @@
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                   }
                 }
-              }
             } else {
               echo "<h1> Login failed. Please try again!. </h1>";
             }
