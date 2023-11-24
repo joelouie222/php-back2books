@@ -93,7 +93,7 @@
                     echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
                     echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
                     echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
-                    echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE'].'</p>';
+                    // echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE'].'</p>';
                     echo '<p>[PRICE]: '.$row['PRICE'].'</p>';
                     echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
                     echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
