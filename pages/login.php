@@ -58,7 +58,7 @@ session_start();
           
             if(empty($emailErr) && empty($passwordErr)){
               $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM USER 
-                      WHERE ACTIVE = 1 AND USER_PASSWORD = $userEmail AND USER_PASSWORD = md5($userPassword)";
+                      WHERE ACTIVE = 1 AND USER_PASSWORD = $userEmail AND USER_PASSWORD = $userPassword";
           
               $getUser = sqlsrv_query($conn, $tsql);
           
