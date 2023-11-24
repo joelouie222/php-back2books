@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,16 +26,84 @@
 
 <body>
     <div class="container">
-        <?php include('../layouts/layout.php');
+        <?php
+          include('../layouts/layout.php');
+
+          if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+            header("location: welcome.php");
+            exit;
+          }
+          
+          include('../config.php');
+          
+          $user_email = $user_password = "";
+          $email_err = $password_err = $login_err = "";
+          
+          if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if(empty(trim($_POST["loginEmail"]))){
+              $email_err = "emptyEmail";
+            } else {
+              $user_email = trim($_POST["loginEmail"]);
+            }
+          
+            if(empty(trim($_POST["loginPassword"]))){
+              $password_err = "emptyPassword";
+            } else {
+              $user_password = trim($_POST["loginPassword"]);
+            }
+          
+            if(empty($email_err) && empty($password_err)){
+              $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM USER 
+                      WHERE ACTIVE = 1 AND USER_PASSWORD = $user_email AND USER_PASSWORD = md5($user_password)";
+          
+              $getUser = sqlsrv_query($conn, $tsql);
+          
+              if( $getUser == false ) {  
+                echo "Error in statement preparation/execution.\n";  
+                die( print_r( sqlsrv_errors(), true));
+              }
+            
+              echo '<div class="about-us">';
+              echo "connectionInfo: ($connectionInfo)";
+              echo "</br>";
+              echo "serverName: ($serverName)";
+              echo "</br>";
+              echo "conn: ($conn)";
+              echo "</br>";
+              echo '</div>';
+
+              $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
+
+              if( $getUser == false ) {  
+                echo "Error in fetching user.\n";  
+                die( print_r( sqlsrv_errors(), true));
+              }
+
+              echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
+              echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
+              echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
+
+              session_start();
+
+              $_SESSION["loggedIn"] = true;
+              $_SESSION["fname"] = $user["USER_FNAME"];
+              $_SESSION['lname'] = $user["USER_LNAME"];
+              $_SESSION["admin"] = $user["USER_ADMIN"]
+
+              echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
+              echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
+              echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
+              echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
+          
+          }
         ?>  
         
         <div class="about-us">
           <center>
                 <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
             <div>
-                <form>
+                <form method="post">
                   <!-- Email input -->
-                  
                   <div class="form-group">
                     <label for="loginEmail">Email Address</label>
                     <input name="loginEmail" type="email" class="form-control" id="loginEmail" placeholder="Email">
@@ -49,6 +121,7 @@
                   <div>
                   <button name="submit" type="submit" value="submit">Submit</button>
                   </div>
+                  <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
                 </form>
             </div>
           </center>

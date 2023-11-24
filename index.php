@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,28 +30,20 @@
         include('layouts/layout.php');
     ?>
     <div class="container">
-        <div class = "gallery">
-                            <?php
-                            // $select_prod="SELECT * from products";
-                            // $result_prod=mysqli_query($db_conn,$select_prod);
-                            // while($row_data=mysqli_fetch_assoc($result_prod)){
-                            //     $prod_name=$row_data['prod_name'];
-                            //     $prod_price=$row_data['prod_price'];
-                            //     echo '<div class="prod-content">';
-                            //     echo '<img src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-retro-book-free-material-png-image_4481187.jpg" alt="Product 2" width="100" height="100">';
-                            //     echo "<h3>$prod_name</h3>";
-                            //     echo "<h6>$prod_price</h6>";
-                            //     echo "</div>";
-                            // }
-                            ?>
-                            
-            
         </div>
         <div class="content">
             <div class="about-us">
                 <?php
-                    $name = 'HELLO WORLD TESTING PHP 8.2';
-                    echo "<h3> {$name} </h3>";
+                    if (isset($_SESSION["loggedin"]) AND $_SESSION["loggedin"] == true)
+                        echo "<h3> Wecome to Back 2 Books, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</h3>";
+                    else
+                        echo "<h3> Wecome to Back 2 Books!</h3>";
+
+                    if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1)
+                        echo "<h3> You're an ADMIN! </h3>";
+                    else
+                        echo "<h3> You're NOT an admin! </h3>";
+                    
                     include('config.php');
                 ?>
                 
