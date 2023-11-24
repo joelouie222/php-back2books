@@ -85,36 +85,34 @@ session_start();
                 die( print_r( sqlsrv_errors(), true));
               }
               
-              while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
-                echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
-                echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
-                echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
-              }
-
-              
-
-              // $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
-
-              // if( $getUser == false ) {  
-              //   echo "Error in fetching user.\n";  
-              //   die( print_r( sqlsrv_errors(), true));
+              // while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
+              //   echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
+              //   echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
+              //   echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
               // }
 
-              // echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
-              // echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
-              // echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
+              $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
 
-              // session_start();
+              if( $getUser == false ) {  
+                echo "Error in fetching user.\n";  
+                die( print_r( sqlsrv_errors(), true));
+              }
 
-              // $_SESSION["loggedIn"] = true;
-              // $_SESSION["fname"] = $user["USER_FNAME"];
-              // $_SESSION['lname'] = $user["USER_LNAME"];
-              // $_SESSION["admin"] = $user["USER_ADMIN"];
+              echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
+              echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
+              echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
 
-              // echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
-              // echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
-              // echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
-              // echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
+              session_start();
+
+              $_SESSION["loggedIn"] = true;
+              $_SESSION["fname"] = $user["USER_FNAME"];
+              $_SESSION['lname'] = $user["USER_LNAME"];
+              $_SESSION["admin"] = $user["USER_ADMIN"];
+
+              echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
+              echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
+              echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
+              echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
 
               sqlsrv_free_stmt($getUser);
             }
