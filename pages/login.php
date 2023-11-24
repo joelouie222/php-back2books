@@ -31,7 +31,7 @@
           include('../config.php');
           include('../functions.php');
           
-          if($_SERVER["REQUEST_METHOD"] == "POST")
+          if(isset($_POST['submit']) &&  $_POST['submit']=="submit")
           { 
             $userEmail = "";
             $userPassword = "";
