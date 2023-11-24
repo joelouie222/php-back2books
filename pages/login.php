@@ -72,11 +72,11 @@ session_start();
 
 
             if(empty($emailErr) && empty($passwordErr)){
-              $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM [USER] 
-                      WHERE [USER].ACTIVE = 1
-                      AND USER_PASSWORD LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
+              $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM B2BUSER 
+                      WHERE USER_ACTIVE = 1
+                      AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
 
-            echo '<p> $tsql: '.$tsql.'<p>';
+              echo '<p> $tsql: '.$tsql.'<p>';
               
               $getUser = sqlsrv_query($conn, $tsql);
 
