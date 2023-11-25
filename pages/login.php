@@ -41,14 +41,14 @@
 
             if(empty(trim($_POST["loginEmail"]))){
               $emailErr = "emptyEmail";
-              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=empty");
             } else {
               $userEmail = trim($_POST["loginEmail"]);
             }
           
             if(empty(trim($_POST["loginPassword"]))){
               $passwordErr = "emptyPassword";
-              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=empty");
             } else {
               $userPassword = trim($_POST["loginPassword"]);
             }
@@ -61,7 +61,7 @@
                       AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
               $getUser = sqlsrv_query($conn, $tsql);
 
-              if( $getUser === false ) { 
+              if( $getUser == false ) { 
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
               } else {
                 while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
@@ -77,7 +77,7 @@
                   $_SESSION["hashedPassword"] = $hashedPassword;
     
                   sqlsrv_free_stmt($getUser);
-                  if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
+                  if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
                     redirect("https://php-back2books.azurewebsites.net/");
                     exit;
                   } else {
@@ -97,6 +97,9 @@
                 <?php
                   if(isset($_GET['verify']) && ($_GET['verify']) == "failed"){
                     echo "<h1> Login failed. Unable to verify email/password. Please try again! </h1>";
+                  }
+                  if(isset($_GET['verify']) && ($_GET['verify']) == "empty"){
+                    echo "<h1> Email or password cannot be empty! Please try again. </h1>";
                   }
                 ?>
             </div>
