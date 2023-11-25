@@ -66,34 +66,34 @@
               if( $getUser == false ) { 
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
               } else {
-                // while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
-                //   if ($user == false) {
-                //     session_unset();
-                //     session_destroy();
-                //     redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
-                //   } else {
-                //     $_SESSION["loggedIn"] = true;
-                //     $_SESSION["fname"] = $user["USER_FNAME"];
-                //     $_SESSION['lname'] = $user["USER_LNAME"];
-                //     $_SESSION["admin"] = $user["USER_ADMIN"];
-                //     $_SESSION["loginEmail"] = $userEmail;
-                //     $_SESSION["hashedPassword"] = $hashedPassword;
-                //     sqlsrv_free_stmt($getUser);
-                //     sqlsrv_free_stmt($user);
-                //     redirect("https://php-back2books.azurewebsites.net/");
-                //   }
-                // }
-                $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
-                if ($user == null)
-                  echo "<h1>user is null</h1>";
-                if ($user == false)
-                  echo "<h1>user is false</h1>";
-                if ($user == '..')
-                  echo "<h1>user is ..</h1>";
-                echo "<h1>user: '.$user.' </h1>";
-                echo "<h1>getUser: '.$user[USER_FNAME].' </h1>";
-                echo "<h1>getUser: '.$user[USER_LNAME].' </h1>";
-                echo "<h1>getUser: '.$user[USER_ADMIN].' </h1>";
+                while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
+                  if ($user == null) {
+                    session_unset();
+                    session_destroy();
+                    redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+                  } else {
+                    $_SESSION["loggedIn"] = true;
+                    $_SESSION["fname"] = $user["USER_FNAME"];
+                    $_SESSION['lname'] = $user["USER_LNAME"];
+                    $_SESSION["admin"] = $user["USER_ADMIN"];
+                    $_SESSION["loginEmail"] = $userEmail;
+                    $_SESSION["hashedPassword"] = $hashedPassword;
+                    sqlsrv_free_stmt($getUser);
+                    sqlsrv_free_stmt($user);
+                    redirect("https://php-back2books.azurewebsites.net/");
+                  }
+                }
+                // $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
+                // if ($user == null)
+                //   echo "<h1>user is null</h1>";
+                // if ($user == false)
+                //   echo "<h1>user is false</h1>";
+                // if ($user == '..')
+                //   echo "<h1>user is ..</h1>";
+                // echo "<h1>user: '.$user.' </h1>";
+                // echo "<h1>getUser: '.$user[USER_FNAME].' </h1>";
+                // echo "<h1>getUser: '.$user[USER_LNAME].' </h1>";
+                // echo "<h1>getUser: '.$user[USER_ADMIN].' </h1>";
               }
               
             }
