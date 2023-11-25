@@ -2,8 +2,8 @@
   session_start();
   include('../config.php');
   
-  if(isset($_POST['submit']) && $_POST['submit']=="ADDTOCART"){ 
-    echo '$_POST[cartBookID] = '.$_POST['cartBookID'].';
+  if((isset($_POST['submit'])) && $_POST['submit']=="ADDTOCART") {
+    echo '$_POST[cartBookID] = '.$_POST['cartBookID'];
   }
 
 ?>
