@@ -118,10 +118,14 @@
 
                     echo '<h1>hashPassword = '.$hashedPassword.'</h1>';
 
+                    $fname = $_SESSION['fname'];                  
+                    $lname = $_SESSION['lname'];                  
+                    $userEmail = $_SESSION['registerEmail'];        
+                    $secretQuestion = $_SESSION['securityQuestion'];
+                    $secretAnswer = $_SESSION['securityAnswer'];
 
-
-                    $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA)
-                            VALUES ('$_SESSION['registerEmail']', '$hashedPassword', '$_SESSION['fname']', '$_SESSION['lname']', '$_SESSION['securityQuestion']', '$_SESSION['securityAnswer']')";
+                    $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA) 
+                    VALUES ('$userEmail', '$hashedPassword', '$fname', '$lname', '$secretQuestion', '$secretAnswer')";
                     
                     $addUser = sqlsrv_query($conn, $tsql);
 
