@@ -121,7 +121,6 @@
                     $fname = $_SESSION['fname'];                  
                     $lname = $_SESSION['lname'];                  
                     $userEmail = $_SESSION['registerEmail'];        
-                    $secretQuestion = $_SESSION['securityQuestion'];
                     $secretAnswer = $_SESSION['securityAnswer'];
 
 
@@ -231,7 +230,7 @@
                             echo '  <p id="registerPasswordStatus"></p>';
                             }
                             if (isset($_GET['pass2']) && $_GET['pass2'] == "mismatch") {
-                              echo '  <p style="font-color: red;" id="registerPassword2Status">Password does not match</p>';
+                              echo '  <p style="color: red;" id="registerPassword2Status">Password must match</p>';
                             }
                         ?>
                       </div>
@@ -246,7 +245,7 @@
                                 echo '  <p id="registerPassword2Status">Password cannot be empty</p>';
                               }
                               if ($_GET['pass2'] == "mismatch") {
-                                echo '  <p style="font-color: red;" id="registerPassword2Status">Password does not match</p>';
+                                echo '  <p style="color: red;" id="registerPassword2Status">Password must match</p>';
                               }
                             } else {
                               echo '  <p id="registerPassword2Status"></p>';
