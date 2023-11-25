@@ -67,6 +67,7 @@
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
               } else {
                 while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
+                  echo "<h1>getUser: '.$user.' </h1>";
                   if ($user == false) {
                     session_unset();
                     session_destroy();
