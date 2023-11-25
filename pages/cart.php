@@ -23,7 +23,7 @@
 </head>
 
 <body id="home">
-    <div class="cart-container">
+    <div class="cartpage-container">
         <?php include('../layouts/layout.php');
         ?>   
 
@@ -63,6 +63,54 @@
                         echo '    </div> ';
                         echo '</li>';
             ?>
+        </div>
+
+        <div class="cart">
+            <h1>Shopping Cart</h1>
+            <form action="" method="post">
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="2">Product</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td>
+                        </tr>
+ 
+                        <tr>
+                            <td class="">
+                                <a href="">
+                                    <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg">
+                                </a>
+                            </td>
+                            <td>
+                                <a href=""><p> PRODUCT NAME </a>
+                                <br>
+                                <a href="" class="remove">Remove</a>
+                            </td>
+                            <td class=""><p>$$$$</p></td>
+                            <td class="">
+                                <input type="" name="quantity-product['id']" value="product['id']" min="1" max="product['quantity']" placeholder="Quantity" required>
+                            </td>
+                            <td class=""><p>PRICE * NUMBER IN CARD</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="subtotal">
+                    <span class="text">Subtotal</span>
+                    <span class="price">$$$$$></span>
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="Update" name="update">
+                    <input type="submit" value="Place Order" name="placeorder">
+                </div>
+            </form>
         </div>
         
         <div class="cart-summary">
