@@ -24,6 +24,8 @@
 <body id="home">
     <?php
         include('../layouts/layout.php');
+        include('../config.php');
+        include('../functions.php');
     ?>  
     <div class="container">
         <div class="about-us">
@@ -76,35 +78,57 @@
                   if(empty(trim($_POST["registerPassword"]))){
                     $passwordErr = "&pass=empty";
                   } else {
-                    $_SESSION['registerPassword'] = str_replace(" ", "", $_POST["registerPassword"]);
+                    $pass = str_replace(" ", "", $_POST["registerPassword"]);
                   }
 
                   if(empty(trim($_POST["registerPassword2"]))){
                     $password2Err = "&pass2=empty";
                   } else {
-                    $_SESSION['registerPassword2'] = str_replace(" ", "", $_POST["registerPassword2"]);
+                    $pass2 = str_replace(" ", "", $_POST["registerPassword2"]);
                   }
 
                   if(empty(trim($_POST["securityQuestion"]))){
                     $questionError = "&question=empty";
                   } else {
-                    $_SESSION['securityQuestion'] = str_replace(" ", "", $_POST["securityQuestion"]);
+                    $_SESSION['securityQuestion'] = (trim($_POST["securityQuestion"]));
                   }
 
-                  if(empty(trim($_POST["security=Answer"]))){
+                  if(empty(trim($_POST["securityAnswer"]))){
                     $answerErr = "&answer=empty";
                   } else {
                     $_SESSION['securityAnswer'] = str_replace(" ", "", $_POST["securityAnswer"]);
                   }
 
-                  if(empty($fnameError) || empty($lnameError) || empty($emailErr) || empty($passwordErr) || empty($password2Err) || empty($questionError) || empty($password2Err)){
+                  if(empty($fnameError) && empty($lnameError) && empty($emailErr) && empty($passwordErr) && empty($password2Err) && empty($questionError) && empty($password2Err)){
                     echo '<h1>fname: '.$_SESSION['fname'].' </h1>';
                     echo '<h1>lname: '.$_SESSION['lname'].' </h1>';
                     echo '<h1>email: '.$_SESSION['registerEmail'].' </h1>';
-                    echo '<h1>p1: '.$_SESSION['registerPassword'].' </h1>';
-                    echo '<h1>p2: '.$_SESSION['registerPassword2'].' </h1>';
-                    echo '<h1>qa: '.$_SESSION['securityQuestion'].' </h1>';
-                    echo '<h1>sa: '.$_SESSION['securityAnswer'].' </h1>';
+                    echo '<h1>p1: '.$pass.' </h1>';
+                    echo '<h1>p2: '.$pass2.' </h1>';
+                    echo '<h1>post-qa: '.$_POST['securityQuestion'].' </h1>';
+                    echo '<h1>session-qa: '.$_SESSION['securityQuestion'].' </h1>';
+                    echo '<h1>post-sa: '.$_POST['securityAnswer'].' </h1>';
+                    echo '<h1>session-sa: '.$_SESSION['securityAnswer'].' </h1>';
+
+                    if ($pass != $pass2) {
+                      redirect("https://php-back2books.azurewebsites.net/pages/register.php?pass2=mismatch")
+                    } else {
+                      $hashedPassword = md5($pass);
+                    }
+
+                    echo '<h1>hashPassword = '.$hashedPassword.'</h1>';
+
+                    // $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA)
+                    //         VALUES
+                    //         ($_SESSION['registerEmail'], $hashedPassword, $_SESSION['fname'], $_SESSION['lname'], USER_SQ, USER_SA);
+                    
+                    
+                    // $addUser = sqlsrv_query($conn, $tsql);
+
+
+
+
+
                   }
                   else {
                     redirect("https://php-back2books.azurewebsites.net/pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
@@ -125,7 +149,7 @@
                         if (isset($_SESSION['fname'])) {
                           echo '  <div class="form-group">';
                           echo '    <label for="fname">First Name</label>';
-                          echo '    <input required name="fname" type="test" class="form-control" id="fname" placeholder="'.$_SESSION['fname'].'">';
+                          echo '    <input required name="fname" type="test" class="form-control" id="fname" value="'.$_SESSION['fname'].'">';
                           echo '  </div>';
                         } else {
                           echo '  <div class="form-group">';
@@ -184,12 +208,12 @@
                       ?>
 
                       <!-- Password input -->                   
-                      <div class="form-group">';
+                      <div class="form-group">
                           <label for="registerPassword">Password</label>
                           <input required name="registerPassword" type="password" class="form-control" id="registerPassword" placeholder="Password">
                         <?php
                           if(isset($_GET['pass']) && ($_GET['pass']) == "empty"){
-                            echo '  <p id="registerPasswordStatus">Password cannot be empty.</p>';
+                            echo '  <p id="registerPasswordStatus">Password cannot be empty</p>';
                             } else {
                             echo '  <p id="registerPasswordStatus"></p>';
                             }
@@ -201,8 +225,13 @@
                         <label for="registerPassword2">Confirm Password</label>
                         <input required name="registerPassword2" type="password" class="form-control" id="registerPassword2" placeholder="Confirm Password">
                         <?php
-                            if(isset($_GET['pass2']) && ($_GET['pass2']) == "empty"){
-                              echo '  <p id="registerPassword2Status">Password cannot be empty.</p>';
+                            if(isset($_GET['pass2'])){
+                              if ($_GET['pass2'] == "empty") {
+                                echo '  <p id="registerPassword2Status">Password cannot be empty</p>';
+                              }
+                              if ($_GET['pass2'] == "mismatch") {
+                                echo '  <p id="registerPassword2Status">Password does not match</p>';
+                              }
                             } else {
                               echo '  <p id="registerPassword2Status"></p>';
                             }
