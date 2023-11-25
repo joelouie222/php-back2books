@@ -22,7 +22,8 @@
 </head>
 
 <body id="home">
-    <?php include('../layouts/layout.php');
+    <?php
+        include('../layouts/layout.php');
     ?>  
     <div class="container">
         <div class="about-us">
@@ -92,19 +93,18 @@
 
                   if(empty(trim($_POST["security=Answer"]))){
                     $answerErr = "&answer=empty";
-                    
                   } else {
                     $_SESSION['securityAnswer'] = str_replace(" ", "", $_POST["securityAnswer"]);
                   }
 
                   if(empty($fnameError) || empty($lnameError) || empty($emailErr) || empty($passwordErr) || empty($password2Err) || empty($questionError) || empty($password2Err)){
                     echo '<h1>fname: '.$_SESSION['fname'].' </h1>';
-                    echo '<h1>fname: '.$_SESSION['lname'].' </h1>';
-                    echo '<h1>fname: '.$_SESSION['registerEmail'].' </h1>';
-                    echo '<h1>fname: '.$_SESSION['registerPassword'].' </h1>';
-                    echo '<h1>fname: '.$_SESSION['registerPassword2'].' </h1>';
-                    echo '<h1>fname: '.$_SESSION['securityQuestion'].' </h1>';
-                    echo '<h1>fname: '.$_SESSION['securityAnswer'].' </h1>';
+                    echo '<h1>lname: '.$_SESSION['lname'].' </h1>';
+                    echo '<h1>email: '.$_SESSION['registerEmail'].' </h1>';
+                    echo '<h1>p1: '.$_SESSION['registerPassword'].' </h1>';
+                    echo '<h1>p2: '.$_SESSION['registerPassword2'].' </h1>';
+                    echo '<h1>qa: '.$_SESSION['securityQuestion'].' </h1>';
+                    echo '<h1>sa: '.$_SESSION['securityAnswer'].' </h1>';
                   }
                   else {
                     redirect("https://php-back2books.azurewebsites.net/pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
@@ -113,8 +113,6 @@
 
                  
                 }
-
-
               ?>
             </div>
 
@@ -148,7 +146,7 @@
                         if (isset($_SESSION['lname'])) {
                           echo '  <div class="form-group">';
                           echo '    <label for="lname">Last Name</label>';
-                          echo '    <input required name="lname" type="test" class="form-control" id="lname" placeholder="'.$_SESSION['lname'].'">';
+                          echo '    <input required name="lname" type="test" class="form-control" id="lname" value="'.$_SESSION['lname'].'">';
                           echo '  </div>';
                         } else {
                           echo '  <div class="form-group">';
@@ -169,7 +167,7 @@
                         if (isset($_SESSION['registerEmail'])) {
                           echo '  <div class="form-group">';
                           echo '    <label for="registerEmail">Email Address</label>';
-                          echo '    <input required name="registerEmail" type="email" class="form-control" id="registerEmail" placeholder="'.$_SESSION['registerEmail'].'">';
+                          echo '    <input required name="registerEmail" type="email" class="form-control" id="registerEmail" value="'.$_SESSION['registerEmail'].'">';
                           echo '  </div>';
                         } else {
                           echo '  <div class="form-group">';
@@ -186,46 +184,30 @@
                       ?>
 
                       <!-- Password input -->                   
-                      <?php
-                        if (isset($_SESSION['registerPassword'])) {
-                          echo '  <div class="form-group">';
-                          echo '    <label for="registerPassword">Password</label>';
-                          echo '    <input required name="registerPassword" type="password" class="form-control" id="registerPassword" placeholder="'.$_SESSION['registerPassword'].'">';
-                          echo '  </div>';
-                        } else {
-                          echo '  <div class="form-group">';
-                          echo '    <label for="registerPassword">Password</label>';
-                          echo '    <input required name="registerPassword" type="password" class="form-control" id="registerPassword" placeholder="Password">';
-
+                      <div class="form-group">';
+                          <label for="registerPassword">Password</label>
+                          <input required name="registerPassword" type="password" class="form-control" id="registerPassword" placeholder="Password">
+                        <?php
                           if(isset($_GET['pass']) && ($_GET['pass']) == "empty"){
                             echo '  <p id="registerPasswordStatus">Password cannot be empty.</p>';
-                          } else {
+                            } else {
                             echo '  <p id="registerPasswordStatus"></p>';
-                          }
-                          echo '</div>';
-                        }
-                      ?>
+                            }
+                        ?>
+                      </div>
                       
                       <!-- Confirm Password input -->
-                      <?php
-                        if (isset($_SESSION['registerPassword2'])) {
-                          echo '  <div class="form-group">';
-                          echo '    <label for="registerPassword2">Confirm Password</label>';
-                          echo '    <input required name="registerPassword2" type="password" class="form-control" id="registerPassword2" placeholder="'.$_SESSION['registerPassword2'].'">';
-                          echo '  </div>';
-                        } else {
-                          echo '  <div class="form-group">';
-                          echo '    <label for="registerPassword2">Confirm Password</label>';
-                          echo '    <input required name="registerPassword2" type="password" class="form-control" id="registerPassword2" placeholder="Confirm Password">';
-
-                          if(isset($_GET['pass2']) && ($_GET['pas2']) == "empty"){
-                            echo '  <p id="registerPassword2Status">Password cannot be empty.</p>';
-                          } else {
-                            echo '  <p id="registerPassword2Status"></p>';
-                          }
-                          echo '</div>';
-                        }
-                      ?>
+                      <div class="form-group">
+                        <label for="registerPassword2">Confirm Password</label>
+                        <input required name="registerPassword2" type="password" class="form-control" id="registerPassword2" placeholder="Confirm Password">
+                        <?php
+                            if(isset($_GET['pass2']) && ($_GET['pass2']) == "empty"){
+                              echo '  <p id="registerPassword2Status">Password cannot be empty.</p>';
+                            } else {
+                              echo '  <p id="registerPassword2Status"></p>';
+                            }
+                        ?>
+                      </div>
 
                       <!-- Security Question -->
 
@@ -253,7 +235,7 @@
                         if (isset($_SESSION['securityAnswer'])) {
                           echo '  <div class="form-group">';
                           echo '    <label for="securityAnswer">Security question answer</label>';
-                          echo '    <input required name="securityAnswer" type="text" class="form-control" id="securityAnswer" placeholder="'.$_SESSION['securityAnswer'].'">';
+                          echo '    <input required name="securityAnswer" type="text" class="form-control" id="securityAnswer" value="'.$_SESSION['securityAnswer'].'">';
                           echo '  </div>';
                         } else {
                           echo '  <div class="form-group">';

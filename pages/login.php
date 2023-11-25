@@ -125,14 +125,14 @@
                   <!-- Email input -->
                   <div class="form-group">
                     <label for="loginEmail">Email Address</label>
-                    <input name="loginEmail" type="email" class="form-control" id="loginEmail" placeholder="Email">
+                    <input name="loginEmail" type="email" class="form-control" id="loginEmail" placeholder="Email" required>
                     <p id="loginEmailStatus"></p>
                   </div>
                       
                   <!-- Password input -->
                   <div class="form-group">
                     <label for="loginPassword">Password</label>
-                    <input name="loginPassword" type="password" class="form-control" id="loginPassword" placeholder="Password">
+                    <input name="loginPassword" type="password" class="form-control" id="loginPassword" placeholder="Password" required>
                     <p id="loginPasswordStatus"></p>
                   </div>
                   
