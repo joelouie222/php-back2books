@@ -56,7 +56,7 @@
             $hashedPassword = md5($userPassword);
             
             if(empty($emailErr) && empty($passwordErr)){
-              $tsql = "SELECT USER_FNAME, USER_LNAME, USER_ADMIN FROM B2BUSER 
+              $tsql = "SELECT USER_ID, USER_FNAME, USER_LNAME, USER_ADMIN FROM B2BUSER 
                       WHERE USER_ACTIVE = 1
                       AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
               $getUser = sqlsrv_query($conn, $tsql);
@@ -77,6 +77,7 @@
                       $_SESSION["fname"] = $user["USER_FNAME"];
                       $_SESSION['lname'] = $user["USER_LNAME"];
                       $_SESSION["admin"] = $user["USER_ADMIN"];
+                      $_SESSION["userId"] = $user["USER_ID"];
                       $_SESSION["loginEmail"] = $userEmail;
                       $_SESSION["hashedPassword"] = $hashedPassword;
                       sqlsrv_free_stmt($getUser);

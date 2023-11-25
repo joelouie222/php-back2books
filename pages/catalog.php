@@ -26,8 +26,8 @@
 <body id="home">
     <?php 
         include('../config.php');
-        include('../layouts/layout.php');
         include('../functions.php')
+        include('../layouts/layout.php');
     ?>  
       
     <div class="container">
@@ -36,14 +36,23 @@
                 <h1> Book Catalog </h1>
                 <?php
                     echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
+                    echo '<p> SESSION-userId: '.$_SESSION["userId"].'<p>';
                     echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
                     echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
                     echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
                     echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"].'<p>';
                     echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"].'<p>';
                     if((isset($_POST['submit'])) && $_POST['submit']=="ADDTOCART") {
-                        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
+                        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
                             echo '$_POST[cartBookID] = '.$_POST['cartBookID'];
+
+                            $bookId = $_POST['cartBookID'];
+                            $userId = $_SESSION["userId"];
+
+                            $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
+                                VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";
+                            
+                            $addBookToCart = sqlsrv_query($conn, $tsql);
                         } else {
                             redirect("https://php-back2books.azurewebsites.net/pages/login.php");
                         }
