@@ -61,6 +61,8 @@
                       AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
               $getUser = sqlsrv_query($conn, $tsql);
 
+              echo "<h1>getUser: '.$getUser.' </h1>";
+
               if( $getUser == false ) { 
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
               } else {
@@ -81,6 +83,8 @@
                     redirect("https://php-back2books.azurewebsites.net/");
                     exit;
                   } else {
+                    session_unset();
+                    session_destroy();
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                   }
                 }
