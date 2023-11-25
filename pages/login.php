@@ -84,6 +84,12 @@
                 //   }
                 // }
                 $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
+                if ($user == null)
+                  echo "<h1>user is null</h1>";
+                if ($user == false)
+                  echo "<h1>user is false</h1>";
+                if ($user == '..')
+                  echo "<h1>user is ..</h1>";
                 echo "<h1>user: '.$user.' </h1>";
                 echo "<h1>getUser: '.$user[USER_FNAME].' </h1>";
                 echo "<h1>getUser: '.$user[USER_LNAME].' </h1>";
