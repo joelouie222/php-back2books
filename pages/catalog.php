@@ -25,8 +25,8 @@
 
 <body id="home">
     <?php 
-        include('../layouts/layout.php');
         include('../config.php');
+        include('../layouts/layout.php');
         include('../functions.php')
     ?>  
       
