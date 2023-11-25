@@ -115,6 +115,12 @@ li {
   padding: 142px 0 0 200px;
 }
 
+.cart-container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 142px 200px 0 200px;
+}
+
 /* Style the main content */
 .main {
   margin-left: 160px; /* Same as the width of the sidenav */
@@ -215,6 +221,12 @@ button, input, optgroup, select, textarea {
     background-color: antiquewhite;
     margin: 20px;
     padding: 10px;
+}
+
+.cart {
+  background-color: antiquewhite;
+  margin: 20px;
+  padding: 10px;
 }
 
 .contact-us {
