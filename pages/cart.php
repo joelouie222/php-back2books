@@ -69,7 +69,7 @@
             <div style="margin: 10px 0px 10px 0px"> <h1>Shopping Cart</h1> <div>
             <div>
                 <form action="" method="post">
-                    <table>
+                    <table style="width: 100%">
                         <thead>
                             <tr>
                                 <th colspan="2" style="text-align: left; padding: 10px 0px 10px 0px"><h3>Product<h3></th>
@@ -84,6 +84,42 @@
                                 <td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td>
                             </tr> -->
     
+                            <tr>
+                                <td class="">
+                                    <a href="">
+                                        <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE]" height="100" width="75">
+                                    </a>
+                                </td>
+                                <td>
+                                    <p> PRODUCT NAME </p>
+                                    <br>
+                                    <a href="" class="remove">Remove</a>
+                                </td>
+                                <td class="" style="text-align: left;"><p>$$$$</p></td>
+                                <td class="" style="text-align: left;">
+                                    <input type="" name="quantity-product['id']" value="1" min="1" max="product['quantity']" placeholder="Quantity" required>
+                                </td>
+                                <td class="" style="text-align: right;"><p>PRICE * NUMBER IN CART</p></td>
+                            </tr>
+
+                            <tr>
+                                <td class="">
+                                    <a href="">
+                                        <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE]" height="100" width="75">
+                                    </a>
+                                </td>
+                                <td>
+                                    <p> PRODUCT NAME </p>
+                                    <br>
+                                    <a href="" class="remove">Remove</a>
+                                </td>
+                                <td class="" style="text-align: left;"><p>$$$$</p></td>
+                                <td class="" style="text-align: left;">
+                                    <input type="" name="quantity-product['id']" value="1" min="1" max="product['quantity']" placeholder="Quantity" required>
+                                </td>
+                                <td class="" style="text-align: right;"><p>PRICE * NUMBER IN CART</p></td>
+                            </tr>
+
                             <tr>
                                 <td class="">
                                     <a href="">
