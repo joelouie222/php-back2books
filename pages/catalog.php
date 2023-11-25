@@ -34,7 +34,7 @@
             <center>
                 <h1> Book Catalog </h1>
                 <?php
-                    echo 'BEFORE ISSET SUBMIT';
+                    echo '<p>BEFORE ISSET SUBMIT</p>';
 
                     if ((isset($_POST['submit'])))
                         echo 'SUBMIT ISSET';
@@ -49,7 +49,7 @@
                             echo 'MUST LOG IN!';
                         }
                     }
-                    echo 'AFTER ISSET SUBMIT';
+                    echo '<p>AFTER ISSET SUBMIT</p>';
                 ?>
             </center>
 
@@ -133,8 +133,8 @@
                                                 </div>';                  
                         echo '                   <div>
                                                     <form method="post" action="">
-                                                        <input name="cartBookID" type="hidden" value="'.$row['BOOK_ID'].'">
-                                                        <div style="cursor: pointer;"><button style="padding: 5px;" type="submit" value="ADDTOCART"> ADD TO CART </button></div>
+                                                        <input name="cartBookID" type="hidden" value="'.$row['BOOK_ID'].'">';
+                        echo '                          <button style="padding: 5px; cursor: pointer;" type="submit" value="ADDTOCART"> ADD TO CART </button>
                                                     </form>
                                                 </div>';
                         echo '                </div>';
