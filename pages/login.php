@@ -72,7 +72,7 @@
                     session_destroy();
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                   } else {
-                    if ($user["USER_FNAME"] == null || $user["USER_LNAME"] = null || $user["USER_ADMIN"] == null) {
+                    if ($user["USER_FNAME"] == null || $user["USER_LNAME"] = null) {
                       redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                     } else {
                       $_SESSION["loggedIn"] = true;
