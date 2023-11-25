@@ -6,5 +6,7 @@
     $_SESSION["admin"]="";
     $_SESSION["loginEmail"]="";
     $_SESSION["hashedPassword"]="";
+    session_abort();
+    session_start();
     redirect("https://php-back2books.azurewebsites.net/");
 ?>
