@@ -113,6 +113,10 @@
                   if(isset($_GET['verify']) && ($_GET['verify']) == "empty"){
                     echo "<h1> Email or password cannot be empty! Please try again. </h1>";
                   }
+
+                  if(isset($_GET['register']) && ($_GET['register']) == "success"){
+                    echo "<h1> Registration success. You can log in now. </h1>";
+                  }
                 ?>
             </div>
 

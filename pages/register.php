@@ -59,6 +59,21 @@
                         <p id="registerPasswordStatus2"></p>
                       </div>
 
+                      <!-- Security Question -->
+                      <label for="securityQuestion">Choose a security question:</label>
+                      <select id="securityQuestion">
+                        <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                        <option value="What is your favorite sport?">What is your favorite sport?</option>
+                        <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+                        <option value="What city were you born in?">What city were you born in?</option>
+                        <option value="What is your favorite color?">What is your favorite color?</option>
+                        <option value="What was the make and model of your first car?">What was the make and model of your first car?</option>
+                      </select>
+                      
+                      <!-- Security Answer -->
+                      <label for="securityAnswer">Security question answer</label>
+                      <input name="securityAnswer" type="text" class="form-control" id="securityAnswer" placeholder="This is will used to recover your password.">
+
                       <!-- Submit button -->
                       <div>
                       <button name="submit" type="submit" value="submit">Submit</button>
