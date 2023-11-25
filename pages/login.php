@@ -37,7 +37,7 @@
             $userPassword = "";
             $emailErr = "";
             $passwordErr = "";
-            $loginErr = "";
+            //$loginErr = "";
 
             if(empty(trim($_POST["loginEmail"]))){
               $emailErr = "emptyEmail";
