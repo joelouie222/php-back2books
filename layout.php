@@ -13,7 +13,7 @@
      
     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
         $userId = $_SESSION["userId"];
-        $tsql = "SELECT COUNT(DISTINCT BOOK_ID) AS numInCart FROM CART)ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
+        $tsql = "SELECT COUNT(DISTINCT BOOK_ID) AS numInCart FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
         $getCartNum = sqlsrv_query($conn, $tsql);
 
         $num = sqlsrv_fetch_array($getCartNum, SQLSRV_FETCH_ASSOC);
