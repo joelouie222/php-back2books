@@ -16,8 +16,10 @@
         $getCartNum = sqlsrv_query($conn, $tsql);
 
         $num = sqlsrv_fetch_array($getCartNum, SQLSRV_FETCH_ASSOC);
-        if ($num == null)
+        if ($num != null) {
+            $_SESSION['numInCart'] = $num['numInCart'];
             echo '<span class="cart-number">'.$num['numInCart'].'</span>';
+        }
     }
     
     echo '            <a href="/pages/cart.php"><i class="fa fa-cart-arrow-down fa-4x"></i></a>
