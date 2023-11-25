@@ -136,9 +136,9 @@
                     
                     // $addUser = sqlsrv_query($conn, $tsql);
 
-                    if($addUser == false) { 
-                      redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
-                    } 
+                    // if($addUser == false) { 
+                    //   redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
+                    // } 
 
 
                     sqlsrv_free_stmt($addUser);
