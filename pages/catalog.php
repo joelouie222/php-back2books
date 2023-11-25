@@ -25,9 +25,9 @@
 
 <body id="home">
     <?php 
-        include('../config.php');
-        include('../functions.php')
         include('../layouts/layout.php');
+        include('../config.php');
+        include('../functions.php');
     ?>  
       
     <div class="container">
