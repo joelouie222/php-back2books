@@ -41,14 +41,12 @@
 
             if(empty(trim($_POST["loginEmail"]))){
               $emailErr = "emptyEmail";
-              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
             } else {
               $userEmail = trim($_POST["loginEmail"]);
             }
           
             if(empty(trim($_POST["loginPassword"]))){
               $passwordErr = "emptyPassword";
-              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
             } else {
               $userPassword = trim($_POST["loginPassword"]);
             }
@@ -65,26 +63,26 @@
               if( $getUser == false ) { 
                 redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
               }
-                while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
-                  echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
-                  echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
-                  echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
+            while($user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
+                echo '<p> USER_FNAME: '.$user["USER_FNAME"].'<p>';
+                echo '<p> USER_LNAME: '.$user["USER_LNAME"].'<p>';
+                echo '<p> USER_ADMIN: '.$user["USER_ADMIN"].'<p>';
   
-                  $_SESSION["loggedIn"] = true;
-                  $_SESSION["fname"] = $user["USER_FNAME"];
-                  $_SESSION['lname'] = $user["USER_LNAME"];
-                  $_SESSION["admin"] = $user["USER_ADMIN"];
-                  $_SESSION["loginEmail"] = $userEmail;
-                  $_SESSION["hashedPassword"] = $hashedPassword;
+                $_SESSION["loggedIn"] = true;
+                $_SESSION["fname"] = $user["USER_FNAME"];
+                $_SESSION['lname'] = $user["USER_LNAME"];
+                $_SESSION["admin"] = $user["USER_ADMIN"];
+                $_SESSION["loginEmail"] = $userEmail;
+                $_SESSION["hashedPassword"] = $hashedPassword;
   
-                  sqlsrv_free_stmt($getUser);
-                  if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
-                    redirect("https://php-back2books.azurewebsites.net/");
-                    exit;
-                  } else {
-                    redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
-                  }
+                sqlsrv_free_stmt($getUser);
+                if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
+                  redirect("https://php-back2books.azurewebsites.net/");
+                  exit;
+                } else {
+                  redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                 }
+              }
             }
           }
         ?>  
