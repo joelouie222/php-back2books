@@ -9,7 +9,7 @@
     echo '</div>';
     echo '  <div class="favorites-container"><a href="/pages/favorites.php"><i class="fa fa-heart fa-4x"></i></a></div>';
     echo '  <div class="cart-container">
-                <span> 1 </span>
+                <span class="cart-number"> 1 </span>
                 <a href="/pages/cart.php"><i class="fa fa-cart-arrow-down fa-4x"></i></a>
             </div>';
     echo '</header>';

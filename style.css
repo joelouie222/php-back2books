@@ -66,6 +66,18 @@ li {
   align-self: flex-end;
 }
 
+.cart-container .cart-number {
+  position: absolute;
+  background: red;
+  border-radius: 999px;
+  color: white;
+  min-width: 32px;
+  max-width: 32px;
+  line-height: 32px;
+  font-size: 20px;
+  padding: 0px 5px;
+  text-align: center;
+}
 
 
 /* -----------------------------------  S I D E B A R -------------------------------------------- */
