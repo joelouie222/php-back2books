@@ -1,5 +1,5 @@
 <?php
-    include('../../config.php');
+    include('../config.php');
     echo '<header class="header">';
     echo '<div class="logo-container">';
     echo '  <a href="/"><img src="/images/b2b-logo-header.png" width="549" height="142" alt="Back to Books Logo"></a>';
@@ -11,17 +11,17 @@
     echo '  <div class="favorites-container"><a href="/pages/favorites.php"><i class="fa fa-heart fa-4x"></i></a></div>';
     echo '  <div class="cart-container">';
      
-    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
-        $userId = $_SESSION["userId"];
-        $tsql = "SELECT COUNT(DISTINCT BOOK_ID) AS numInCart FROM CART)ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
-        $getCartNum = sqlsrv_query($conn, $tsql);
+    // if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+    //     $userId = $_SESSION["userId"];
+    //     $tsql = "SELECT COUNT(DISTINCT BOOK_ID) AS numInCart FROM CART)ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
+    //     $getCartNum = sqlsrv_query($conn, $tsql);
 
-        $num = sqlsrv_fetch_array($getCartNum, SQLSRV_FETCH_ASSOC);
-        if ($num != null) {
-            $_SESSION['numInCart'] = $num['numInCart'];
-            echo '<span class="cart-number">'.$num['numInCart'].'</span>';
-        }
-    }
+    //     $num = sqlsrv_fetch_array($getCartNum, SQLSRV_FETCH_ASSOC);
+    //     if ($num != null) {
+    //         $_SESSION['numInCart'] = $num['numInCart'];
+    //         echo '<span class="cart-number">'.$num['numInCart'].'</span>';
+    //     }
+    // }
     
     echo '            <a href="/pages/cart.php"><i class="fa fa-cart-arrow-down fa-4x"></i></a>
             </div>';
