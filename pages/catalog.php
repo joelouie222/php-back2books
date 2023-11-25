@@ -50,6 +50,7 @@
                         }
                     }
                     echo '<p>AFTER ISSET SUBMIT</p>';
+                    echo '$_POST[cartBookID] = '.$_POST['cartBookID'];
                 ?>
             </center>
 
