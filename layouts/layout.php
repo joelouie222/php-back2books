@@ -16,8 +16,8 @@
 
     echo '<div class="sidebar">';
     
-    if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true){
-        if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1) {
+    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
+        if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
             echo '<a Welcome back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
             echo '<a href=""><i class=""></i> VIEW ORDERS </a>';
             echo '<a href=""><i class=""></i> VIEW USERS </a>';

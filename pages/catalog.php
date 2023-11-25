@@ -31,14 +31,21 @@
       
     <div class="container">
         <div class="products">
-            <?php
-                if((isset($_POST['submit'])) && $_POST['submit']=="ADDTOCART") {
-                  echo '$_POST[cartBookID] = '.$_POST['cartBookID'];
-                }
-            ?>
             <center>
                 <h1> Book Catalog </h1>
+                <?php
+                    echo 'BEFORE ISSET SUBMIT';
+                    if((isset($_POST['submit'])) && $_POST['submit']=="ADDTOCART") {
+                        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
+                            echo '$_POST[cartBookID] = '.$_POST['cartBookID'];
+                        } else {
+                            echo 'MUST LOG IN!';
+                        }
+                    }
+                    echo 'AFTER ISSET SUBMIT';
+                ?>
             </center>
+
             <ol class="book-list-view">
                 <?php
                     $tsql = "SELECT TOP (10) *
