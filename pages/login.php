@@ -70,7 +70,7 @@
                   if ($user == false) {
                     session_unset();
                     session_destroy();
-                    redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed")
+                    redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                   } else {
                     $_SESSION["loggedIn"] = true;
                     $_SESSION["fname"] = $user["USER_FNAME"];
