@@ -111,7 +111,7 @@
                     echo '<h1>session-sa: '.$_SESSION['securityAnswer'].' </h1>';
 
                     if ($pass != $pass2) {
-                      redirect("https://php-back2books.azurewebsites.net/pages/register.php?pass2=mismatch")
+                      redirect("https://php-back2books.azurewebsites.net/pages/register.php?pass2=mismatch");
                     } else {
                       $hashedPassword = md5($pass);
                     }
