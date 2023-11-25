@@ -123,24 +123,24 @@
                     $userEmail = $_SESSION['registerEmail'];        
                     $secretAnswer = $_SESSION['securityAnswer'];
 
-
                     echo '<h1>$fname : '.$fname .' </h1>';
                     echo '<h1>$lname: '.$lname.' </h1>';
                     echo '<h1>$userEmail: '.$userEmail.' </h1>';
                     echo '<h1>$secretQuestion: '.$secretQuestion .' </h1>';
-                    echo '<h1>$$secretAnswer: '.$secretAnswer.' </h1>';
+                    echo '<h1>$secretAnswer: '.$secretAnswer.' </h1>';
 
-                    // $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA) 
-                    // VALUES ('$userEmail', '$hashedPassword', '$fname', '$lname', '$secretQuestion', '$secretAnswer')";
+                    $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA) 
+                    VALUES ('$userEmail', '$hashedPassword', '$fname', '$lname', '$secretQuestion', '$secretAnswer')";
                     
-                    // $addUser = sqlsrv_query($conn, $tsql);
+                    $addUser = sqlsrv_query($conn, $tsql);
 
-                    // if($addUser == false) { 
-                    //   redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
-                    // } 
-
-
-                    sqlsrv_free_stmt($addUser);
+                    if($addUser == false) {
+                      sqlsrv_free_stmt($addUser);
+                      redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
+                    } else {
+                      sqlsrv_free_stmt($addUser);
+                      redirect("https://php-back2books.azurewebsites.net/pages/login.php?reg=success")
+                    }
                   }
                   else {
                     redirect("https://php-back2books.azurewebsites.net/pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");

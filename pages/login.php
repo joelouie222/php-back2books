@@ -114,7 +114,7 @@
                     echo "<h1> Email or password cannot be empty! Please try again. </h1>";
                   }
 
-                  if(isset($_GET['register']) && ($_GET['register']) == "success"){
+                  if(isset($_GET['reg']) && ($_GET['reg']) == "success"){
                     echo "<h1> Registration success. You can log in now. </h1>";
                   }
                 ?>
