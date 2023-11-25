@@ -121,8 +121,7 @@
 
 
                     $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA)
-                            VALUES
-                            ($_SESSION['registerEmail'], $hashedPassword, $_SESSION['fname'], $_SESSION['lname'], $_SESSION['securityQuestion'], $_SESSION['securityAnswer'])";
+                            VALUES ('$_SESSION['registerEmail']', '$hashedPassword', '$_SESSION['fname']', '$_SESSION['lname']', '$_SESSION['securityQuestion']', '$_SESSION['securityAnswer']')";
                     
                     $addUser = sqlsrv_query($conn, $tsql);
 
@@ -132,7 +131,7 @@
                     } 
 
 
-                    
+                    sqlsrv_free_stmt($addUser);
                   }
                   else {
                     redirect("https://php-back2books.azurewebsites.net/pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
