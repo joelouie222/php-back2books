@@ -78,19 +78,19 @@
                   if(empty(trim($_POST["registerPassword"]))){
                     $passwordErr = "&pass=empty";
                   } else {
-                    $pass = str_replace(" ", "", $_POST["registerPassword"]);
+                    $userPassword = str_replace(" ", "", $_POST["registerPassword"]);
                   }
 
                   if(empty(trim($_POST["registerPassword2"]))){
                     $password2Err = "&pass2=empty";
                   } else {
-                    $pass2 = str_replace(" ", "", $_POST["registerPassword2"]);
+                    $userPassword2 = str_replace(" ", "", $_POST["registerPassword2"]);
                   }
 
                   if(empty(trim($_POST["securityQuestion"]))){
                     $questionError = "&question=empty";
                   } else {
-                    $_SESSION['securityQuestion'] = (trim($_POST["securityQuestion"]));
+                    $secretQuestion = (trim($_POST["securityQuestion"]));
                   }
 
                   if(empty(trim($_POST["securityAnswer"]))){
@@ -103,32 +103,36 @@
                     echo '<h1>fname: '.$_SESSION['fname'].' </h1>';
                     echo '<h1>lname: '.$_SESSION['lname'].' </h1>';
                     echo '<h1>email: '.$_SESSION['registerEmail'].' </h1>';
-                    echo '<h1>p1: '.$pass.' </h1>';
-                    echo '<h1>p2: '.$pass2.' </h1>';
+                    echo '<h1>p1: '.$userPassword.' </h1>';
+                    echo '<h1>p2: '.$userPassword2.' </h1>';
                     echo '<h1>post-qa: '.$_POST['securityQuestion'].' </h1>';
                     echo '<h1>session-qa: '.$_SESSION['securityQuestion'].' </h1>';
                     echo '<h1>post-sa: '.$_POST['securityAnswer'].' </h1>';
                     echo '<h1>session-sa: '.$_SESSION['securityAnswer'].' </h1>';
 
-                    if ($pass != $pass2) {
+                    if ($userPassword != $userPassword2) {
                       redirect("https://php-back2books.azurewebsites.net/pages/register.php?pass2=mismatch");
                     } else {
-                      $hashedPassword = md5($pass);
+                      $hashedPassword = md5($userPassword);
                     }
 
                     echo '<h1>hashPassword = '.$hashedPassword.'</h1>';
 
-                    // $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA)
-                    //         VALUES
-                    //         ($_SESSION['registerEmail'], $hashedPassword, $_SESSION['fname'], $_SESSION['lname'], USER_SQ, USER_SA);
+
+
+                    $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA)
+                            VALUES
+                            ($_SESSION['registerEmail'], $hashedPassword, $_SESSION['fname'], $_SESSION['lname'], $_SESSION['securityQuestion'], $_SESSION['securityAnswer'])";
                     
+                    $addUser = sqlsrv_query($conn, $tsql);
+
+                    if($addUser == false) { 
+                      die(print_r(sqlsrv_errors(), true));
+                      // redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
+                    } 
+
+
                     
-                    // $addUser = sqlsrv_query($conn, $tsql);
-
-
-
-
-
                   }
                   else {
                     redirect("https://php-back2books.azurewebsites.net/pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
@@ -217,6 +221,9 @@
                             } else {
                             echo '  <p id="registerPasswordStatus"></p>';
                             }
+                            if (isset($_GET['pass2']) && $_GET['pass2'] == "mismatch") {
+                              echo '  <p style="font-color: red;" id="registerPassword2Status">Password does not match</p>';
+                            }
                         ?>
                       </div>
                       
@@ -230,7 +237,7 @@
                                 echo '  <p id="registerPassword2Status">Password cannot be empty</p>';
                               }
                               if ($_GET['pass2'] == "mismatch") {
-                                echo '  <p id="registerPassword2Status">Password does not match</p>';
+                                echo '  <p style="font-color: red;" id="registerPassword2Status">Password does not match</p>';
                               }
                             } else {
                               echo '  <p id="registerPassword2Status"></p>';
