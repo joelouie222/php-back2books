@@ -1,5 +1,5 @@
 <?php
-    include('../config.php');
+    include('/config.php');
     echo '<header class="header">';
     echo '<div class="logo-container">';
     echo '  <a href="/"><img src="/images/b2b-logo-header.png" width="549" height="142" alt="Back to Books Logo"></a>';
