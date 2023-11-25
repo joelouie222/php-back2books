@@ -68,8 +68,6 @@
               } else {
                 $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC); 
                   if ($user == null) {
-                    session_unset();
-                    session_destroy();
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                   } else {
                     if ($user["USER_FNAME"] == null || $user["USER_LNAME"] = null) {
