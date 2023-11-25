@@ -358,3 +358,15 @@ h6{
   margin: 0!important;
   list-style-type: none;
 }
+
+
+
+/* ------------------------------------- C A R T ----------------------------------------*/
+.cart-summary {
+  position: fixed;
+  top: 142px;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  background-color: antiquewhite;
+}
