@@ -71,26 +71,26 @@
                 <table>
                     <thead>
                         <tr>
-                            <td colspan="2">Product</td>
-                            <td>Price</td>
-                            <td>Quantity</td>
-                            <td>Total</td>
+                            <th colspan="2">Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        <tr>
+                        <!-- <tr>
                             <td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td>
-                        </tr>
+                        </tr> -->
  
                         <tr>
                             <td class="">
                                 <a href="">
-                                    <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg">
+                                    <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE]" height="100" width="75">
                                 </a>
                             </td>
                             <td>
-                                <a href=""><p> PRODUCT NAME </a>
+                                <p> PRODUCT NAME </p>
                                 <br>
                                 <a href="" class="remove">Remove</a>
                             </td>
@@ -102,11 +102,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="subtotal">
+                <div class="">
                     <span class="text">Subtotal</span>
                     <span class="price">$$$$$></span>
                 </div>
-                <div class="buttons">
+                <div class="">
                     <input type="submit" value="Update" name="update">
                     <input type="submit" value="Place Order" name="placeorder">
                 </div>
