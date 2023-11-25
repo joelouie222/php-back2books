@@ -73,7 +73,7 @@
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                   } else {
                     if ($user["USER_FNAME"] == null || $user["USER_LNAME"] = null || $user["USER_ADMIN"] == null) {
-
+                      redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                     } else {
                       $_SESSION["loggedIn"] = true;
                       $_SESSION["fname"] = $user["USER_FNAME"];
