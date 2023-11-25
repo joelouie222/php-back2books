@@ -27,7 +27,7 @@
     <?php
         // Include the configuration file
         //include('config.php');
-        include('layouts/layout.php');
+        include('layout.php');
     ?>
     <div class="container">
         <div class="content">

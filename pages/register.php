@@ -23,7 +23,7 @@
 
 <body id="home">
     <?php
-        include('../layouts/layout.php');
+        include('../layout.php');
         include('../config.php');
         include('../functions.php');
     ?>  

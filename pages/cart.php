@@ -24,7 +24,7 @@
 
 <body id="home">
     <div class="cartpage-container">
-        <?php include('../layouts/layout.php');
+        <?php include('../layout.php');
         ?>   
 
         <div class="cart">
