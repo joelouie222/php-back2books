@@ -66,51 +66,55 @@
         </div>
 
         <div class="cart">
-            <h1>Shopping Cart</h1>
-            <form action="" method="post">
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="2">Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <!-- <tr>
-                            <td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td>
-                        </tr> -->
- 
-                        <tr>
-                            <td class="">
-                                <a href="">
-                                    <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE]" height="100" width="75">
-                                </a>
-                            </td>
-                            <td>
-                                <p> PRODUCT NAME </p>
-                                <br>
-                                <a href="" class="remove">Remove</a>
-                            </td>
-                            <td class=""><p>$$$$</p></td>
-                            <td class="">
-                                <input type="" name="quantity-product['id']" value="product['id']" min="1" max="product['quantity']" placeholder="Quantity" required>
-                            </td>
-                            <td class=""><p>PRICE * NUMBER IN CARD</p></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="">
-                    <span class="text">Subtotal</span>
-                    <span class="price">$$$$$></span>
-                </div>
-                <div class="">
-                    <input type="submit" value="Update" name="update">
-                    <input type="submit" value="Place Order" name="placeorder">
-                </div>
-            </form>
+            <div style="margin: 10px 0px 10px 0px"> <h1>Shopping Cart</h1> <div>
+            <div>
+                <form action="" method="post">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2" style="text-align: left; padding: 10px 0px 10px 0px"><h3>Product<h3></th>
+                                <th style="text-align: left;"><h3>Price</h3></th>
+                                <th style="text-align: left;"><h3>Quantity<h3></th>
+                                <th style="text-align: right;"><h3>Total</h3></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <!-- <tr>
+                                <td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td>
+                            </tr> -->
+    
+                            <tr>
+                                <td class="">
+                                    <a href="">
+                                        <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE]" height="100" width="75">
+                                    </a>
+                                </td>
+                                <td>
+                                    <p> PRODUCT NAME </p>
+                                    <br>
+                                    <a href="" class="remove">Remove</a>
+                                </td>
+                                <td class="" style="text-align: left;"><p>$$$$</p></td>
+                                <td class="" style="text-align: left;">
+                                    <input type="" name="quantity-product['id']" value="1" min="1" max="product['quantity']" placeholder="Quantity" required>
+                                </td>
+                                <td class="" style="text-align: right;"><p>PRICE * NUMBER IN CART</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="">
+                        <span class="text">Subtotal</span>
+                        <span class="price">$$$$$></span>
+                    </div>
+                    <div class="">
+                        <input type="submit" value="Update" name="update">
+                        <input type="submit" value="Place Order" name="placeorder">
+                    </div>
+                </form>
+            </div>
         </div>
         
         <div class="cart-summary">
