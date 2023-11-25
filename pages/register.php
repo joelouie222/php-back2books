@@ -242,7 +242,7 @@
 
                         <div class="form-group">
                         <label for="securityQuestion">Choose a security question:</label>
-                        <select id="securityQuestion" required>
+                        <select name="securityQuestion" id="securityQuestion" required>
                           <option value="What was the name of your first pet?">What was the name of your first pet?</option>
                           <option value="What is your favorite sport?">What is your favorite sport?</option>
                           <option value="What was your childhood nickname?">What was your childhood nickname?</option>
