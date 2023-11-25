@@ -124,14 +124,20 @@
                     $secretQuestion = $_SESSION['securityQuestion'];
                     $secretAnswer = $_SESSION['securityAnswer'];
 
-                    $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA) 
-                    VALUES ('$userEmail', '$hashedPassword', '$fname', '$lname', '$secretQuestion', '$secretAnswer')";
+
+                    echo '<h1>$fname : '.$fname .' </h1>';
+                    echo '<h1>$lname: '.$lname.' </h1>';
+                    echo '<h1>$userEmail: '.$userEmail.' </h1>';
+                    echo '<h1>$secretQuestion: '.$secretQuestion .' </h1>';
+                    echo '<h1>$$secretAnswer: '.$secretAnswer.' </h1>';
+
+                    // $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA) 
+                    // VALUES ('$userEmail', '$hashedPassword', '$fname', '$lname', '$secretQuestion', '$secretAnswer')";
                     
-                    $addUser = sqlsrv_query($conn, $tsql);
+                    // $addUser = sqlsrv_query($conn, $tsql);
 
                     if($addUser == false) { 
-                      die(print_r(sqlsrv_errors(), true));
-                      // redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
+                      redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
                     } 
 
 
