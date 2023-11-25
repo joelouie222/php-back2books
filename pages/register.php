@@ -139,7 +139,7 @@
                       redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
                     } else {
                       sqlsrv_free_stmt($addUser);
-                      redirect("https://php-back2books.azurewebsites.net/pages/login.php?reg=success")
+                      redirect("https://php-back2books.azurewebsites.net/pages/login.php?reg=success");
                     }
                   }
                   else {
