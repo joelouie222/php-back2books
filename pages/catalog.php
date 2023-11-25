@@ -106,9 +106,18 @@
                         echo '                </div>';
                         echo '                <div><h1>$ '.$row['PRICE'].'</h1></div>  ';
                         echo '                <div style="display: flex; align-items: flex-end;">';
-                        echo '                   <div><input type="hidden" value="'.$row['BOOK_ID'].'"></div>';
-                        echo '                    <div style="margin-right: 10px; cursor: pointer;"><button style="border: none; background-color: antiquewhite;" type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>';
-                        echo '                   <div style="cursor: pointer;"><button style="padding: 5px;" type="submit" value="ADDTOCART"> ADD TO CART </button></div>';
+                        echo '                   <div>
+                                                    <form method="post" action="">
+                                                        <input name="favBookID" type="hidden" value="'.$row['BOOK_ID'].'">
+                                                        <div style="margin-right: 10px; cursor: pointer;"><button style="border: none; background-color: antiquewhite;" type="submit" value="ADDTOFAV"><i class="fa fa-heart fa-2x"></i></button></div>
+                                                    </form>
+                                                </div>';                  
+                        echo '                   <div>
+                                                    <form method="post" action="">
+                                                        <input name="cartBookID" type="hidden" value="'.$row['BOOK_ID'].'">
+                                                        <div style="cursor: pointer;"><button style="padding: 5px;" type="submit" value="ADDTOCART"> ADD TO CART </button></div>
+                                                    </form>
+                                                </div>';
                         echo '                </div>';
                         echo '            </div>';
                         echo '        </div>';

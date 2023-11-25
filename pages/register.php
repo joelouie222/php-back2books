@@ -100,15 +100,15 @@
                   }
 
                   if(empty($fnameError) && empty($lnameError) && empty($emailErr) && empty($passwordErr) && empty($password2Err) && empty($questionError) && empty($password2Err)){
-                    echo '<h1>fname: '.$_SESSION['fname'].' </h1>';
-                    echo '<h1>lname: '.$_SESSION['lname'].' </h1>';
-                    echo '<h1>email: '.$_SESSION['registerEmail'].' </h1>';
-                    echo '<h1>p1: '.$userPassword.' </h1>';
-                    echo '<h1>p2: '.$userPassword2.' </h1>';
-                    echo '<h1>post-qa: '.$_POST['securityQuestion'].' </h1>';
-                    echo '<h1>session-qa: '.$_SESSION['securityQuestion'].' </h1>';
-                    echo '<h1>post-sa: '.$_POST['securityAnswer'].' </h1>';
-                    echo '<h1>session-sa: '.$_SESSION['securityAnswer'].' </h1>';
+                    // echo '<h1>fname: '.$_SESSION['fname'].' </h1>';
+                    // echo '<h1>lname: '.$_SESSION['lname'].' </h1>';
+                    // echo '<h1>email: '.$_SESSION['registerEmail'].' </h1>';
+                    // echo '<h1>p1: '.$userPassword.' </h1>';
+                    // echo '<h1>p2: '.$userPassword2.' </h1>';
+                    // echo '<h1>post-qa: '.$_POST['securityQuestion'].' </h1>';
+                    // echo '<h1>session-qa: '.$_SESSION['securityQuestion'].' </h1>';
+                    // echo '<h1>post-sa: '.$_POST['securityAnswer'].' </h1>';
+                    // echo '<h1>session-sa: '.$_SESSION['securityAnswer'].' </h1>';
 
                     if ($userPassword != $userPassword2) {
                       redirect("https://php-back2books.azurewebsites.net/pages/register.php?pass2=mismatch");
@@ -122,15 +122,17 @@
                     $lname = $_SESSION['lname'];                  
                     $userEmail = $_SESSION['registerEmail'];        
                     $secretAnswer = $_SESSION['securityAnswer'];
+                    $currentDate = date('Y-m-d');
 
-                    echo '<h1>$fname : '.$fname .' </h1>';
-                    echo '<h1>$lname: '.$lname.' </h1>';
-                    echo '<h1>$userEmail: '.$userEmail.' </h1>';
-                    echo '<h1>$secretQuestion: '.$secretQuestion .' </h1>';
-                    echo '<h1>$secretAnswer: '.$secretAnswer.' </h1>';
+                    // echo '<h1>$fname : '.$fname .' </h1>';
+                    // echo '<h1>$lname: '.$lname.' </h1>';
+                    // echo '<h1>$userEmail: '.$userEmail.' </h1>';
+                    // echo '<h1>$secretQuestion: '.$secretQuestion .' </h1>';
+                    // echo '<h1>$secretAnswer: '.$secretAnswer.' </h1>';
 
                     $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA) 
-                    VALUES ('$userEmail', '$hashedPassword', '$fname', '$lname', '$secretQuestion', '$secretAnswer')";
+                    VALUES ('$userEmail', '$hashedPassword', '$fname', '$lname', '$secretQuestion', '$secretAnswer'); 
+                    INSERT INTO CART (USER_ID, CART_CREATE_DATE) VALUES ((SELECT USER_ID FROM B2BUSER WHERE USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'), '$currentDate');";
                     
                     $addUser = sqlsrv_query($conn, $tsql);
 
