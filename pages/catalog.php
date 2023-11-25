@@ -35,6 +35,13 @@
                 <h1> Book Catalog </h1>
                 <?php
                     echo 'BEFORE ISSET SUBMIT';
+
+                    if ((isset($_POST['submit'])))
+                        echo 'SUBMIT ISSET';
+
+                    if ($_POST['submit']=="ADDTOCART")
+                        echo 'SUBMIT = ADDTOCART';
+
                     if((isset($_POST['submit'])) && $_POST['submit']=="ADDTOCART") {
                         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
                             echo '$_POST[cartBookID] = '.$_POST['cartBookID'];
