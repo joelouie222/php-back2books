@@ -139,26 +139,29 @@
                                     }                             
                                     sqlsrv_free_stmt($getCart);
 
-                echo '</tbody>';
-                echo '</table>';
-                echo '<div> <h3>SUBTOTAL: $ '.$subtotal.'</h3></div>';
-                echo '<div>';
-                echo '<form method="post" action="">';
-                echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
-                echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
-                echo '</form>';
-                echo '</div>';
-                echo '<div><h3>DISCOUNT: - $ '.($subtotal * $_SESSION['discountValue']).'</h3></div>';
-                echo '<div><h3>TAX: $'.($subtotal * 0.0825).' </h3></div>';
-                echo '<div><h3>SHIPPING: $ '.$shipping.'/h3></div>';
-                echo '<div><h3>TOTAL: $ '.($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping).'</h3></div>';
-                echo '<div class="">';
-                echo '<button type="submit" value="update" name="updateOrder">Update Order</button>';
-                echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
-                ?>
+                                        echo '</tbody>';
+                                        echo '</table>';
+                                        echo '<div> <h3>SUBTOTAL: $ '.$subtotal.'</h3></div>';
+                                        echo '<div>';
+                                        echo '<form method="post" action="">';
+                                        echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
+                                        echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
+                                        echo '</form>';
+                                        echo '</div>';
+                                        echo '<div><h3>DISCOUNT: - $ '.($subtotal * $_SESSION['discountValue']).'</h3></div>';
+                                        echo '<div><h3>TAX: $'.($subtotal * 0.0825).' </h3></div>';
+                                        echo '<div><h3>SHIPPING: $ '.$shipping.'/h3></div>';
+                                        echo '<div><h3>TOTAL: $ '.($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping).'</h3></div>';
+                                        echo '<div class="">';
+                                        echo '<button type="submit" value="update" name="updateOrder">Update Order</button>';
+                                        echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
+                                }
+                            }
+                    
+                    echo '</div>';
+                    echo'</form>';
+                    ?>
             </div>
-        </form>
-    </div>
                     
         <div class="cart-summary">
                 <div><span>SUBTOTAL: </span> <span> $$$$ </span> </div>
