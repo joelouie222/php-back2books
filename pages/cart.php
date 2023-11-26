@@ -67,12 +67,13 @@
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                     } else {
                                         while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
+                                            $subtotal = 0;
                                             $bookdId = $row['BOOK_ID'];
-                                            $quantity = $row['quantity'];
+                                            $quantity = $row['ITEM_QUANTITY'];
 
                                             echo '<p>row[BOOK_ID]:'.$row['BOOK_ID'].'</p>';
                                             echo '<p>bookId: '.$bookdId.'</p>';
-                                            echo '<p>row[quantity]: '.$row['ITEM_QUANTITY'].'</p>';
+                                            echo '<p>row[ITEM_QUANTITY]: '.$row['ITEM_QUANTITY'].'</p>';
                                             echo '<p>quantity: '.$quantity.'</p>';
                                             
                                             $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
@@ -107,6 +108,7 @@
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['PRICE'] * $quantity), 2).'</p></td>';
                                                 echo '    </tr>';
+                                                $subtotal = $subtotal + ($row['PRICE'] * $quantity);
                                                 }
                                             }
                                             //sqlsrv_free_stmt($getBook);
@@ -118,15 +120,29 @@
                         ?>
                         </tbody>
                     </table>
-
-
-                    <div class="">
-                        <span class="text">Subtotal</span>
-                        <span class="price">$$$$$></span>
+                    
+                    <div> 
+                        <h3>SUBTOTAL: <?php echo '$subtotal'; ?></h3>
+                    </div>
+                    <div>
+                        <input type="text" name="discountCode" placeholder="Discount Code" value=""></input>
+                    </div>
+                    <div> 
+                        <h3>DISCOUNT: -$$$</h3>
+                    </div>
+                    
+                    <div>
+                        <h3>SHIPPING: $6.99</h3>;
+                    </div>
+                    <div>
+                        <h3>TAX: 8.25% </h3>
+                    </div>
+                    <div>
+                        <h3>TOTAL: $$$$$ </h3>
                     </div>
                     <div class="">
-                        <input type="submit" value="Update" name="update">
-                        <input type="submit" value="Place Order" name="placeorder">
+                        <input type="submit" value="updateOrder" name="update">
+                        <input type="submit" value="placeOrder" name="place">
                     </div>
                 </form>
             </div>
