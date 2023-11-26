@@ -67,7 +67,7 @@
 
                     $address = ''.$_POST['streetAddress1'].', '.$_POST['streetAddress2'].',  '.$_POST['city'].', '.$_POST['state'].' '.$_POST['zipCode'].'';
                     $payment = $_POST['payment'];
-                    $currentDate = date('Y-m-d');
+                    $currentDate = date('Y-m-d');                    
                     $orderDiscount = $_SESSION['DISCOUNT'];
                     
                     
@@ -75,12 +75,31 @@
                     echo '<p>payment: '.$payment.'</p>';
                     echo '<p>currentDate: '.$currentDate.'</p>';
                     echo '<p>orderDiscount: '.$orderDiscount.'</p>';
-                    echo '<p>orderDiscount: '.$userId.'</p>';
+                    echo '<p>userId: '.$userId.'</p>';
+                    echo '<p>bookId: '.$userId.'</p>';
 
-                    // $tsql = "SELECT CITEM_ID, BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
+                    $tsql = "INSERT INTO ORDER (USER_ID, ORDER_DATE, ORDER_DISCOUNT, SHIP_ADDR, BILL_ADDR) 
+                    VALUES ('$userId', '$currentDate', '$orderDiscount', '$address', '$address')";
+
+                    $addOrder = sqlsrv_query($conn, $tsql);
+
+                    if($addOrder== false) {
+                        redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                    } else {
+                        // GET ORDER ID
+                        
+                        // GET CART ITEMS
+                        //$tsql = "SELECT CITEM_ID, BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
+
+                        // CONVERT CART ITEMS INTO ORDER LINES
+
+                        // UPDATE STOCK in PRODUCT INVENTORY (NEED BOOK ID)
+                        
+                        // DELETE CART ITEMS AND CART
+                    }
 
 
-
+                    
                 }
             }
 
@@ -111,6 +130,9 @@
             <?php
                 if (isset($_GET['update']) && $_GET['update'] == "err") {
                     echo '<h3 style="color: red"> Unable to update product quantity. Please try again later. </h3>';
+                }
+                if (isset($_GET['order']) && $_GET['order'] == "err") {
+                    echo '<h3 style="color: red"> There was a problem submitting your order. Please try again later. </h3>';
                 }
                 if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
                     echo '<div style="margin: 10px 0px 10px 0px"> <h1>Checkout</h1> <div>';
