@@ -137,6 +137,7 @@
                                                                   <input type="hidden" name="product_id" value="'.$row['$bookId'].'"';
                                                 echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
                                                 echo '            <button type="submit" name="update" value="update">Update</button>';
+                                                echo '         </form>';
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['PRICE'] * $quantity), 2).'</p></td>';
                                                 echo '    </tr>';
