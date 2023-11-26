@@ -24,7 +24,7 @@
 </head>
 
 <body id="home">
-    <div class="cartpage-container">
+    <div class="container">
         <?php 
             include('../layout.php');
             include('../functions.php');
@@ -58,10 +58,6 @@
 
         <div class="cart">
             <div style="margin: 10px 0px 10px 0px"> <h1>Shopping Cart</h1> <div>
-
-            <div>
-                    
-            </div>
                 
             <div>
                 <?php
@@ -84,7 +80,7 @@
                                     $subtotal = 0;
                                     $discount = 0;
                                     $shipping = 6.99;
-                                    $tsql = "SELECT BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
+                                    $tsql = "SELECT CITEM_ID, BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
 
                                     $getCart = sqlsrv_query($conn, $tsql);
 
@@ -92,14 +88,9 @@
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                     } else {
                                         while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
-                                            
+                                            $citemId = $row['CITEM_ID']
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['ITEM_QUANTITY'];
-
-                                            echo '<p>row[BOOK_ID]:'.$row['BOOK_ID'].'</p>';
-                                            echo '<p>bookId: '.$bookdId.'</p>';
-                                            echo '<p>row[ITEM_QUANTITY]: '.$row['ITEM_QUANTITY'].'</p>';
-                                            echo '<p>quantity: '.$quantity.'</p>';
                                             
                                             $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
                                                      FROM BOOKS B 
@@ -125,7 +116,7 @@
                                                 echo '            <p> ISBN: '.$row['BOOK_ISBN'].'</p>';
                                                 echo '            <p> Stock left: '.$row['INV_QUANTITY'].'</p>';
                                                 echo '            </br>';
-                                                echo '           <a href="">Remove</a>';
+                                                echo '           <a href="https://php-back2books.azurewebsites.net/removeCartItem?p='.$citemId.'">Remove</a>';
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
@@ -169,14 +160,14 @@
                 ?>
             </div>
                     
-        <div class="cart-summary">
+        <!-- <div class="cart-summary">
                 <div><span>SUBTOTAL: </span> <span> $$$$ </span> </div>
                 <div><span>DISCOUNT: </span> <span> - $$$ </span> </div>
                 <div><span>SHIPPING: </span> <span> $$$$ </span> </div>
                 <div><span>TAX: </span> <span> $$$$ </span> </div>
                 <div><span>SHIPPING: </span> <span> $$$$ </span> </div>
                 <div><button>CHECK OUT</button></div>
-        </div>
+        </div> -->
 </body>
 
 <script src="js/scripts.js"></script>
