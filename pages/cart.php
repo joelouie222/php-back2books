@@ -140,7 +140,7 @@
                                     sqlsrv_free_stmt($getCart);
 
                 echo '</tbody>';
-                echo '</table>'
+                echo '</table>';
                 echo '<div> <h3>SUBTOTAL: $ '.$subtotal.'</h3></div>';
                 echo '<div>';
                 echo '<form method="post" action="">';
