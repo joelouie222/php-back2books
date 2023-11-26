@@ -1,6 +1,8 @@
 <?php
   session_start();
   $_SESSION['discountValue'] = 0;
+  
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +30,18 @@
         <?php 
             include('../layout.php');
             include('../functions.php');
+
+
+            echo '<div class="cart">';
+            if (isset($_POST['updateCart']) && $_POST['updateCart'] == "update") {
+                foreach ($_SESSION as $key => $value) {
+                    echo "Session Key: $key" . PHP_EOL;
+                    echo "Session Value: $value" . PHP_EOL;
+                  }
+              }
+            echo '</div>'
+
+
 
             if (isset($_POST['discountCode'])) {
                 $found = false;
@@ -89,10 +103,6 @@
                                     } else {
                                         while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
                                             $citemId = $row['CITEM_ID'];
-
-                                            echo '<h1>$row[CITEM_ID]: '.$row['CITEM_ID'].'</h1>';
-                                            echo '<h1>$citemId: '.$citemId.'</h1>';
-
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['ITEM_QUANTITY'];
                                             
@@ -150,7 +160,7 @@
                                         echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
                                         echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
                                         echo '<div class="">';
-                                        echo '<button type="submit" value="update" name="updateOrder">Update Order</button>';
+                                        echo '<button type="submit" value="update" name="updateCart">Update Cart</button>';
                                         echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
                                 }
                             
