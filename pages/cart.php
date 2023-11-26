@@ -35,7 +35,7 @@
                 $getDiscount = sqlsrv_query($conn, $tsql);
                 if ($getDiscount != false){
                     while (($row = sqlsrv_fetch_array($getDiscount, SQLSRV_FETCH_ASSOC)) && $found == false) {
-                        if (($row[DISCOUNT_CODE]) == $_POST['discountCode']) {
+                        if (($row['DISCOUNT_CODE']) == $_POST['discountCode']) {
                             $_SESSION['discountCode'] = $_POST['discountCode'];
                             $_SESSION['discountValue'] = ($row['DISCOUNT_TAG'] / 100);
                             $found = true;
