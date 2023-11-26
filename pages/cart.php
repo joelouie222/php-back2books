@@ -37,11 +37,11 @@
             echo "Session Key: $key" . PHP_EOL;
             echo "Session Value: $value" . PHP_EOL;
             if (isset($_POST['updateCart']) && $_POST['updateCart'] == "update") {
-                foreach ($_SESSION as $key => $value) {
-                    echo "Session Key: $key" . PHP_EOL;
-                    echo "Session Value: $value" . PHP_EOL;
-                  }
-              }
+                foreach ($_POST as $key => $value) {
+                    echo "POST Key: $key" . PHP_EOL;
+                    echo "POST Value: $value" . PHP_EOL;
+                }
+            }
             echo '</div>';
 
 
