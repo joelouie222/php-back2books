@@ -104,6 +104,8 @@
                                             $citemId = $row['CITEM_ID'];
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['ITEM_QUANTITY'];
+
+                                            echo '<h1>$bookId : '.$bookId.'</h1>';
                                             
                                             $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
                                                      FROM BOOKS B 
@@ -133,6 +135,7 @@
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
+                                                echo '<h1>$bookId : '.$bookId.'</h1>';
                                                 echo '        <form method="post" action="">
                                                                   <input type="hidden" name="product_id" value="'.$bookId.'">';
                                                 echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
