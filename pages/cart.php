@@ -34,12 +34,26 @@
             include('../functions.php');
 
 
-
+            
             echo '<div class="cart">';
+            if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
                 if ((isset($_POST['update'])) && $_POST['update'] == "update") {
                     echo '<p>citemId: '.$_POST['citemId'].'</p>';
                     echo '<p>productId: '.$_POST['productId'].'</p>';
                     echo '<p>quantity: '.$_POST['quantity'].'</p>';
+
+                    $cartItemId = $_POST['citemId'];
+                    $newQuantity = $_POST['quantity'];
+
+                    $tsql = "UPDATE CART_ITEMS SET ITEM_QUANTITY = '$newQuantity' WHERE CITEM_ID = '$cartItemId'";
+
+                    $updateCart = sqlsrv_query($conn, $tsql);
+                    if ($updateCart === false) {
+                        redirect("https://php-back2books.azurewebsites.net/pages/cart.php?update=err");
+                    }
+                    $newQuantity = "";
+                    $cartItemId = "";
+                    redirect("https://php-back2books.azurewebsites.net/pages/cart.php");
                 }
 
                 if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
@@ -55,7 +69,7 @@
                     echo '<p>Zip: '.$_POST['zipCode'].'!</p>';
                     echo '<p>Payment: '.$_POST['payment'].'!</p>';
                 }
-
+            }
 
             echo '</div>';
 
@@ -82,13 +96,16 @@
 
         <div class="cart">
             <?php
+                if (isset($_GET['update']) && $_GET['update'] == "err") {
+                    echo '<h3 style="color: red"> Unable to update product quantity. Please try again later. </h3>';
+                }
                 if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
                     echo '<div style="margin: 10px 0px 10px 0px"> <h1>Checkout</h1> <div>';
                 } else {
                     echo '<div style="margin: 10px 0px 10px 0px"> <h1>Shopping Cart</h1> <div>';
                 }
-            
             ?>
+
             <div>
                 <?php
                 if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
@@ -285,8 +302,8 @@
                         </select>
                         </div>';
 
-                        echo '
                         // <!-- Zipcode input -->
+                        echo '
                         <div class="form-group">
                             <label for="zipCode">Zipcode: </label>
                             <input id="zipCode" maxlength="5" name="zipCode" type="text">
