@@ -78,10 +78,14 @@
 
                                 $getCart = sqlsrv_query($conn, $tsql);
 
-                                while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
-                                    echo '<p>[BOOK_ID]: '.$row['BOOK_ID'].'</p>';
-                                    echo '<p>[quantity]: '.$row['quantity'].'</p>';                                        
-                                }
+                                if ($getCart === false) {
+                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                } else {
+                                    while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
+                                        echo '<p>[BOOK_ID]: '.$row['BOOK_ID'].'</p>';
+                                        echo '<p>[quantity]: '.$row['quantity'].'</p>';  
+                                    }   
+                                }                             
                                 sqlsrv_free_stmt($getCart);
                             }
                         }
