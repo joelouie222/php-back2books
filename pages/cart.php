@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $_SESSION['discountValue'] = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,25 @@
 
 <body id="home">
     <div class="cartpage-container">
-        <?php include('../layout.php');
+        <?php 
+            include('../layout.php');
+
+            if (isset(discountCode)) {
+                $found = false;
+                $tsql = "SELECT DISCOUNT_CODE, DISCOUNT_TAG FROM DISCOUNT WHERE ACTIVE = 1";
+                $getDiscount = sqlsrv_query($conn, $tsql);
+                if ($getDiscount != false){
+                    while (($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) && $found == false) {
+                        if (($row[DISCOUNT_COD]) == $_SESSION('discountCode')) {
+                            $_SESSION['discountValue'] = ($row['DISCOUNT_TAG'] / 100);
+                            $found = true;
+                        }
+                    }
+                } else {
+                    $_SESSION['discountCode'] = "Invalid Code";
+                    $_SESSION['discountValue'] = 0;
+                }
+            }
         ?>   
 
         <div class="cart">
@@ -43,22 +62,26 @@
             </div>
                 
             <div>
-                <form action="" method="post">
-                    <table style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th colspan="2" style="text-align: left; padding: 10px 0px 10px 0px"><h3>Product<h3></th>
-                                <th style="text-align: left;"><h3>Price</h3></th>
-                                <th style="text-align: left;"><h3>Quantity<h3></th>
-                                <th style="text-align: right;"><h3>Total</h3></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+                <?php
+                echo '<form action="" method="post">';
+                echo '   <table style="width: 100%">';
+                echo '        <thead>';
+                echo '            <tr>';
+                echo '                <th colspan="2" style="text-align: left; padding: 10px 0px 10px 0px"><h3>Product<h3></th>';
+                echo '                <th style="text-align: left;"><h3>Price</h3></th>';
+                echo '                <th style="text-align: left;"><h3>Quantity<h3></th>';
+                echo '                <th style="text-align: right;"><h3>Total</h3></th>';
+                echo '            </tr>';
+                echo '        </thead>';
+                echo '        <tbody>';
+                            
                             if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
                                 if ($_SESSION['numInCart'] == 0 )
                                     echo '<tr><td colspan="5" style="text-align:center;"><h3> You have no products added in your Shopping Cart</h3></td></tr>';
                                 else {
+                                    $subtotal = 0;
+                                    $discount = 0;
+                                    $shipping = 6.99;
                                     $tsql = "SELECT BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
 
                                     $getCart = sqlsrv_query($conn, $tsql);
@@ -67,7 +90,7 @@
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                     } else {
                                         while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
-                                            $subtotal = 0;
+                                            
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['ITEM_QUANTITY'];
 
@@ -115,40 +138,42 @@
                                         }   
                                     }                             
                                     sqlsrv_free_stmt($getCart);
+
+                echo '</tbody>';
+                echo '</table>'
+                echo '<div> <h3>SUBTOTAL: $ '.$subtotal.'</h3></div>';
+                echo '<div>';
+                echo '<form method="post" action="">';
+                echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
+                echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
+                echo '</form>';
+                echo '</div>';
+                echo '<div><h3>DISCOUNT: - $ '.($subtotal * $_SESSION['discountValue']).'</h3></div>';
+                echo '<div><h3>TAX: $'.($subtotal * 0.0825).' </h3></div>';
+                echo '<div><h3>SHIPPING: $ '.$shipping.'/h3></div>';
+                echo '<div><h3>TOTAL: $ '.($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping).'</h3></div>';
+                echo '<div class="">';
+                echo '<button type="submit" value="update" name="updateOrder">Update Order</button>';
+                echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+
+
                                 }
                             }
                         ?>
-                        </tbody>
-                    </table>
+        
                     
-                    <div> 
-                        <h3>SUBTOTAL: <?php echo $subtotal; ?></h3>
-                    </div>
-                    <div>
-                        <form method="post" action="">
-                            <input type="text" name="discountCode" placeholder="Discount Code" value=""></input>
-                            <button type="submit" name="coupon" value="apply">Apply</button>
-                        </form>
-                    </div>
-                    <div> 
-                        <h3>DISCOUNT: -$$$</h3>
-                    </div>
                     
-                    <div>
-                        <h3>SHIPPING: $6.99</h3>;
-                    </div>
-                    <div>
-                        <h3>TAX: 8.25% </h3>
-                    </div>
-                    <div>
-                        <h3>TOTAL: $$$$$ </h3>
-                    </div>
-                    <div class="">
-                        <button type="submit" value="update" name="updateOrder">Update Order</button>
-                        <button type="submit" value="order" name="placeOrder">Place Order</button>
-                    </div>
-                </form>
-            </div>
         </div>
         
         <div class="cart-summary">
