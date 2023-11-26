@@ -59,7 +59,7 @@
                                 if ($_SESSION['numInCart'] == 0 )
                                     echo '<tr><td colspan="5" style="text-align:center;"><h3> You have no products added in your Shopping Cart</h3></td></tr>';
                                 else {
-                                    $tsql = "SELECT BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId') GROUP BY BOOK_ID";
+                                    $tsql = "SELECT BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
 
                                     $getCart = sqlsrv_query($conn, $tsql);
 
