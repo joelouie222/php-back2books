@@ -36,60 +36,10 @@
         </div>
 
         <div class="cart">
-            <?php
-                        echo '<li style="border: solid; margin: 15px 10px; padding: 5px">';
-                        echo '    <div style="margin-left: 0; margin-right: 0; display: flex;">';
-                        echo '        <div style="align-items: center; width: 20%; display: flex">';
-                        echo '            <div style="margin: 10px"><h2> 1 </h2></div>';
-                        echo '            <div style="margin: 10px">';
-                        echo '                <a href="">';
-                        echo '                    <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE] height="100" width="75" >';
-                        echo '                </a>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '        <div style="width: 80%; display: flex; flex-direction: column;">';
-                        echo '            <div style="margin: 5px 0 5px 0;"><span><h1> [BOOK_TITLE] </h1></span></h3></div>';
-                        echo '            <div><span style="margin-right: 20px;">Author:&nbsp;&nbsp;&nbsp;<strong> [author_fname] [author_lname] </strong></span><span>Publisher:&nbsp;&nbsp;&nbsp;<strong> [PUBLISHER_NAME] </strong></span></div>';
-                        echo '            <div style="display: flex; padding: 5px 25px 10px 0; justify-content: space-between; align-items: flex-end;">';
-                        echo '                <div style="width: 60%;">';
-                        echo '                <div style="display: flex; align-items: flex-end;">';
-                        echo '                </div>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '        <div style="width: 20%;">
-                                        <form><input type="text" name="quantity" value="1" ></input></form>
-                                        <form><input></input> <button>REMOVE</button></form>
-                                        </div>';
-                        echo '    </div> ';
-                        echo '</li>';
-            ?>
-        </div>
-
-        <div class="cart">
             <div style="margin: 10px 0px 10px 0px"> <h1>Shopping Cart</h1> <div>
 
             <div>
-                    <?php
-                        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
-                            if ($_SESSION['numInCart'] == 0 )
-                                echo '<tr><td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td></tr>';
-                            else {
-                                $tsql = "SELECT BOOK_ID, COUNT(BOOK_ID) AS quantity FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId') GROUP BY BOOK_ID";
-
-                                $getCart = sqlsrv_query($conn, $tsql);
-
-                                if ($getCart === false) {
-                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                } else {
-                                    while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
-                                        echo '<p>[BOOK_ID]: '.$row['BOOK_ID'].'</p>';
-                                        echo '<p>[quantity]: '.$row['quantity'].'</p>';  
-                                    }   
-                                }                             
-                                sqlsrv_free_stmt($getCart);
-                            }
-                        }
-                     ?>
+                    
             </div>
                 
             <div>
@@ -104,26 +54,58 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <?php
+                            if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+                                if ($_SESSION['numInCart'] == 0 )
+                                    echo '<tr><td colspan="5" style="text-align:center;"><h3> You have no products added in your Shopping Cart</h3></td></tr>';
+                                else {
+                                    $tsql = "SELECT BOOK_ID, COUNT(BOOK_ID) AS quantity FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId') GROUP BY BOOK_ID";
+
+                                    $getCart = sqlsrv_query($conn, $tsql);
+
+                                    if ($getCart === false) {
+                                        die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    } else {
+                                        while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
+                                            $bookdId = $row['BOOK_ID'];
+                                            $quantity = $row['quantity'];
+                                            
+                                            $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK FROM BOOKS B WHERE B.BOOK_ID = '$bookdId'
+                                                     INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+                                                     INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID";
+
+                                            $getBook = sqlsrv_query($conn, $tsql);
+
+                                            if ($getBook != false) {
+                                                while($row = sqlsrv_fetch_array($getBook, SQLSRV_FETCH_ASSOC)){
+                                                echo '    <tr>';
+                                                echo '        <td class="">';
+                                                echo '            <img src="'.$row['BI.IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" height="100" width="75">';
+                                                echo '        </td>';
+                                                echo '        <td>';
+                                                echo '            <p>'.$row['B.BOOK_TITLE'].'</p>';
+                                                echo '            <p> ISBN: '.$row['B.BOOK_ISBN'].'</p>';
+                                                echo '            <br>';
+                                                echo '           <a href="">Remove</a>';
+                                                echo '        </td>';
+                                                echo '        <td class="" style="text-align: left;"><p>$ '.$row['B.PRICE'].'</p></td>';
+                                                echo '        <td class="" style="text-align: left;">';
+                                                echo '            <input type="" name="'.$row['$bookId'].'" min="1" max="" value="'.$quantity.'" required>';
+                                                echo '        </td>';
+                                                echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['B.PRICE'] * $quantity), 2).'</p></td>';
+                                                echo '    </tr>';
+                                                }
+                                            }
+                                            sqlsrv_free_stmt($getBook);
+                                        }   
+                                    }                             
+                                    sqlsrv_free_stmt($getCart);
+                                }
+                            }
+                        ?>
                             
     
-                            <tr>
-                                <td class="">
-                                    <a href="">
-                                        <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE]" height="100" width="75">
-                                    </a>
-                                </td>
-                                <td>
-                                    <p> PRODUCT NAME </p>
-                                    <br>
-                                    <a href="" class="remove">Remove</a>
-                                </td>
-                                <td class="" style="text-align: left;"><p>$$$$</p></td>
-                                <td class="" style="text-align: left;">
-                                    <input type="" name="quantity-product['id']" value="1" min="1" max="product['quantity']" placeholder="Quantity" required>
-                                </td>
-                                <td class="" style="text-align: right;"><p>PRICE * NUMBER IN CART</p></td>
-                            </tr>
+                            
 
                             <tr>
                                 <td class="">
@@ -133,6 +115,7 @@
                                 </td>
                                 <td>
                                     <p> PRODUCT NAME </p>
+                                    <p> </p>
                                     <br>
                                     <a href="" class="remove">Remove</a>
                                 </td>
