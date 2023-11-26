@@ -307,7 +307,7 @@
                         // <!-- Submit button input -->
                         echo '<div><button type="submit" value="go" name="placeOrder">PLACE ORDER</button></div>';
                         echo '</form>';
-                        echo '</div>'
+                        echo '</div>';
                     }
                 } else {
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php");
