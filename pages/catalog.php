@@ -49,12 +49,46 @@
                             $bookId = $_POST['cartBookID'];
                             $userId = $_SESSION["userId"];
 
-                            $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
-                                VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";
+                            // CHECK IF BOOK ID IS ALREADY IN CART
+                            $tsql = "SELECT CITEM_ID, BOOK_ID FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
+
+                            $getCart = sqlsrv_query($conn, $tsql);
+                            if ($getCart === false) {
+                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            }
                             
-                            $addBookToCart = sqlsrv_query($conn, $tsql);
-                            redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
-                        } else {
+
+                            // IF THERE ARE ITEMS IN CART - FIND BOOK ID, it ITS IN THE CART THEN UPDATE ELSE INSERT ITEM
+                            if (sqlsrv_has_rows($getCart)) {
+                                while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)){
+                                    if ($row['BOOK_ID'] == $bookId) {
+                                        $cartItemId = $row['CITEM_ID'];
+                                        $tsql = "UPDATE CART_ITEMS SET ITEM_QUANTITY = (ITEM_QUANTITY + 1) WHERE CITEM_ID = '$cartItemId'";
+                                        $updateCart = sqlsrv_query($conn, $tsql);
+                                        if ($updateCart === false) {
+                                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                        }
+                                        redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                    } else {
+                                        $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
+                                        VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";             
+                                        $addBookToCart = sqlsrv_query($conn, $tsql);
+                                        if ($addBookToCart === false) {
+                                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                        }
+                                        redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                    }
+                                }
+                            } else {  // IF THERE ARE NOTHING IN CART, INSERT ITEM
+                                $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
+                                VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";             
+                                $addBookToCart = sqlsrv_query($conn, $tsql);
+                                if ($addBookToCart === false) {
+                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                }
+                                redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                            }
+                        } else { // NOT LOGGED IN
                             redirect("https://php-back2books.azurewebsites.net/pages/login.php");
                         }
                     }
