@@ -117,7 +117,7 @@
                                     // CONVERT CART ITEMS INTO ORDER LINES (NEED ORDER_ID, BOOK_ID, PRICE, QUANTITY)
                                     $transferBOOKID = $cartRow['BOOK_ID'];
                                     $transferPRICE = $cartRow['PRICE'];
-                                    $transferQTY = ['ORDER_QUANTITY'];
+                                    $transferQTY = $cartRow['ORDER_QUANTITY'];
 
                                     $tsql = "INSERT INTO ORDER_LINES (ORDER_ID, BOOK_ID, PRICE, ORDER_QUANTITY)
                                             VALUES ('$orderId', '$transferBOOKID', '$transferPRICE', '$transferQTY')";
