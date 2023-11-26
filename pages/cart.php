@@ -78,7 +78,7 @@
                     echo '<p>userId: '.$userId.'</p>';
                     echo '<p>bookId: '.$userId.'</p>';
 
-                    $tsql = "INSERT INTO ORDER (USER_ID, ORDER_DATE, ORDER_DISCOUNT, SHIP_ADDR, BILL_ADDR) 
+                    $tsql = "INSERT INTO ORDERS (USER_ID, ORDER_DATE, ORDER_DISCOUNT, SHIP_ADDR, BILL_ADDR) 
                     VALUES ('$userId', '$currentDate', '$orderDiscount', '$address', '$address')";
 
                     $addOrder = sqlsrv_query($conn, $tsql);
