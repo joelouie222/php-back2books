@@ -139,9 +139,9 @@
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
-                                                echo '        <form method="post" action="">
-                                                                  <input type="hidden" name="citemId" value='.$citemId.'">'
-                                                                  <input type="hidden" name="productId" value="'.$bookId.'">';
+                                                echo '        <form method="post" action="">';
+                                                echo '                  <input type="hidden" name="citemId" value='.$citemId.'">';
+                                                echo '                  <input type="hidden" name="productId" value="'.$bookId.'">';
                                                 echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
                                                 echo '            <button type="submit" name="update" value="update">Update</button>';
                                                 echo '         </form>';
@@ -158,13 +158,13 @@
                                     echo '</tbody>';
                                     echo '</table>';
                                     echo '</form>';
-                                    echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';
                                     echo '<div>';
                                     echo '<form method="post" action="">';
                                     echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
                                     echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
                                     echo '</form>';
                                     echo '</div>';
+                                    echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';                
                                     echo '<div><h3>DISCOUNT: - $ '.number_format(($subtotal * $_SESSION['discountValue']), 2).'</h3></div>';
                                     echo '<div><h3>TAX (8.25%): $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
                                     echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
