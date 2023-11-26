@@ -102,7 +102,7 @@
                                     } else {
                                         while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
                                             $citemId = $row['CITEM_ID'];
-                                            $bookdId = $row['BOOK_ID'];
+                                            $bookId = $row['BOOK_ID'];
                                             $quantity = $row['ITEM_QUANTITY'];
 
                                             echo '<h1>$bookId : '.$bookId.'</h1>';
@@ -111,7 +111,7 @@
                                                      FROM BOOKS B 
                                                      INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
                                                      INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
-                                                     WHERE B.BOOK_ID = '$bookdId'";
+                                                     WHERE B.BOOK_ID = '$bookId'";
 
                                             $getBook = sqlsrv_query($conn, $tsql);
 
