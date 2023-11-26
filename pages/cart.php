@@ -35,9 +35,15 @@
 
             echo '<div class="cart">';
                 if ((isset($_POST['update'])) && $_POST['update'] == "update") {
-                    echo '<p>product_id: '.$_POST['product_id'].'</p>';
+                    echo '<p>citemId: '.$_POST['citemId'].'</p>';
+                    echo '<p>productId: '.$_POST['productId'].'</p>';
                     echo '<p>quantity: '.$_POST['quantity'].'</p>';
                 }
+
+                if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
+                    echo '<p>Checkout is a '.$_POST['checkout'].'!</p>';
+                }
+
             echo '</div>';
 
 
@@ -104,8 +110,6 @@
                                             $citemId = $row['CITEM_ID'];
                                             $bookId = $row['BOOK_ID'];
                                             $quantity = $row['ITEM_QUANTITY'];
-
-                                            echo '<h1>$bookId : '.$bookId.'</h1>';
                                             
                                             $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
                                                      FROM BOOKS B 
@@ -135,9 +139,9 @@
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
-                                                echo '<h1>$bookId : '.$bookId.'</h1>';
                                                 echo '        <form method="post" action="">
-                                                                  <input type="hidden" name="product_id" value="'.$bookId.'">';
+                                                                  <input type="hidden" name="citemId" value='.$citemId.'">'
+                                                                  <input type="hidden" name="productId" value="'.$bookId.'">';
                                                 echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
                                                 echo '            <button type="submit" name="update" value="update">Update</button>';
                                                 echo '         </form>';
@@ -151,37 +155,29 @@
                                         }   
                                     }                             
                                     sqlsrv_free_stmt($getCart);
-
-                                        echo '</tbody>';
-                                        echo '</table>';
-                                        echo '<button type="submit" value="update" name="updateCart">Update Cart</button>';
-                                        echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
-                                        echo '</form>';
-
-                                        echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';
-                                        echo '<div>';
-                                        echo '<form method="post" action="">';
-                                        echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
-                                        echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
-                                        echo '</form>';
-                                        echo '</div>';
-                                        echo '<div><h3>DISCOUNT: - $ '.number_format(($subtotal * $_SESSION['discountValue']), 2).'</h3></div>';
-                                        echo '<div><h3>TAX (8.25%): $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
-                                        echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
-                                        echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
-                                        echo '<div class="">';
-                                }
-                            
-                    
-                    echo '</div>';
-                   
+                                    echo '</tbody>';
+                                    echo '</table>';
+                                    echo '</form>';
+                                    echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';
+                                    echo '<div>';
+                                    echo '<form method="post" action="">';
+                                    echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
+                                    echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
+                                    echo '</form>';
+                                    echo '</div>';
+                                    echo '<div><h3>DISCOUNT: - $ '.number_format(($subtotal * $_SESSION['discountValue']), 2).'</h3></div>';
+                                    echo '<div><h3>TAX (8.25%): $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
+                                    echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
+                                    echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
+                                    echo '<div><button type="submit" value="go" name="checkout">CHECKOUT</button></div>';
+                                    echo '<div class="">';
+                                }            
+                    echo '</div>';                   
                 } else {
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php");
-                }
-                    
+                }                    
                 ?>
-            </div>
-                    
+            </div>                    
         <!-- <div class="cart-summary">
                 <div><span>SUBTOTAL: </span> <span> $$$$ </span> </div>
                 <div><span>DISCOUNT: </span> <span> - $$$ </span> </div>
