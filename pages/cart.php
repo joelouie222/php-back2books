@@ -69,6 +69,11 @@
                                         while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['quantity'];
+
+                                            echo 'row[BOOK_ID]:'.$row['BOOK_ID'];
+                                            echo 'bookId: '.$bookdId;
+                                            echo 'quantity: '.$row['quantity'];
+                                            echo 'quantity: '.$quantity;
                                             
                                             $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
                                                      FROM BOOKS B 
@@ -111,46 +116,6 @@
                                 }
                             }
                         ?>
-                            
-    
-                            
-
-                            <tr>
-                                <td class="">
-                                    <a href="">
-                                        <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE]" height="100" width="75">
-                                    </a>
-                                </td>
-                                <td>
-                                    <p> PRODUCT NAME </p>
-                                    <p> </p>
-                                    <br>
-                                    <a href="" class="remove">Remove</a>
-                                </td>
-                                <td class="" style="text-align: left;"><p>$$$$</p></td>
-                                <td class="" style="text-align: left;">
-                                    <input type="" name="quantity-product['id']" value="1" min="1" max="product['quantity']" placeholder="Quantity" required>
-                                </td>
-                                <td class="" style="text-align: right;"><p>PRICE * NUMBER IN CART</p></td>
-                            </tr>
-
-                            <tr>
-                                <td class="">
-                                    <a href="">
-                                        <img src="https://images.bwbcovers.com/006/To-Kill-a-Mockingbird-9780060935467.jpg" alt="Image of Book [BOOK_TITLE]" height="100" width="75">
-                                    </a>
-                                </td>
-                                <td>
-                                    <p> PRODUCT NAME </p>
-                                    <br>
-                                    <a href="" class="remove">Remove</a>
-                                </td>
-                                <td class="" style="text-align: left;"><p>$$$$</p></td>
-                                <td class="" style="text-align: left;">
-                                    <input type="" name="quantity-product['id']" value="1" min="1" max="product['quantity']" placeholder="Quantity" required>
-                                </td>
-                                <td class="" style="text-align: right;"><p>PRICE * NUMBER IN CART</p></td>
-                            </tr>
                         </tbody>
                     </table>
 
