@@ -87,20 +87,20 @@
                                                 while($row = sqlsrv_fetch_array($getBook, SQLSRV_FETCH_ASSOC)){
                                                 echo '    <tr>';
                                                 echo '        <td class="">';
-                                                echo '            <img src="'.$row['BI.IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" height="100" width="75">';
+                                                echo '            <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" height="100" width="75">';
                                                 echo '        </td>';
                                                 echo '        <td>';
-                                                echo '            <p>'.$row['B.BOOK_TITLE'].'</p>';
-                                                echo '            <p> ISBN: '.$row['B.BOOK_ISBN'].'</p>';
-                                                echo '            <p> Stock left: '.$row['PI.INV_QUANTITY'].'</p>';
+                                                echo '            <p>'.$row['BOOK_TITLE'].'</p>';
+                                                echo '            <p> ISBN: '.$row['BOOK_ISBN'].'</p>';
+                                                echo '            <p> Stock left: '.$row['INV_QUANTITY'].'</p>';
                                                 echo '            </br>';
                                                 echo '           <a href="">Remove</a>';
                                                 echo '        </td>';
-                                                echo '        <td class="" style="text-align: left;"><p>$ '.$row['B.PRICE'].'</p></td>';
+                                                echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
                                                 echo '            <input type="" name="'.$row['$bookId'].'" min="1" max="" value="'.$quantity.'" required>';
                                                 echo '        </td>';
-                                                echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['B.PRICE'] * $quantity), 2).'</p></td>';
+                                                echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['PRICE'] * $quantity), 2).'</p></td>';
                                                 echo '    </tr>';
                                                 }
                                             }
