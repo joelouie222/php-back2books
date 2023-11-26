@@ -59,7 +59,7 @@
                                 if ($_SESSION['numInCart'] == 0 )
                                     echo '<tr><td colspan="5" style="text-align:center;"><h3> You have no products added in your Shopping Cart</h3></td></tr>';
                                 else {
-                                    $tsql = "SELECT BOOK_ID, COUNT(BOOK_ID) AS quantity FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId') GROUP BY BOOK_ID";
+                                    $tsql = "SELECT BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId') GROUP BY BOOK_ID";
 
                                     $getCart = sqlsrv_query($conn, $tsql);
 
@@ -71,9 +71,9 @@
                                             $quantity = $row['quantity'];
 
                                             echo '<p>row[BOOK_ID]:'.$row['BOOK_ID'].'</p>';
-                                            echo '<p>rbookId: '.$bookdId.'</p>';
-                                            echo '<p>rquantity: '.$row['quantity'].'</p>';
-                                            echo '<p>rquantity: '.$quantity.'</p>';
+                                            echo '<p>bookId: '.$bookdId.'</p>';
+                                            echo '<p>row[quantity]: '.$row['ITEM_QUANTITY'].'</p>';
+                                            echo '<p>quantity: '.$quantity.'</p>';
                                             
                                             $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
                                                      FROM BOOKS B 
