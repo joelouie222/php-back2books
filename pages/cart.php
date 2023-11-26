@@ -34,12 +34,10 @@
 
 
             echo '<div class="cart">';
-            echo "Session Key: $key" . PHP_EOL;
-            echo "Session Value: $value" . PHP_EOL;
+            print_r($_SESSION);
             if (isset($_POST['updateCart']) && $_POST['updateCart'] == "update") {
                 foreach ($_POST as $key => $value) {
-                    echo "POST Key: $key" . PHP_EOL;
-                    echo "POST Value: $value" . PHP_EOL;
+                    print_r($_POST);
                 }
             }
             echo '</div>';
@@ -151,6 +149,9 @@
 
                                         echo '</tbody>';
                                         echo '</table>';
+                                        echo '<button type="submit" value="update" name="updateCart">Update Cart</button>';
+                                        echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
+                                        echo'</form>';
                                         echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';
                                         echo '<div>';
                                         echo '<form method="post" action="">';
@@ -159,17 +160,15 @@
                                         echo '</form>';
                                         echo '</div>';
                                         echo '<div><h3>DISCOUNT: - $ '.number_format(($subtotal * $_SESSION['discountValue']), 2).'</h3></div>';
-                                        echo '<div><h3>TAX: $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
+                                        echo '<div><h3>TAX (8.25%): $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
                                         echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
                                         echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
                                         echo '<div class="">';
-                                        echo '<button type="submit" value="update" name="updateCart">Update Cart</button>';
-                                        echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
                                 }
                             
                     
                     echo '</div>';
-                    echo'</form>';
+                   
                 } else {
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php");
                 }
