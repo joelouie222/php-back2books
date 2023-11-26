@@ -33,7 +33,7 @@
                 $tsql = "SELECT DISCOUNT_CODE, DISCOUNT_TAG FROM DISCOUNT WHERE ACTIVE = 1";
                 $getDiscount = sqlsrv_query($conn, $tsql);
                 if ($getDiscount != false){
-                    while (($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) && $found == false) {
+                    while (($row = sqlsrv_fetch_array($getDiscount, SQLSRV_FETCH_ASSOC)) && $found == false) {
                         if (($row[DISCOUNT_COD]) == $_POST['discountCode']) {
                             $_SESSION['discountCode'] = $_POST['discountCode'];
                             $_SESSION['discountValue'] = ($row['DISCOUNT_TAG'] / 100);
@@ -64,19 +64,19 @@
                 
             <div>
                 <?php
-                echo '<form action="" method="post">';
-                echo '   <table style="width: 100%">';
-                echo '        <thead>';
-                echo '            <tr>';
-                echo '                <th colspan="2" style="text-align: left; padding: 10px 0px 10px 0px"><h3>Product<h3></th>';
-                echo '                <th style="text-align: left;"><h3>Price</h3></th>';
-                echo '                <th style="text-align: left;"><h3>Quantity<h3></th>';
-                echo '                <th style="text-align: right;"><h3>Total</h3></th>';
-                echo '            </tr>';
-                echo '        </thead>';
-                echo '        <tbody>';
-                            
-                            if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+                if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+                    echo '<form action="" method="post">';
+                    echo '   <table style="width: 100%">';
+                    echo '        <thead>';
+                    echo '            <tr>';
+                    echo '                <th colspan="2" style="text-align: left; padding: 10px 0px 10px 0px"><h3>Product<h3></th>';
+                    echo '                <th style="text-align: left;"><h3>Price</h3></th>';
+                    echo '                <th style="text-align: left;"><h3>Quantity<h3></th>';
+                    echo '                <th style="text-align: right;"><h3>Total</h3></th>';
+                    echo '            </tr>';
+                    echo '        </thead>';
+                    echo '        <tbody>';
+                              
                                 if ($_SESSION['numInCart'] == 0 )
                                     echo '<tr><td colspan="5" style="text-align:center;"><h3> You have no products added in your Shopping Cart</h3></td></tr>';
                                 else {
@@ -142,26 +142,30 @@
 
                                         echo '</tbody>';
                                         echo '</table>';
-                                        echo '<div> <h3>SUBTOTAL: $ '.$subtotal.'</h3></div>';
+                                        echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';
                                         echo '<div>';
                                         echo '<form method="post" action="">';
                                         echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
                                         echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
                                         echo '</form>';
                                         echo '</div>';
-                                        echo '<div><h3>DISCOUNT: - $ '.($subtotal * $_SESSION['discountValue']).'</h3></div>';
-                                        echo '<div><h3>TAX: $'.($subtotal * 0.0825).' </h3></div>';
+                                        echo '<div><h3>DISCOUNT: - $ '.number_format(($subtotal * $_SESSION['discountValue']), 2).'</h3></div>';
+                                        echo '<div><h3>TAX: $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
                                         echo '<div><h3>SHIPPING: $ '.$shipping.'/h3></div>';
-                                        echo '<div><h3>TOTAL: $ '.($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping).'</h3></div>';
+                                        echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
                                         echo '<div class="">';
                                         echo '<button type="submit" value="update" name="updateOrder">Update Order</button>';
                                         echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
                                 }
-                            }
+                            
                     
                     echo '</div>';
                     echo'</form>';
-                    ?>
+                } else {
+                    redirect("https://php-back2books.azurewebsites.net/pages/login.php");
+                }
+                    
+                ?>
             </div>
                     
         <div class="cart-summary">
