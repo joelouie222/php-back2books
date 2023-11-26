@@ -88,7 +88,7 @@
                         redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                     } else {
                         // GET ORDER ID
-                        $tsql = "SELECT ORDER_ID FROM ORDERS WHERE USER_ID = '$userId'' AND ORDER_DATE = '$currentDate' AND ORDER_DISCOUNT = '$orderDiscount'";
+                        $tsql = "SELECT ORDER_ID FROM ORDERS WHERE USER_ID = '$userId' AND ORDER_DATE = '$currentDate' AND ORDER_DISCOUNT = '$orderDiscount'";
                         
                         $getOrderId = sqlsrv_query($conn, $tsql);
 
@@ -252,7 +252,7 @@
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
                                                 if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
-                                                    echo '<p>'.$row['INV_QUANTITY'].'</p>';
+                                                    echo '<p>'.$quantity.'</p>';
                                                 } else {
                                                     echo '        <form method="post" action="">';
                                                     echo '                  <input type="hidden" name="citemId" value="'.$citemId.'">';
@@ -286,7 +286,7 @@
                                     echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';    
                                     $_SESSION['DISCOUNT'] = ($subtotal * $_SESSION['discountValue']);
                                     echo '<div><h3>DISCOUNT: - $ '.number_format($_SESSION['DISCOUNT'], 2).'</h3></div>';                                    
-                                    echo '<div><h3>TAX (8.25%): $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
+                                    echo '<div><h3>TAX (8.25%): $ '.number_format(($subtotal * 0.0825), 2).' </h3></div>';
                                     echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
                                     echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
                                     if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
