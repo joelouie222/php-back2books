@@ -71,10 +71,13 @@
                     $orderDiscount = $_SESSION['DISCOUNT'];
                     
                     
-                    echo 'address: '.$address.'';
-                    echo 'payment: '.$payment.'';
-                    echo 'currentDate: '.$currentDate.'';
-                    echo 'orderDiscount: '.$orderDiscount.'';
+                    echo '<p>address: '.$address.'</p>';
+                    echo '<p>payment: '.$payment.'</p>';
+                    echo '<p>currentDate: '.$currentDate.'</p>';
+                    echo '<p>orderDiscount: '.$orderDiscount.'</p>';
+                    echo '<p>orderDiscount: '.$userId.'</p>';
+
+                    // $tsql = "SELECT CITEM_ID, BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
 
 
 
@@ -323,11 +326,11 @@
                         echo '<div class="form-group">
                             <label for="payment">Payment Method: </label>
                             <select name="payment" id="payment">
-                                <option selected value="CC">CREDIT CARD</option>
-                                <option value="paypal">PAYPAL</option>
-                                <option value="google">GOOGLE PAY</option>
-                                <option value="amazon">AMAZON PAY</option>
-                                <option value="apple">APPLE PAY</option>
+                                <option selected value="CREDIT CARD">CREDIT CARD</option>
+                                <option value="PAYPAL">PAYPAL</option>
+                                <option value="GOOGLE PAY">GOOGLE PAY</option>
+                                <option value="AMAZON PAY">AMAZON PAY</option>
+                                <option value="APPLE PAY">APPLE PAY</option>
                             </select>
                         </div>';
 
