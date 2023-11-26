@@ -70,7 +70,7 @@
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['quantity'];
                                             
-                                            $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK
+                                            $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
                                                      FROM BOOKS B 
                                                      INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
                                                      INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
@@ -92,6 +92,7 @@
                                                 echo '        <td>';
                                                 echo '            <p>'.$row['B.BOOK_TITLE'].'</p>';
                                                 echo '            <p> ISBN: '.$row['B.BOOK_ISBN'].'</p>';
+                                                echo '            <p> Stock left: '.$row['PI.INV_QUANTITY'].'</p>;
                                                 echo '            <br>';
                                                 echo '           <a href="">Remove</a>';
                                                 echo '        </td>';
