@@ -2,7 +2,7 @@
   session_start();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -14,13 +14,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
-
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- OUR CSS -->
     <link rel="stylesheet" href="/style.css">
-    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
 <body id="home">
@@ -34,7 +33,7 @@
                 <img src="/images/patrick-star-dumb.gif" width="300" height="150">
                 </br>
                 <h1> PAGE UNDER CONSTRUCTION</h1>
-                <h2> This page will be for products that are currently listed by other others.</h3>
+                <h2> This page will list ALL PRODUCTS, create, edit, and disable products </h2>
             </center>
         </div>
 </body>

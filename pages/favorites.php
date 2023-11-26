@@ -33,7 +33,7 @@
                 <img src="/images/patrick-star-dumb.gif" width="300" height="150">
                 </br>
                 <h1> PAGE UNDER CONSTRUCTION</h1>
-                <h2> This is the wish list page </h2>
+                <h2> This is the wish list page for the logged in user </h2>
             </center>
         </div>
 </body>
