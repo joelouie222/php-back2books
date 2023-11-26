@@ -155,27 +155,11 @@
                 echo '<div class="">';
                 echo '<button type="submit" value="update" name="updateOrder">Update Order</button>';
                 echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
+                ?>
             </div>
         </form>
     </div>
-
-
-
-
-
-
-
-
-
-
-                                }
-                            }
-                        ?>
-        
                     
-                    
-        </div>
-        
         <div class="cart-summary">
                 <div><span>SUBTOTAL: </span> <span> $$$$ </span> </div>
                 <div><span>DISCOUNT: </span> <span> - $$$ </span> </div>
