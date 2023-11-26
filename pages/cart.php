@@ -34,12 +34,10 @@
 
 
             echo '<div class="cart">';
-            print_r($_SESSION);
-            if (isset($_POST['updateCart']) && $_POST['updateCart'] == "update") {
-                foreach ($_POST as $key => $value) {
-                    print_r($_POST);
+                if ((isset($_POST['update'])) && $_POST['update'] == "update") {
+                    echo '<p>product_id: '.$_POST['product_id'].'</p>';
+                    echo '<p>quantity: '.$_POST['quantity'].'</p>';
                 }
-            }
             echo '</div>';
 
 
@@ -135,7 +133,10 @@
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
-                                                echo '            <input type="number" name="'.$row['$bookId'].'" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
+                                                echo '        <form method="post" action="">
+                                                                  <input type="hidden" name="product_id" value="'.$row['$bookId'].'"';
+                                                echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
+                                                echo '            <button type="submit" name="update" value="update">Update</button>';
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['PRICE'] * $quantity), 2).'</p></td>';
                                                 echo '    </tr>';
@@ -151,7 +152,8 @@
                                         echo '</table>';
                                         echo '<button type="submit" value="update" name="updateCart">Update Cart</button>';
                                         echo '<button type="submit" value="order" name="placeOrder">Place Order</button>';
-                                        echo'</form>';
+                                        echo '</form>';
+
                                         echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';
                                         echo '<div>';
                                         echo '<form method="post" action="">';
