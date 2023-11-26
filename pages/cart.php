@@ -76,6 +76,11 @@
 
                                             $getBook = sqlsrv_query($conn, $tsql);
 
+
+                                            if ($getBook === false) {
+                                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                            }
+
                                             if ($getBook != false) {
                                                 while($row = sqlsrv_fetch_array($getBook, SQLSRV_FETCH_ASSOC)){
                                                 echo '    <tr>';
@@ -96,7 +101,7 @@
                                                 echo '    </tr>';
                                                 }
                                             }
-                                            sqlsrv_free_stmt($getBook);
+                                            //sqlsrv_free_stmt($getBook);
                                         }   
                                     }                             
                                     sqlsrv_free_stmt($getCart);
