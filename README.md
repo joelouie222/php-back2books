@@ -21,15 +21,15 @@ Instructor: [Ali Dogru](alihikmet.dogru@utsa.edu)
 - [x] Database driven
 - [ ] Create/Modify User Information
     - [ ] Allow users to register for accounts
-- [ ] Create/Modify Items for Sale
-    - [ ] Include images
-    - [ ] Include price
-    - [ ] Include quantity available
-    - [ ] Allow ability to add new items
+- [x] Create/Modify Items for Sale
+    - [x] Include images
+    - [x] Include price
+    - [x] Include quantity available
+    - [x] Allow ability to add new items
 - [ ] Create/Modify Shopping Cart
-    - [ ] Show items in cart
-    - [ ] Calculate taxes: assume 8.25% tax rate
-    - [ ] Allow for discount codes
+    - [x] Show items in cart
+    - [x] Calculate taxes: assume 8.25% tax rate
+    - [x] Allow for discount codes
     - [ ] Show summary of order and allow for order to be placed
 - [ ] Ability to search based on criteria:
     - [ ] Item/Description
@@ -53,7 +53,6 @@ Instructor: [Ali Dogru](alihikmet.dogru@utsa.edu)
 - CSS
 - JavaScript
 - MySQL
-- Go
 - PHP
 
 #### Development tools:
@@ -61,7 +60,6 @@ Instructor: [Ali Dogru](alihikmet.dogru@utsa.edu)
 - [GitHub](https://github.com/)
 - [GitHub Actions](https://docs.github.com/en/actions)
 - [Microsoft Azure](https://azure.microsoft.com/en-us)
-- [DigitalOcean](https://www.digitalocean.com/)
 
 #### Design tools:
 - [Lucid](https://lucid.app/)
