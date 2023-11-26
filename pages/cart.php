@@ -84,6 +84,7 @@
                     $addOrder = sqlsrv_query($conn, $tsql);
 
                     if($addOrder== false) {
+                        die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                         redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                     } else {
                         // GET ORDER ID
