@@ -70,9 +70,11 @@
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['quantity'];
                                             
-                                            $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK FROM BOOKS B WHERE B.BOOK_ID = '$bookdId'
+                                            $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK
+                                                     FROM BOOKS B 
                                                      INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
-                                                     INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID";
+                                                     INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
+                                                     WHERE B.BOOK_ID = '$bookdId'";
 
                                             $getBook = sqlsrv_query($conn, $tsql);
 
