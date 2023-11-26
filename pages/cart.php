@@ -1,6 +1,8 @@
 <?php
   session_start();
-  $_SESSION['discountValue'] = 0;
+  if (!isset($_SESSION['discountValue']) || $_SESSION['discountValue'] == 0){
+    $_SESSION['discountValue'] = 0;
+  }
   
 
 ?>
@@ -44,6 +46,17 @@
                     echo '<p>Checkout is a '.$_POST['checkout'].'!</p>';
                 }
 
+                if ((isset($_POST['placeOrder'])) && $_POST['placeOrder'] == "go") {
+                    echo '<p>placeOrder is a '.$_POST['placeOrder'].'!</p>';
+                    echo '<p>Street Add: '.$_POST['streetAddress1'].'!</p>';
+                    echo '<p>Street Add2: '.$_POST['streetAddress2'].'!</p>';
+                    echo '<p>City: '.$_POST['city'].'!</p>';
+                    echo '<p>State: '.$_POST['state'].'!</p>';
+                    echo '<p>Zip: '.$_POST['zipCode'].'!</p>';
+                    echo '<p>Payment: '.$_POST['payment'].'!</p>';
+                }
+
+
             echo '</div>';
 
 
@@ -68,16 +81,14 @@
         ?>   
 
         <div class="cart">
-            <center>
-                <img src="/images/patrick-star-dumb.gif" width="300" height="150">
-                </br>
-                <h1> PAGE UNDER CONSTRUCTION</h1>
-            </center>
-        </div>
-
-        <div class="cart">
-            <div style="margin: 10px 0px 10px 0px"> <h1>Shopping Cart</h1> <div>
-                
+            <?php
+                if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
+                    echo '<div style="margin: 10px 0px 10px 0px"> <h1>Checkout</h1> <div>';
+                } else {
+                    echo '<div style="margin: 10px 0px 10px 0px"> <h1>Shopping Cart</h1> <div>';
+                }
+            
+            ?>
             <div>
                 <?php
                 if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
@@ -135,16 +146,23 @@
                                                 echo '            <p> ISBN: '.$row['BOOK_ISBN'].'</p>';
                                                 echo '            <p> Stock left: '.$row['INV_QUANTITY'].'</p>';
                                                 echo '            </br>';
-                                                echo '           <a href="https://php-back2books.azurewebsites.net/removeCartItem.php?p='.$citemId.'">Remove</a>';
+                                                if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
+                                                    echo '           <a href="https://php-back2books.azurewebsites.net/removeCartItem.php?p='.$citemId.'">Remove</a>';
+                                                }
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
-                                                echo '        <form method="post" action="">';
-                                                echo '                  <input type="hidden" name="citemId" value='.$citemId.'">';
-                                                echo '                  <input type="hidden" name="productId" value="'.$bookId.'">';
-                                                echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
-                                                echo '            <button type="submit" name="update" value="update">Update</button>';
-                                                echo '         </form>';
+                                                if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
+                                                    echo '<p>'.$row['INV_QUANTITY'].'</p>';
+                                                } else {
+                                                    echo '        <form method="post" action="">';
+                                                    echo '                  <input type="hidden" name="citemId" value="'.$citemId.'">';
+                                                    echo '                  <input type="hidden" name="productId" value="'.$bookId.'">';
+                                                    echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
+                                                    echo '            <button type="submit" name="update" value="update">Update</button>';
+                                                    echo '         </form>';
+                                                }
+                                                
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['PRICE'] * $quantity), 2).'</p></td>';
                                                 echo '    </tr>';
@@ -159,20 +177,138 @@
                                     echo '</table>';
                                     echo '</form>';
                                     echo '<div>';
-                                    echo '<form method="post" action="">';
-                                    echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
-                                    echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
-                                    echo '</form>';
+                                    if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
+                                        echo '<form method="post" action="">';
+                                        echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
+                                        echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
+                                        echo '</form>';
+                                    }
                                     echo '</div>';
-                                    echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';                
-                                    echo '<div><h3>DISCOUNT: - $ '.number_format(($subtotal * $_SESSION['discountValue']), 2).'</h3></div>';
+                                    echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';    
+                                    $_SESSION['DISCOUNT'] = ($subtotal * $_SESSION['discountValue']);
+                                    echo '<div><h3>DISCOUNT: - $ '.number_format($_SESSION['DISCOUNT'], 2).'</h3></div>';                                    
                                     echo '<div><h3>TAX (8.25%): $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
                                     echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
                                     echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
-                                    echo '<div><button type="submit" value="go" name="checkout">CHECKOUT</button></div>';
+                                    if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
+                                        echo '<div><button type="submit" value="go" name="checkout">CHECKOUT</button></div>';
+                                    }
                                     echo '<div class="">';
                                 }            
-                    echo '</div>';                   
+                    echo '</div>';  
+                    
+                    if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
+                        echo '<div class="checkout">';
+                        echo '<div style="margin: 10px 0px 10px 0px"> <h1>Shipping/Billing Information</h1> <div>';
+                        echo '<form name="shippingInfo" id="shippingInfo" method="post" action="">';
+                        
+                        // <!-- StreetAddress1 input -->
+                        echo '                        
+                        <div class="form-group">
+                            <label for="streetAddress1">Street Address: </label>
+                            <input name="streetAddress1" type="text" class="form-control" id="streetAddress1" placeholder="Street Address" required>
+                            <p id="streetAddress1Status"></p>
+                        </div>';
+                        
+                         // <!-- StreetAddress2 input -->
+                        echo '
+                        <div class="form-group">
+                            <label for="streetAddress2">Street Address 2: </label>
+                            <input name="streetAddress2" type="text" class="form-control" id="streetAddress2" placeholder="(Optional)">
+                            <p id="streetAddress2Status"></p>
+                        </div>';
+
+                        // <!-- City input -->
+                        echo '
+                        <div class="form-group">
+                            <label for="city">City: </label>
+                            <input name="city" type="text" class="form-control" id="city" placeholder="City">
+                            <p id="cityStatus"></p>
+                        </div>';
+
+                        // <!-- State input -->
+                        echo '
+                        <div class="form-group">
+                        <label for="state">State: </label>
+                        <select name="state" id="state">
+                                <option selected value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="DC">District Of Columbia</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="IA">Iowa</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MT">Montana</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NH">New Hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NY">New York</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VT">Vermont</option>
+                                <option value="VA">Virginia</option>
+                                <option value="WA">Washington</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WY">Wyoming </option>
+                        </select>
+                        </div>';
+
+                        echo '
+                        // <!-- Zipcode input -->
+                        <div class="form-group">
+                            <label for="zipCode">Zipcode: </label>
+                            <input id="zipCode" maxlength="5" name="zipCode" type="text">
+                        </div>';
+
+                        // <!-- Payment Method input -->
+                        echo '<div class="form-group">
+                            <label for="payment">Payment Method: </label>
+                            <select name="payment" id="payment">
+                                <option selected value="CC">CREDIT CARD</option>
+                                <option value="paypal">PAYPAL</option>
+                                <option value="google">GOOGLE PAY</option>
+                                <option value="amazon">AMAZON PAY</option>
+                                <option value="apple">APPLE PAY</option>
+                            </select>
+                        </div>';
+
+                        // <!-- Submit button input -->
+                        echo '<div><button type="submit" value="go" name="placeOrder">PLACE ORDER</button></div>';
+                        echo '</form>';
+                        echo '</div>'
+                    }
                 } else {
                     redirect("https://php-back2books.azurewebsites.net/pages/login.php");
                 }                    
