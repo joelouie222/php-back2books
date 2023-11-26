@@ -71,16 +71,15 @@
                                         $bookId = "";
                                         $cartItemId = "";
                                         redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
-                                    } else {
-                                        $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
-                                        VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";             
-                                        $addBookToCart = sqlsrv_query($conn, $tsql);
-                                        if ($addBookToCart === false) {
-                                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                        }
-                                        redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
                                     }
                                 }
+                                $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
+                                        VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";             
+                                $addBookToCart = sqlsrv_query($conn, $tsql);
+                                if ($addBookToCart === false) {
+                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                }
+                                redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
                             } else {  // IF THERE ARE NOTHING IN CART, INSERT ITEM
                                 $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
                                 VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";             
