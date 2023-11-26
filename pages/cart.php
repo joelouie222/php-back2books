@@ -122,10 +122,13 @@
                     </table>
                     
                     <div> 
-                        <h3>SUBTOTAL: <?php echo '$subtotal'; ?></h3>
+                        <h3>SUBTOTAL: <?php echo $subtotal; ?></h3>
                     </div>
                     <div>
-                        <input type="text" name="discountCode" placeholder="Discount Code" value=""></input>
+                        <form method="post" action="">
+                            <input type="text" name="discountCode" placeholder="Discount Code" value=""></input>
+                            <button type="submit" name="coupon" value="apply">Apply</button>
+                        </form>
                     </div>
                     <div> 
                         <h3>DISCOUNT: -$$$</h3>
@@ -141,8 +144,8 @@
                         <h3>TOTAL: $$$$$ </h3>
                     </div>
                     <div class="">
-                        <input type="submit" value="updateOrder" name="update">
-                        <input type="submit" value="placeOrder" name="place">
+                        <button type="submit" value="update" name="updateOrder">Update Order</button>
+                        <button type="submit" value="order" name="placeOrder">Place Order</button>
                     </div>
                 </form>
             </div>
