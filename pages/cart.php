@@ -89,6 +89,10 @@
                                     } else {
                                         while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
                                             $citemId = $row['CITEM_ID'];
+
+                                            echo '<h1>$row[CITEM_ID]: '.$row['CITEM_ID'].'</h1>';
+                                            echo '<h1>$citemId: '.$citemId.'</h1>';
+
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['ITEM_QUANTITY'];
                                             
