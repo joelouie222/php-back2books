@@ -56,18 +56,28 @@
                     redirect("https://php-back2books.azurewebsites.net/pages/cart.php");
                 }
 
-                if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
-                    echo '<p>Checkout is a '.$_POST['checkout'].'!</p>';
-                }
-
                 if ((isset($_POST['placeOrder'])) && $_POST['placeOrder'] == "go") {
-                    echo '<p>placeOrder is a '.$_POST['placeOrder'].'!</p>';
-                    echo '<p>Street Add: '.$_POST['streetAddress1'].'!</p>';
-                    echo '<p>Street Add2: '.$_POST['streetAddress2'].'!</p>';
-                    echo '<p>City: '.$_POST['city'].'!</p>';
-                    echo '<p>State: '.$_POST['state'].'!</p>';
-                    echo '<p>Zip: '.$_POST['zipCode'].'!</p>';
-                    echo '<p>Payment: '.$_POST['payment'].'!</p>';
+                    // echo '<p>placeOrder is a '.$_POST['placeOrder'].'!</p>';
+                    // echo '<p>Street Add: '.$_POST['streetAddress1'].'!</p>';
+                    // echo '<p>Street Add2: '.$_POST['streetAddress2'].'!</p>';
+                    // echo '<p>City: '.$_POST['city'].'!</p>';
+                    // echo '<p>State: '.$_POST['state'].'!</p>';
+                    // echo '<p>Zip: '.$_POST['zipCode'].'!</p>';
+                    // echo '<p>Payment: '.$_POST['payment'].'!</p>';
+
+                    $address = ''.$_POST['streetAddress1'].', '.$_POST['streetAddress2'].',  '.$_POST['city'].', '.$_POST['state'].' '.$_POST['zipCode'].'';
+                    $payment = $_POST['payment']
+                    $currentDate = date('Y-m-d');
+                    $orderDiscount = $_SESSION['DISCOUNT'];
+                    
+                    
+                    echo 'address: '.$address.'';
+                    echo 'payment: '.$payment.'';
+                    echo 'currentDate: '.$currentDate.'';
+                    echo 'orderDiscount: '.$orderDiscount.'';
+
+
+
                 }
             }
 

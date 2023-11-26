@@ -33,6 +33,7 @@
                 <img src="/images/patrick-star-dumb.gif" width="300" height="150">
                 </br>
                 <h1> PAGE UNDER CONSTRUCTION</h1>
+                <h2> This page will list all products that is listed by the user currently logged in.</h2>
             </center>
         </div>
 </body>

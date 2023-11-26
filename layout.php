@@ -41,6 +41,7 @@
             echo '<a Wecome back, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
             echo '<a href=""><i class=""></i> Edit Profile </a>';
             echo '<a href=""><i class=""></i> My Orders </a>';
+            echo '<a href="/pages/selling.php"><i class="fa fa-fw fa-money"></i>My Listing</a>';
             echo '<a href="/logout.php"><i class=""></i> Log Out </a>';
         }
     } else {
@@ -49,7 +50,6 @@
     }
     echo '  <a href="/pages/catalog.php"><i class="fa fa-fw fa-book"></i> Catalog </a>';
     echo '  <a href="/pages/marketplace.php"><i class="fa fa-fw fa-usd"></i> Marketplace </a>';
-    echo '  <a href="/pages/selling.php"><i class="fa fa-fw fa-money"></i> Selling</a>';
     echo '  <a href="/pages/promotion.php"><i class="fa fa-fw fa-tag"></i> Promotions</a>';
     echo '  <a href="/pages/about.php"><i class="fa fa-fw fa-info-circle"></i> About Us </a>';
     echo '  <a href="/pages/contact.php"><i class="fa fa-fw fa-envelope"></i> Contact</a>';
