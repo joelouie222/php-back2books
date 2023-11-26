@@ -74,7 +74,7 @@
                             if ($_SESSION['numInCart'] == 0 )
                                 echo '<tr><td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td></tr>';
                             else {
-                                $tsql = "SELECT *, COUNT(BOOK_ID) AS quantity FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId') GROUP BY BOOK_ID";
+                                $tsql = "SELECT BOOK_ID, COUNT(BOOK_ID) AS quantity FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId') GROUP BY BOOK_ID";
 
                                 $getCart = sqlsrv_query($conn, $tsql);
 
