@@ -28,13 +28,14 @@
         <?php 
             include('../layout.php');
 
-            if (isset(discountCode)) {
+            if (isset($_POST['discountCode'])) {
                 $found = false;
                 $tsql = "SELECT DISCOUNT_CODE, DISCOUNT_TAG FROM DISCOUNT WHERE ACTIVE = 1";
                 $getDiscount = sqlsrv_query($conn, $tsql);
                 if ($getDiscount != false){
                     while (($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) && $found == false) {
-                        if (($row[DISCOUNT_COD]) == $_SESSION('discountCode')) {
+                        if (($row[DISCOUNT_COD]) == $_POST['discountCode'])) {
+                            $_SESSION['discountCode'] = $_POST['discountCode'];
                             $_SESSION['discountValue'] = ($row['DISCOUNT_TAG'] / 100);
                             $found = true;
                         }
