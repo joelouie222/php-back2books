@@ -120,7 +120,7 @@
                                                 echo '            <p> ISBN: '.$row['BOOK_ISBN'].'</p>';
                                                 echo '            <p> Stock left: '.$row['INV_QUANTITY'].'</p>';
                                                 echo '            </br>';
-                                                echo '           <a href="https://php-back2books.azurewebsites.net/removeCartItem?p='.$citemId.'">Remove</a>';
+                                                echo '           <a href="https://php-back2books.azurewebsites.net/removeCartItem.php?p='.$citemId.'">Remove</a>';
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
