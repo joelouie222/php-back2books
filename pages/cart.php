@@ -27,6 +27,7 @@
     <div class="cartpage-container">
         <?php 
             include('../layout.php');
+            include('../functions.php');
 
             if (isset($_POST['discountCode'])) {
                 $found = false;
@@ -34,7 +35,7 @@
                 $getDiscount = sqlsrv_query($conn, $tsql);
                 if ($getDiscount != false){
                     while (($row = sqlsrv_fetch_array($getDiscount, SQLSRV_FETCH_ASSOC)) && $found == false) {
-                        if (($row[DISCOUNT_COD]) == $_POST['discountCode']) {
+                        if (($row[DISCOUNT_CODE]) == $_POST['discountCode']) {
                             $_SESSION['discountCode'] = $_POST['discountCode'];
                             $_SESSION['discountValue'] = ($row['DISCOUNT_TAG'] / 100);
                             $found = true;
@@ -151,7 +152,7 @@
                                         echo '</div>';
                                         echo '<div><h3>DISCOUNT: - $ '.number_format(($subtotal * $_SESSION['discountValue']), 2).'</h3></div>';
                                         echo '<div><h3>TAX: $'.number_format(($subtotal * 0.0825), 2).' </h3></div>';
-                                        echo '<div><h3>SHIPPING: $ '.$shipping.'/h3></div>';
+                                        echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
                                         echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
                                         echo '<div class="">';
                                         echo '<button type="submit" value="update" name="updateOrder">Update Order</button>';
