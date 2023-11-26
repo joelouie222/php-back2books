@@ -93,7 +93,7 @@
                         $getOrderId = sqlsrv_query($conn, $tsql);
 
                         if ($getOrderId == false) {
-                            echo '<p>$getOrderId</p>'
+                            echo '<p>$getOrderId</p>';
                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                             //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                         }
@@ -108,7 +108,7 @@
                                $orderCart = sqlsrv_query($conn, $tsql);
 
                                if ($orderCart == false) {
-                                echo '<p>$orderCart</p>'
+                                echo '<p>$orderCart</p>';
                                 die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                 //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                                 }
@@ -125,7 +125,7 @@
                                     $addOrderLine = sqlsrv_query($conn, $tsql);
 
                                     if ($addOrderLine == false) {
-                                        echo '<p>$addOrderLine</p>'
+                                        echo '<p>$addOrderLine</p>';
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                         //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                                     }
@@ -136,7 +136,7 @@
                                     $updateProductQty = sqlsrv_query($conn, $tsql);
 
                                     if ($updateProductQty == false) {
-                                        echo '<p>$updateProductQty</p>'
+                                        echo '<p>$updateProductQty</p>';
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                         //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                                     }
@@ -147,7 +147,7 @@
 
                                     $deleteCI = sqlsrv_query($conn, $tsql);
                                     if ($deleteCI == false) {
-                                        echo '<p>$deleteCI</p>'
+                                        echo '<p>$deleteCI</p>';
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                         //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                                     }
