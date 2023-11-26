@@ -92,8 +92,8 @@
                                                 echo '        <td>';
                                                 echo '            <p>'.$row['B.BOOK_TITLE'].'</p>';
                                                 echo '            <p> ISBN: '.$row['B.BOOK_ISBN'].'</p>';
-                                                echo '            <p> Stock left: '.$row['PI.INV_QUANTITY'].'</p>;
-                                                echo '            <br>';
+                                                echo '            <p> Stock left: '.$row['PI.INV_QUANTITY'].'</p>';
+                                                echo '            </br>';
                                                 echo '           <a href="">Remove</a>';
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['B.PRICE'].'</p></td>';
