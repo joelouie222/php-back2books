@@ -92,6 +92,11 @@
                         
                         $getOrderId = sqlsrv_query($conn, $tsql);
 
+                        if ($getOrderId == false) {
+                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                        }
+
                         while($orderRow = sqlsrv_fetch_array($getOrderId , SQLSRV_FETCH_ASSOC)) {
                             $orderId = $orderRow['ORDER_ID'];
 
