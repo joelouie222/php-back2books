@@ -53,6 +53,7 @@
                                 VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";
                             
                             $addBookToCart = sqlsrv_query($conn, $tsql);
+                            redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
                         } else {
                             redirect("https://php-back2books.azurewebsites.net/pages/login.php");
                         }

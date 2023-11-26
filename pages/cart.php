@@ -67,6 +67,27 @@
 
         <div class="cart">
             <div style="margin: 10px 0px 10px 0px"> <h1>Shopping Cart</h1> <div>
+
+            <div>
+                    <?php
+                        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+                            if ($_SESSION['numInCart'] == 0 )
+                                echo '<tr><td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td></tr>';
+                            else {
+                                $tsql = "SELECT *, COUNT(BOOK_ID) AS quantity FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId') GROUP BY BOOK_ID";
+
+                                $getCart = sqlsrv_query($conn, $tsql);
+
+                                while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
+                                    echo '<p>[BOOK_ID]: '.$row['BOOK_ID'].'</p>';
+                                    echo '<p>[quantity]: '.$row['quantity'].'</p>';                                        
+                                }
+                                sqlsrv_free_stmt($getCart);
+                            }
+                        }
+                     ?>
+            </div>
+                
             <div>
                 <form action="" method="post">
                     <table style="width: 100%">
@@ -80,9 +101,7 @@
                         </thead>
                         <tbody>
                             
-                            <!-- <tr>
-                                <td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td>
-                            </tr> -->
+                            
     
                             <tr>
                                 <td class="">
