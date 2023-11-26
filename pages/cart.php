@@ -88,7 +88,7 @@
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                     } else {
                                         while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
-                                            $citemId = $row['CITEM_ID']
+                                            $citemId = $row['CITEM_ID'];
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['ITEM_QUANTITY'];
                                             
