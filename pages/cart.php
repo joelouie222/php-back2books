@@ -39,7 +39,7 @@
                     echo "Session Value: $value" . PHP_EOL;
                   }
               }
-            echo '</div>'
+            echo '</div>';
 
 
 
