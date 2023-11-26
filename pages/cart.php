@@ -70,10 +70,10 @@
                                             $bookdId = $row['BOOK_ID'];
                                             $quantity = $row['quantity'];
 
-                                            echo 'row[BOOK_ID]:'.$row['BOOK_ID'];
-                                            echo 'bookId: '.$bookdId;
-                                            echo 'quantity: '.$row['quantity'];
-                                            echo 'quantity: '.$quantity;
+                                            echo '<p>row[BOOK_ID]:'.$row['BOOK_ID'].'</p>';
+                                            echo '<p>rbookId: '.$bookdId.'</p>';
+                                            echo '<p>rquantity: '.$row['quantity'].'</p>';
+                                            echo '<p>rquantity: '.$quantity.'</p>';
                                             
                                             $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
                                                      FROM BOOKS B 
@@ -103,7 +103,7 @@
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
-                                                echo '            <input type="" name="'.$row['$bookId'].'" min="1" max="" value="'.$quantity.'" required>';
+                                                echo '            <input type="number" name="'.$row['$bookId'].'" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['PRICE'] * $quantity), 2).'</p></td>';
                                                 echo '    </tr>';
