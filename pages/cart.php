@@ -81,7 +81,7 @@
                     $tsql = "INSERT INTO ORDERS (USER_ID, ORDER_DATE, ORDER_DISCOUNT, SHIP_ADDR, PAY_METHOD, BILL_ADDR) 
                     VALUES ('$userId', '$currentDate', '$orderDiscount', '$address', '$payment', '$address')";
 
-                    $addOrder = sqlsrv_query($conn, $tsql);
+                    $addOrder = sqlsrv_query($conn, $tsql);   // SUCCESSSFUL
 
                     if($addOrder== false) {
                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
@@ -93,6 +93,7 @@
                         $getOrderId = sqlsrv_query($conn, $tsql);
 
                         if ($getOrderId == false) {
+                            echo '<p>$getOrderId</p>'
                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                             //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                         }
@@ -106,6 +107,12 @@
 
                                $orderCart = sqlsrv_query($conn, $tsql);
 
+                               if ($orderCart == false) {
+                                echo '<p>$orderCart</p>'
+                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                                }
+
                                while($cartRow = sqlsrv_fetch_array($orderCart, SQLSRV_FETCH_ASSOC)) {
                                     // CONVERT CART ITEMS INTO ORDER LINES (NEED ORDER_ID, BOOK_ID, PRICE, QUANTITY)
                                     $transferBOOKID = $cartRow['BOOK_ID'];
@@ -118,6 +125,7 @@
                                     $addOrderLine = sqlsrv_query($conn, $tsql);
 
                                     if ($addOrderLine == false) {
+                                        echo '<p>$addOrderLine</p>'
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                         //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                                     }
@@ -128,6 +136,7 @@
                                     $updateProductQty = sqlsrv_query($conn, $tsql);
 
                                     if ($updateProductQty == false) {
+                                        echo '<p>$updateProductQty</p>'
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                         //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                                     }
@@ -138,6 +147,7 @@
 
                                     $deleteCI = sqlsrv_query($conn, $tsql);
                                     if ($deleteCI == false) {
+                                        echo '<p>$deleteCI</p>'
                                         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                         //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                                     }
