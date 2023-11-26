@@ -68,6 +68,8 @@
                                         if ($updateCart === false) {
                                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                         }
+                                        $bookId = "";
+                                        $cartItemId = "";
                                         redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
                                     } else {
                                         $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
