@@ -134,7 +134,7 @@
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
                                                 echo '        <td class="" style="text-align: left;">';
                                                 echo '        <form method="post" action="">
-                                                                  <input type="hidden" name="product_id" value="'.$row['$bookId'].'"';
+                                                                  <input type="hidden" name="product_id" value="'.$row['$bookId'].'">';
                                                 echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
                                                 echo '            <button type="submit" name="update" value="update">Update</button>';
                                                 echo '         </form>';
