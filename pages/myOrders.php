@@ -14,7 +14,7 @@
             $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
-            ORDER BY SUBQ.TOTAL_AMOUNT DESC
+            ORDER BY TOTAL_AMOUNT DESC
             WHERE USER_ID = '$userId'";
             break;
         case "priceAsc":
@@ -70,13 +70,14 @@
                 <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
+                        <option selected value="-"> - </option>
                         <option value="dateDesc"> New to Old </option>
                         <option value="dateAsc"> Old to New </option>
                         <option value="priceDesc"> Total Descending </option>
                         <option value="priceAsc"> Total Ascending </option>
                     </select></span>
                     <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
-                    <p>Current Sort: <?php echo '$sortBy';?></p>
+                    <p>Current Sort: <?php echo $sortBy;?></p>
                 </select></form></div>
 
                 <?php
