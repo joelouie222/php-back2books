@@ -8,7 +8,7 @@
   if (isset($_POST['sortBtn']) && $_POST['sortBtn'] == "apply"){
     switch ($_POST['sortVal']) {
         case "dateAsc":
-            $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId'";
+            $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE";
             break;
         case "priceDesc":
             $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
@@ -77,7 +77,6 @@
                         <option value="priceAsc"> Total Ascending </option>
                     </select></span>
                     <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
-                    <p>Current Sort: <?php echo $sortBy;?></p>
                 </select></form></div>
 
                 <?php
