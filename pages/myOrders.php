@@ -33,21 +33,20 @@
                               
         <div class="products .my-orders">
             <center>
-                <img src="/images/patrick-star-dumb.gif" width="300" height="150">
-                </br>
-                <h1> PAGE UNDER CONSTRUCTION</h1>
-                <h2> This page will list the orders made by the current logged in user </h2>
+                <h1> MY ORDER HISTORY </h1>
             </center>
             <div> 
                 <div><form method="post" action="">
                     <span><label for="sort">Sort by: </label></span>
-                    <span><select name="sort" id="sort"></span>
+                    <span><select name="sort" id="sort">
                         <option selected value="dateDesc"> New to Old </option>
                         <option value="dateAsc"> Old to New </option>
                         <option value="priceDesc"> Total Amount Descending </option>
                         <option value="priceAsc"> Total Amount Ascending </option>
-                    <span><button type="submit" name="sort" value="apply" >APPLY</button></span>
+                    </span>
+                    <span><button type="submit" name="sort" value="apply">APPLY</button></span>
                 </select></form></div>
+
                 <?php
                     $userId = $_SESSION["userId"];
 
@@ -71,7 +70,7 @@
                         echo '            </tr>';
                         echo '        </thead>';
                         echo '        <tbody>';
-                        echo '<div class="products">';
+                        // echo '<div class="products">';
                         if ($getMyOrders != null){
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
                                 $orderId = $orderRow['ORDER_ID'];
