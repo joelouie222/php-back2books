@@ -91,7 +91,7 @@
                                     echo '                <td>'.$orderId.'</td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
-
+                                    echo '<td>';
                                     while($orderLines = sqlsrv_fetch_array($getOrderLines, SQLSRV_FETCH_ASSOC)) {
                                         $bookId = $orderLines['BOOK_ID'];
                                         $bookPrice = $orderLines['PRICE'];
@@ -105,7 +105,7 @@
 
                                         if ($getOrderLines != null){
 
-                                            echo '<td>';
+                                            
                                             while($bookInfo  = sqlsrv_fetch_array($getBookInfo , SQLSRV_FETCH_ASSOC)) {
                                                 $bookTitle = $bookInfo['BOOK_TITLE'];
                                                 $bookISBN = $bookInfo['BOOK_ISBN'];
@@ -114,13 +114,13 @@
                                                         <span> '.$bookTitle.' ['.$bookISBN.'] <span>
                                                         <span> @ $ '.number_format($bookPrice, 2).' </span></br></br>';       
                                             }
-                                            echo '</td>';
+                                            
                                         } else {
                                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                         //redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                                         }
                                     }
-
+                                    echo '</td>';
                                     echo '                <td>'.number_format($subTotal, 2).'</td>';
                                     echo '                <td> - $ '.number_format($orderDiscount, 2).'</td>';
                                     echo '                <td>'.$orderPayment.'</td>';
