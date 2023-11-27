@@ -99,7 +99,7 @@
 
                                         echo '<p> BookId: '.$bookId.'</p';
                                         echo '<p> BookPrice: '.$bookPrice.'</p';
-                                        echo '<p> Book Qty: '.$bookQty.'</p';
+                                        echo '<p> Book Qty: '.$bookQty.'</p</br></br></br>';
 
                                         $subTotal = ($subTotal + ($bookPrice * $bookQty));
 
