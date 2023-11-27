@@ -20,6 +20,7 @@
 
     <!-- OUR CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="logo-style.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
@@ -48,7 +49,6 @@
                     echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
                     echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"].'<p>';
                     echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"].'<p>';
-                    include('config.php');
                 ?>
                 
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore

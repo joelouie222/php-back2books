@@ -10,7 +10,6 @@
     echo '</div>';
     echo '  <div class="favorites-container"><a href="/pages/favorites.php"><i class="fa fa-heart fa-4x"></i></a></div>';
     echo '  <div class="cart-container">';
-     
     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
         $userId = $_SESSION["userId"];
         $tsql = "SELECT COUNT(DISTINCT BOOK_ID) AS numInCart FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
