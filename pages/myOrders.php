@@ -31,7 +31,7 @@
       
     <div class="container">
                               
-        <div class="products">
+        <div class="products .my-orders">
             <center>
                 <img src="/images/patrick-star-dumb.gif" width="300" height="150">
                 </br>
@@ -74,13 +74,13 @@
                                 $shipping = 6.99;
                                 $subTotal = 0;
 
-                                echo '<p>'.$orderRow['ORDER_ID'] .'</p';
-                                    echo '<p>'.$orderRow['USER_ID'] .'</p';
-                                    echo '<p>'.$orderRow['ORDER_DATE']->format('Y-m-d').'</p';
-                                    echo '<p>'.$orderRow['ORDER_DISCOUNT'] .'</p';
-                                    echo '<p>'.$orderRow['SHIP_ADDR'] .'</p';
-                                    echo '<p>'.$orderRow['PAY_METHOD'] .'</p';
-                                    echo '<p>'.$orderBillAddr.'</p';
+                                    // echo '<p>'.$orderRow['ORDER_ID'] .'</p';
+                                    // echo '<p>'.$orderRow['USER_ID'] .'</p';
+                                    // echo '<p>'.$orderRow['ORDER_DATE']->format('Y-m-d').'</p';
+                                    // echo '<p>'.$orderRow['ORDER_DISCOUNT'] .'</p';
+                                    // echo '<p>'.$orderRow['SHIP_ADDR'] .'</p';
+                                    // echo '<p>'.$orderRow['PAY_METHOD'] .'</p';
+                                    // echo '<p>'.$orderBillAddr.'</p';
 
                                 $tsql = "SELECT * FROM ORDER_LINES WHERE ORDER_ID = '$orderId'";
 
@@ -97,9 +97,9 @@
                                         $bookPrice = $orderLines['PRICE'];
                                         $bookQty = $orderLines['ORDER_QUANTITY'];
 
-                                        echo '<p> BookId: '.$bookId.'</p';
-                                        echo '<p> BookPrice: '.$bookPrice.'</p';
-                                        echo '<p> Book Qty: '.$bookQty.'</p</br></br></br>';
+                                        // echo '<p> BookId: '.$bookId.'</p';
+                                        // echo '<p> BookPrice: '.$bookPrice.'</p';
+                                        // echo '<p> Book Qty: '.$bookQty.'</p</br></br></br>';
 
                                         $subTotal = ($subTotal + ($bookPrice * $bookQty));
 
