@@ -1,6 +1,38 @@
 <?php
   session_start();
+  include('../functions.php');
+  include('../config.php');
+  $userId = $_SESSION["userId"];
+  $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
+
+  if (isset($_POST['sortBtn']) && $_POST['sortBtn'] == "apply"){
+    switch ($_POST['sortVal']) {
+        case "dateAsc":
+            $sortSQL = "ORDER_DATE DESC";
+            break;
+        case "priceDesc":
+            $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
+            INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
+                ON O.ORDER_ID = SUBQ.ORDER_ID
+            WHERE USER_ID = '$userId'
+            ORDER BY SUBQ.TOTAL_AMOUNT DESC";
+            break;
+        case "priceAsc":
+            $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
+            INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
+                ON O.ORDER_ID = SUBQ.ORDER_ID
+            WHERE USER_ID = '$userId'
+            ORDER BY SUBQ.TOTAL_AMOUNT";
+            break;
+        case "dateDesc":
+            $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
+            break;
+        default:
+            $sortSQL  = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
+    }
+  }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,8 +57,7 @@
 <body id="home">
     <?php
         include('../layout.php');
-        include('../functions.php');
-        include('../config.php');
+
     ?>  
       
     <div class="container">
@@ -37,21 +68,22 @@
             </center>
             <div> 
                 <div><form method="post" action="">
-                    <span><label for="sort">Sort by: </label></span>
-                    <span><select name="sort" id="sort">
-                        <option selected value="dateDesc"> New to Old </option>
+                    <span><label for="sortVal">Sort by: </label></span>
+                    <span><select name="sortVal" id="sortBy">
+                        <option value="dateDesc"> New to Old </option>
                         <option value="dateAsc"> Old to New </option>
-                        <option value="priceDesc"> Total Amount Descending </option>
-                        <option value="priceAsc"> Total Amount Ascending </option>
-                    </span>
-                    <span><button type="submit" name="sort" value="apply">APPLY</button></span>
+                        <option value="priceDesc"> Total Descending </option>
+                        <option value="priceAsc"> Total Ascending </option>
+                    </select></span>
+                    <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
+                    <p>Current Sort: $sortBy</p>
                 </select></form></div>
 
                 <?php
-                    $userId = $_SESSION["userId"];
+                    
 
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
-                        $tsql = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
+                        $tsql = $sortSQL;
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
                         echo '    <div class="products">
@@ -65,7 +97,7 @@
                         echo '                <th>Subtotal</th>';
                         echo '                <th>Discount</th>';
                         echo '                <th>Payment Method</th>';
-                        echo '                 <th style="width: 10% >Fees</th>';
+                        echo '                 <th style="width: 10%">Fees</th>';
                         echo '                <th style="width: 10% colspan="2">Total</th>';
                         echo '            </tr>';
                         echo '        </thead>';
