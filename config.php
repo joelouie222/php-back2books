@@ -36,11 +36,17 @@ $AZURE_SQL_SERVERNAME = getenv('AZURE_SQL_SERVERNAME');
 $AZURE_SQL_UID = getenv('AZURE_SQL_UID');
 
 $connectionInfo = array("UID" => $AZURE_SQL_UID, "pwd" => $AZURE_SQL_PWD, "Database" => $AZURE_SQL_DATABASE, "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
-$serverName = "tcp:$AZURE_SQL_SERVERNAME";
+$serverName = "tcp:" . $AZURE_SQL_SERVERNAME;
 //$conn = sqlsrv_connect($serverName, $connectionInfo);
 
 $connectionOptions = array("Database"=>$AZURE_SQL_DATABASE,"Uid"=>$AZURE_SQL_UID, "PWD"=>$AZURE_SQL_PWD);
+echo "<p>Server: $serverName</p><br>";
+echo "<p>Database: " . $connectionOptions["Database"] . "</p><br>";
+echo "<p>Username: " . $connectionOptions["Uid"] . "</p><br>";
 $conn = sqlsrv_connect($serverName, $connectionOptions);
+if (!$conn) {
+    die("Connection failed: " . print_r(sqlsrv_errors(), true));
+}
 
 
 
