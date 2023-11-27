@@ -336,7 +336,7 @@
                         echo '
                         <div class="form-group">
                             <label for="city">City: </label>
-                            <input name="city" type="text" class="form-control" id="city" placeholder="City">
+                            <input name="city" type="text" class="form-control" id="city" placeholder="City" required>
                             <p id="cityStatus"></p>
                         </div>';
 
@@ -403,7 +403,7 @@
                         echo '
                         <div class="form-group">
                             <label for="zipCode">Zipcode: </label>
-                            <input id="zipCode" maxlength="5" name="zipCode" type="text">
+                            <input id="zipCode" maxlength="5" name="zipCode" type="text" required>
                         </div>';
 
                         // <!-- Payment Method input -->
