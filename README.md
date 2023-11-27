@@ -25,7 +25,7 @@ Instructor: [Ali Dogru](alihikmet.dogru@utsa.edu)
     - [x] Include images
     - [x] Include price
     - [x] Include quantity available
-    - [] Allow ability to add new items
+    - [ ] Allow ability to add new items
 - [x] Create/Modify Shopping Cart
     - [x] Show items in cart
     - [x] Calculate taxes: assume 8.25% tax rate
