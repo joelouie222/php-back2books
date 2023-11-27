@@ -8,21 +8,21 @@
   if (isset($_POST['sortBtn']) && $_POST['sortBtn'] == "apply"){
     switch ($_POST['sortVal']) {
         case "dateAsc":
-            $sortSQL = "ORDER_DATE DESC";
+            $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId'";
             break;
         case "priceDesc":
             $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
-            ORDER BY TOTAL_AMOUNT DESC
-            WHERE USER_ID = '$userId'";
+            WHERE USER_ID = '$userId'
+            ORDER BY SUBQ.TOTAL_AMOUNT DESC";
             break;
         case "priceAsc":
             $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
-            ORDER BY SUBQ.TOTAL_AMOUNT
-            WHERE USER_ID = '$userId'";
+            WHERE USER_ID = '$userId'
+            ORDER BY SUBQ.TOTAL_AMOUNT";
             break;
         case "dateDesc":
             $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
@@ -70,7 +70,7 @@
                 <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
-                        <option selected value="-"> - </option>
+                        <option selected value=""> - </option>
                         <option value="dateDesc"> New to Old </option>
                         <option value="dateAsc"> Old to New </option>
                         <option value="priceDesc"> Total Descending </option>
