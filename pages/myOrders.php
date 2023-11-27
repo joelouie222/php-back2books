@@ -39,21 +39,29 @@
                 <h2> This page will list the orders made by the current logged in user </h2>
             </center>
             <div> 
-
+                <div><form method="post" action="">
+                    <span><label for="sort">Sort by: </label></span>
+                    <span><select name="sort" id="sort"></span>
+                        <option selected value="dateDesc"> New to Old </option>
+                        <option value="dateAsc"> Old to New </option>
+                        <option value="priceDesc"> Total Amount Descending </option>
+                        <option value="priceAsc"> Total Amount Ascending </option>
+                    <span><button type="submit" name="sort" value="apply" >APPLY</button></span>
+                </select></form></div>
                 <?php
                     $userId = $_SESSION["userId"];
 
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
-                        $tsql = "SELECT * FROM ORDERS WHERE USER_ID = '$userId'";
+                        $tsql = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
                         echo '    <div class="products">
                                     <table style="width: 100%; text-align: center;">';
                         echo '        <thead>';
                         echo '            <tr>';
-                        echo '                <th style="width: 6%>Order Number</th>';
-                        echo '                <th style="width: 6%>Order Date</th>';
-                        echo '                <th style="width: 12%>Shipping/Billing Address</th>';
+                        echo '                <th style="width: 6%">Order Number</th>';
+                        echo '                <th style="width: 6%">Order Date</th>';
+                        echo '                <th style="width: 12%">Shipping/Billing Address</th>';
                         echo '                <th colspan="2">Products List</th>';
                         echo '                <th>Subtotal</th>';
                         echo '                <th>Discount</th>';
