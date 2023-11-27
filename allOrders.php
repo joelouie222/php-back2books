@@ -1,7 +1,7 @@
 <?php
   session_start();
-  include('../functions.php');
-  include('../config.php');
+  include('functions.php');
+  include('config.php');
   //$userId = $_SESSION["userId"];
   $sortSQL = "SELECT * FROM ORDERS ORDER BY ORDER_DATE DESC";
 
@@ -160,7 +160,7 @@
                                             }
                                             
                                         } else {
-                                            //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                             redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
                                         }
                                     }
@@ -174,14 +174,14 @@
                                     echo '            </tr>';
 
                                 } else {
-                                    //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                     redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
                                 }                                
                             }
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
-                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            (print_r(sqlsrv_errors(), true));  // Print detailed error information
                             redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
                         }
 
