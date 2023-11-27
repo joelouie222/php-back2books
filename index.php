@@ -78,7 +78,7 @@
                                             <a class="book-card-carousel">
                                             <img src="<?php echo $row['IMAGE_LINK']; ?>"
                                             alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
-                                            <p><?php echo $row['BOOK_TITLE']; ?></p>
+                                            <!-- <p><?php echo $row['BOOK_TITLE']; ?></p> -->
                                             </a>
                                         </div>
                                         <?php
