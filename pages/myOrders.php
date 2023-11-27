@@ -89,14 +89,14 @@
                         echo '    <div class="products">
                                     <table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;">';
                         echo '        <thead>';
-                        echo '            <tr border: 1px solid;>';
-                        echo '                <th style="width: 6%">Order Number</th>';
-                        echo '                <th style="width: 6%">Order Date</th>';
+                        echo '            <tr style="border: 1px solid;">';
+                        echo '                <th style="width: 6%">Order #</th>';
+                        echo '                <th style="width: 6%">Date</th>';
                         echo '                <th style="width: 12%">Shipping/Billing Address</th>';
                         echo '                <th colspan="2">Products List</th>';
-                        echo '                <th>Subtotal</th>';
-                        echo '                <th>Discount</th>';
-                        echo '                <th>Payment Method</th>';
+                        echo '                <th style="width: 8%">Subtotal</th>';
+                        echo '                <th style="width: 6%">Discount</th>';
+                        echo '                <th style="width: 6%">Payment Method</th>';
                         echo '                 <th style="width: 10%">Fees</th>';
                         echo '                <th style="width: 10%; colspan="2">Total</th>';
                         echo '            </tr>';
@@ -126,7 +126,7 @@
                                 $getOrderLines = sqlsrv_query($conn, $tsql);
                                 
                                 if ($getOrderLines != null){
-                                    echo '            <tr border: 1px solid;>';
+                                    echo '            <tr style="border: 1px solid;">';
                                     echo '                <td>'.$orderId.'</td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
