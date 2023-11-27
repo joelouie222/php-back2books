@@ -97,7 +97,7 @@
                                         $bookPrice = $orderLines['PRICE'];
                                         $bookQty = $orderLines['ORDER_QUANTITY'];
 
-                                        $subTotal = (total + ($bookPrice * $bookQty));
+                                        $subTotal = ($subTotal + ($bookPrice * $bookQty));
 
                                         $tsql = "SELECT BOOK_TITLE, BOOK_ISBN FROM BOOKS WHERE BOOK_ID = '$bookId'";
 
