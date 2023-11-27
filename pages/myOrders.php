@@ -14,15 +14,15 @@
             $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
-            WHERE USER_ID = '$userId'
-            ORDER BY SUBQ.TOTAL_AMOUNT DESC";
+            ORDER BY SUBQ.TOTAL_AMOUNT DESC
+            WHERE USER_ID = '$userId'";
             break;
         case "priceAsc":
             $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
-            WHERE USER_ID = '$userId'
-            ORDER BY SUBQ.TOTAL_AMOUNT";
+            ORDER BY SUBQ.TOTAL_AMOUNT
+            WHERE USER_ID = '$userId'";
             break;
         case "dateDesc":
             $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
@@ -67,7 +67,7 @@
                 <h1> MY ORDER HISTORY </h1>
             </center>
             <div> 
-                <div><form method="post" action="">
+                <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
                         <option value="dateDesc"> New to Old </option>
@@ -76,7 +76,7 @@
                         <option value="priceAsc"> Total Ascending </option>
                     </select></span>
                     <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
-                    <p>Current Sort: $sortBy</p>
+                    <p>Current Sort: <?php echo '$sortBy';?></p>
                 </select></form></div>
 
                 <?php
@@ -167,8 +167,8 @@
                                     echo '                <td>'.number_format($subTotal, 2).'</td>';
                                     echo '                <td> - $ '.number_format($orderDiscount, 2).'</td>';
                                     echo '                <td>'.$orderPayment.'</td>';
-                                    echo '                <td><p>Tax</br>'.number_format(($subTotal * 0.0825), 2).'</p></br>
-                                                             <p>Shipping</br>'.$shipping.'</p></td>';
+                                    echo '                <td><p style="margin-top: 5px;">Tax</br>$ '.number_format(($subTotal * 0.0825), 2).'</p></br>
+                                                             <p style="margin-bottom: 5px;">Shipping</br>$ '.$shipping.'</p></td>';
                                     echo '                <td colspan="2">$ '.number_format(($subTotal - $orderDiscount + ($subTotal * 0.0825) + $shipping), 2).'</td>';
                                     echo '            </tr>';
 
