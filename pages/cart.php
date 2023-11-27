@@ -157,7 +157,7 @@
                                 redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                             }
                             // ORDER CREATION SUCCESS REDIRECT TO MY ORDERS
-                            $_SESSION['discountValue'] = "";
+                            $_SESSION['discountValue'] = 0;
                             $_SESSION['DISCOUNT'] = "";
                             $_SESSION['discountCode'] = "";
                             $_SESSION['numInCart'] = "";
