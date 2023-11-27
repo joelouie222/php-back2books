@@ -54,12 +54,12 @@
                         echo '                <th>Order Number</th>';
                         echo '                <th>Order Date</th>';
                         echo '                <th>Shipping/Billing Address</th>';
-                        echo '                <th>Products List</th>';
+                        echo '                <th colspan="2">Products List</th>';
                         echo '                <th>Subtotal</th>';
                         echo '                <th>Discount</th>';
                         echo '                <th>Payment Method</th>';
                         echo '                 <th>Fees</th>';
-                        echo '                <th>Total</th>';
+                        echo '                <th colspan="2">Total</th>';
                         echo '            </tr>';
                         echo '        </thead>';
                         echo '        <tbody>';
@@ -114,8 +114,8 @@
                                                 $bookTitle = $bookInfo['BOOK_TITLE'];
                                                 $bookISBN = $bookInfo['BOOK_ISBN'];
                                                 
-                                                echo '<span>'.$bookQty.' x </span>
-                                                        <span> '.$bookTitle.' ['.$bookISBN.'] <span>
+                                                echo '<span> '.$bookTitle.' ['.$bookISBN.'] <span></br>
+                                                        <span>'.$bookQty.'</span>                                                        
                                                         <span> @ $ '.number_format($bookPrice, 2).' </span></br></br>';       
                                             }
                                             
@@ -128,8 +128,8 @@
                                     echo '                <td>'.number_format($subTotal, 2).'</td>';
                                     echo '                <td> - $ '.number_format($orderDiscount, 2).'</td>';
                                     echo '                <td>'.$orderPayment.'</td>';
-                                    echo '                <td><p>Tax: '.number_format(($subTotal * 0.0825), 2).'</p>
-                                                             <p>Shipping:  '.$shipping.'</p></td>';
+                                    echo '                <td><p>Tax</br>'.number_format(($subTotal * 0.0825), 2).'</p></br>
+                                                             <p>Shipping</br>'.$shipping.'</p></td>';
                                     echo '                <td>$ '.number_format(($subTotal - $orderDiscount + ($subTotal * 0.0825) + $shipping), 2).'</td>';
                                     echo '            </tr>';
 
