@@ -1,5 +1,5 @@
 <?php
-    include '/config.php'
+    include '../config.php'
 ?>
 <h1>Search page</h1>
 
