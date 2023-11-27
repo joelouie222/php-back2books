@@ -48,8 +48,8 @@
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
                         echo '    <div class="products">
-                                    <table style="width: 100%;">';
-                        echo '        <thead style="text-align: center;">';
+                                    <table style="width: 100%; text-align: center;">';
+                        echo '        <thead>';
                         echo '            <tr>';
                         echo '                <th>Order Number</th>';
                         echo '                <th>Order Date</th>';
@@ -61,7 +61,7 @@
                         echo '                 <th>Fees</th>';
                         echo '                <th>Total</th>';
                         echo '            </tr>';
-                        echo '        </thead style="text-align: center;">';
+                        echo '        </thead>';
                         echo '        <tbody>';
                         echo '<div class="products">';
                         if ($getMyOrders != null){
@@ -114,7 +114,7 @@
                                                 $bookTitle = $bookInfo['BOOK_TITLE'];
                                                 $bookISBN = $bookInfo['BOOK_ISBN'];
                                                 
-                                                echo '<span>'.$bookQty.'x </span>
+                                                echo '<span>'.$bookQty.' x </span>
                                                         <span> '.$bookTitle.' ['.$bookISBN.'] <span>
                                                         <span> @ $ '.number_format($bookPrice, 2).' </span></br></br>';       
                                             }
@@ -128,9 +128,9 @@
                                     echo '                <td>'.number_format($subTotal, 2).'</td>';
                                     echo '                <td> - $ '.number_format($orderDiscount, 2).'</td>';
                                     echo '                <td>'.$orderPayment.'</td>';
-                                    echo '                <td><p>Tax: '.number_format(($subtotal * 0.0825), 2).'</p>
+                                    echo '                <td><p>Tax: '.number_format(($subTotal * 0.0825), 2).'</p>
                                                              <p>Shipping:  '.$shipping.'</p></td>';
-                                    echo '                <td>$ '.number_format(($subtotal - $orderDiscount + ($subtotal * 0.0825) + $shipping), 2).'</td>';
+                                    echo '                <td>$ '.number_format(($subTotal - $orderDiscount + ($subTotal * 0.0825) + $shipping), 2).'</td>';
                                     echo '            </tr>';
 
                                 } else {
