@@ -23,7 +23,10 @@
 </head>
 
 <body id="home">
-    <?php include('../layout.php');
+    <?php
+        include('../layout.php');
+        include('../functions.php');
+        include('..config.php');
     ?>  
       
     <div class="container">
@@ -35,9 +38,35 @@
                 <h1> PAGE UNDER CONSTRUCTION</h1>
                 <h2> This page will list the orders made by the current logged in user </h2>
             </center>
+            <div> 
+
+                <?php
+                    $userId = $_SESSION["userId"];
+
+                    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+                        $tsql = "SELECT * FROM ORDERS WHERE USER_ID = '$userId'";
+                        $getMyOrders = sqlsrv_query($conn, $tsql);
+
+                        if ($getMyOrders != null){
+                            while($orderRow = sqlsrv_fetch_array($getOrderId , SQLSRV_FETCH_ASSOC)) {
+                                echo '<p>'.$orderRow['ORDER_ID'] .'</p';
+                                echo '<p>'.$orderRow['USER_ID'] .'</p';
+                                echo '<p>'.$orderRow['ORDER_DATE'] .'</p';
+                                echo '<p>'.$orderRow['ORDER_DISCOUNT'] .'</p';
+                                echo '<p>'.$orderRow['SHIP_ADDR'] .'</p';
+                                echo '<p>'.$orderRow['PAY_METHOD'] .'</p';
+                                echo '<p>'.$orderRow['BILL_ADDR'] .'</p';
+                            }
+                        } else {
+                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                        }
+
+                    }
+                ?>
 
 
-            
+            </div>
         </div>
 </body>
 
