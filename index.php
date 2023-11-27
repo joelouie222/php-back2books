@@ -56,112 +56,80 @@
                     aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
                     culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                    sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-                    est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius
-                    modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-                    veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
-                    commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-                    molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                    sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-                    est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius
-                    modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-                    veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
-                    commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-                    molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
             <div class="gallery-container-carousel">
-                <!--prev button-->
-                <div>
-                    <button class="prev-btn">&larr;</button>
-                </div>
-                <!--next button-->
-                <div>
-                    <button class="next-btn">&rarr;</button>
-                </div>
-                <?php
-                    $query = "SELECT b.*, bi.IMAGE_LINK FROM BOOKS b LEFT JOIN BOOK_IMAGE bi ON b.BOOK_ID = bi.book_id LIMIT 10";
-                    $result = $conn->query($query);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            ?>
-                <div class="card-container-carousel">
-                    <div class="card-carousel">
-                        <a class="book-card-carousel">
-                            <img src="<?php echo $row['IMAGE_LINK']; ?>"
-                                alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
-                            <p><?php echo $row['BOOK_TITLE']; ?></p>
-                        </a>
+                    <!--prev button-->
+                    <div>
+                        <button class="prev-btn">&larr;</button>
                     </div>
-                    <?php
-                        }
-                }
-                ?>
+                    <!--next button-->
+                    <div>
+                        <button class="next-btn">&rarr;</button>
+                    </div>
+                    
+                        <?php
+                            $query = "SELECT b.*, bi.IMAGE_LINK FROM BOOKS b LEFT JOIN BOOK_IMAGE bi ON b.BOOK_ID = bi.book_id LIMIT 10";
+                            $result = sqlsrv_query($conn, $query);
+                            if ($result->num_rows > 0) {
+                                while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                                    ?>
+                                    <div class="card-container-carousel">
+                                        <div class="card-carousel">
+                                            <a class="book-card-carousel">
+                                            <img src="<?php echo $row['IMAGE_LINK']; ?>"
+                                            alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
+                                            <p><?php echo $row['BOOK_TITLE']; ?></p>
+                                            </a>
+                                        </div>
+                                        <?php
+                                }
+                            }
+                        ?>
+                    </div>
                 </div>
-            </div>
-            <div class="contact-us">
-                <h2>Contact Us</h2>
-                <p>
-                    please don't, we will cry if you yell at us. Seriously though, you can contact us at
-                    1*1-1*1-1111
-                </p>
-            </div>
+    <div class="contact-us">
+        <h2>Contact Us</h2>
+        <p>
+            please don't, we will cry if you yell at us. Seriously though, you can contact us at
+            1*1-1*1-1111
+        </p>
+    </div>
 
-            <div class="about-us">
-                <p>Copyright 2023 Back 2 Books (B2B)</p>
-            </div>
-        </div>
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const cardContainer = document.querySelector(".card-container-carousel");
-            const cards = document.querySelectorAll(".card-carousel");
+    <div class="about-us">
+        <p>Copyright 2023 Back 2 Books (B2B)</p>
+    </div>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const cardContainer = document.querySelector(".card-container-carousel");
+        const cards = document.querySelectorAll(".card-carousel");
 
-            let currentIndex = 0;
+        let currentIndex = 0;
 
-            function showCard(index) {
-                const cardWidth = cards[0].offsetWidth;
-                currentIndex = index;
-                cardContainer.style.transition = "transform 0.5s ease-in-out";
-                cardContainer.style.transform = `translateX(${-index * cardWidth}px)`;
-            }
+        function showCard(index) {
+            const cardWidth = cards[0].offsetWidth;
+            currentIndex = index;
+            cardContainer.style.transition = "transform 0.5s ease-in-out";
+            cardContainer.style.transform = `translateX(${-index * cardWidth}px)`;
+        }
 
-            function nextCards() {
-                currentIndex = (currentIndex + 4) % cards.length;
-                showCard(currentIndex);
-            }
-
-            function prevCards() {
-                currentIndex = (currentIndex - 4 + cards.length) % cards.length;
-                showCard(currentIndex);
-            }
-
-            document.querySelector(".prev-btn").addEventListener("click", prevCards);
-            document.querySelector(".next-btn").addEventListener("click", nextCards);
-
-            // Initial display
+        function nextCards() {
+            currentIndex = (currentIndex + 4) % cards.length;
             showCard(currentIndex);
-        });
-        </script>
+        }
+
+        function prevCards() {
+            currentIndex = (currentIndex - 4 + cards.length) % cards.length;
+            showCard(currentIndex);
+        }
+
+        document.querySelector(".prev-btn").addEventListener("click", prevCards);
+        document.querySelector(".next-btn").addEventListener("click", nextCards);
+
+        // Initial display
+        showCard(currentIndex);
+    });
+    </script>
 
 </body>
 
