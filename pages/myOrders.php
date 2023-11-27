@@ -26,7 +26,7 @@
     <?php
         include('../layout.php');
         include('../functions.php');
-        include('..config.php');
+        include('../config.php');
     ?>  
       
     <div class="container">
@@ -91,7 +91,7 @@
                                     echo '                <td>'.$orderId.'</td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
-                                    echo '<td>';
+                                    echo '<td colspan="2">';
                                     while($orderLines = sqlsrv_fetch_array($getOrderLines, SQLSRV_FETCH_ASSOC)) {
                                         $bookId = $orderLines['BOOK_ID'];
                                         $bookPrice = $orderLines['PRICE'];
@@ -130,7 +130,7 @@
                                     echo '                <td>'.$orderPayment.'</td>';
                                     echo '                <td><p>Tax</br>'.number_format(($subTotal * 0.0825), 2).'</p></br>
                                                              <p>Shipping</br>'.$shipping.'</p></td>';
-                                    echo '                <td>$ '.number_format(($subTotal - $orderDiscount + ($subTotal * 0.0825) + $shipping), 2).'</td>';
+                                    echo '                <td colspan="2">$ '.number_format(($subTotal - $orderDiscount + ($subTotal * 0.0825) + $shipping), 2).'</td>';
                                     echo '            </tr>';
 
                                 } else {
