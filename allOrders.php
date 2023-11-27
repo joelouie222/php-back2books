@@ -54,17 +54,28 @@
 
 <body id="home">
     <?php
-        include('../layout.php');
-
+        include('layout.php');
     ?>  
       
     <div class="container">
                               
-        <div class="products .my-orders">
+        <div class="products">
             <center>
-                <h1> MY ORDER HISTORY </h1>
+                <h1> A L L   O R D E RS </h1>
             </center>
             <div> 
+                <?php
+                    if (isset($_POST['editOrder']) && $_POST['editOrder'] == "go" ) {
+                        echo "<div> EDIT ORDER is a go</div>";
+                        echo '<div> Order ID = '.$_POST['orderId'].'</div>';
+                    }
+
+                    if (isset($_POST['deleteOrder']) && $_POST['deleteOrder'] == "go" ) {
+                        echo "<div> EDIT ORDER is a go</div>";
+                        echo '<div> Order ID = '.$_POST['orderId'].'</div>';
+                    }
+                ?>
+
                 <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
@@ -78,8 +89,6 @@
                 </select></form></div>
 
                 <?php
-                    
-
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
                         $tsql = $sortSQL;
                         $getMyOrders = sqlsrv_query($conn, $tsql);
@@ -128,7 +137,16 @@
                                 
                                 if ($getOrderLines != null){
                                     echo '            <tr style="border: 1px solid;">';
-                                    echo '                <td>'.$orderId.'</td>';
+                                    echo '                <td><div>'.$orderId.'</div>
+                                                            <div><form method="post" action="">
+                                                                <input type="hidden" name="orderId" value="'.$orderId.'">
+                                                                <button type="submit" name="editOrder" value="go">Edit</button>
+                                                            </form></div>
+                                                            <div><form method="post" action="">
+                                                                <input type="hidden" name="orderId" value="'.$orderId.'">
+                                                                <button type="submit" name="deleteOrder" value="go">Delete</button>
+                                                            </form></div>
+                                                            </td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
                                     echo '<td colspan="2">';
