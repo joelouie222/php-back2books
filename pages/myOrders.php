@@ -80,7 +80,7 @@
                                     echo '<p>'.$orderRow['ORDER_DISCOUNT'] .'</p';
                                     echo '<p>'.$orderRow['SHIP_ADDR'] .'</p';
                                     echo '<p>'.$orderRow['PAY_METHOD'] .'</p';
-                                    echo '<p>'.$orderBillAddr.'</p</div>';
+                                    echo '<p>'.$orderBillAddr.'</p';
 
                                 $tsql = "SELECT * FROM ORDER_LINES WHERE ORDER_ID = '$orderId'";
 
@@ -96,6 +96,10 @@
                                         $bookId = $orderLines['BOOK_ID'];
                                         $bookPrice = $orderLines['PRICE'];
                                         $bookQty = $orderLines['ORDER_QUANTITY'];
+
+                                        echo '<p> BookId: '.$bookId.'</p';
+                                        echo '<p> BookPrice: '.$bookPrice.'</p';
+                                        echo '<p> Book Qty: '.$bookQty.'</p';
 
                                         $subTotal = ($subTotal + ($bookPrice * $bookQty));
 
