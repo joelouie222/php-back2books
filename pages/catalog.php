@@ -31,6 +31,10 @@
     ?>  
       
     <div class="container">
+        <form action="../search.php" method="POST">
+            <input type="text" name="search" placeholder="Search">
+            <button type="submit" name="submit-search">Search</button>
+        </form>
         <div class="products">
             <center>
                 <h1> Book Catalog </h1>
@@ -98,7 +102,7 @@
 
             <ol class="book-list-view">
                 <?php
-                    $tsql = "SELECT TOP (10) *
+                    $tsql = "SELECT TOP (100) *
                             FROM BOOKS B
                             INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
                             INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID

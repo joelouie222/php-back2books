@@ -1,5 +1,5 @@
 <?php
-  session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,18 +23,18 @@
 </head>
 
 <body id="home">
-    <?php include('../layout.php');
-    ?>  
-      
+<?php include('../layout.php');
+?>  
+
     <div class="container">
-                              
-        <div class="about-us">
-            <center>
-                <img src="/images/patrick-star-dumb.gif" width="300" height="150">
-                </br>
-                <h1> PAGE UNDER CONSTRUCTION</h1>
-            </center>
-        </div>
+
+    <div class="contact-us">
+        <h2>Contact Us</h2>
+        <p>
+            please don't, we will cry if you yell at us. Seriously though, you can contact us at
+            1*1-1*1-1111
+        </p>
+    </div>
 </body>
 
 <script src="js/scripts.js"></script>

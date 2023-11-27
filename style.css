@@ -386,8 +386,12 @@ h6{
 
 
 /* --------------------------------- M Y   O R D E R S ------------------------------------------ */
-.my-orders table, th, td {
+/* .my-orders table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.my-orders td {
+  padding: 5px;
+} */

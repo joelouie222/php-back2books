@@ -8,21 +8,21 @@
   if (isset($_POST['sortBtn']) && $_POST['sortBtn'] == "apply"){
     switch ($_POST['sortVal']) {
         case "dateAsc":
-            $sortSQL = "ORDER_DATE DESC";
+            $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE";
             break;
         case "priceDesc":
             $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
-            ORDER BY SUBQ.TOTAL_AMOUNT DESC
-            WHERE USER_ID = '$userId'";
+            WHERE USER_ID = '$userId'
+            ORDER BY SUBQ.TOTAL_AMOUNT DESC";
             break;
         case "priceAsc":
             $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
-            ORDER BY SUBQ.TOTAL_AMOUNT
-            WHERE USER_ID = '$userId'";
+            WHERE USER_ID = '$userId'
+            ORDER BY SUBQ.TOTAL_AMOUNT";
             break;
         case "dateDesc":
             $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
@@ -70,39 +70,41 @@
                 <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
+                        <option selected value=""> - </option>
                         <option value="dateDesc"> New to Old </option>
                         <option value="dateAsc"> Old to New </option>
                         <option value="priceDesc"> Total Descending </option>
                         <option value="priceAsc"> Total Ascending </option>
                     </select></span>
                     <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
-                    <p>Current Sort: <?php echo '$sortBy';?></p>
                 </select></form></div>
 
                 <?php
-                    
-
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
                         $tsql = $sortSQL;
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
                         echo '    <div class="products">
-                                    <table style="width: 100%; text-align: center;">';
+                                    <table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;">';
                         echo '        <thead>';
-                        echo '            <tr>';
-                        echo '                <th style="width: 6%">Order Number</th>';
-                        echo '                <th style="width: 6%">Order Date</th>';
+                        echo '            <tr style="border: 1px solid;">';
+                        echo '                <th style="width: 6%">Order #</th>';
+                        echo '                <th style="width: 6%">Date</th>';
                         echo '                <th style="width: 12%">Shipping/Billing Address</th>';
                         echo '                <th colspan="2">Products List</th>';
-                        echo '                <th>Subtotal</th>';
-                        echo '                <th>Discount</th>';
-                        echo '                <th>Payment Method</th>';
+                        echo '                <th style="width: 8%">Subtotal</th>';
+                        echo '                <th style="width: 6%">Discount</th>';
+                        echo '                <th style="width: 6%">Payment Method</th>';
                         echo '                 <th style="width: 10%">Fees</th>';
-                        echo '                <th style="width: 10% colspan="2">Total</th>';
+                        echo '                <th style="width: 10%; colspan="2">Total</th>';
                         echo '            </tr>';
                         echo '        </thead>';
                         echo '        <tbody>';
                         // echo '<div class="products">';
+                        if (isset($_GET['fetch']) && $_GET['fetch'] == "err") {
+                            echo '<div><h3> There was an error fetching your order history. Please try again later. </h3><div>';
+                        } 
+
                         if ($getMyOrders != null){
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
                                 $orderId = $orderRow['ORDER_ID'];
@@ -126,7 +128,7 @@
                                 $getOrderLines = sqlsrv_query($conn, $tsql);
                                 
                                 if ($getOrderLines != null){
-                                    echo '            <tr>';
+                                    echo '            <tr style="border: 1px solid;">';
                                     echo '                <td>'.$orderId.'</td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
@@ -159,8 +161,8 @@
                                             }
                                             
                                         } else {
-                                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                        //redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                                            //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                            redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                                         }
                                     }
                                     echo '</td>';
@@ -173,15 +175,15 @@
                                     echo '            </tr>';
 
                                 } else {
-                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                    //redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                                    // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                                 }                                
                             }
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
-                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            //redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                            // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                         }
 
                     }
