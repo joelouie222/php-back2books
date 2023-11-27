@@ -29,7 +29,7 @@
 // }
 
 
-SQL Server Extension Sample Code:
+// SQL Server Extension Sample Code:
 $AZURE_SQL_DATABASE = getenv('AZURE_SQL_DATABASE');
 $AZURE_SQL_PWD = getenv('AZURE_SQL_PWD');
 $AZURE_SQL_SERVERNAME = getenv('AZURE_SQL_SERVERNAME');
