@@ -87,13 +87,6 @@
                         ?>
                     </div>
                 </div>
-    <div class="contact-us">
-        <h2>Contact Us</h2>
-        <p>
-            please don't, we will cry if you yell at us. Seriously though, you can contact us at
-            1*1-1*1-1111
-        </p>
-    </div>
 
     <div class="about-us">
         <p>Copyright 2023 Back 2 Books (B2B)</p>
