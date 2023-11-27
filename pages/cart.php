@@ -67,7 +67,7 @@
 
                     $address = ''.$_POST['streetAddress1'].', '.$_POST['streetAddress2'].',  '.$_POST['city'].', '.$_POST['state'].' '.$_POST['zipCode'].'';
                     $payment = $_POST['payment'];
-                    $currentDate = date('Y-m-d');                    
+                    $currentDate = date('Y-m-d H:i:s');                    
                     $orderDiscount = $_SESSION['DISCOUNT'];
                     
                     
@@ -88,7 +88,7 @@
                         redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                     } else {
                         // GET ORDER ID
-                        $tsql = "SELECT ORDER_ID FROM ORDERS WHERE USER_ID = '$userId' AND ORDER_DATE = '$currentDate' AND ORDER_DISCOUNT = '$orderDiscount'";
+                        $tsql = "SELECT TOP (1) ORDER_ID FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
                         
                         $getOrderId = sqlsrv_query($conn, $tsql);
 
