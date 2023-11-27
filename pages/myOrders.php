@@ -47,40 +47,47 @@
                         $tsql = "SELECT * FROM ORDERS WHERE USER_ID = '$userId'";
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
+                        echo '    <div class="products"><table>';
+                        echo '        <thead>';
+                        echo '            <tr>';
+                        echo '                <th>Order Number</th>';
+                        echo '                <th>Order Date</th>';
+                        echo '                <th>Shipping Address</th>';
+                        echo '                <th>Billing Address</th>';
+                        echo '                <th>Payment Method</th>';
+                        echo '                <th>Discount Amount</th>';
+                        echo '            </tr>';
+                        echo '        </thead>';
+                        echo '        <tbody>';
+                        echo '<div class="products">';
                         if ($getMyOrders != null){
+
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
-                                echo '<div class="products"><p>'.$orderRow['ORDER_ID'] .'</p';
+                                $orderId = $orderRow['ORDER_ID'];
+                                $orderDate = $orderRow['ORDER_DATE']->format('Y-m-d');
+                                $orderDiscount = $orderRow['ORDER_DISCOUNT'];
+                                $orderShipAddr = $orderRow['SHIP_ADDR'];
+                                $orderPayment = $orderRow['PAY_METHOD'];
+                                $orderBillAddr = $orderRow['BILL_ADDR'];
+
+                                echo '<p>'.$orderRow['ORDER_ID'] .'</p';
                                 echo '<p>'.$orderRow['USER_ID'] .'</p';
                                 echo '<p>'.$orderRow['ORDER_DATE']->format('Y-m-d').'</p';
                                 echo '<p>'.$orderRow['ORDER_DISCOUNT'] .'</p';
                                 echo '<p>'.$orderRow['SHIP_ADDR'] .'</p';
                                 echo '<p>'.$orderRow['PAY_METHOD'] .'</p';
-                                echo '<p>'.$orderRow['BILL_ADDR'] .'</p</div>';
-                                echo'    <div class="products"><table>
-                                        <thead>
-                                            <tr>
-                                                <th>Column 1</th>
-                                                <th>Column 2</th>
-                                                <th>Column 3</th>
-                                                <th>Column 4</th>
-                                                <th>Column 5</th>
-                                                <th>Column 6</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Data 1</td>
-                                                <td>Data 2</td>
-                                                <td>Data 3</td>
-                                                <td>Data 4</td>
-                                                <td>Data 5</td>
-                                                <td>Data 6</td>
-                                            </tr>
-                                            <!-- Add more rows as needed -->
-                                        </tbody>
-                                    </table></div>';
-
+                                echo '<p>'.$orderBillAddr.'</p</div>';
+                                echo '            <tr>';
+                                echo '                <td>'.$orderId.'</td>';
+                                echo '                <td>'.$orderDate.'</td>';
+                                echo '                <td>'.$orderShipAddr.'</td>';
+                                echo '                <td>'.$orderBillAddr .'</td>';
+                                echo '                <td>'.$orderPayment.'</td>';
+                                echo '                <td>'.$orderDiscount.'</td>';
+                                echo '            </tr>';
                             }
+                            echo '        </tbody>';
+                            echo '    </table></div>';
                         } else {
                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                             //redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
