@@ -65,7 +65,7 @@
                     // echo '<p>Zip: '.$_POST['zipCode'].'!</p>';
                     // echo '<p>Payment: '.$_POST['payment'].'!</p>';
 
-                    $address = ''.$_POST['streetAddress1'].', '.$_POST['streetAddress2'].',  '.$_POST['city'].', '.$_POST['state'].' '.$_POST['zipCode'].'';
+                    $address = ''.$_POST['streetAddress1'].', '.$_POST['streetAddress2'].', '.$_POST['city'].', '.$_POST['state'].' '.$_POST['zipCode'].'';
                     $payment = $_POST['payment'];
                     $currentDate = date('Y-m-d H:i:s');                    
                     $orderDiscount = $_SESSION['DISCOUNT'];
