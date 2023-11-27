@@ -31,6 +31,10 @@
     ?>  
       
     <div class="container">
+        <form action="../search.php" method="POST">
+            <input type="text" name="search" placeholder="Search">
+            <button type="submit" name="submit-search">Search</button>
+        </form>
         <div class="products">
             <center>
                 <h1> Book Catalog </h1>
