@@ -31,7 +31,7 @@
       
     <div class="container">
                               
-        <div class="about-us">
+        <div class="products">
             <center>
                 <img src="/images/patrick-star-dumb.gif" width="300" height="150">
                 </br>
@@ -51,7 +51,7 @@
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
                                 echo '<p>'.$orderRow['ORDER_ID'] .'</p';
                                 echo '<p>'.$orderRow['USER_ID'] .'</p';
-                                echo '<p>'.$orderRow['ORDER_DATE'] .'</p';
+                                echo '<p>'.$orderRow['ORDER_DATE']->format('Y-m-d').'</p';
                                 echo '<p>'.$orderRow['ORDER_DISCOUNT'] .'</p';
                                 echo '<p>'.$orderRow['SHIP_ADDR'] .'</p';
                                 echo '<p>'.$orderRow['PAY_METHOD'] .'</p';
