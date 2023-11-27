@@ -87,9 +87,9 @@
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
                         echo '    <div class="products">
-                                    <table style="width: 100%; text-align: center;">';
+                                    <table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;">';
                         echo '        <thead>';
-                        echo '            <tr>';
+                        echo '            <tr border: 1px solid;>';
                         echo '                <th style="width: 6%">Order Number</th>';
                         echo '                <th style="width: 6%">Order Date</th>';
                         echo '                <th style="width: 12%">Shipping/Billing Address</th>';
@@ -98,7 +98,7 @@
                         echo '                <th>Discount</th>';
                         echo '                <th>Payment Method</th>';
                         echo '                 <th style="width: 10%">Fees</th>';
-                        echo '                <th style="width: 10% colspan="2">Total</th>';
+                        echo '                <th style="width: 10%; colspan="2">Total</th>';
                         echo '            </tr>';
                         echo '        </thead>';
                         echo '        <tbody>';
@@ -126,7 +126,7 @@
                                 $getOrderLines = sqlsrv_query($conn, $tsql);
                                 
                                 if ($getOrderLines != null){
-                                    echo '            <tr>';
+                                    echo '            <tr border: 1px solid;>';
                                     echo '                <td>'.$orderId.'</td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
