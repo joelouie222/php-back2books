@@ -49,13 +49,37 @@
 
                         if ($getMyOrders != null){
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
-                                echo '<p>'.$orderRow['ORDER_ID'] .'</p';
+                                echo '<div class="products"><p>'.$orderRow['ORDER_ID'] .'</p';
                                 echo '<p>'.$orderRow['USER_ID'] .'</p';
                                 echo '<p>'.$orderRow['ORDER_DATE']->format('Y-m-d').'</p';
                                 echo '<p>'.$orderRow['ORDER_DISCOUNT'] .'</p';
                                 echo '<p>'.$orderRow['SHIP_ADDR'] .'</p';
                                 echo '<p>'.$orderRow['PAY_METHOD'] .'</p';
-                                echo '<p>'.$orderRow['BILL_ADDR'] .'</p';
+                                echo '<p>'.$orderRow['BILL_ADDR'] .'</p</div>';
+                                echo'    <div class="products"><table>
+                                        <thead>
+                                            <tr>
+                                                <th>Column 1</th>
+                                                <th>Column 2</th>
+                                                <th>Column 3</th>
+                                                <th>Column 4</th>
+                                                <th>Column 5</th>
+                                                <th>Column 6</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Data 1</td>
+                                                <td>Data 2</td>
+                                                <td>Data 3</td>
+                                                <td>Data 4</td>
+                                                <td>Data 5</td>
+                                                <td>Data 6</td>
+                                            </tr>
+                                            <!-- Add more rows as needed -->
+                                        </tbody>
+                                    </table></div>';
+
                             }
                         } else {
                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
