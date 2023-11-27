@@ -57,15 +57,16 @@
                     culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
             <div class="gallery-container-carousel">
-                    <!--prev button-->
-                    <div>
-                        <button class="prev-btn">&larr;</button>
-                    </div>
-                    <!--next button-->
-                    <div>
-                        <button class="next-btn">&rarr;</button>
-                    </div>
-                        <?php
+                <!--prev button-->
+                <div>
+                    <button class="prev-btn">&larr;</button>
+                </div>
+                <!--next button-->
+                <div>
+                    <button class="next-btn">&rarr;</button>
+                </div>
+                <div class="card-container-carousel">
+                    <?php
                             $query = "SELECT TOP 10 b.*, bi.IMAGE_LINK FROM BOOKS b LEFT JOIN BOOK_IMAGE bi ON b.BOOK_ID = bi.book_id";
                             $result = sqlsrv_query($conn, $query);
                             if ($result === false) {
@@ -73,25 +74,25 @@
                             }
                                 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
                                     ?>
-                                    <div class="card-container-carousel">
-                                        <div class="card-carousel">
-                                            <a class="book-card-carousel">
-                                            <img src="<?php echo $row['IMAGE_LINK']; ?>"
-                                            alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
-                                            <!-- <p><?php echo $row['BOOK_TITLE']; ?></p> -->
-                                            </a>
-                                        </div>
-                                        <?php
+                    <div class="card-carousel">
+                        <a class="book-card-carousel">
+                            <img src="<?php echo $row['IMAGE_LINK']; ?>"
+                                alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
+                            <!-- <p><?php echo $row['BOOK_TITLE']; ?></p> -->
+                        </a>
+                    </div>
+                    <?php
                                 }
                             
                             sqlsrv_free_stmt($result);
                         ?>
-                    </div>
                 </div>
-
-    <div class="about-us">
-        <p>Copyright 2023 Back 2 Books (B2B)</p>
-    </div>
+            </div>
+            </br>
+            <div class="about-us">
+                <p>Copyright 2023 Back 2 Books (B2B)</p>
+            </div>
+        </div>
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -124,7 +125,6 @@
         showCard(currentIndex);
     });
     </script>
-
 </body>
 
 
