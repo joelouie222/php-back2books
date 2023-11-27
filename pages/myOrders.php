@@ -80,8 +80,6 @@
                 </select></form></div>
 
                 <?php
-                    
-
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
                         $tsql = $sortSQL;
                         $getMyOrders = sqlsrv_query($conn, $tsql);
@@ -103,6 +101,10 @@
                         echo '        </thead>';
                         echo '        <tbody>';
                         // echo '<div class="products">';
+                        if (isset($_GET['fetch']) && $_GET['fetch'] == "err") {
+                            echo '<div><h3> There was an error fetching your order history. Please try again later. </h3><div>';
+                        } 
+
                         if ($getMyOrders != null){
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
                                 $orderId = $orderRow['ORDER_ID'];
@@ -159,8 +161,8 @@
                                             }
                                             
                                         } else {
-                                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                        //redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                                            //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                            redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                                         }
                                     }
                                     echo '</td>';
@@ -173,15 +175,15 @@
                                     echo '            </tr>';
 
                                 } else {
-                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                    //redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                                    // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                                 }                                
                             }
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
-                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            //redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                            // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                         }
 
                     }
