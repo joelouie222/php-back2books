@@ -122,7 +122,7 @@
                                     }
 
                                     echo '                <td>'.number_format($subTotal, 2).'</td>';
-                                    echo '                <td> - $ '.number_format($orderDiscount. , 2).'</td>';
+                                    echo '                <td> - $ '.number_format($orderDiscount, 2).'</td>';
                                     echo '                <td>'.$orderPayment.'</td>';
                                     echo '                <td><p>Tax: '.number_format(($subtotal * 0.0825), 2).'</p>
                                                              <p>Shipping:  '.$shipping.'</p></td>';
