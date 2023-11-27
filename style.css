@@ -103,7 +103,7 @@ li {
 /* Style links on mouse-over */
 .sidebar a:hover {
   color: black;
-  background-color: pink;
+  background-color: #538772;
 }
 
 
@@ -218,7 +218,7 @@ button, input, optgroup, select, textarea {
 }
 
 .about-us {
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     margin: 20px;
     padding: 10px;
 }
