@@ -27,7 +27,6 @@
 <body id="home">
     <?php
         // Include the configuration file
-        //include('config.php');
         include('layout.php');
     ?>
     <div class="container">
@@ -66,11 +65,12 @@
                     <div>
                         <button class="next-btn">&rarr;</button>
                     </div>
-                    
                         <?php
-                            $query = "SELECT b.*, bi.IMAGE_LINK FROM BOOKS b LEFT JOIN BOOK_IMAGE bi ON b.BOOK_ID = bi.book_id LIMIT 10";
+                            $query = "SELECT TOP 10 b.*, bi.IMAGE_LINK FROM BOOKS b LEFT JOIN BOOK_IMAGE bi ON b.BOOK_ID = bi.book_id";
                             $result = sqlsrv_query($conn, $query);
-                            if ($result->num_rows > 0) {
+                            if ($result === false) {
+                                die("Query failed: " . print_r(sqlsrv_errors(), true));
+                            }
                                 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
                                     ?>
                                     <div class="card-container-carousel">
@@ -78,12 +78,13 @@
                                             <a class="book-card-carousel">
                                             <img src="<?php echo $row['IMAGE_LINK']; ?>"
                                             alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
-                                            <p><?php echo $row['BOOK_TITLE']; ?></p>
+                                            <!-- <p><?php echo $row['BOOK_TITLE']; ?></p> -->
                                             </a>
                                         </div>
                                         <?php
                                 }
-                            }
+                            
+                            sqlsrv_free_stmt($result);
                         ?>
                     </div>
                 </div>

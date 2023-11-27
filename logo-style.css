@@ -482,7 +482,7 @@ h6{
   color:#de732c;
   font-family: sans-serif;
   font-weight: bold;
-  font-size: x-large;
+  font-size: large;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -490,6 +490,9 @@ h6{
   z-index: 3;
   position: relative;
   text-decoration: none;
+  word-wrap: break-word;
+  max-width: 150px;
+  text-align: center;
 }
 
 .card-carousel:hover .book-card-carousel:hover {
