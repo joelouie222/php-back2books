@@ -48,7 +48,7 @@
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
                         if ($getMyOrders != null){
-                            while($orderRow = sqlsrv_fetch_array($getOrderId , SQLSRV_FETCH_ASSOC)) {
+                            while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
                                 echo '<p>'.$orderRow['ORDER_ID'] .'</p';
                                 echo '<p>'.$orderRow['USER_ID'] .'</p';
                                 echo '<p>'.$orderRow['ORDER_DATE'] .'</p';
