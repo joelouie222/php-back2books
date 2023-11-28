@@ -4,23 +4,10 @@
     echo '<div class="logo-container">';
     echo '  <a href="/"><img src="/images/b2b-logo-header.png" width="549" height="142" alt="Back to Books Logo"></a>';
     echo '</div>';
-    echo '<div class="search-container">';
-    echo '    <input type="text" placeholder="Search..." name="search" size="40">';
-    echo '    <button type="submit"><i class="fa fa-search fa-2x"></i></button>';
-    echo '</div>';
-    echo '<div class="search"'>;
-    echo '    <form action="../pages/search.php" method="POST">';
-    echo '        <input type="text" id="search" name="search" placeholder="Search" required>';
-    echo '        <button type="submit"><i class="fa fa-search"></i></button><br />';
-    echo '    <label for="sortBy">Sort By:</label>';
-    echo '    <select id="sortBy" name="sortBy">';
-    echo '        <option value="relevance">Relevance</option>';
-    echo '        <option value="availability">Availability</option>';
-    echo '        <option value="priceLowToHigh">Price Low to High</option>';
-    echo '        <option value="priceHighToLow">Price High to Low</option>';
-    echo '    </select>';
-    echo '    </form>';
-    echo '</div>';
+    // echo '<div class="search-container">';
+    // echo '    <input type="text" placeholder="Search..." name="search" size="40">';
+    // echo '    <button type="submit"><i class="fa fa-search fa-2x"></i></button>';
+    // echo '</div>';
     // echo '  <div class="favorites-container"><a href="/pages/favorites.php"><i class="fa fa-heart fa-4x"></i></a></div>';
     echo '  <div class="cart-container">';
     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
