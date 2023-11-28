@@ -423,9 +423,11 @@ r   width: 60%;
 }
 .book-container {
     display: flex;
+    flex: wrap;
     background-color: antiquewhite;
     align-items: center;
     padding: 10px;
+    width: 50%;
 }
 
 .search-cover {
