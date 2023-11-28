@@ -34,11 +34,113 @@
     <div class="container">
                               
         <div class="products">
+            
             <center>
                 <h1> A L L &nbsp &nbsp U S E R S </h1>
             </center>
             <?php
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
+                        
+                        if (isset($_POST["userUpdate"]) && $_POST["userUpdate"] == "go") {
+                            $userid = $_POST['userid'];
+                            $useremail =$_POST['useremail'];
+                            $userpass = md5($_POST['userpass']);
+                            $userfname =$_POST['fname'];
+                            $userlname = $_POST['lname'];
+                            $useractive = $_POST['useractive'];
+                            $usersq = $_POST['usersq'];
+                            $usersa = $_POST['usersa'];
+
+                            echo 'userid: '.$userid.'';
+                            echo 'useremail: '.$useremail.'';
+                            echo 'userpass: '.$userpass.'';
+                            echo 'userfname: '.$userfname.'';
+                            echo 'userlname: '.$userlname.'';
+                            echo 'useractive: '.$useractive.'';
+                            echo 'usersq: '.$usersq.'';
+                            echo 'usersa: '.$usersa.'';
+
+
+
+                        }
+
+
+
+                        if (isset($_GET['id'])) {
+                            $userid = $_GET['id'];
+
+                            $tsql = "SELECT * FROM B2BUSER WHERE USER_ID = '$userid'";
+                            $getUser = sqlsrv_query($conn, $tsql);
+
+                            if ($getUser == NULL) {
+                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                //redirect("https://php-back2books.azurewebsites.net/allUsers.php?fetch=err");
+                            }
+
+                            while($userInfo = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
+                                $userid = $userInfo['USER_ID'];
+                                $useremail = $userInfo['USER_EMAIL'];
+                                $userpass = $userInfo['USER_PASS'];
+                                $userfname = $userInfo['USER_FNAME'];
+                                $userlname = $userInfo['USER_LNAME'];
+                                // $useradmin = 
+                                $useractive = $userInfo['USER_ACTIVE'];
+                                $usersq = $userInfo['USER_SQ'];
+                                $usersa = $userInfo['USER_SA'];
+
+                            }
+                            echo ' <h1> You are editing User ID #: '.$userid'</h1></br>';
+                            echo ' <form method="post" action="">';
+                            echo '  <input type="hidden" name="orderid" value="'.$orderId.'">';
+                            echo '  <div class="form-group">';
+                            echo '    <input type="hidden" name="userid" value="'.$userId.'">';
+                            echo '    <label for="useridview">User Id: </label>';
+                            echo '    <input required disabled name="useridview" value="'.$userId.'">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="useremail">Email Address: </label>';
+                            echo '    <input required name="useremail" type="datetime-local" value="'.$useremail.'">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="userpass">User Password: </label>';
+                            echo '    <input required name="userpass" value="'.$userpass.'">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="fname">First Name: </label>';
+                            echo '    <input required name="fname" value="'.$userfname.'">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="lname">Last Name: </label>';
+                            echo '    <input required name="lname" value="'.$userlname.'">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="useractive">Active:</label>';
+                            echo '    <input required name="useractive" value="'.$useractive.'">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="usersq">Secret Question:</label>';
+                            echo '    <input required name="usersq" value="'.$usersq.'">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="usersa">Secret Answer:</label>';
+                            echo '    <input required name="usersa" value="'.$usersa.'">';
+                            echo '  </div>';
+
+                            echo '  <div>';
+                            echo '      <button name="userUpdate" type="submit" value="go"> Save </button>';
+                            echo '      </div>';
+                            echo '  </form>';
+                            echo ' </br><hr> ';
+                        }
+
+
                         $tsql = "SELECT * FROM B2BUSER";
                         $getUsers = sqlsrv_query($conn, $tsql);
 
@@ -71,7 +173,7 @@
 
                                 echo '            <tr style="border: 1px solid;">';
                                 echo '                <td><div><h3>'.$userId.'</h3></div>';
-                                echo '                        <div style="margin: 10px 0px;"><a href="">Edit</a></div>';
+                                echo '                        <div style="margin: 10px 0px;"><a href="/allUser?id='.$userId.'">Edit</a></div>';
                                 echo '                        </td>'; 
                                 echo '                <td>'.$userActive.'</td>';
                                 echo '                <td>'.$userEmail.'</td>';
