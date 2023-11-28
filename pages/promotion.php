@@ -30,7 +30,7 @@
     ?>
     <div class="container">
         <div class="about-us">
-            <center style="border: double; padding: 10px; background-color: #e0d3c4;">
+            <center style="border: double; padding: 10px; background-color: #FFFFFF;">
                 <div><img src="https://images.pexels.com/photos/5650026/pexels-photo-5650026.jpeg" width="450" height="225"></div>
                 <!-- <img src="/images/patrick-star-dumb.gif" width="300" height="150"> -->
                 <div><h1 style="font-size: xxx-large;"> P R O M O T I O N S </h1><div>
