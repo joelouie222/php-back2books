@@ -44,7 +44,7 @@
                         $bookauthorfname = $_POST['bookauthorfname'];
                         $bookdesc = $_POST['bookdesc'];
                         $bookisbn = $_POST['bookisbn'];
-                        $bookpubdate = $_POST['bookpubdate']->format('Y-m-d');
+                        $bookpubdate = $_POST['bookpubdate'];
                         $bookgenre = $_POST['bookgenre'];
                         $bookformat = $_POST['bookformat'];
                         $bookpages = $_POST['bookpages'];
