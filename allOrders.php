@@ -25,10 +25,10 @@
                 ON O.ORDER_ID = SUBQ.ORDER_ID
             ORDER BY SUBQ.TOTAL_AMOUNT";
             break;
-        case "priceDesc":
+        case "userDesc":
             $sortSQL = "SELECT * FROM ORDERS ORDER BY USER_ID DESC";
             break;
-        case "priceAsc":
+        case "userAsc":
             $sortSQL = "SELECT * FROM ORDERS ORDER BY USER_ID";
             break;
         case "dateDesc":
