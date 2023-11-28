@@ -104,6 +104,7 @@
         ?>  
         
         <div class="about-us">
+        <div class="login-container">
           <center>
                 <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
             <div>
@@ -121,7 +122,6 @@
                 ?>
             </div>
 
-            <div id="login-container">
             <div>
                 <form method="post" action="">
                   <!-- Email input -->
@@ -145,8 +145,8 @@
                   <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
                 </form>
             </div>
-          </div>
           </center>
+            </div>
         </div>
     </div>
 </div>
