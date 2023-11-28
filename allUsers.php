@@ -91,7 +91,6 @@
                             }
                             echo ' <h1> You are editing User ID #: '.$userid.'</h1></br>';
                             echo ' <form method="post" action="">';
-                            echo '  <input type="hidden" name="orderid" value="'.$orderId.'">';
                             echo '  <div class="form-group">';
                             echo '    <input type="hidden" name="userid" value="'.$userId.'">';
                             echo '    <label for="useridview">User Id: </label>';
@@ -173,7 +172,7 @@
 
                                 echo '            <tr style="border: 1px solid;">';
                                 echo '                <td><div><h3>'.$userId.'</h3></div>';
-                                echo '                        <div style="margin: 10px 0px;"><a href="/allUser?id='.$userId.'">Edit</a></div>';
+                                echo '                        <div style="margin: 10px 0px;"><a href="/allUsers?id='.$userId.'">Edit</a></div>';
                                 echo '                        </td>'; 
                                 echo '                <td>'.$userActive.'</td>';
                                 echo '                <td>'.$userEmail.'</td>';
