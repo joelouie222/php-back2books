@@ -81,7 +81,7 @@
 
                 while($orderInfo = sqlsrv_fetch_array($getOrder, SQLSRV_FETCH_ASSOC)) {
                   $userId = $orderInfo['USER_ID'];
-                  $orderDate = $orderInfo['ORDER_DATE']->format('Y-m-d H:i:s');;
+                  $orderDate = $orderInfo['ORDER_DATE']->format('Y-m-d H:i:s');
                   $orderDiscount = $orderInfo['ORDER_DISCOUNT'];
                   $shippingAddr = $orderInfo['SHIP_ADDR'];
                   $payment = $orderInfo['PAY_METHOD'];
@@ -161,7 +161,7 @@
                   echo '  <div>';
                   echo '      <button name="orderLineUpdate" type="submit" value="go"> Save </button>';
                   echo '      </div>';
-                  echo '  </form>'
+                  echo '  </form>';
                 }
 
 
