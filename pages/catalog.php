@@ -95,17 +95,9 @@
                         }
                     }
                 ?>
-<<<<<<< HEAD
-                <div style="margin: 10px 50px 10px 0px;"><form method="post" action="">
-=======
-<<<<<<< HEAD
-                <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
-=======
-            </center>
 
-            <div style="float: right; margin: 0px 50px 20px 0px;"><form method="post" action="">
->>>>>>> 23ca607 (css linking)
->>>>>>> 622a3b70cfa80c58afe86e94db9046b294cd8273
+            </center>
+            <div style=" margin: 0px 50px 20px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
                         <option selected value=""> - </option>
@@ -117,8 +109,6 @@
                     <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
                 </select></form></div>
             </center>
-
-            
 
             <ol class="book-list-view">
                 <?php
