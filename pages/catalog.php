@@ -18,7 +18,7 @@
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- OUR CSS -->
+    <!-- OUR CSS -->    
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/logo-style.css">
     <link rel="icon" type="image/x-icon" href="../images/favicon/favicon-16x16.png">
@@ -95,7 +95,17 @@
                         }
                     }
                 ?>
+<<<<<<< HEAD
                 <div style="margin: 10px 50px 10px 0px;"><form method="post" action="">
+=======
+<<<<<<< HEAD
+                <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
+=======
+            </center>
+
+            <div style="float: right; margin: 0px 50px 20px 0px;"><form method="post" action="">
+>>>>>>> 23ca607 (css linking)
+>>>>>>> 622a3b70cfa80c58afe86e94db9046b294cd8273
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
                         <option selected value=""> - </option>
