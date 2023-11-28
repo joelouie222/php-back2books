@@ -62,7 +62,7 @@
                             if ($addCoupon == NULL){
                                 die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                             }
-                            redirect("https://php-back2books.azurewebsites.net/allPromos.php")
+                            redirect("https://php-back2books.azurewebsites.net/allPromos.php");
                         } 
 
                         if (isset($_GET['action']) && $_GET['action'] == "add") {
