@@ -414,23 +414,24 @@ h6{
     border: none;
 }
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
-.catalog-container {
+.book-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    flex: 200px;
-    text-decoration: none;
-    font-family: arial; 
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: antiquewhite;
+    align-items: center;
     padding: 20px;
 }
-.catalog-container a{
-    color: inherit;
-}
+
 .search-cover {
-    width: 40%;
+    flex-shrink: 0;
+    margin-right:20px;
+}
+
+.book-info-container {
+    flex-grow: 1;
+}
+
+.search-add {
+    margin-top: auto;
+    margin-left: auto;
 }
 /* --------------------------------- LOGIN & REGISTER ------------------------------------------ */
 .login-container {
