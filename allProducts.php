@@ -42,6 +42,7 @@
                     if (isset($_POST["addProduct"]) && $_POST["addProduct"] == "go") {
                         $booktitle = $_POST['booktitle'];
                         $bookauthorfname = $_POST['bookauthorfname'];
+                        $bookauthorfname = $_POST['bookauthorlname'];
                         $bookdesc = $_POST['bookdesc'];
                         $bookisbn = $_POST['bookisbn'];
                         $bookpubdate = $_POST['bookpubdate'];
@@ -55,7 +56,7 @@
 
                         echo '<center>';
                         echo 'booktitle: '.$booktitle.'</br>';
-                        echo 'bookauthorfname: '.$bookauthorfnam.'</br>';
+                        echo 'bookauthorfname: '.$bookauthorfname.'</br>';
                         echo 'bookdesc: '.$bookdesc .'  </br>';
                         echo 'bookisbn: '.$bookisbn.'</br>';
                         echo 'bookpubdate: '.$bookpubdate .'</br>';
