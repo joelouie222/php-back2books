@@ -416,18 +416,16 @@ h6{
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
 .search-container {
     display: flex;
-    align-items: center;
     width: 70%;
-    background-color: antiquewhite;
 }
 .serch-container a {
     color: inherit;
 }
 .book-container {
     display: flex;
+    background-color: antiquewhite;
     align-items: center;
-    padding: 20px;
-    width: 50%;
+    padding: 0px;
 }
 
 .search-cover {
@@ -441,7 +439,7 @@ h6{
 
 .search-add {
     margin-top: auto;
-    margin-right: auto;
+    margin-left: auto;
 }
 /* --------------------------------- LOGIN & REGISTER ------------------------------------------ */
 .login-container {
