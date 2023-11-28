@@ -118,7 +118,7 @@
                   $billingAddr = $orderInfo['BILL_ADDR'];
 
                 }
-                echo ' <h1> You are editing Order #: '.$orderId.'</h1>';
+                echo ' <h1> You are editing Order #: '.$orderId.'</h1></br>';
                 echo ' <form method="post" action="">';
                 echo '  <input type="hidden" name="orderid" value="'.$orderId.'">';
                 echo '  <div class="form-group">';
@@ -155,7 +155,7 @@
                 echo '      <button name="orderUpdate" type="submit" value="go"> Save </button>';
                 echo '      </div>';
                 echo '  </form>';
-                echo ' <hr> ';
+                echo ' </br><hr> ';
 
                 $tsql = "SELECT * FROM ORDER_LINES WHERE ORDER_ID = '$orderId'";
                 $getOrderLines = sqlsrv_query($conn, $tsql);
@@ -165,7 +165,7 @@
                   //redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
                 }
 
-                echo ' </br><h3> You are editing each product in the order </h3>';
+                echo ' </br><h3> You are editing each product in the order </h3></br><hr>';
                 while($orderLine = sqlsrv_fetch_array($getOrderLines, SQLSRV_FETCH_ASSOC)) {
                   $oline_id = $orderLine['OLINE_ID'];
                   $bookId = $orderLine['BOOK_ID'];
