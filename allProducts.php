@@ -70,7 +70,16 @@
                         echo '</center>';
 
                         // INSERT BOOK
+                        $tsql = "INSERT INTO BOOKS (BOOK_TITLE, PROD_DESC, BOOK_ISBN, BOOK_PUBLISHED_DATE, PRICE, BOOK_FORMAT, NUM_PAGES, PUBLISHER_NAME)
+                            VALUES ('$booktitle', '$bookdesc', '$bookisbn', '$bookpubdate', '$bookprice', '$bookformat', '$bookpages', '$bookpubname')";
 
+                        $addBook = sqlsrv_query($conn, $tsql);
+
+                        if ($addBook == NULL) {
+                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                        }
+
+                        redirect("https://php-back2books.azurewebsites.net/allProducts.php");
 
                         // INSERT GENRE
 
@@ -90,7 +99,6 @@
 
                         // Redirect to current page
                         //redirect("https://php-back2books.azurewebsites.net/allProducts.php");
-
                     }
 
 
