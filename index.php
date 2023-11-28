@@ -51,6 +51,21 @@
                 ?> -->
                 <img src="images/welcome.gif" id="welcome">
                 </br>
+            <center>
+            <div class="search">
+                <form action="../pages/search.php" method="POST">
+                    <input type="text" id="search" name="search" placeholder="Search" required>
+                    <button type="submit"><i class="fa fa-search"></i></button><br />
+                <label for="sortBy">Sort By:</label>
+                <select id="sortBy" name="sortBy">
+                    <option value="relevance">Relevance</option>
+                    <option value="availability">Availability</option>
+                    <option value="priceLowToHigh">Price Low to High</option>
+                    <option value="priceHighToLow">Price High to Low</option>
+                </select>
+                </form>
+            </div>
+            </center>
             </div>
             <center>
             <div class="search">
