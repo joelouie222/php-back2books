@@ -52,8 +52,8 @@
                 <img src="images/welcome.gif" id="welcome">
                 </br>
             </div>
+            <center>
             <div class="search">
-                <center>
                 <form action="../pages/search.php" method="POST">
                     <input type="text" id="search" name="search" placeholder="Search" required>
                     <button type="submit"><i class="fa fa-search"></i></button><br />
@@ -65,8 +65,8 @@
                     <option value="priceHighToLow">Price High to Low</option>
                 </select>
                 </form>
-                </center>
             </div>
+            </center>
             <div class="window">
                 <div class="gallery-container-carousel">
                     <!--prev button-->
