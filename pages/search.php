@@ -24,7 +24,7 @@
         } elseif ($sortBy == "priceHighToLow") {
             $sql .= " ORDER BY PRICE DESC";
         } elseif ($sortBy == "availability") {
-            $sql .= " ORDER BY INV_QUANTITY ASC";
+            $sql .= " ORDER BY INV_QUANTITY DESC";
         }
 
         $result = sqlsrv_query($conn, $sql);
