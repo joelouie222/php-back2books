@@ -1,6 +1,12 @@
 <?php
     include '../config.php'
 ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../style.css">
+    </head>
+
 <h1>Search page</h1>
 
 <div class="catalog-container">
@@ -44,3 +50,4 @@
     }
 ?>
 </div>
+</html>
