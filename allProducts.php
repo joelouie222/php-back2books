@@ -79,6 +79,8 @@
                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                         }
 
+                        redirect("https://php-back2books.azurewebsites.net/allProducts.php");
+
                         // INSERT GENRE
 
                         // INSERT GENRE LIST
@@ -97,7 +99,6 @@
 
                         // Redirect to current page
                         //redirect("https://php-back2books.azurewebsites.net/allProducts.php");
-
                     }
 
 
