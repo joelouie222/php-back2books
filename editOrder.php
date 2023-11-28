@@ -2,7 +2,10 @@
   session_start();
   if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
     // PUT ALL HTML HERE
+    if (isset($_POST["orderUpdate"]) && $_SESSION["orderUpdate"] == "go") {
+       echo "<h1> ORDER UPDATE is GO<h1>";
 
+    }
 
     
   }
@@ -37,7 +40,7 @@
       
     <div class="container">
                               
-        <div class="about-us">
+        <div class="products">
             <center>
                 <img src="/images/patrick-star-dumb.gif" width="300" height="150">
                 </br>
@@ -79,28 +82,28 @@
                 echo '  </div>';
 
                 echo '  <div class="form-group">';
-                echo '    <label for="userid">User Id: </label>';
-                echo '    <input required name="userid" value="'.$orderDate.'">';
+                echo '    <label for="orderDate">Order Date: </label>';
+                echo '    <input required name="orderDate" type="datetime-local" value="'.$orderDate.'">';
                 echo '  </div>';
 
                 echo '  <div class="form-group">';
-                echo '    <label for="userid">User Id: </label>';
-                echo '    <input required name="userid" value="'.$orderDiscoun.'">';
+                echo '    <label for="orderDiscount">Order Discount: </label>';
+                echo '    <input required name="orderDiscount" value="'.$orderDiscount.'">';
                 echo '  </div>';
 
                 echo '  <div class="form-group">';
-                echo '    <label for="userid">User Id: </label>';
-                echo '    <input required name="userid" value="'.$shippingAddr.'">';
+                echo '    <label for="shipAddr">Shipping Address: </label>';
+                echo '    <input required name="shipAddr" value="'.$shippingAddr.'">';
                 echo '  </div>';
 
                 echo '  <div class="form-group">';
-                echo '    <label for="userid">User Id: </label>';
-                echo '    <input required name="userid" value="'.$payment.'">';
+                echo '    <label for="payment">Payment Method: </label>';
+                echo '    <input required name="payment" value="'.$payment.'">';
                 echo '  </div>';
 
                 echo '  <div class="form-group">';
-                echo '    <label for="userid">User Id: </label>';
-                echo '    <input required name="userid" value="'.$billingAddr.'">';
+                echo '    <label for="billAddr">Billing Address:</label>';
+                echo '    <input required name="billAddr" value="'.$billingAddr.'">';
                 echo '  </div>';
 
                 echo '  <div>';
