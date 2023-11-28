@@ -25,6 +25,12 @@
                 ON O.ORDER_ID = SUBQ.ORDER_ID
             ORDER BY SUBQ.TOTAL_AMOUNT";
             break;
+        case "priceDesc":
+            $sortSQL = "SELECT * FROM ORDERS ORDER BY USER_ID DESC";
+            break;
+        case "priceAsc":
+            $sortSQL = "SELECT * FROM ORDERS ORDER BY USER_ID";
+            break;
         case "dateDesc":
             $sortSQL = "SELECT * FROM ORDERS ORDER BY ORDER_DATE DESC";
             break;
@@ -75,6 +81,8 @@
                         <option value="dateAsc"> Old to New </option>
                         <option value="priceDesc"> Total Descending </option>
                         <option value="priceAsc"> Total Ascending </option>
+                        <option value="userDesc"> User Descending </option>
+                        <option value="userAsc"> User Acending </option>
                     </select></span>
                     <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
                 </select></form></div>

@@ -155,6 +155,7 @@
                 echo '      <button name="orderUpdate" type="submit" value="go"> Save </button>';
                 echo '      </div>';
                 echo '  </form>';
+                echo ' <hr> ';
 
                 $tsql = "SELECT * FROM ORDER_LINES WHERE ORDER_ID = '$orderId'";
                 $getOrderLines = sqlsrv_query($conn, $tsql);
@@ -164,14 +165,14 @@
                   //redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
                 }
 
-                echo ' <h3> You are editing each product in the order </h3>';
+                echo ' </br><h3> You are editing each product in the order </h3>';
                 while($orderLine = sqlsrv_fetch_array($getOrderLines, SQLSRV_FETCH_ASSOC)) {
                   $oline_id = $orderLine['OLINE_ID'];
                   $bookId = $orderLine['BOOK_ID'];
                   $price = $orderLine['PRICE'];
                   $orderQty = $orderLine['ORDER_QUANTITY'];
 
-                  echo ' <form method="post" action="">';
+                  echo ' <form style="margin: 10px;" method="post" action="">';
                   echo '  <input type="hidden" name="olineid" value="'.$oline_id.'">';
                   echo '  <div class="form-group">';
                   echo '    <label for="bookid">Book Id: </label>';
@@ -192,7 +193,7 @@
                   echo '      <button name="orderLineUpdate" type="submit" value="go"> Save </button>';
                   echo '      </div>';
                   echo '  </form>';
-
+                  echo ' <hr> ';
                  
                 }
 
