@@ -89,6 +89,7 @@
                         echo '        <thead>';
                         echo '            <tr style="border: 1px solid;">';
                         echo '                <th style="width: 6%">Order #</th>';
+                        echo '                <th style="width: 6%">User Id</th>';
                         echo '                <th style="width: 6%">Date</th>';
                         echo '                <th style="width: 12%">Shipping/Billing Address</th>';
                         echo '                <th colspan="2">Products List</th>';
@@ -107,6 +108,7 @@
                         if ($getMyOrders != null){
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
                                 $orderId = $orderRow['ORDER_ID'];
+                                $userId = $orderRow['USER_ID'];
                                 $orderDate = $orderRow['ORDER_DATE']->format('Y-m-d');
                                 $orderDiscount = $orderRow['ORDER_DISCOUNT'];
                                 $orderShipAddr = $orderRow['SHIP_ADDR'];
@@ -122,8 +124,9 @@
                                     echo '            <tr style="border: 1px solid;">';
                                     echo '                <td><div><h3>'.$orderId.'</h3></div>';
                                     echo '                        <div style="margin: 10px 0px;"><a href="https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'">Edit</a></div>';
-                                    echo '                        <div><a href="">Delete</a></div>';
+                                    // echo '                        <div><a href="">Delete</a></div>';
                                     echo '                        </td>';
+                                    echo '                <td>'.$userId.'</td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
                                     echo '<td colspan="2">';

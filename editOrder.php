@@ -67,6 +67,7 @@
                if (isset($_POST["orderLineUpdate"]) && $_POST["orderLineUpdate"] == "go") {
                   echo '<h1> ORDER LINE UPDATE is a GO<h1>';
                   $olineid = $_POST["olineid"];
+                  $orderid = $_GET['id'];
                   // $bookid = ["bookid"];
                   // $price = ["price"];
                   $orderqty = $_POST["orderqty"];
@@ -74,6 +75,14 @@
                   $tsql = "UPDATE ORDER_LINES SET ORDER_QUANTITY = '$orderqty' WHERE OLINE_ID = '$olineid'";
 
                   $updateOrderLine = sqlsrv_query($conn, $tsql);
+                  
+                  $tsql = "SELECT ORDER_ID FROM ORDER_LINES  WHERE OLINE_ID = '$olineid'";
+
+                  $getOrderId = sqlsrv_query($conn, $tsql);
+
+                  while($orderLineInfo = sqlsrv_fetch_array($getOrderId, SQLSRV_FETCH_ASSOC)) {
+                    $orderid = $orderLineInfo['ORDER_ID'];
+                  }
 
                   if ($updateOrderLine === false) {
                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
