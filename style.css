@@ -414,10 +414,14 @@ h6{
     border: none;
 }
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
+.search-container {
+
+}
 .book-container {
     display: flex;
     align-items: center;
     padding: 20px;
+    width: 50%;
 }
 
 .search-cover {
@@ -431,7 +435,7 @@ h6{
 
 .search-add {
     margin-top: auto;
-    margin-left: auto;
+    margin-right: auto;
 }
 /* --------------------------------- LOGIN & REGISTER ------------------------------------------ */
 .login-container {

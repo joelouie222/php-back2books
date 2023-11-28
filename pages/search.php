@@ -21,7 +21,7 @@ include '../layout.php'
 
 <h1>Search page</h1>
 
-<div class="catalog-container">
+<div class="search-container">
 <?php
 if (isset($_POST['search'])) {
     $search = $_POST['search'];
