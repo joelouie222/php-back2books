@@ -39,13 +39,13 @@
                 <?php
                 if (isset($_POST["orderUpdate"]) && $_POST["orderUpdate"] == "go") {
                   echo '<h1> ORDER UPDATE is a GO<h1>';
-                  $orderid = $_POST["orderid"]
-                  $userid = $_POST["userid"]
-                  $orderDate = $_POST["orderDate"]
-                  $orderDiscount = $_POST["orderDiscount"]
-                  $shipAddr = $_POST["shipAddr"]
-                  $payment = $_POST["payment"]
-                  $billAddr = $_POST["billAddr"]
+                  $orderid = $_POST["orderid"];
+                  $userid = $_POST["userid"];
+                  $orderDate = $_POST["orderDate"];
+                  $orderDiscount = $_POST["orderDiscount"];
+                  $shipAddr = $_POST["shipAddr"];
+                  $payment = $_POST["payment"];
+                  $billAddr = $_POST["billAddr"];
 
                   $tsql = "UPDATE ORDERS
                   SET
