@@ -95,8 +95,6 @@
                         }
                     }
                 ?>
-
-            </center>
             <div style=" margin: 0px 50px 20px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
