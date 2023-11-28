@@ -32,7 +32,7 @@ Instructor: [Ali Dogru](alihikmet.dogru@utsa.edu)
     - [x] Allow for discount codes
     - [x] Show summary of order and allow for order to be placed
 - [ ] Ability to search based on criteria:
-    - [ ] Item/Description
+    - [x] Item/Description
     - [ ] Sort by Price
     - [ ] Sort by Availability
 - [ ] Administrative back end
