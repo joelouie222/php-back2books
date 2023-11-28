@@ -30,7 +30,7 @@
     <div class="container">
         <div class="about-us">
         <center>
-        <div class="register-container">
+        <div class="login-container">
             <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
 
             <div>
