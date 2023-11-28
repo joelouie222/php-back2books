@@ -34,11 +34,6 @@ li {
   flex-grow: 1;
 }
 
-.search-container {
-  padding: 8px;
-  margin: 8px;
-  align-self: flex-end;
-}
 
 .search-container input[type=text] {
   border: none;
@@ -414,20 +409,15 @@ h6{
     border: none;
 }
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
-.search-container {
-    display: flex;
-    align-items: center;
-    width: 60%;
-}
 .search-container a {
     color: inherit;
 }
 .book-container {
     display: flex;
-    flex: wrap;
-    background-color: antiquewhite;
+    flex-direction: column;
     align-items: center;
-    padding: 10px;
+    padding-top: 50px;
+    padding-left: 20px;
 }
 
 .search-cover {
@@ -442,6 +432,7 @@ h6{
 .search-add {
     margin-top: auto;
     margin-left: auto;
+    margin-right: auto;
 }
 /* --------------------------------- LOGIN & REGISTER ------------------------------------------ */
 .login-container {

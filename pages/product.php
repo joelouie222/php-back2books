@@ -21,7 +21,7 @@ include '../layout.php';
 
 <h1>Product page</h1>
 
-<div class="catalog-container">
+<div class="container">
 <?php
 $isbn = $_GET['isbn'];
 $tsql = "SELECT * FROM BOOKS B
@@ -37,14 +37,13 @@ if ($result == false) {
     die(print_r(sqlsrv_errors(), true));
 }
 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-    echo "<div class='book-container'>
+    echo "<div class='book-container window'>
         <img class='search-cover' src=".$row['IMAGE_LINK']." alt='Book Cover'>
         <h1>".$row['BOOK_TITLE']."</h1>
-        <p>".$row['author_fname']."</p>
-        <p>".$row['author_lname']."</p>
-        <p>".$row['BOOK_ISBN']."</p>
-        <p>".$row['PRICE']."</p>
-        <p>".$row['PROD_DESC']."</p>
+        <p>".$row['author_fname'] . " ".$row['author_lname']. "</p>" .
+        "<p>ISBN: ".$row['BOOK_ISBN']."</p>
+        <p>Price: $".$row['PRICE']."</p>
+        <p>Synopsis:</br>".$row['PROD_DESC']."</p>
         </div>";
 } 
 ?>
