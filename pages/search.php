@@ -1,8 +1,7 @@
+<!DOCTYPE html>
 <?php
-    include '../config.php'
     include '../layout.php'
 ?>
-<!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="../style.css">
