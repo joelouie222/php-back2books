@@ -53,7 +53,7 @@
                 </br>
             </div>
             <center>
-            <div class="search">
+            <div class="window search">
                 <form action="../pages/search.php" method="POST">
                     <input type="text" id="search" name="search" placeholder="Search" required>
                     <button type="submit"><i class="fa fa-search"></i></button><br />
