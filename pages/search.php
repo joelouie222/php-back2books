@@ -27,7 +27,7 @@
             die(print_r(sqlsrv_errors(), true));
         }
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            echo "div class='book-container'>
+            echo "<div class='book-container'>
                 <h1>".$row['BOOK_TITLE']."</h1>
                 <p>".$row['author_fname']."</p>
                 <p>".$row['author_lname']."</p>
