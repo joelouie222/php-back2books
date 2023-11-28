@@ -62,7 +62,9 @@ if (isset($_POST['search'])) {
         echo '<div>
             <form method="post" action="">
             <input name="cartBookID" type="hidden" value="'.$row['BOOK_ID'].'">
-            <div style="cursor: pointer;"><button name="submit" style="padding: 5px;" type="submit" value="ADDTOCART"> ADD TO CART </button></div>
+            <div class="search-add">
+            <button name="submit" type="submit" value="ADDTOCART"> ADD TO CART </button>
+            </div>
             </form>
             </div>';
     } 
