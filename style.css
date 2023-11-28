@@ -416,7 +416,7 @@ h6{
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
 .catalog-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     text-decoration: none;
     font-family: arial; 
     max-width: 800px;
