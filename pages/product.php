@@ -33,6 +33,7 @@ include '../config.php';
             <p>".$row['author_lname']."</p>
             <p>".$row['BOOK_ISBN']."</p>
             <p>".$row['PRICE']."</p>
+            <p>".$row['PROD_DESC']."</p>
             </div>";
     } 
 ?>
