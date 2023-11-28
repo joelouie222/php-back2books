@@ -416,7 +416,7 @@ h6{
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
 .search-container {
     display: flex;
-r   width: 80%;
+r   width: 60%;
 }
 .serch-container a {
     color: inherit;
