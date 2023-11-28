@@ -28,6 +28,7 @@
 
     echo '<div class="sidebar">';
     
+    echo '  <a href="/"><i class="fa fa-fw fa-home"></i> Home </a>';
     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
         if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
             echo '<a Welcome back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</a>';
