@@ -1,5 +1,5 @@
 <?php
-  session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@
 <body id="home">
     <div class="container">
         <?php include('../layout.php');
-        ?>  
+        ?>
 
         <div class="about-us">
             <center>
@@ -33,10 +33,25 @@
             <br>
             <p>
                 This is a class project for the course CS 3773 Software Engineering in the term FALL 2023 at University
-                of
-                Texas at San Antonio (UTSA).
+                of Texas at San Antonio (UTSA).
                 <br>Back 2 Books is an retro/Y2K-style online shopping site that enables users to buy or sell books,
-                stationary, and other merchandise!
+                stationary, and other merchandise!<br>
+                <br>
+            <h2 style="margin-bottom: 10px;">The Team</h2>
+            <ul>
+                <li style="text-align: center;"><strong>Kip Roberts-Lemus</strong> | <span><i>Product Owner </i></span>
+                </li>
+                <li style="text-align: center; margin-right: 82px;"><strong>Bernardo Vazquez De La Cruz</strong> |
+                    <span><i> Scrum Master </i></span>
+                </li>
+                <li style="text-align: center; margin-left: 5px;"><strong>Andrea Mendez</strong> | <span style="margin-right: 10px;"><i>Developer</i> </span></li>
+                <li style="text-align: center;margin-left: 7px;"><strong>Daniel Hwang</strong> | <span><i>Developer</i>
+                    </span></li>
+                <li style="text-align: center; margin-left: 38px;"><strong>Joe Louie</strong> | <span><i>Developer</i>
+                    </span></li>
+            </ul>
+            <br>Thank you for coming to our website! This is all about empowering others to be able to make some extra
+            cash from old textbooks, cool custom stationary supplies, or other related items.<br>
             </p>
         </div>
 
