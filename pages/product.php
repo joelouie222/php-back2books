@@ -1,28 +1,33 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <?php
 include '../layout.php';
+include('../functions.php');
 ?>
 <html lang="us">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
-        <!-- FONT AWESOME -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
-        <!-- OUR CSS -->
-        <link rel="stylesheet" href="../style.css">
-        <link rel="stylesheet" href="../logo-style.css">
-        <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
-    </head>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- OUR CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../logo-style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
+</head>
 
 <h1>Product page</h1>
 
 <div class="container">
-<?php
+    <?php
 $isbn = $_GET['isbn'];
 $tsql = "SELECT * FROM BOOKS B
     INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
@@ -44,8 +49,14 @@ while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
         "<p>ISBN: ".$row['BOOK_ISBN']."</p>
         <p>Price: $".$row['PRICE']."</p>
         <p>Synopsis:</br>".$row['PROD_DESC']."</p>
+        </br>
+        <form method='post' action=''>
+            <input name='cartBookID' type='hidden' value=''".$row['BOOK_ID'].">
+            <div style='cursor: pointer;'><button name='submit' style='padding: 5px;' type='submit' value='ADDTOCART'> ADD TO CART </button></div>
+        </form>
         </div>";
 } 
 ?>
 </div>
+
 </html>
