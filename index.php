@@ -87,7 +87,7 @@
                 </div>
             </div>
             </br>
-            <div class="about-us window">
+            <div class="window about-us">
                 <p>Copyright 2023 Back 2 Books (B2B)</p>
             </div>
         </div>
