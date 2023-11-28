@@ -70,7 +70,7 @@
                             USER_SQ = '$usersq',
                             USER_SA = '$usersa'
                             WHERE USER_ID = '$userid'";
-                            
+
                             $updateUser = sqlsrv_query($conn, $tsql);
           
                             if ($updateUser === false) {
@@ -108,9 +108,9 @@
                             echo ' <h1> You are editing User ID #: '.$userid.'</h1></br>';
                             echo ' <form method="post" action="">';
                             echo '  <div class="form-group">';
-                            echo '    <input type="hidden" name="userid" value="'.$userId.'">';
+                            echo '    <input type="hidden" name="userid" value="'.$userid.'">';
                             echo '    <label for="useridview">User Id: </label>';
-                            echo '    <input required disabled name="useridview" value="'.$userId.'">';
+                            echo '    <input required disabled name="useridview" value="'.$userid.'">';
                             echo '  </div>';
 
                             echo '  <div class="form-group">';
