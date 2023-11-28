@@ -401,17 +401,14 @@ h6{
 /* --------------------------------- SEARCH BAR------------------------------------------ */
 .search {
     background-color: antiquewhite;
-    width: 70%;
+    width: 40%;
 }
 .search button {
-  font-size: 36px;
-  border: none;
-  cursor: pointer;
+    font-size: 36px;
+    border: none;
+    cursor: pointer;
 }
 .search input[type=text] {
-    padding: 4px;
-    margin-top: 8px;
-    margin-bottom: 8px;
     font-size: 36px;
     border: none;
 }
