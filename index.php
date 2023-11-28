@@ -30,9 +30,9 @@
         include('layout.php');
     ?>
     <div class="container">
-        <div class="content">
-            <div class="about-us">
-                <?php
+        <div id="content">
+            <div class="window">
+                <!-- <?php
                     if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true)
                         echo '<h3> Wecome to Back 2 Books, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</h3>';
                     else
@@ -48,25 +48,22 @@
                     echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
                     echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"].'<p>';
                     echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"].'<p>';
-                ?>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                ?> -->
+                <img src="images/welcome.gif" id="welcome">
+                </br>
             </div>
-            <div class="gallery-container-carousel">
-                <!--prev button-->
-                <div>
-                    <button class="prev-btn">&larr;</button>
-                </div>
-                <!--next button-->
-                <div>
-                    <button class="next-btn">&rarr;</button>
-                </div>
-                <div class="card-container-carousel">
-                    <?php
+            <div class="window">
+                <div class="gallery-container-carousel">
+                    <!--prev button-->
+                    <div>
+                        <button class="prev-btn">&larr;</button>
+                    </div>
+                    <!--next button-->
+                    <div>
+                        <button class="next-btn">&rarr;</button>
+                    </div>
+                    <div class="card-container-carousel">
+                        <?php
                             $query = "SELECT TOP 10 b.*, bi.IMAGE_LINK FROM BOOKS b LEFT JOIN BOOK_IMAGE bi ON b.BOOK_ID = bi.book_id";
                             $result = sqlsrv_query($conn, $query);
                             if ($result === false) {
@@ -74,22 +71,23 @@
                             }
                                 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
                                     ?>
-                    <div class="card-carousel">
-                        <a class="book-card-carousel">
-                            <img src="<?php echo $row['IMAGE_LINK']; ?>"
-                                alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
-                            <!-- <p><?php echo $row['BOOK_TITLE']; ?></p> -->
-                        </a>
-                    </div>
-                    <?php
+                        <div class="card-carousel">
+                            <a class="book-card-carousel">
+                                <img src="<?php echo $row['IMAGE_LINK']; ?>"
+                                    alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
+                                <!-- <p><?php echo $row['BOOK_TITLE']; ?></p> -->
+                            </a>
+                        </div>
+                        <?php
                                 }
                             
                             sqlsrv_free_stmt($result);
                         ?>
+                    </div>
                 </div>
             </div>
             </br>
-            <div class="about-us">
+            <div class="about-us window">
                 <p>Copyright 2023 Back 2 Books (B2B)</p>
             </div>
         </div>

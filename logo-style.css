@@ -408,7 +408,7 @@ h6{
 }
 
 .gallery-container-carousel {
-  padding-top: 15%;
+  /* padding-top: 15%; */
   padding-bottom: 20px;
   margin-left: 35px;
   margin-right: 35px;
@@ -436,7 +436,7 @@ h6{
 
 .prev-btn, .next-btn  {
   position: absolute;
-  top: 60%;
+  top: 40%;
   cursor: pointer;
   font-size: 2em;
   z-index: 5;
@@ -505,4 +505,26 @@ h6{
   width: 150px;
   height: 225px;
   border-radius: 5px;
+}
+
+.window {
+  display: flex;
+  flex-wrap: wrap;
+  background-image: url('/images/y2kwindow-b2bblue.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  z-index: 0;
+  margin-block-start: 5%;
+}
+
+#welcome{
+  width: 300px;
+  height: 275px;
 }
