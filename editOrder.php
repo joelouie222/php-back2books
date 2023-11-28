@@ -36,14 +36,8 @@
                               
         <div class="products">
             <center>
-                <img src="/images/patrick-star-dumb.gif" width="300" height="150">
-                </br>
-                <h1> PAGE UNDER CONSTRUCTION</h1>
-                
-                
-                
                 <?php
-                if (isset($_POST["orderUpdate"]) && $_SESSION["orderUpdate"] == "go") {
+                if (isset($_POST["orderUpdate"]) && $_POST["orderUpdate"] == "go") {
                   echo '<h1> ORDER UPDATE is a GO<h1>';
                   echo '<h1> orderid = '.$_POST["orderid"].'<h1>';
                   echo '<h1> userid = '.$_POST["userid"].'<h1>';
@@ -54,7 +48,7 @@
                   echo '<h1> billAddr = '.$_POST["billAddr"].'<h1>';
                }
 
-               if (isset($_POST["orderLineUpdate"]) && $_SESSION["orderLineUpdate"] == "go") {
+               if (isset($_POST["orderLineUpdate"]) && $_POST["orderLineUpdate"] == "go") {
                 echo '<h1> ORDER LINE UPDATE is a GO<h1>';
                 echo '<h1> olineid = '.$_POST["olineid"].'<h1>';
                 echo '<h1> bookid = '.$_POST["bookid"].'<h1>';
@@ -134,7 +128,7 @@
                   //redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
                 }
 
-                echo ' <h1> You are editing each product in the order </h1>';
+                echo ' <h3> You are editing each product in the order </h3>';
                 while($orderLine = sqlsrv_fetch_array($getOrderLines, SQLSRV_FETCH_ASSOC)) {
                   $oline_id = $orderLine['OLINE_ID'];
                   $bookId = $orderLine['BOOK_ID'];
@@ -149,12 +143,12 @@
                   echo '  </div>';
 
                   echo '  <div class="form-group">';
-                  echo '    <label for="price">Book Id: </label>';
+                  echo '    <label for="price">Book price:</label>';
                   echo '    <input required disabled name="price" value="'.$price.'">';
                   echo '  </div>';
 
                   echo '  <div class="form-group">';
-                  echo '    <label for="orderqty">Book Id: </label>';
+                  echo '    <label for="orderqty">Order Quantity: </label>';
                   echo '    <input required name="orderqty" type="number" value="'.$orderQty.'">';
                   echo '  </div>';
 
