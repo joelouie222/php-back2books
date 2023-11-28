@@ -162,13 +162,13 @@ button, input, optgroup, select, textarea {
 }
 
 
+
 /* ELEMENTS */
 .hidden {
   display: none !important;
 }
 
 .form-group {
-    color: antiquewhite;
     margin-bottom: 15px;
 }
 
@@ -414,4 +414,12 @@ h6{
 }
 .search-cover {
     width: 80%;
+}
+/* --------------------------------- LOGIN ------------------------------------------ */
+.login-container {
+    width: 50%;
+    background-color: antiquewhite;
+}
+.login-container input{
+    width: 30%;
 }
