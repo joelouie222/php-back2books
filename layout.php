@@ -32,10 +32,10 @@
     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
         if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
             echo '<p Welcome back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</p>';
-            echo '<a href="/allOrders.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> VIEW ORDERS </a>';
-            echo '<a href="/allUsers.php"><i class="fa fa-users" aria-hidden="true"></i>VIEW USERS </a>';
-            echo '<a href="/allProducts.php"><i class="fa fa-list-ol" aria-hidden="true"></i> VIEW PRODUCTS </a>';
-            echo '<a href="/allPromos.php"><i class="fa fa-tags" aria-hidden="true"></i>VIEW COUPONS </a>';
+            echo '<a href="/allOrders.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ALL ORDERS </a>';
+            echo '<a href="/allUsers.php"><i class="fa fa-users" aria-hidden="true"></i>ALL USERS </a>';
+            echo '<a href="/allProducts.php"><i class="fa fa-list-ol" aria-hidden="true"></i> ALL PRODUCTS </a>';
+            echo '<a href="/allPromos.php"><i class="fa fa-tags" aria-hidden="true"></i>ALL COUPONS </a>';
             echo '<a href="/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out </a>';
         } else {
             echo '<p Wecome back, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</p>';

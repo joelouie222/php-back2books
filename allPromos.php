@@ -48,11 +48,11 @@
                             $disccode = $_POST['disccode'];
                             $discval = ((100 - $disctag)/ 100);
   
-                            echo 'discname: '.$discname.'';
-                            echo 'discdesc: '.$discdesc.'';
-                            echo 'disctag: '.$disctag.'';
-                            echo 'disccode: '.$disccode.'';
-                            echo 'discval: '.$discval.'';
+                            // echo 'discname: '.$discname.'';
+                            // echo 'discdesc: '.$discdesc.'';
+                            // echo 'disctag: '.$disctag.'';
+                            // echo 'disccode: '.$disccode.'';
+                            // echo 'discval: '.$discval.'';
 
                             $tsql = "INSERT INTO DISCOUNT (DISCOUNT_CODE, DISCOUNT_VALUE, DISCOUNT_NAME, DISCOUNT_DESC, DISCOUNT_TAG, ACTIVE)
                             VALUES ('$disccode', '$discval', '$discname', '$discdesc', '$disctag', 1)";
@@ -60,7 +60,8 @@
                             $addCoupon = sqlsrv_query($conn, $tsql);
 
                             if ($addCoupon == NULL){
-                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                redirect("https://php-back2books.azurewebsites.net/allPromos.php?fetch=err");
                             }
                             redirect("https://php-back2books.azurewebsites.net/allPromos.php");
                         } 
@@ -129,7 +130,7 @@
 
                                 echo '            <tr style="border: 1px solid;">';
                                 echo '                <td><div><h3>'.$discountId.'</h3></div>';
-                                echo '                        <div style="margin: 10px 0px;"><a href="">Edit</a></div>';
+                                //echo '                        <div style="margin: 10px 0px;"><a href="">Edit</a></div>';
                                 echo '                        </td>'; 
                                 echo '                <td>'.$discountActive.'</td>';
                                 echo '                <td>'.$discountName.'</td>';
@@ -142,8 +143,8 @@
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
-                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            //redirect("https://php-back2books.azurewebsites.net/allPromos.php?fetch=err");
+                            //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            redirect("https://php-back2books.azurewebsites.net/allPromos.php?fetch=err");
                         }                                
                     } else {
                         redirect("https://php-back2books.azurewebsites.net/");
