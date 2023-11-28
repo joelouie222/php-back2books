@@ -5,22 +5,19 @@
 
 <div class="catalog-container">
 <?php
-    if (isset($_POST['submit-search'])) {
+    if (isset($_POST['search'])) {
         // $search = mysqli_real_escape_string($conn, $_POST['search']);
         $sql = "SELECT * FROM BOOKS WHERE BOOK_TITLE LIKE '%search%'";
-        $cnt = "SELECT COUNT(*) FROM BOOKS WHERE BOOK_TITLE LIKE '%search%'";
         $result = sqlsrv_query($conn, $sql);
-        $queryCount = sqlsrv_query($conn, $cnt);
 
-        if ($cnt > 0) {
-            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-                echo "<div class='book-box'>
-                    <h3>".$row['BOOK_TITLE']."</h3>
-                    <p>".$row['PROD_DESC']."</p>
-                    </div>";
-            } 
+        if ($result == false) {
+            die(print_r(sqlsrv_errors(), true));
         }
-        else echo "There are not results matching your search!";
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            echo "
+                <h3>".$row['BOOK_TITLE']."</h3>
+                ";
+        } 
     }
 ?>
 </div>
