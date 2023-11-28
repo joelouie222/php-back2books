@@ -401,6 +401,7 @@ h6{
 /* --------------------------------- SEARCH BAR------------------------------------------ */
 .search {
     background-color: antiquewhite;
+    width: 50%;
 }
 .search button {
   padding: 6px 10px;
