@@ -20,6 +20,7 @@
 
     <!-- OUR CSS -->
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/logo-style.css">
     <link rel="icon" type="image/x-icon" href="../images/favicon/favicon-16x16.png">
 </head>
 
@@ -191,7 +192,7 @@
                         echo '        <div style="align-items: center; width: 20%; display: flex">';
                         echo '            <div style="margin: 10px"><h2>'.$count.'</h2></div>';
                         echo '            <div style="margin: 10px">';
-                        echo '                <a href="">';
+                        echo "                <a href=/pages/product.php?isbn=" .$row['BOOK_ISBN'] .">";
                         echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" height="200" width="150" >';
                         echo '                </a>';
                         echo '            </div>';
