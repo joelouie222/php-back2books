@@ -53,8 +53,8 @@
                         $bookprice = $_POST['bookprice'];
                         $bookimg = $_POST['bookimg'];
 
-
-                        echo '<p>booktitle: '.$booktitle.'</br>
+                        echo '<center>';
+                        echo 'booktitle: '.$booktitle.'</br>
                         bookauthorfname: '.$bookauthorfnam.'</br>
                         bookdesc: '.$bookdesc .'  </br>
                         bookisbn: '.$bookisbn.'</br>
@@ -66,7 +66,7 @@
                         stock: '.$stock.'</br>
                         bookprice: '.$bookprice.'</br>
                         bookimg: '.$bookimg.'</br>
-                        </p>';
+                        </center>';
 
                     }
 
@@ -100,7 +100,7 @@
 
                         echo '  <div class="form-group">';
                         echo '    <label for="bookisbn">ISBN-13: </label>';
-                        echo '    <input required name="bookisbn" maxlength="13" type="number" placeholder="ISBN-13"">';
+                        echo '    <input required name="bookisbn" maxlength="13" type="text" placeholder="ISBN-13"">';
                         echo '  </div>';
 
                         echo '  <div class="form-group">';
