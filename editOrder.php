@@ -1,17 +1,10 @@
 <?php
   session_start();
-  if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
-    // PUT ALL HTML HERE
-    if (isset($_POST["orderUpdate"]) && $_SESSION["orderUpdate"] == "go") {
-       echo "<h1> ORDER UPDATE is GO<h1>";
-
-    }
-
-    
+  include("functions.php");
+  if (!isset($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] != true || $_SESSION["admin"] != true) {
+    redirect("https://php-back2books.azurewebsites.net/");
   }
-  else {
-    //redirect
-  }
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +29,7 @@
 
 <body id="home">
     <?php include('layout.php');
+    
     ?>  
       
     <div class="container">
@@ -49,6 +43,25 @@
                 
                 
                 <?php
+                if (isset($_POST["orderUpdate"]) && $_SESSION["orderUpdate"] == "go") {
+                  echo '<h1> ORDER UPDATE is a GO<h1>';
+                  echo '<h1> orderid = '.$_POST["orderid"].'<h1>';
+                  echo '<h1> userid = '.$_POST["userid"].'<h1>';
+                  echo '<h1> orderDate = '.$_POST["orderDate"].'<h1>';
+                  echo '<h1> orderDiscount = '.$_POST["orderDiscount"].'<h1>';
+                  echo '<h1> shipAddr = '.$_POST["shipAddr"].'<h1>';
+                  echo '<h1> payment = '.$_POST["payment"].'<h1>';
+                  echo '<h1> billAddr = '.$_POST["billAddr"].'<h1>';
+               }
+
+               if (isset($_POST["orderLineUpdate"]) && $_SESSION["orderLineUpdate"] == "go") {
+                echo '<h1> ORDER LINE UPDATE is a GO<h1>';
+                echo '<h1> olineid = '.$_POST["olineid"].'<h1>';
+                echo '<h1> bookid = '.$_POST["bookid"].'<h1>';
+                echo '<h1> price = '.$_POST["price"].'<h1>';
+                echo '<h1> orderqty = '.$_POST["orderqty"].'<h1>';
+                }
+
                 $orderId = $_GET['id'];
                 $userId = "";
                 $orderDate = "";
@@ -75,10 +88,12 @@
                   $billingAddr = $orderInfo['BILL_ADDR'];
 
                 }
-                echo '<form method="post" action="">';
+                echo ' <h1> You are editing Order #: '.$orderId.'</h1>';
+                echo ' <form method="post" action="">';
+                echo '  <input type="hidden" name="orderid" value="'.$orderId.'">';
                 echo '  <div class="form-group">';
                 echo '    <label for="userid">User Id: </label>';
-                echo '    <input required name="userid" value="'.$userId.'">';
+                echo '    <input required disabled name="userid" value="'.$userId.'">';
                 echo '  </div>';
 
                 echo '  <div class="form-group">';
@@ -93,7 +108,7 @@
 
                 echo '  <div class="form-group">';
                 echo '    <label for="shipAddr">Shipping Address: </label>';
-                echo '    <input required name="shipAddr" value="'.$shippingAddr.'">';
+                echo '    <input required name="shipAddr" value="'.$shippingAddr.'" style="width: 400px;">';
                 echo '  </div>';
 
                 echo '  <div class="form-group">';
@@ -103,7 +118,7 @@
 
                 echo '  <div class="form-group">';
                 echo '    <label for="billAddr">Billing Address:</label>';
-                echo '    <input required name="billAddr" value="'.$billingAddr.'">';
+                echo '    <input required name="billAddr" value="'.$billingAddr.'" style="width: 400px;">';
                 echo '  </div>';
 
                 echo '  <div>';
@@ -111,45 +126,46 @@
                 echo '      </div>';
                 echo '  </form>'
 
+                $tsql = "SELECT * FROM ORDER_LINES WHERE ORDER_ID = '$orderId'";
+                $getOrderLines = sqlsrv_query($conn, $tsql);
 
+                if ($getOrderLines == NULL) {
+                  die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                  //redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                }
 
+                echo ' <h1> You are editing each product in the order </h1>';
+                while($orderLine = sqlsrv_fetch_array($getOrderLines, SQLSRV_FETCH_ASSOC)) {
+                  $oline_id = $orderLine['OLINE_ID'];
+                  $bookId = $orderLine['BOOK_ID'];
+                  $price = $orderLine['PRICE'];
+                  $orderQty = $orderLine['ORDER_QUANTITY'];
+
+                  echo ' <form method="post" action="">';
+                  echo '  <input type="hidden" name="olineid" value="'.$oline_id.'">';
+                  echo '  <div class="form-group">';
+                  echo '    <label for="bookid">Book Id: </label>';
+                  echo '    <input required disabled name="bookid" value="'.$bookId.'">';
+                  echo '  </div>';
+
+                  echo '  <div class="form-group">';
+                  echo '    <label for="price">Book Id: </label>';
+                  echo '    <input required disabled name="price" value="'.$price.'">';
+                  echo '  </div>';
+
+                  echo '  <div class="form-group">';
+                  echo '    <label for="orderqty">Book Id: </label>';
+                  echo '    <input required name="orderqty" type="number" value="'.$orderQty.'">';
+                  echo '  </div>';
+
+                  echo '  <div>';
+                  echo '      <button name="orderLineUpdate" type="submit" value="go"> Save </button>';
+                  echo '      </div>';
+                  echo '  </form>'
+                }
 
 
                 ?>
-
-                    <!-- User Id -->
-
-                    <!-- Order Date -->
-
-                    <!-- shipping addr -->
-
-                    <!-- billing address -->
-
-                    <!-- order discount -->
-
-                    <!-- payment method -->
-
-                    <!-- SAVE button (by order id) -->
-
-                    <!-- bookid -->
-
-                    <!-- Qty -->
-
-                    <!-- save (by citem) -->
-
-                    <!-- bookid -->
-
-                    <!-- Qty -->
-
-                    <!-- save (by citem) -->
-
-
-
-
-
-                <form>
-
-
             </center>
         </div>
 </body>
