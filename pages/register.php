@@ -30,6 +30,7 @@
     <div class="container">
         <div class="about-us">
         <center>
+        <div class="register-container">
             <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
 
             <div>
@@ -302,6 +303,7 @@
                       <button name="submit" type="submit" value="submit">Submit</button>
                       </div>
                 </form>
+            </div>
             </div>
         </center>
       </div>

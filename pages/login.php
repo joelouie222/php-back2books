@@ -104,8 +104,8 @@
         ?>  
         
         <div class="about-us">
-        <div class="login-container">
           <center>
+        <div class="login-container">
                 <img src="../images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
             <div>
                 <?php
@@ -145,8 +145,8 @@
                   <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
                 </form>
             </div>
-          </center>
             </div>
+          </center>
         </div>
     </div>
 </div>
