@@ -404,10 +404,6 @@ h6{
     width: 70%;
 }
 .search button {
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
   font-size: 36px;
   border: none;
   cursor: pointer;
