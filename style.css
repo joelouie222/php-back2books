@@ -405,6 +405,12 @@ h6{
     border: none;
     font-size: 17px;
 }
+.search input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+}
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
 .catalog-container {
     display: flex;
