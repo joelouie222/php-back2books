@@ -54,19 +54,19 @@
                         $bookimg = $_POST['bookimg'];
 
                         echo '<center>';
-                        echo 'booktitle: '.$booktitle.'</br>
-                        bookauthorfname: '.$bookauthorfnam.'</br>
-                        bookdesc: '.$bookdesc .'  </br>
-                        bookisbn: '.$bookisbn.'</br>
-                        bookpubdate: '.$bookpubdate .'</br>
-                        bookgenre: '.$bookgenre.'</br>
-                        bookformat: '.$bookformat.'</br>
-                        bookpages: '.$bookpages.'</br>
-                        bookpubname: '.$bookpubname.'</br>
-                        stock: '.$stock.'</br>
-                        bookprice: '.$bookprice.'</br>
-                        bookimg: '.$bookimg.'</br>
-                        </center>';
+                        echo 'booktitle: '.$booktitle.'</br>';
+                        echo 'bookauthorfname: '.$bookauthorfnam.'</br>';
+                        echo 'bookdesc: '.$bookdesc .'  </br>';
+                        echo 'bookisbn: '.$bookisbn.'</br>';
+                        echo 'bookpubdate: '.$bookpubdate .'</br>';
+                        echo 'bookgenre: '.$bookgenre.'</br>';
+                        echo 'bookformat: '.$bookformat.'</br>';
+                        echo 'bookpages: '.$bookpages.'</br>';
+                        echo 'bookpubname: '.$bookpubname.'</br>';
+                        echo 'stock: '.$stock.'</br>';
+                        echo 'bookprice: '.$bookprice.'</br>';
+                        echo 'bookimg: '.$bookimg.'</br>';
+                        echo '</center>';
 
                     }
 
