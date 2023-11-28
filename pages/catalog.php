@@ -95,7 +95,7 @@
                         }
                     }
                 ?>
-                <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
+                <div style="margin: 10px 50px 10px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
                         <option selected value=""> - </option>
