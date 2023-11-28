@@ -52,12 +52,16 @@ if (isset($_POST['search'])) {
     }
     while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
         echo "<a href='product.php?isbn=".$row['BOOK_ISBN']."'><div class='book-container'>
+            <div class='book-cover-container'>
             <img class='search-cover' src=".$row['IMAGE_LINK']." alt='Book Cover'>
+            </div>
+            <div class='book-info-container'>
             <h1>".$row['BOOK_TITLE']."</h1>
             <p>".$row['author_fname']." ".$row['author_lname']."</p>
             <p>".$row['BOOK_ISBN']."</p>
             <p>".$row['PRICE']."</p>
             <p>".$row['INV_QUANTITY']."</p>
+            </div>
             </div></a>";
         echo '<div>
             <form method="post" action="">
