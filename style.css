@@ -398,9 +398,11 @@ h6{
 
 /* --------------------------------- SEARCH ------------------------------------------ */
 .catalog-container {
+    text-decoration: none;
+    font-family: arial; 
     max-width: 800px;
     margin: 20px auto;
-    background-color: #fff;
+    background-color: antiquewhite;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
