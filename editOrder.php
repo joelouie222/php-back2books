@@ -124,7 +124,7 @@
                 echo '  <div>';
                 echo '      <button name="orderUpdate" type="submit" value="go"> Save </button>';
                 echo '      </div>';
-                echo '  </form>'
+                echo '  </form>';
 
                 $tsql = "SELECT * FROM ORDER_LINES WHERE ORDER_ID = '$orderId'";
                 $getOrderLines = sqlsrv_query($conn, $tsql);
