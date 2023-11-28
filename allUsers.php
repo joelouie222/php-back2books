@@ -120,7 +120,7 @@
 
                             echo '  <div class="form-group">';
                             echo '    <label for="userpass">User Password: </label>';
-                            echo '    <input required name="userpass" disabled type="password" value="**************">';
+                            echo '    <input required name="userpass" type="password" value="**************">';
                             echo '  </div>';
 
                             echo '  <div class="form-group">';
@@ -156,7 +156,7 @@
                         }
 
 
-                        $tsql = "SELECT * FROM B2BUSER";
+                        $tsql = "SELECT * FROM B2BUSER WHERE USER_ADMIN = 0";
                         $getUsers = sqlsrv_query($conn, $tsql);
 
                         echo '    <div class="products">
