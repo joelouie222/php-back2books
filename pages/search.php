@@ -20,7 +20,7 @@ include '../layout.php'
     </head>
 
 <h1>Search page</h1>
-
+<center>
 <div class="search-container">
 <?php
 if (isset($_POST['search'])) {
@@ -68,4 +68,5 @@ if (isset($_POST['search'])) {
 }
 ?>
 </div>
+</center>
 </html>
