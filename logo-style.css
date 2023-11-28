@@ -238,6 +238,7 @@ li {
   align-items: center;
   width: 100%;
   max-width: 800px;
+  z-index: 0;
 }
 
 .contact-us {
@@ -412,7 +413,6 @@ h6{
   margin-left: 35px;
   margin-right: 35px;
   position: relative;
-  z-index: 0;
   overflow: hidden;
   margin-left: 25px;
   margin-right: 25px;
@@ -493,6 +493,7 @@ h6{
   word-wrap: break-word;
   max-width: 150px;
   text-align: center;
+  margin-right: 30px;
 }
 
 .card-carousel:hover .book-card-carousel:hover {

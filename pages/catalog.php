@@ -31,10 +31,18 @@
     ?>  
       
     <div class="container">
-        <form action="../search.php" method="POST">
-            <input type="text" name="search" placeholder="Search">
-            <button type="submit" name="submit-search">Search</button>
+        <form action="../pages/search.php" method="POST">
+            <input type="text" id="search" name="search" placeholder="Search" required>
+            <button type="submit">Search</button>
+
+        <label for="sortBy">Sort By:</label>
+        <select id="sortBy" name="sortBy">
+            <option value="relevance">Relevance</option>
+            <option value="priceLowToHigh">Price Low to High</option>
+            <option value="priceHighToLow">Price High to Low</option>
+        </select>
         </form>
+
         <div class="products">
             <center>
                 <h1> Book Catalog </h1>
