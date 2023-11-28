@@ -416,12 +416,14 @@ h6{
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
 .search-container {
     display: flex;
+    width: 70%;
 }
 .book-container {
     display: flex;
     align-items: center;
     padding: 20px;
     width: 50%;
+    background-color: antiquewhite;
 }
 
 .search-cover {
