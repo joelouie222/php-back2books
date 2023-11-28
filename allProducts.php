@@ -53,7 +53,7 @@
                         $bookprice = $_POST['bookprice'];
                         $bookimg = $_POST['bookimg'];
 
-                        echo '<center>'
+                        echo '<center>';
                         echo 'booktitle: '.$booktitle.'</br>
                         bookauthorfname: '.$bookauthorfnam.'</br>
                         bookdesc: '.$bookdesc .'  </br>
