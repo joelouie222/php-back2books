@@ -89,6 +89,7 @@
                                 $usersa = $userInfo['USER_SA'];
 
                             }
+                            echo ' <hr><center>';
                             echo ' <h1> You are editing User ID #: '.$userid.'</h1></br>';
                             echo ' <form method="post" action="">';
                             echo '  <div class="form-group">';
@@ -99,12 +100,12 @@
 
                             echo '  <div class="form-group">';
                             echo '    <label for="useremail">Email Address: </label>';
-                            echo '    <input required name="useremail" type="datetime-local" value="'.$useremail.'">';
+                            echo '    <input required name="useremail" type="email" value="'.$useremail.'">';
                             echo '  </div>';
 
                             echo '  <div class="form-group">';
                             echo '    <label for="userpass">User Password: </label>';
-                            echo '    <input required name="userpass" value="'.$userpass.'">';
+                            echo '    <input required name="userpass" type="password" value="'.$userpass.'">';
                             echo '  </div>';
 
                             echo '  <div class="form-group">';
@@ -124,19 +125,19 @@
 
                             echo '  <div class="form-group">';
                             echo '    <label for="usersq">Secret Question:</label>';
-                            echo '    <input required name="usersq" value="'.$usersq.'">';
+                            echo '    <input required name="usersq" value="'.$usersq.'" style="width: 400px;">';
                             echo '  </div>';
 
                             echo '  <div class="form-group">';
                             echo '    <label for="usersa">Secret Answer:</label>';
-                            echo '    <input required name="usersa" value="'.$usersa.'">';
+                            echo '    <input required name="usersa" value="'.$usersa.'" style="width: 400px;">';
                             echo '  </div>';
 
                             echo '  <div>';
                             echo '      <button name="userUpdate" type="submit" value="go"> Save </button>';
                             echo '      </div>';
                             echo '  </form>';
-                            echo ' </br><hr> ';
+                            echo ' </br></center><hr>';
                         }
 
 
