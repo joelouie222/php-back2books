@@ -13,7 +13,7 @@
         INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
         INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
         WHERE BOOK_TITLE LIKE '%$search%' OR
-        BOOK_TITLE LIKE '%$search%' OR
+        BOOK_ISBN LIKE '%$search%' OR
         author_fname LIKE '%$search%' OR 
         author_lname LIKE '%$search%'";
 
@@ -31,6 +31,7 @@
                 <h1>".$row['BOOK_TITLE']."</h1>
                 <p>".$row['author_fname']."</p>
                 <p>".$row['author_lname']."</p>
+                <p>".$row['BOOK_ISBN']."</p>
                 </div>";
         } 
     }
