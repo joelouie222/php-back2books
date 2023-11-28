@@ -39,21 +39,45 @@
                 <?php
                 if (isset($_POST["orderUpdate"]) && $_POST["orderUpdate"] == "go") {
                   echo '<h1> ORDER UPDATE is a GO<h1>';
-                  echo '<h1> orderid = '.$_POST["orderid"].'<h1>';
-                  echo '<h1> userid = '.$_POST["userid"].'<h1>';
-                  echo '<h1> orderDate = '.$_POST["orderDate"].'<h1>';
-                  echo '<h1> orderDiscount = '.$_POST["orderDiscount"].'<h1>';
-                  echo '<h1> shipAddr = '.$_POST["shipAddr"].'<h1>';
-                  echo '<h1> payment = '.$_POST["payment"].'<h1>';
-                  echo '<h1> billAddr = '.$_POST["billAddr"].'<h1>';
+                  $orderid = $_POST["orderid"]
+                  $userid = $_POST["userid"]
+                  $orderDate = $_POST["orderDate"]
+                  $orderDiscount = $_POST["orderDiscount"]
+                  $shipAddr = $_POST["shipAddr"]
+                  $payment = $_POST["payment"]
+                  $billAddr = $_POST["billAddr"]
+
+                  $tsql = "UPDATE ORDERS
+                  SET
+                  ORDER_DATE = '$orderDate'
+                  ORDER_DISCOUNT = '$orderDiscount'
+                  SHIP_ADDR = '$shipAddr'
+                  PAY_METHOD = '$payment'
+                  BILL_ADDR = '$billAddr'
+                  WHERE ORDER_ID = '$orderid'";
+                  $updateOrder = sqlsrv_query($conn, $tsql);
+
+                  if ($updateOrder === false) {
+                      die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                  }
+                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'");
                }
 
                if (isset($_POST["orderLineUpdate"]) && $_POST["orderLineUpdate"] == "go") {
-                echo '<h1> ORDER LINE UPDATE is a GO<h1>';
-                echo '<h1> olineid = '.$_POST["olineid"].'<h1>';
-                echo '<h1> bookid = '.$_POST["bookid"].'<h1>';
-                echo '<h1> price = '.$_POST["price"].'<h1>';
-                echo '<h1> orderqty = '.$_POST["orderqty"].'<h1>';
+                  echo '<h1> ORDER LINE UPDATE is a GO<h1>';
+                  $olineid $_POST["olineid"];
+                  // $bookid = ["bookid"];
+                  // $price = ["price"];
+                  $orderqty = ["orderqty"];
+
+                  $tsql = "UPDATE ORDER_LINES SET ORDER_QUANTITY = '$orderqty' WHERE OLINE_ID = '$olineid'";
+
+                  $updateOrderLine = sqlsrv_query($conn, $tsql);
+
+                  if ($updateOrderLine === false) {
+                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                  }
+                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'");
                 }
 
                 $orderId = $_GET['id'];
