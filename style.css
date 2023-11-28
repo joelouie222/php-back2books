@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
+    font-family: arial;
 }
 
 body {
@@ -397,7 +398,14 @@ h6{
   padding: 5px;
 } */
 
-/* --------------------------------- SEARCH ------------------------------------------ */
+/* --------------------------------- SEARCH BAR------------------------------------------ */
+.search {
+    background-color: antiquewhite;
+    padding: 6px;
+    border: none;
+    font-size: 17px;
+}
+/* --------------------------------- SEARCH PAGE------------------------------------------ */
 .catalog-container {
     display: flex;
     flex-direction: row;

@@ -53,6 +53,7 @@
                 </br>
             </div>
             <div class="search">
+                <center>
                 <form action="../pages/search.php" method="POST">
                     <input type="text" id="search" name="search" placeholder="Search" required>
                     <button type="submit">Search</button>
@@ -65,6 +66,7 @@
                     <option value="priceHighToLow">Price High to Low</option>
                 </select>
                 </form>
+                </center>
             </div>
             <div class="window">
                 <div class="gallery-container-carousel">
