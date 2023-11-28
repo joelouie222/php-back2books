@@ -418,6 +418,9 @@ h6{
     display: flex;
     width: 70%;
 }
+.serch-container a {
+    color: inherit;
+}
 .book-container {
     display: flex;
     align-items: center;
