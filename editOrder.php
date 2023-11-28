@@ -60,7 +60,7 @@
                   if ($updateOrder === false) {
                       die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                   }
-                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'");
+                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id='$orderId'");
                }
 
                if (isset($_POST["orderLineUpdate"]) && $_POST["orderLineUpdate"] == "go") {
@@ -77,7 +77,7 @@
                   if ($updateOrderLine === false) {
                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                   }
-                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'");
+                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id='$orderId'");
                 }
 
                 $orderId = $_GET['id'];
