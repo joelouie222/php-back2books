@@ -65,7 +65,7 @@
 
                if (isset($_POST["orderLineUpdate"]) && $_POST["orderLineUpdate"] == "go") {
                   echo '<h1> ORDER LINE UPDATE is a GO<h1>';
-                  $olineid $_POST["olineid"];
+                  $olineid = $_POST["olineid"];
                   // $bookid = ["bookid"];
                   // $price = ["price"];
                   $orderqty = ["orderqty"];
