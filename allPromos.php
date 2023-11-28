@@ -40,9 +40,102 @@
 
             <?php
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
+
+                        if (isset($_POST["addPromo"]) && $_POST["addPromo"] == "go") {
+                            $discname = $_POST['discname'];
+                            $discdisc = $_POST['discdisc'];
+                            $disctag = $_POST['disctag'];
+                            $disccode = $_POST['disccode'];
+                            $discval = ($disctag / 10);
+  
+
+                            echo 'discname: '.$discname.'';
+                            echo 'discdisc: '.$discdisc.'';
+                            echo 'disctag: '.$disctag.'';
+                            echo 'disccode: '.$disccode.'';
+                            echo 'discval: '.$discval.'';
+
+                        } 
+
+
+
+
+
+                                        // if (isset($_POST["userUpdate"]) && $_POST["userUpdate"] == "go") {
+                                        //     $userid = $_POST['userid'];
+                                        //     $useremail =$_POST['useremail'];
+                                        //     $userpass = md5($_POST['userpass']);
+                                        //     $userfname =$_POST['fname'];
+                                        //     $userlname = $_POST['lname'];
+                                        //     $useractive = $_POST['useractive'];
+                                        //     $usersq = $_POST['usersq'];
+                                        //     $usersa = $_POST['usersa'];
+
+                                        //     // echo 'userid: '.$userid.'';
+                                        //     // echo 'useremail: '.$useremail.'';
+                                        //     // echo 'userpass: '.$userpass.'';
+                                        //     // echo 'userfname: '.$userfname.'';
+                                        //     // echo 'userlname: '.$userlname.'';
+                                        //     // echo 'useractive: '.$useractive.'';
+                                        //     // echo 'usersq: '.$usersq.'';
+                                        //     // echo 'usersa: '.$usersa.'';
+
+                                        //     $tsql = "UPDATE B2BUSER
+                                        //     SET
+                                        //     USER_EMAIL = '$useremail', 
+                                        //     USER_PASSWORD = '$userpass',
+                                        //     USER_FNAME = '$userfname',
+                                        //     USER_LNAME = '$userlname',
+                                        //     USER_ACTIVE = '$useractive',
+                                        //     USER_SQ = '$usersq',
+                                        //     USER_SA = '$usersa'
+                                        //     WHERE USER_ID = '$userid'";
+
+                                        //     $updateUser = sqlsrv_query($conn, $tsql);
+                        
+                                        //     if ($updateUser === false) {
+                                        //         die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                        //     }
+                                        //     redirect("https://php-back2books.azurewebsites.net/allUsers.php");
+                                        // }
+
+                        if (isset($_GET['action']) && $_GET['action'] == "add") {
+
+                            echo ' <hr><center>';
+                            echo ' <h1> You are adding a new Coupon</h1></br>';
+                            echo ' <form method="post" action="">';
+                            echo '  <div class="form-group">';
+                            echo '    <label for="discname">Coupon Name: </label>';
+                            echo '    <input required name="discname" placeholder ="Name">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="discdisc">Description: </label>';
+                            echo '    <textarea required name="discdisc"></textarea>';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="disctag">Discount Tag: </label>';
+                            echo '    <input required name="disctag" type="number" placeholder="How much % off?"">';
+                            echo '  </div>';
+
+                            echo '  <div class="form-group">';
+                            echo '    <label for="disccode">Discount Code: </label>';
+                            echo '    <input required name="disccode" placeholder="CODE">';
+                            echo '  </div>';
+
+                            echo '  <div>';
+                            echo '      <button name="addPromo" type="submit" value="go"> Save </button>';
+                            echo '      </div>';
+                            echo '  </form>';
+                            echo ' </br></center><hr>';
+                        }
+
+
                         $tsql = "SELECT * FROM DISCOUNT";
                         $getDiscounts = sqlsrv_query($conn, $tsql);
 
+                        echo '     <div><a href="/allPromos.php?action=add"><button>ADD NEW COUPON</button></a></div>';
                         echo '    <div class="products">
                                     <table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;">';
                         echo '        <thead>';
