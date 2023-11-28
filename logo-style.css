@@ -227,18 +227,9 @@ li {
 }
 
 .about-us {
-  display: flex;
-  flex-wrap: wrap;
-  background-image: url('/images/y2kwindow-b2bblue.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin: 0 auto;
-  padding-top: 50px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 800px;
-  z-index: 0;
+  margin: 20px;
+  padding: 10px;
+  flex-direction: column;
 }
 
 .contact-us {
@@ -416,6 +407,7 @@ h6{
   overflow: hidden;
   margin-left: 25px;
   margin-right: 25px;
+  /* flex-direction: row; */
 }
 
 .card-container-carousel {
@@ -425,6 +417,7 @@ h6{
   margin-left: 40px;
   margin-right: 40px;
   position: relative;
+  overflow: hidden;
   z-index: 1;
 }
 
@@ -432,6 +425,8 @@ h6{
   flex: 0 0 auto;
   box-sizing: border-box;
   position: relative;
+  /* flex-direction: row; */
+  overflow: hidden;
 }
 
 .prev-btn, .next-btn  {
@@ -510,6 +505,7 @@ h6{
 .window {
   display: flex;
   flex-wrap: wrap;
+  /* flex-direction: column; */
   background-image: url('/images/y2kwindow-b2bblue.png');
   background-size: cover;
   background-repeat: no-repeat;
