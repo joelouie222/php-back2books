@@ -35,13 +35,13 @@
             <center>
                 <h1> Book Catalog </h1>
                 <?php
-                    echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
-                    echo '<p> SESSION-userId: '.$_SESSION["userId"].'<p>';
-                    echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
-                    echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
-                    echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
-                    echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"].'<p>';
-                    echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"].'<p>';
+                    // echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
+                    // echo '<p> SESSION-userId: '.$_SESSION["userId"].'<p>';
+                    // echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
+                    // echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
+                    // echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
+                    // echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"].'<p>';
+                    // echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"].'<p>';
                     if((isset($_POST['submit'])) && $_POST['submit']=="ADDTOCART") {
                         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
                             echo '$_POST[cartBookID] = '.$_POST['cartBookID'];

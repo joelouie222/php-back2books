@@ -92,12 +92,6 @@
 
 
 
-
-
-
-
-
-
                 $orderId = $_GET['id'];
                 $userId = "";
                 $orderDate = "";
@@ -198,7 +192,13 @@
                   echo '      <button name="orderLineUpdate" type="submit" value="go"> Save </button>';
                   echo '      </div>';
                   echo '  </form>';
+
+                 
                 }
+
+                echo ' <div style="margin: 10px;"><a href="/allOrders.php"><button>DONE</button></a></div>';
+
+                
 
 
                 ?>
