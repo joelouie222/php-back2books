@@ -168,7 +168,8 @@ button, input, optgroup, select, textarea {
 }
 
 .form-group {
-  margin-bottom: 15px;
+    color: antiquewhite;
+    margin-bottom: 15px;
 }
 
 .form-control {
