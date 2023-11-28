@@ -68,7 +68,7 @@
                   $olineid = $_POST["olineid"];
                   // $bookid = ["bookid"];
                   // $price = ["price"];
-                  $orderqty = ["orderqty"];
+                  $orderqty = $_POST["orderqty"];
 
                   $tsql = "UPDATE ORDER_LINES SET ORDER_QUANTITY = '$orderqty' WHERE OLINE_ID = '$olineid'";
 
