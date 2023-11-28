@@ -51,17 +51,32 @@
                             $usersq = $_POST['usersq'];
                             $usersa = $_POST['usersa'];
 
-                            echo 'userid: '.$userid.'';
-                            echo 'useremail: '.$useremail.'';
-                            echo 'userpass: '.$userpass.'';
-                            echo 'userfname: '.$userfname.'';
-                            echo 'userlname: '.$userlname.'';
-                            echo 'useractive: '.$useractive.'';
-                            echo 'usersq: '.$usersq.'';
-                            echo 'usersa: '.$usersa.'';
+                            // echo 'userid: '.$userid.'';
+                            // echo 'useremail: '.$useremail.'';
+                            // echo 'userpass: '.$userpass.'';
+                            // echo 'userfname: '.$userfname.'';
+                            // echo 'userlname: '.$userlname.'';
+                            // echo 'useractive: '.$useractive.'';
+                            // echo 'usersq: '.$usersq.'';
+                            // echo 'usersa: '.$usersa.'';
 
-
-
+                            $tsql = "UPDATE B2BUSER
+                            SET
+                            USER_EMAIL = '$useremail', 
+                            USER_PASSWORD = '$userpass',
+                            USER_FNAME = '$userfname',
+                            USER_LNAME = '$userlname',
+                            USER_ACTIVE = '$useractive',
+                            USER_SQ = '$usersq',
+                            USER_SA = '$usersa'
+                            WHERE USER_ID = '$userid'";
+                            
+                            $updateUser = sqlsrv_query($conn, $tsql);
+          
+                            if ($updateUser === false) {
+                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            }
+                            redirect("https://php-back2books.azurewebsites.net/allUsers.php");
                         }
 
 
