@@ -172,7 +172,7 @@
 
                                 echo '            <tr style="border: 1px solid;">';
                                 echo '                <td><div><h3>'.$userId.'</h3></div>';
-                                echo '                        <div style="margin: 10px 0px;"><a href="/allUsers?id='.$userId.'">Edit</a></div>';
+                                echo '                        <div style="margin: 10px 0px;"><a href="/allUsers.php?id='.$userId.'">Edit</a></div>';
                                 echo '                        </td>'; 
                                 echo '                <td>'.$userActive.'</td>';
                                 echo '                <td>'.$userEmail.'</td>';
