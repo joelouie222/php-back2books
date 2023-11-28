@@ -47,6 +47,7 @@
                   $payment = $_POST["payment"];
                   $billAddr = $_POST["billAddr"];
 
+
                   $tsql = "UPDATE ORDERS
                   SET
                   ORDER_DATE = '$orderDate', 
@@ -60,7 +61,7 @@
                   if ($updateOrder === false) {
                       die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                   }
-                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id=$orderId");
+                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id=$orderid");
                }
 
                if (isset($_POST["orderLineUpdate"]) && $_POST["orderLineUpdate"] == "go") {
@@ -77,7 +78,7 @@
                   if ($updateOrderLine === false) {
                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                   }
-                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id=$orderId");
+                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id=$orderid");
                 }
 
 
