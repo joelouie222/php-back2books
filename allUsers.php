@@ -40,7 +40,7 @@
             </center>
             <?php
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
-                        
+
                         if (isset($_POST["userUpdate"]) && $_POST["userUpdate"] == "go") {
                             $userid = $_POST['userid'];
                             $useremail =$_POST['useremail'];
@@ -89,7 +89,7 @@
                                 $usersa = $userInfo['USER_SA'];
 
                             }
-                            echo ' <h1> You are editing User ID #: '.$userid'</h1></br>';
+                            echo ' <h1> You are editing User ID #: '.$userid.'</h1></br>';
                             echo ' <form method="post" action="">';
                             echo '  <input type="hidden" name="orderid" value="'.$orderId.'">';
                             echo '  <div class="form-group">';
