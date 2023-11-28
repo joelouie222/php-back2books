@@ -29,7 +29,11 @@ session_start();
 
     <div class="container">
 
-        <div class="contact-us">
+        <div class="about-us window">
+        <center>
+                <img src="/images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
+            </center>
+            <br>
             <div style="margin-bottom: 5px;">
                 <h1>Contact Us</h1>
             </div>
