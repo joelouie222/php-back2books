@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include('../functions.php');
 ?>
 
 <?php
@@ -65,7 +66,6 @@
 <!DOCTYPE html>
 <?php
 include '../layout.php';
-include('../functions.php');
 ?>
 <html lang="us">
 
