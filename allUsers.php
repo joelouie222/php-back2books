@@ -62,12 +62,12 @@
                             while($userRow = sqlsrv_fetch_array($getUsers, SQLSRV_FETCH_ASSOC)) {
                                 $userId = $userRow['USER_ID'];
                                 $userEmail = $userRow['USER_EMAIL'];
-                                $userPassword = $userRow['USER_PASSWORD'];
+                                // $userPassword = $userRow['USER_PASSWORD'];
                                 $userFName = $userRow['USER_FNAME'];
                                 $userLName = $userRow['USER_LNAME'];
                                 $userActive = $userRow['USER_ACTIVE'];
                                 $userSQ = $userRow['USER_SQ'];
-                                $userSA = $userRow['USER_SA'];
+                                // $userSA = $userRow['USER_SA'];
 
                                 echo '            <tr style="border: 1px solid;">';
                                 echo '                <td><div><h3>'.$userId.'</h3></div>';
