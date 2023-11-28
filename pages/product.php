@@ -112,7 +112,7 @@ while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
         <p>Synopsis:</br>".$row['PROD_DESC']."</p>
         </br>
         <form method='post' action=''>
-            <input name='cartBookID' type='hidden' value=''".$row['BOOK_ID'].">
+            <input name='cartBookID' type='hidden' value='".$row['BOOK_ID']."'>
             <div style='cursor: pointer;'><button name='submit' style='padding: 5px;' type='submit' value='ADDTOCART'> ADD TO CART </button></div>
         </form>
         </div>";
