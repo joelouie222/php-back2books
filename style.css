@@ -416,9 +416,10 @@ h6{
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
 .search-container {
     display: flex;
-r   width: 60%;
+    align-items: center;
+    width: 60%;
 }
-.serch-container a {
+.search-container a {
     color: inherit;
 }
 .book-container {
@@ -427,7 +428,6 @@ r   width: 60%;
     background-color: antiquewhite;
     align-items: center;
     padding: 10px;
-    width: 50%;
 }
 
 .search-cover {
