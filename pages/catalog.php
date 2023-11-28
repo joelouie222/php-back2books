@@ -96,14 +96,71 @@
                 ?>
             </center>
 
+            <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
+                    <span><label for="sortVal">Sort by: </label></span>
+                    <span><select name="sortVal" id="sortBy">
+                        <option selected value=""> - </option>
+                        <option value="priceDesc"> Price Descending </option>
+                        <option value="priceAsc"> Price Ascending </option>
+                        <option value="availDesc"> Availability Descending </option>
+                        <option value="availAsc"> Availability Acending </option>
+                    </select></span>
+                    <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
+                </select></form></div>
+
             <ol class="book-list-view">
                 <?php
-                    $tsql = "SELECT TOP (100) *
-                            FROM BOOKS B
-                            INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
-                            INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
-                            INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
-                            INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID";
+                    $sortSQL = "SELECT TOP (100) * FROM BOOKS B
+                    INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+                    INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
+                    INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
+                    INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID";
+                    if (isset($_POST['sortBtn']) && $_POST['sortBtn'] == "apply"){
+                        switch ($_POST['sortVal']) {
+                            case "priceDesc":
+                                $sortSQL = "SELECT TOP (100) * FROM BOOKS B
+                                INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+                                INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
+                                INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
+                                INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
+                                ORDER BY PRICE DESC";
+                                break;
+                            case "priceAsc":
+                                $sortSQL = "SELECT TOP (100) * FROM BOOKS B
+                                INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+                                INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
+                                INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
+                                INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
+                                ORDER BY PRICE";
+                                break;
+                            case "availDesc":
+                                $sortSQL = "SELECT TOP (100) * FROM BOOKS B
+                                INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+                                INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
+                                INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
+                                INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
+                                ORDER BY INV_QUANTITY DESC";
+                                break;
+                            case "availAsc":
+                                $sortSQL = "SELECT TOP (100) * FROM BOOKS B
+                                INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+                                INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
+                                INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
+                                INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
+                                ORDER BY INV_QUANTITY";
+                                break;
+                            default:
+                                $sortSQL  = "SELECT TOP (100) * FROM BOOKS B
+                                INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+                                INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
+                                INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
+                                INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID";
+                        }
+                      }
+
+
+
+                    $tsql = $sortSQL;
                     $getBooks = sqlsrv_query($conn, $tsql);
 
                     if($getBooks == false ) {  
