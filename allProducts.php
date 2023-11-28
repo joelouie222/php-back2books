@@ -39,7 +39,7 @@
             </center>
 
             <?php
-                    if (isset($_POST["addProduct"]) && $_POST["addPromo"] == "go") {
+                    if (isset($_POST["addProduct"]) && $_POST["addProduct"] == "go") {
                         $booktitle = $_POST['booktitle'];
                         $bookauthorfname = $_POST['bookauthorfname'];
                         $bookdesc = $_POST['bookdesc'];
@@ -68,9 +68,29 @@
                         echo 'bookimg: '.$bookimg.'</br>';
                         echo '</center>';
 
+                        // INSERT BOOK
+
+
+                        // INSERT GENRE
+
+                        // INSERT GENRE LIST
+
+                        // INSERT autho
+
+                        // INSERT AUTHOR LIST
+
+
+                        // INSERT BOOK IMG
+
+                        // INSERT LISTING
+
+                        // INSERT PRODUCT_INVENTORY
+                        
+
+                        // Redirect to current page
+                        //redirect("https://php-back2books.azurewebsites.net/allProducts.php");
+
                     }
-
-
 
 
                     if (isset($_GET['action']) && $_GET['action'] == "add") {
