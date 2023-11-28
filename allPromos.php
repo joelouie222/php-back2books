@@ -54,8 +54,8 @@
                             echo 'disccode: '.$disccode.'';
                             echo 'discval: '.$discval.'';
 
-                            $tsql = "INSERT INTO DISCOUNT (DISCOUNT_CODE, DISCOUNT_VALUE, DISCOUNT_NAME, DISCOUNT_DESC, DISCOUNT_TAG)
-                            VALUES ('$disccode', '$discval', '$discname', '$discdesc', '$disctag')";
+                            $tsql = "INSERT INTO DISCOUNT (DISCOUNT_CODE, DISCOUNT_VALUE, DISCOUNT_NAME, DISCOUNT_DESC, DISCOUNT_TAG, ACTIVE)
+                            VALUES ('$disccode', '$discval', '$discname', '$discdesc', '$disctag', 1)";
 
                             $addCoupon = sqlsrv_query($conn, $tsql);
 

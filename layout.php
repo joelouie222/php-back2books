@@ -32,17 +32,17 @@
     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
         if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
             echo '<p Welcome back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</p>';
-            echo '<a href="/allOrders.php"><i class=""></i> VIEW ORDERS </a>';
-            echo '<a href="/allUsers.php"><i class=""></i> VIEW USERS </a>';
-            echo '<a href="/allProducts.php"><i class=""></i> VIEW PRODUCTS </a>';
-            echo '<a href="/allPromos.php"><i class=""></i> VIEW COUPONS </a>';
-            echo '<a href="/logout.php"><i class=""></i> Log Out </a>';
+            echo '<a href="/allOrders.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> VIEW ORDERS </a>';
+            echo '<a href="/allUsers.php"><i class="fa fa-users" aria-hidden="true"></i>VIEW USERS </a>';
+            echo '<a href="/allProducts.php"><i class="fa fa-list-ol" aria-hidden="true"></i> VIEW PRODUCTS </a>';
+            echo '<a href="/allPromos.php"><i class="fa fa-tags" aria-hidden="true"></i>VIEW COUPONS </a>';
+            echo '<a href="/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out </a>';
         } else {
             echo '<p Wecome back, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</p>';
             // echo '<a href="/pages/editProfile.php"><i class=""></i> Edit Profile </a>';
-            echo '<a href="/pages/myOrders.php"><i class=""></i> My Orders </a>';
+            echo '<a href="/pages/myOrders.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> My Orders </a>';
             // echo '<a href="/pages/selling.php"><i class="fa fa-fw fa-money"></i>My Listing</a>';
-            echo '<a href="/logout.php"><i class=""></i> Log Out </a>';
+            echo '<a href="/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out </a>';
         }
     } else {
         echo '  <a href="/pages/login.php"><i class="fa fa-fw fa-sign-in"></i> Sign In</a>';
