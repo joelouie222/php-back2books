@@ -117,10 +117,10 @@
                                 
                                 if ($getOrderLines != null){
                                     echo '            <tr style="border: 1px solid;">';
-                                    echo '                <td><div><h3>'.$orderId.'</h3></div>
-                                                            <div style="margin: 10px 0px;"><a href="https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'">Edit</a></div>
-                                                            <div><a href="">Delete</a></div>
-                                                            </td>';
+                                    echo '                <td><div><h3>'.$orderId.'</h3></div>';
+                                    echo '                        <div style="margin: 10px 0px;"><a href="https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'">Edit</a></div>';
+                                    echo '                        <div><a href="">Delete</a></div>';
+                                    echo '                        </td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
                                     echo '<td colspan="2">';
