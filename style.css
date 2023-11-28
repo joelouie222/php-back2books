@@ -372,6 +372,12 @@ h6{
   list-style-type: none;
 }
 
+.item-page-view {
+  padding: 0!important;
+  margin: 0!important;
+  list-style-type: none;
+}
+
 
 
 /* ------------------------------------- C A R T ----------------------------------------*/

@@ -37,7 +37,7 @@
         </form>
         <div class="products">
             <center>
-                <h1> Book Catalog </h1>
+                <h1> Item Page </h1>
                 <?php
                     echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
                     echo '<p> SESSION-userId: '.$_SESSION["userId"].'<p>';
@@ -100,7 +100,7 @@
                 ?>
             </center>
 
-            <ol class="book-list-view">
+            <ol class="item-page-view">
                 <?php
                     $tsql = "SELECT TOP (100) *
                             FROM BOOKS B
@@ -114,33 +114,15 @@
                         echo "Error in statement preparation/execution.\n";  
                         die( print_r( sqlsrv_errors(), true));
                     }
-                    $count = 1;
-                    while($row = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
 
-                        $bookIdForItemPage = $row["BOOK_ID"];
-                        
-                        // echo '<p>[BOOK TITLE]: '.$row['BOOK_TITLE'].'</p>';
-                        // echo '<p>[PROD_DESC]: '.$row['PROD_DESC'].'</p>';
-                        // echo '<p>[BOOK_ISBN]: '.$row['BOOK_ISBN'].'</p>';
-                        // // $date = $row['BOOK_PUBLISHED_DATE'];
-                        // // $formattedDate = date("Y-m-d", strtotime($date));
-                        // echo '<p>[BOOK_PUBLISHED_DATE]: '.$row['BOOK_PUBLISHED_DATE']->format('Y-m-d').'</p>';
-                        // echo '<p>[PRICE]: '.$row['PRICE'].'</p>';
-                        // echo '<p>[BOOK_FORMAT]: '.$row['BOOK_FORMAT'].'</p>';
-                        // echo '<p>[NUM_PAGES]: '.$row['NUM_PAGES'].'</p>';
-                        // echo '<p>[PUBLISHER_NAME]: '.$row['PUBLISHER_NAME'].'</p>';
-                        // echo '<p>[IMAGE_LINK]: '.$row['IMAGE_LINK'].'</p>';
-                        // echo '<p>[INV_QUANTITY]: '.$row['INV_QUANTITY'].'</p>';
-                        // echo '<p>[Author_fname]: '.$row['author_fname'].'</p>';
-                        // echo '<p>[author_lname]: '.$row['author_lname'].'</p>';
-                        // echo '</br></br>';
-
+                   if ($row = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
+                         
                         echo '<li style="border: solid; margin: 15px 10px; padding: 5px">';
                         echo '    <div style="margin-left: 0; margin-right: 0; display: flex;">';
                         echo '        <div style="align-items: center; width: 20%; display: flex">';
-                        echo '            <div style="margin: 10px"><h2>'.$count.'</h2></div>';
+                        echo '            <div style="margin: 10px"></div>';
                         echo '            <div style="margin: 10px">';
-                        echo '                <a href="https://php-back2books.azurewebsites.net/pages/itemPage.php">';
+                        echo '                <a href="">';
                         echo '                    <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" height="200" width="150" >';
                         echo '                </a>';
                         echo '            </div>';
@@ -158,7 +140,6 @@
                         echo '                                <th>Format</th>';
                         echo '                                <th>Pages</th>';
                         echo '                                <th>Stock</th>';
-                        // echo '                                <th>Price</th>';
                         echo '                            </tr>';
                         echo '                        </thead>';
                         echo '                        <tbody>';
@@ -167,7 +148,6 @@
                         echo '                                <td>'.$row['BOOK_FORMAT'].'</td>';
                         echo '                                <td>'.$row['NUM_PAGES'].'</td>';
                         echo '                                <td>'.$row['INV_QUANTITY'].'</td>';
-                        // echo '                                <td>'.$row['PRICE'].'</td>';
                         echo '                            </tr>';
                         echo '                        </tbody>';
                         echo '                    </table>';
@@ -191,7 +171,6 @@
                         echo '        </div>';
                         echo '    </div> ';
                         echo '</li>';
-                        $count++;
                     }
                     sqlsrv_free_stmt($getBooks);
                 ?>
