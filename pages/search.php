@@ -35,8 +35,7 @@
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             echo "<a href='product.php?isbn=".$row['BOOK_ISBN']."'><div class='book-container'>
                 <h1>".$row['BOOK_TITLE']."</h1>
-                <p>".$row['author_fname'],$row['author_lname']."</p>
-                <p>".$row['author_lname']."</p>
+                <p>".$row['author_fname']." ".$row['author_lname']."</p>
                 <p>".$row['BOOK_ISBN']."</p>
                 <p>".$row['PRICE']."</p>
                 <p>".$row['INV_QUANTITY']."</p>
