@@ -399,13 +399,15 @@ h6{
 } */
 
 /* --------------------------------- SEARCH BAR------------------------------------------ */
+.search {
+    background-color: antiquewhite;
+}
 .search button {
-  float: right;
   padding: 6px 10px;
   margin-top: 8px;
   margin-right: 16px;
   background: #ddd;
-  font-size: 17px;
+  font-size: 36px;
   border: none;
   cursor: pointer;
 }
