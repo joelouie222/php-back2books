@@ -39,10 +39,131 @@
             </center>
 
             <?php
+                    if (isset($_POST["addProduct"]) && $_POST["addPromo"] == "go") {
+                        $booktitle = $_POST['booktitle'];
+                        $bookauthorfname = $_POST['bookauthorfname'];
+                        $bookdesc = $_POST['bookdesc'];
+                        $bookisbn = $_POST['bookisbn'];
+                        $bookpubdate = $_POST['bookpubdate']->format('Y-m-d');
+                        $bookgenre = $_POST['bookgenre'];
+                        $bookformat = $_POST['bookformat'];
+                        $bookpages = $_POST['bookpages'];
+                        $bookpubname = $_POST['bookpubname'];
+                        $stock = $_POST['stock'];
+                        $bookprice = $_POST['bookprice'];
+                        $bookimg = $_POST['bookimg'];
+
+
+                        echo '<p>booktitle: '.$booktitle.'</br>
+                        bookauthorfname: '.$bookauthorfnam.'</br>
+                        bookdesc: '.$bookdesc .'  </br>
+                        bookisbn: '.$bookisbn.'</br>
+                        bookpubdate: '.$bookpubdate .'</br>
+                        bookgenre: '.$bookgenre.'</br>
+                        bookformat: '.$bookformat.'</br>
+                        bookpages: '.$bookpages.'</br>
+                        bookpubname: '.$bookpubname.'</br>
+                        stock: '.$stock.'</br>
+                        bookprice: '.$bookprice.'</br>
+                        bookimg: '.$bookimg.'</br>
+                        </p>';
+
+                    }
+
+
+
+
+                    if (isset($_GET['action']) && $_GET['action'] == "add") {
+ 
+                        echo ' <hr><center>';
+                        echo ' <h1> You are adding a new Product</h1></br>';
+                        echo ' <form method="post" action="">';
+                        echo '  <div class="form-group">';
+                        echo '    <label for="booktitle">Book Title: </label>';
+                        echo '    <input required name="booktitle" placeholder ="Title">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookauthorfname">Author First Name: </label>';
+                        echo '    <input required name="bookauthorfname" placeholder ="First name">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookauthorlname">Author Last Name: </label>';
+                        echo '    <input required name="bookauthorlname" placeholder ="Last name">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookdesc">Description: </label>';
+                        echo '    <textarea required name="bookdesc" style="height: 228px; width: 421px;"></textarea>';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookisbn">ISBN-13: </label>';
+                        echo '    <input required name="bookisbn" maxlength="13" type="number" placeholder="ISBN-13"">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookpubdate">Published Date: </label>';
+                        echo '    <input required name="bookpubdate" type="date">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookgenre"> Genre: </label>';
+                        echo '    <input required name="bookgenre" placeholder="Genre">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookformat">Format: </label>';
+                        echo '    <input required name="bookformat" placeholder="Format">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookpages">Number of Pages: </label>';
+                        echo '    <input required name="bookpages" maxlength="6" type="number">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookpubname">Publisher Name: </label>';
+                        echo '    <input required name="bookpubname" placeholder="Publisher name">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="stock">How many in Stock?: </label>';
+                        echo '    <input required name="stock" maxlength="6" type="number">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookprice">Price: </label>';
+                        echo '    <input required name="bookprice" placeholder="Price">';
+                        echo '  </div>';
+
+                        echo '  <div class="form-group">';
+                        echo '    <label for="bookimg">Link to Book cover image: </label>';
+                        echo '    <input required name="bookimg" type="text" type="text">';
+                        echo '  </div>';
+
+                        echo '  <div>';
+                        echo '      <button name="addProduct" type="submit" value="go"> Save </button>';
+                        echo '      </div>';
+                        echo '  </form>';
+                        echo ' </br></center><hr>';
+                    }
+
+
+
+
+
+
+
+
+
+
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
                         $tsql = "SELECT * FROM BOOKS";
                         $getBooks = sqlsrv_query($conn, $tsql);
 
+                        echo '     <div><a href="/allProducts.php?action=add"><button>ADD NEW PRODUCT</button></a></div>';
                         echo '    <div class="products">
                                     <table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;">';
                         echo '        <thead>';
