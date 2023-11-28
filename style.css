@@ -416,20 +416,19 @@ h6{
 /* --------------------------------- SEARCH PAGE------------------------------------------ */
 .catalog-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-decoration: none;
     font-family: arial; 
     max-width: 800px;
     margin: 20px auto;
     background-color: antiquewhite;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .catalog-container a{
     color: inherit;
 }
 .search-cover {
-    width: 80%;
+    width: 40%;
 }
 /* --------------------------------- LOGIN & REGISTER ------------------------------------------ */
 .login-container {
