@@ -2,9 +2,22 @@
 <?php
     include '../layout.php'
 ?>
-<html>
+<html lang="us">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+
+        <!-- FONT AWESOME -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- OUR CSS -->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="logo-style.css">
+        <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
     </head>
 
 <h1>Search page</h1>
