@@ -32,7 +32,7 @@
 </head>
 
 <body id="home">
-    <?php include('../layout.php');
+    <?php include('layout.php');
     ?>  
       
     <div class="container">
@@ -43,10 +43,79 @@
                 </br>
                 <h1> PAGE UNDER CONSTRUCTION</h1>
                 
-                <form method="post" action="">
-                    
-                    <!-- User Id -->
                 
+                
+                <?php
+                $orderId = $_GET['id'];
+                $userId = "";
+                $orderDate = "";
+                $orderDiscount = "";
+                $shippingAddr = "";
+                $payment = "";
+                $billingAddr = "";
+
+
+                $tsql = "SELECT * FROM ORDERS WHERE ORDER_ID = '$orderId'";
+                $getOrder = sqlsrv_query($conn, $tsql);
+
+                if ($getOrder == NULL) {
+                  die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                  //redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                }
+
+                while($orderInfo = sqlsrv_fetch_array($getOrder, SQLSRV_FETCH_ASSOC)) {
+                  $userId = $orderInfo['USER_ID'];
+                  $orderDate = $orderInfo['ORDER_DATE']->format('Y-m-d H:i:s');;
+                  $orderDiscount = $orderInfo['ORDER_DISCOUNT'];
+                  $shippingAddr = $orderInfo['SHIP_ADDR'];
+                  $payment = $orderInfo['PAY_METHOD'];
+                  $billingAddr = $orderInfo['BILL_ADDR'];
+
+                }
+                echo '<form method="post" action="">';
+                echo '  <div class="form-group">';
+                echo '    <label for="userid">User Id: </label>';
+                echo '    <input required name="userid" value="'.$userId.'">';
+                echo '  </div>';
+
+                echo '  <div class="form-group">';
+                echo '    <label for="userid">User Id: </label>';
+                echo '    <input required name="userid" value="'.$orderDate.'">';
+                echo '  </div>';
+
+                echo '  <div class="form-group">';
+                echo '    <label for="userid">User Id: </label>';
+                echo '    <input required name="userid" value="'.$orderDiscoun.'">';
+                echo '  </div>';
+
+                echo '  <div class="form-group">';
+                echo '    <label for="userid">User Id: </label>';
+                echo '    <input required name="userid" value="'.$shippingAddr.'">';
+                echo '  </div>';
+
+                echo '  <div class="form-group">';
+                echo '    <label for="userid">User Id: </label>';
+                echo '    <input required name="userid" value="'.$payment.'">';
+                echo '  </div>';
+
+                echo '  <div class="form-group">';
+                echo '    <label for="userid">User Id: </label>';
+                echo '    <input required name="userid" value="'.$billingAddr.'">';
+                echo '  </div>';
+
+                echo '  <div>';
+                echo '      <button name="orderUpdate" type="submit" value="go"> Save </button>';
+                echo '      </div>';
+                echo '  </form>'
+
+
+
+
+
+                ?>
+
+                    <!-- User Id -->
+
                     <!-- Order Date -->
 
                     <!-- shipping addr -->
