@@ -55,8 +55,8 @@
             <div class="search">
                 <center>
                 <form action="../pages/search.php" method="POST">
-                    <input type="text" id="search" name="search" placeholder="Search" required>
-                    <button type="submit">Search</button>
+                    <input type="text" id="search" name="search" placeholder="Search" required><br />
+                    <button type="submit">Search</button><br />
 
                 <label for="sortBy">Sort By:</label>
                 <select id="sortBy" name="sortBy">
