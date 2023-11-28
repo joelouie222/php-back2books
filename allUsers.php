@@ -44,7 +44,7 @@
                         if (isset($_POST["userUpdate"]) && $_POST["userUpdate"] == "go") {
                             $userid = $_POST['userid'];
                             $useremail =$_POST['useremail'];
-                            // $userpass = md5($_POST['userpass']);
+                            $userpass = md5($_POST['userpass']);
                             $userfname =$_POST['fname'];
                             $userlname = $_POST['lname'];
                             $useractive = $_POST['useractive'];
@@ -63,7 +63,7 @@
                             $tsql = "UPDATE B2BUSER
                             SET
                             USER_EMAIL = '$useremail', 
-                            -- USER_PASSWORD = '$userpass',
+                            USER_PASSWORD = '$userpass',
                             USER_FNAME = '$userfname',
                             USER_LNAME = '$userlname',
                             USER_ACTIVE = '$useractive',
@@ -120,7 +120,7 @@
 
                             echo '  <div class="form-group">';
                             echo '    <label for="userpass">User Password: </label>';
-                            echo '    <input required name="userpass" disabled type="password" value="'.$userpass.'">';
+                            echo '    <input required name="userpass" disabled type="password" value="**************">';
                             echo '  </div>';
 
                             echo '  <div class="form-group">';
