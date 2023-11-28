@@ -97,7 +97,7 @@
                 ?>
             </center>
 
-            <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
+            <div  style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
                         <option selected value=""> - </option>
@@ -109,7 +109,7 @@
                     <span><button type="submit" name="sortBtn" value="apply">APPLY</button></span>
                 </select></form></div>
 
-            <ol class="book-list-view">
+            <div><ol class="book-list-view">
                 <?php
                     $sortSQL = "SELECT TOP (100) * FROM BOOKS B
                     INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
@@ -247,7 +247,7 @@
                     }
                     sqlsrv_free_stmt($getBooks);
                 ?>
-            </ol>
+            </ol></div>
         </div>
 
 
