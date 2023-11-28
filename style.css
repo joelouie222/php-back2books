@@ -399,7 +399,7 @@ h6{
 /* --------------------------------- SEARCH ------------------------------------------ */
 .catalog-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-decoration: none;
     font-family: arial; 
     max-width: 800px;
@@ -410,4 +410,7 @@ h6{
 }
 .catalog-container a{
     color: inherit;
+}
+.search-cover {
+    width: 80%;
 }
