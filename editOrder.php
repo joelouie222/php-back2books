@@ -49,10 +49,10 @@
 
                   $tsql = "UPDATE ORDERS
                   SET
-                  ORDER_DATE = '$orderDate'
-                  ORDER_DISCOUNT = '$orderDiscount'
-                  SHIP_ADDR = '$shipAddr'
-                  PAY_METHOD = '$payment'
+                  ORDER_DATE = '$orderDate', 
+                  ORDER_DISCOUNT = '$orderDiscount',
+                  SHIP_ADDR = '$shipAddr',
+                  PAY_METHOD = '$payment',
                   BILL_ADDR = '$billAddr'
                   WHERE ORDER_ID = '$orderid'";
                   $updateOrder = sqlsrv_query($conn, $tsql);
