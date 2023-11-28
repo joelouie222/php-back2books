@@ -415,19 +415,12 @@ h6{
 .search-cover {
     width: 80%;
 }
-/* --------------------------------- LOGIN ------------------------------------------ */
-.login-container {
+/* --------------------------------- LOGIN & REGISTER ------------------------------------------ */
+.login-container .register-container {
     width: 70%;
     background-color: antiquewhite;
+    padding: 10px;
 }
-.login-container input{
-    width: 40%;
-}
-/* --------------------------------- LOGIN ------------------------------------------ */
-.register-container {
-    width: 70%;
-    background-color: antiquewhite;
-}
-.register-container input{
+.login-container input .register-container input {
     width: 40%;
 }
