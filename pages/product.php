@@ -12,7 +12,7 @@ include '../config.php';
         INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
         INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
         INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
-        BOOK_ISBN LIKE '%$isbn%'";
+        WHERE BOOK_ISBN LIKE '%$isbn%'";
     
     $result = sqlsrv_query($conn, $tsql);
     
