@@ -43,7 +43,7 @@
 
             <?php
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
-                        $tsql = "SELECT * FROM DISCOUNT"
+                        $tsql = "SELECT * FROM DISCOUNT";
                         $getDiscounts = sqlsrv_query($conn, $tsql);
 
                         echo '    <div class="products">
