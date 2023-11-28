@@ -87,7 +87,7 @@
                                 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
                                     ?>
                         <div class="card-carousel">
-                            <a class="book-card-carousel">
+                            <a href="<?php echo 'pages/product.php?isbn='.$row['BOOK_ISBN']; ?>"class="book-card-carousel">
                                 <img src="<?php echo $row['IMAGE_LINK']; ?>"
                                     alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
                                 <!-- <p><?php echo $row['BOOK_TITLE']; ?></p> -->
