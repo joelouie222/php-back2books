@@ -64,18 +64,6 @@
                 <h1> A L L   O R D E RS </h1>
             </center>
             <div> 
-                <?php
-                    if (isset($_POST['editOrder']) && $_POST['editOrder'] == "go" ) {
-                        echo "<div> EDIT ORDER is a go</div>";
-                        echo '<div> Order ID = '.$_POST['orderId'].'</div>';
-                    }
-
-                    if (isset($_POST['deleteOrder']) && $_POST['deleteOrder'] == "go" ) {
-                        echo "<div> EDIT ORDER is a go</div>";
-                        echo '<div> Order ID = '.$_POST['orderId'].'</div>';
-                    }
-                ?>
-
                 <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
                     <span><label for="sortVal">Sort by: </label></span>
                     <span><select name="sortVal" id="sortBy">
@@ -89,7 +77,7 @@
                 </select></form></div>
 
                 <?php
-                    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+                    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
                         $tsql = $sortSQL;
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
@@ -137,15 +125,9 @@
                                 
                                 if ($getOrderLines != null){
                                     echo '            <tr style="border: 1px solid;">';
-                                    echo '                <td><div>'.$orderId.'</div>
-                                                            <div><form method="post" action="">
-                                                                <input type="hidden" name="orderId" value="'.$orderId.'">
-                                                                <button type="submit" name="editOrder" value="go">Edit</button>
-                                                            </form></div>
-                                                            <div><form method="post" action="">
-                                                                <input type="hidden" name="orderId" value="'.$orderId.'">
-                                                                <button type="submit" name="deleteOrder" value="go">Delete</button>
-                                                            </form></div>
+                                    echo '                <td><div><h3>'.$orderId.'</h3></div>
+                                                            <div style="margin: 10px 0px;"><a href="https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'">Edit</a></div>
+                                                            <div><a href="">Delete</a></div>
                                                             </td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
