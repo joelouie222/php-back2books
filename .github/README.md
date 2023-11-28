@@ -31,10 +31,10 @@ Instructor: [Ali Dogru](alihikmet.dogru@utsa.edu)
     - [x] Calculate taxes: assume 8.25% tax rate
     - [x] Allow for discount codes
     - [x] Show summary of order and allow for order to be placed
-- [ ] Ability to search based on criteria:
-    - [ ] Item/Description
-    - [ ] Sort by Price
-    - [ ] Sort by Availability
+- [x] Ability to search based on criteria:
+    - [x] Item/Description
+    - [x] Sort by Price
+    - [x] Sort by Availability
 - [ ] Administrative back end
     - [ ] Allow to modify all items
     - [ ] Allow for creation of discount codes
@@ -45,7 +45,7 @@ Instructor: [Ali Dogru](alihikmet.dogru@utsa.edu)
         - [ ] Sort by order date
         - [ ] Sort by customer
         - [ ] Sort by order size in dollar amount
-- [ ] Intuitive UI/UX
+- [ ] **Intuitive UI/UX**
 - [x] A web application (bonus)
 
 #### Web Technologies

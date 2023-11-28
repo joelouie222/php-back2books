@@ -163,12 +163,12 @@
                         if (isset($_SESSION['fname'])) {
                           echo '  <div class="form-group">';
                           echo '    <label for="fname">First Name</label>';
-                          echo '    <input required name="fname" type="test" class="form-control" id="fname" value="'.$_SESSION['fname'].'">';
+                          echo '    <input required name="fname" type="text" class="form-control" id="fname" value="'.$_SESSION['fname'].'">';
                           echo '  </div>';
                         } else {
                           echo '  <div class="form-group">';
                           echo '    <label for="fname">First Name</label>';
-                          echo '    <input required name="fname" type="test" class="form-control" id="fname" placeholder="First Name">';
+                          echo '    <input required name="fname" type="text" class="form-control" id="fname" placeholder="First Name">';
                           
                           if(isset($_GET['fname']) && ($_GET['fname']) == "empty"){
                             echo '  <p id="fnameStatus">First name cannot be empty.</p>';
@@ -184,7 +184,7 @@
                         if (isset($_SESSION['lname'])) {
                           echo '  <div class="form-group">';
                           echo '    <label for="lname">Last Name</label>';
-                          echo '    <input required name="lname" type="test" class="form-control" id="lname" value="'.$_SESSION['lname'].'">';
+                          echo '    <input required name="lname" type="text" class="form-control" id="lname" value="'.$_SESSION['lname'].'">';
                           echo '  </div>';
                         } else {
                           echo '  <div class="form-group">';

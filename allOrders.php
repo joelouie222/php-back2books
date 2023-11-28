@@ -111,24 +111,16 @@
                                 $shipping = 6.99;
                                 $subTotal = 0;
 
-                                    // echo '<p>'.$orderRow['ORDER_ID'] .'</p';
-                                    // echo '<p>'.$orderRow['USER_ID'] .'</p';
-                                    // echo '<p>'.$orderRow['ORDER_DATE']->format('Y-m-d').'</p';
-                                    // echo '<p>'.$orderRow['ORDER_DISCOUNT'] .'</p';
-                                    // echo '<p>'.$orderRow['SHIP_ADDR'] .'</p';
-                                    // echo '<p>'.$orderRow['PAY_METHOD'] .'</p';
-                                    // echo '<p>'.$orderBillAddr.'</p';
-
                                 $tsql = "SELECT * FROM ORDER_LINES WHERE ORDER_ID = '$orderId'";
 
                                 $getOrderLines = sqlsrv_query($conn, $tsql);
                                 
                                 if ($getOrderLines != null){
                                     echo '            <tr style="border: 1px solid;">';
-                                    echo '                <td><div><h3>'.$orderId.'</h3></div>
-                                                            <div style="margin: 10px 0px;"><a href="https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'">Edit</a></div>
-                                                            <div><a href="">Delete</a></div>
-                                                            </td>';
+                                    echo '                <td><div><h3>'.$orderId.'</h3></div>';
+                                    echo '                        <div style="margin: 10px 0px;"><a href="https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'">Edit</a></div>';
+                                    echo '                        <div><a href="">Delete</a></div>';
+                                    echo '                        </td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
                                     echo '<td colspan="2">';
@@ -136,10 +128,6 @@
                                         $bookId = $orderLines['BOOK_ID'];
                                         $bookPrice = $orderLines['PRICE'];
                                         $bookQty = $orderLines['ORDER_QUANTITY'];
-
-                                        // echo '<p> BookId: '.$bookId.'</p';
-                                        // echo '<p> BookPrice: '.$bookPrice.'</p';
-                                        // echo '<p> Book Qty: '.$bookQty.'</p</br></br></br>';
 
                                         $subTotal = ($subTotal + ($bookPrice * $bookQty));
 

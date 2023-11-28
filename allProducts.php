@@ -23,7 +23,7 @@
 </head>
 
 <body id="home">
-    <?php include('../layout.php');
+    <?php include('layout.php');
     ?>  
       
     <div class="container">
