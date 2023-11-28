@@ -417,6 +417,8 @@ h6{
 .catalog-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    flex: 200px;
     text-decoration: none;
     font-family: arial; 
     max-width: 800px;
