@@ -121,6 +121,7 @@
                 ?>
             </div>
 
+            <div id="login-container">
             <div>
                 <form method="post" action="">
                   <!-- Email input -->
@@ -144,6 +145,7 @@
                   <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
                 </form>
             </div>
+          </div>
           </center>
         </div>
     </div>
