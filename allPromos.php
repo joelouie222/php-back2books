@@ -35,10 +35,7 @@
                               
         <div class="products">
             <center>
-                <img src="/images/patrick-star-dumb.gif" width="300" height="150">
-                </br>
-                <h1> PAGE UNDER CONSTRUCTION</h1>
-                <h2> This page will list ALL PROMOTIONS active or note, be able to create a new COUPON CODE </h2>
+                <h1> A L L &nbsp &nbsp P R O M O T I O N S </h1>
             </center>
 
             <?php
