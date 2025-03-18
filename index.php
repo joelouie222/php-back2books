@@ -86,6 +86,12 @@
                             }
                                 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
                                     ?>
+                        <?php
+                            echo '<pre>';
+                            print_r($row);
+                            echo '</pre>';
+                        ?>
+                            
                         <div class="card-carousel">
                             <a href="<?php echo 'pages/product.php?isbn='.$row['BOOK_ISBN']; ?>"class="book-card-carousel">
                                 <img src="<?php echo $row['IMAGE_LINK']; ?>"
