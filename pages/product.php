@@ -104,15 +104,15 @@ if ($result == false) {
 }
 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
     echo "<div class='book-container window'>
-        <img class='search-cover' src=".$row['IMAGE_LINK']." alt='Book Cover'>
-        <h1>".$row['BOOK_TITLE']."</h1>
+        <img class='search-cover' src=".$row['image_link']." alt='".$row['book_title']." Book Cover'>
+        <h1>".$row['book_title']."</h1>
         <p>".$row['author_fname'] . " ".$row['author_lname']. "</p>" .
-        "<p>ISBN: ".$row['BOOK_ISBN']."</p>
-        <p>Price: $".$row['PRICE']."</p>
-        <p>Synopsis:</br>".$row['PROD_DESC']."</p>
+        "<p>ISBN: ".$row['book_isbn']."</p>
+        <p>Price: $".$row['price']."</p>
+        <p>Synopsis:</br>".$row['prod_desc']."</p>
         </br>
         <form method='post' action=''>
-            <input name='cartBookID' type='hidden' value='".$row['BOOK_ID']."'>
+            <input name='cartBookID' type='hidden' value='".$row['book_id']."'>
             <div style='cursor: pointer;'><button name='submit' style='padding: 5px;' type='submit' value='ADDTOCART'> ADD TO CART </button></div>
         </form>
         </div>";
