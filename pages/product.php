@@ -90,7 +90,7 @@ include '../layout.php';
 <div class="container">
     <?php
 $isbn = $_GET['isbn'];
-$tsql = "SELECT * FROM BOOKS B
+$tsql = "SELECT * FROM BOOK B
     INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
     INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
     INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
