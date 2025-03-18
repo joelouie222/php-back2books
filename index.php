@@ -85,17 +85,19 @@
                                 die("Query failed: " . print_r(sqlsrv_errors(), true));
                             }
                                 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-                                    ?>
+                                    echo '<pre>';
+                                    print_r($row);
+                                    echo '</pre>';
+                                ?>
                         <div class="card-carousel">
-                            <a href="<?php echo 'pages/product.php?isbn='.$row["BOOK_ISBN"]; ?>"class="book-card-carousel">
-                                <img src="<?php echo $row["IMAGE_LINK"]; ?>"
-                                    alt="<?php echo $row["BOOK_TITLE"]; ?> book cover">
-                                <!-- <p><?php echo $row["BOOK_TITLE"]; ?></p> -->
+                            <a href="<?php echo 'pages/product.php?isbn='.$row['book_isbn']; ?>"class="book-card-carousel">
+                                <img src="<?php echo $row['book_isbn']; ?>"
+                                    alt="<?php echo $row['book_title']; ?> book cover">
+                                <!-- <p><?php echo $row['book_title']; ?></p> -->
                             </a>
                         </div>
                         <?php
                                 }
-                            
                             sqlsrv_free_stmt($result);
                         ?>
                     </div>
