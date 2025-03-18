@@ -79,7 +79,7 @@
                     </div>
                     <div class="card-container-carousel">
                         <?php
-                            $query = "SELECT TOP 10 b.*, bi.IMAGE_LINK FROM BOOKS b LEFT JOIN BOOK_IMAGE bi ON b.BOOK_ID = bi.book_id";
+                            $query = "SELECT TOP 10 b.*, bi.image_link FROM book b LEFT JOIN book_image bi ON b.book_id = bi.book_id";
                             $result = sqlsrv_query($conn, $query);
                             if ($result === false) {
                                 die("Query failed: " . print_r(sqlsrv_errors(), true));
