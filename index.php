@@ -79,24 +79,18 @@
                     </div>
                     <div class="card-container-carousel">
                         <?php
-                            $query = "SELECT TOP 10 b.*, bi.image_link FROM book b LEFT JOIN book_image bi ON b.book_id = bi.book_id";
+                            $query = "SELECT TOP 10 b.book_isbn, b.book_title, bi.image_link FROM book b LEFT JOIN book_image bi ON b.book_id = bi.book_id";
                             $result = sqlsrv_query($conn, $query);
                             if ($result === false) {
                                 die("Query failed: " . print_r(sqlsrv_errors(), true));
                             }
                                 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
                                     ?>
-                        <?php
-                            echo '<pre>';
-                            print_r($row);
-                            echo '</pre>';
-                        ?>
-                            
                         <div class="card-carousel">
-                            <a href="<?php echo 'pages/product.php?isbn='.$row['BOOK_ISBN']; ?>"class="book-card-carousel">
-                                <img src="<?php echo $row['IMAGE_LINK']; ?>"
-                                    alt="<?php echo $row['BOOK_TITLE']; ?> book cover">
-                                <!-- <p><?php echo $row['BOOK_TITLE']; ?></p> -->
+                            <a href="<?php echo 'pages/product.php?isbn='.$row["BOOK_ISBN"]; ?>"class="book-card-carousel">
+                                <img src="<?php echo $row["IMAGE_LINK"]; ?>"
+                                    alt="<?php echo $row["BOOK_TITLE"]; ?> book cover">
+                                <!-- <p><?php echo $row["BOOK_TITLE"]; ?></p> -->
                             </a>
                         </div>
                         <?php
