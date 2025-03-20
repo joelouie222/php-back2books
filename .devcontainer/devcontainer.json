@@ -1,0 +1,40 @@
+{
+
+	"name": "PHP",
+
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile	
+	"image": "mcr.microsoft.com/devcontainers/php:1-8.2-bullseye",
+	
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"extensions": [
+				"ikappas.composer"
+			]
+		}
+	},
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		8080
+	],
+	
+	"features": {
+		"ghcr.io/jlaundry/devcontainer-features/mssql-odbc-driver:1": {}
+	},
+	
+	
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html && if [ -f composer.json ]; then composer install; fi && sudo apt-get update && sudo apt-get install -y unixodbc-dev && sudo pecl install sqlsrv pdo_sqlsrv && echo 'extension=sqlsrv.so' | sudo tee -a /usr/local/etc/php/conf.d/sqlsrv.ini && echo 'extension=pdo_sqlsrv.so' | sudo tee -a /usr/local/etc/php/conf.d/pdo_sqlsrv.ini && bash ./.devcontainer/post-create.sh"
+	
+	// In the Terminal of your codespace, enter:
+	// sudo sed -i 's/Listen 80$//' /etc/apache2/ports.conf
+	// sudo sed -i 's/<VirtualHost \*:80>/ServerName 127.0.0.1\n<VirtualHost \*:8080>/' /etc/apache2/sites-enabled/000-default.conf
+	// apache2ctl start
+	
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	
+	// "remoteUser": "root"
+	
+}
