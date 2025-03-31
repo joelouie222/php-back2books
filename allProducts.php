@@ -70,7 +70,7 @@
                         echo '</center>';
 
                         // INSERT BOOK
-                        $tsql = "INSERT INTO BOOKS (BOOK_TITLE, PROD_DESC, BOOK_ISBN, BOOK_PUBLISHED_DATE, PRICE, BOOK_FORMAT, NUM_PAGES, PUBLISHER_NAME)
+                        $tsql = "INSERT INTO BOOK (BOOK_TITLE, PROD_DESC, BOOK_ISBN, BOOK_PUBLISHED_DATE, PRICE, BOOK_FORMAT, NUM_PAGES, PUBLISHER_NAME)
                             VALUES ('$booktitle', '$bookdesc', '$bookisbn', '$bookpubdate', '$bookprice', '$bookformat', '$bookpages', '$bookpubname')";
 
                         $addBook = sqlsrv_query($conn, $tsql);
@@ -189,7 +189,7 @@
 
 
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
-                        $tsql = "SELECT * FROM BOOKS";
+                        $tsql = "SELECT * FROM BOOK";
                         $getBooks = sqlsrv_query($conn, $tsql);
 
                         echo '     <div><a href="/allProducts.php?action=add"><button>ADD NEW PRODUCT</button></a></div>';
@@ -212,15 +212,15 @@
 
                         if ($getBooks != null){
                             while($bookRow = sqlsrv_fetch_array($getBooks, SQLSRV_FETCH_ASSOC)) {
-                                $bookId = $bookRow['BOOK_ID'];
-                                $bookTitle = $bookRow['BOOK_TITLE'];
-                                $bookDesc = $bookRow['PROD_DESC'];
-                                $bookISBN = $bookRow['BOOK_ISBN'];
-                                $bookPubDate = $bookRow['BOOK_PUBLISHED_DATE']->format('Y-m-d');
-                                $bookPrice = $bookRow['PRICE'];
-                                $bookFormat = $bookRow['BOOK_FORMAT'];
-                                $bookPages = $bookRow['NUM_PAGES'];
-                                $bookPubName = $bookRow['PUBLISHER_NAME'];
+                                $bookId = $bookRow['book_id'];
+                                $bookTitle = $bookRow['book_title'];
+                                $bookDesc = $bookRow['prod_desc'];
+                                $bookISBN = $bookRow['book_isbn'];
+                                $bookPubDate = $bookRow['book_published_date']->format('Y-m-d');
+                                $bookPrice = $bookRow['price'];
+                                $bookFormat = $bookRow['book_format'];
+                                $bookPages = $bookRow['num_pages'];
+                                $bookPubName = $bookRow['publisher_name'];
 
                                 echo '            <tr style="border: 1px solid;">';
                                 echo '                <td><div><h3>'.$bookId.'</h3></div>';

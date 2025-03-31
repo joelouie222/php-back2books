@@ -28,7 +28,7 @@ if (isset($_POST['search'])) {
     $search = $_POST['search'];
     $sortBy = $_POST['sortBy'];
 
-    $sql = "SELECT * FROM BOOKS B
+    $sql = "SELECT * FROM BOOK B
         INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
         INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
         INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
@@ -39,11 +39,11 @@ if (isset($_POST['search'])) {
         author_lname LIKE '%$search%'";
 
     if ($sortBy == "priceLowToHigh") {
-        $sql .= " ORDER BY PRICE ASC";
+        $sql .= " ORDER BY price ASC";
     } elseif ($sortBy == "priceHighToLow") {
-        $sql .= " ORDER BY PRICE DESC";
+        $sql .= " ORDER BY price DESC";
     } elseif ($sortBy == "availability") {
-        $sql .= " ORDER BY INV_QUANTITY DESC";
+        $sql .= " ORDER BY inv_quantity DESC";
     }
 
     $result = sqlsrv_query($conn, $sql);
@@ -52,14 +52,14 @@ if (isset($_POST['search'])) {
         die(print_r(sqlsrv_errors(), true));
     }
     while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-        echo "<a href='product.php?isbn=".$row['BOOK_ISBN']."'><div class='book-container'>
-            <img class='search-cover' src=".$row['IMAGE_LINK']." alt='Book Cover'>
+        echo "<a href='product.php?isbn=".$row['book_id']."'><div class='book-container'>
+            <img class='search-cover' src=".$row['image_link']." alt='Book Cover'>
             <div class='book-info-container'>
-            <h1>".$row['BOOK_TITLE']."</h1>
+            <h1>".$row['book_title']."</h1>
             <p>".$row['author_fname']." ".$row['author_lname']."</p>
-            <p>ISBN: ".$row['BOOK_ISBN']."</p>
-            <p>Price: $".$row['PRICE']."</p>
-            <p>In stock: ".$row['INV_QUANTITY']."</p>
+            <p>ISBN: ".$row['book_isbn']."</p>
+            <p>Price: $".$row['price']."</p>
+            <p>In stock: ".$row['inv_quantity']."</p>
             </div>
             </br>
             <button class='search-add' name='submit' type='submit'> ADD TO CART </button>
