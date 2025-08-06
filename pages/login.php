@@ -21,7 +21,7 @@
     
     <!-- OUR CSS -->    
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/logo-style.css">
+    <!-- <link rel="stylesheet" href="/logo-style.css"> -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
@@ -29,7 +29,6 @@
     <div class="container">
         <?php
           include('../layout.php');          
-          include('../config.php');
           include('../functions.php');
           
           if(isset($_POST['submit']) && $_POST['submit']=="submit")
@@ -42,14 +41,16 @@
 
             if(empty(trim($_POST["loginEmail"]))){
               $emailErr = "emptyEmail";
-              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=empty");
+              // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=empty");
+              redirect($HOME."pages/login.php?verify=empty");
             } else {
               $userEmail = trim($_POST["loginEmail"]);
             }
           
             if(empty(trim($_POST["loginPassword"]))){
               $passwordErr = "emptyPassword";
-              redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=empty");
+              // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=empty");
+              redirect($HOME."pages/login.php?verify=empty");
             } else {
               $userPassword = trim($_POST["loginPassword"]);
             }
@@ -65,14 +66,17 @@
               // echo "<h1>getUser: '.$getUser.' </h1>";
 
               if( $getUser == false ) { 
-                redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+                // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+                redirect($HOME."pages/login.php?verify=failed");
               } else {
                 $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC); 
                   if ($user == null) {
-                    redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+                    // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+                    redirect($HOME."pages/login.php?verify=failed");
                   } else {
                     if ($user["USER_FNAME"] == null || $user["USER_LNAME"] = null) {
-                      redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+                      // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
+                      redirect($HOME."pages/login.php?verify=failed");
                     } else {
                       $_SESSION["loggedIn"] = true;
                       $_SESSION["fname"] = $user["USER_FNAME"];
@@ -83,7 +87,8 @@
                       $_SESSION["hashedPassword"] = $hashedPassword;
                       sqlsrv_free_stmt($getUser);
                       //sqlsrv_free_stmt($user);
-                      redirect("https://php-back2books.azurewebsites.net/");
+                      // redirect("https://php-back2books.azurewebsites.net/");
+                      redirect($HOME);
                     }
                   }
                 

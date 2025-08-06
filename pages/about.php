@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,8 @@ session_start();
 
 <body id="home">
     <div class="container">
-        <?php include('../layout.php');
+        <?php 
+            include('../layout.php');
         ?>
 
         <div class="about-us window">

@@ -27,7 +27,6 @@
 <body id="home">
     <?php 
         include('../layout.php');
-        include('../config.php');
         include('../functions.php');
     ?>  
       
@@ -71,7 +70,8 @@
                                         }
                                         $bookId = "";
                                         $cartItemId = "";
-                                        redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                        // redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                        redirect($HOME."pages/catalog.php");
                                     }
                                 }
                                 $tsql = "INSERT INTO CART_ITEMS (CART_ID, book_id, ITEM_QUANTITY, price) 
@@ -80,7 +80,8 @@
                                 if ($addBookToCart === false) {
                                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                 }
-                                redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                // redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                redirect($HOME."pages/catalog.php");
                             } else {  // IF THERE ARE NOTHING IN CART, INSERT ITEM
                                 $tsql = "INSERT INTO CART_ITEMS (CART_ID, book_id, ITEM_QUANTITY, price) 
                                 VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT price FROM BOOKS WHERE book_id = '$bookId')) ";             
@@ -88,10 +89,12 @@
                                 if ($addBookToCart === false) {
                                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                 }
-                                redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                // redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                redirect($HOME."pages/catalog.php");
                             }
                         } else { // NOT LOGGED IN
-                            redirect("https://php-back2books.azurewebsites.net/pages/login.php");
+                            // redirect("https://php-back2books.azurewebsites.net/pages/login.php");
+                            redirect($HOME."pages/login.php");
                         }
                     }
                 ?>

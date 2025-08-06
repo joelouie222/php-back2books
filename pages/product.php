@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('../functions.php');
+    include('../config.php');
 ?>
 
 <?php
@@ -39,7 +40,8 @@
                                         }
                                         $bookId = "";
                                         $cartItemId = "";
-                                        redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                        // redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                        redirect($HOME."pages/catalog.php");
                                     }
                                 }
                                 $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
@@ -48,7 +50,8 @@
                                 if ($addBookToCart === false) {
                                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                 }
-                                redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                // redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                redirect($HOME."pages/catalog.php");
                             } else {  // IF THERE ARE NOTHING IN CART, INSERT ITEM
                                 $tsql = "INSERT INTO CART_ITEMS (CART_ID, BOOK_ID, ITEM_QUANTITY, PRICE) 
                                 VALUES ((SELECT CART_ID FROM CART WHERE USER_ID = '$userId'), '$bookId', 1, (SELECT PRICE FROM BOOKS WHERE BOOK_ID = '$bookId')) ";             
@@ -56,16 +59,18 @@
                                 if ($addBookToCart === false) {
                                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                 }
-                                redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                // redirect("https://php-back2books.azurewebsites.net/pages/catalog.php");
+                                redirect($HOME."pages/catalog.php");
                             }
                         } else { // NOT LOGGED IN
-                            redirect("https://php-back2books.azurewebsites.net/pages/login.php");
+                            // redirect("https://php-back2books.azurewebsites.net/pages/login.php");
+                            redirect($HOME."pages/login.php");
                         }
                     }
-                ?>
+?>
 <!DOCTYPE html>
 <?php
-include '../layout.php';
+    include '../layout.php';
 ?>
 <html lang="us">
 
@@ -81,43 +86,43 @@ include '../layout.php';
 
     <!-- OUR CSS -->
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../logo-style.css">
+    <!-- <link rel="stylesheet" href="../logo-style.css"> -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
-<h1>Product page</h1>
+    <h1>Product page</h1>
 
-<div class="container">
-    <?php
-$isbn = $_GET['isbn'];
-$tsql = "SELECT * FROM BOOK B
-    INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
-    INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
-    INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
-    INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
-    WHERE BOOK_ISBN LIKE '%$isbn%'";
+    <div class="container">
+        <?php
+    $isbn = $_GET['isbn'];
+    $tsql = "SELECT * FROM BOOK B
+        INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
+        INNER JOIN AUTHOR_LIST AL ON B.BOOK_ID = AL.BOOK_ID
+        INNER JOIN AUTHOR A ON AL.AUTHOR_ID = A.AUTHOR_ID
+        INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
+        WHERE BOOK_ISBN LIKE '%$isbn%'";
 
-$result = sqlsrv_query($conn, $tsql);
+    $result = sqlsrv_query($conn, $tsql);
 
-if ($result == false) {
-    die(print_r(sqlsrv_errors(), true));
-}
-while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-    echo "<div class='book-container'>
-        <img class='search-cover' src=".$row['image_link']." alt='".$row['book_title']." Book Cover'>
-        <h1>".$row['book_title']."</h1>
-        <p>".$row['author_fname'] . " ".$row['author_lname']. "</p>" .
-        "<p>ISBN: ".$row['book_isbn']."</p>
-        <p>Price: $".$row['price']."</p>
-        <p>Synopsis:</br>".$row['prod_desc']."</p>
-        </br>
-        <form method='post' action=''>
-            <input name='cartBookID' type='hidden' value='".$row['book_id']."'>
-            <div style='cursor: pointer;'><button name='submit' style='padding: 5px;' type='submit' value='ADDTOCART'> ADD TO CART </button></div>
-        </form>
-        </div>";
-} 
-?>
-</div>
+    if ($result == false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+    while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+        echo "<div class='book-container'>
+            <img class='search-cover' src=".$row['image_link']." alt='".$row['book_title']." Book Cover'>
+            <h1>".$row['book_title']."</h1>
+            <p>".$row['author_fname'] . " ".$row['author_lname']. "</p>" .
+            "<p>ISBN: ".$row['book_isbn']."</p>
+            <p>Price: $".$row['price']."</p>
+            <p>Synopsis:</br>".$row['prod_desc']."</p>
+            </br>
+            <form method='post' action=''>
+                <input name='cartBookID' type='hidden' value='".$row['book_id']."'>
+                <div style='cursor: pointer;'><button name='submit' style='padding: 5px;' type='submit' value='ADDTOCART'> ADD TO CART </button></div>
+            </form>
+            </div>";
+    } 
+    ?>
+    </div>
 
 </html>

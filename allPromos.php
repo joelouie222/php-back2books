@@ -3,7 +3,8 @@
   include('functions.php');
   include('config.php');
   if (!isset($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] != true || $_SESSION["admin"] != true) {
-    redirect("https://php-back2books.azurewebsites.net/");
+    // redirect("https://php-back2books.azurewebsites.net/");
+    redirect($HOME);
   }
 ?>
 <!DOCTYPE html>
@@ -61,9 +62,11 @@
 
                             if ($addCoupon == NULL){
                                 // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                redirect("https://php-back2books.azurewebsites.net/allPromos.php?fetch=err");
+                                // redirect("https://php-back2books.azurewebsites.net/allPromos.php?fetch=err");
+                                redirect($HOME."allPromos.php?fetch=err");
                             }
-                            redirect("https://php-back2books.azurewebsites.net/allPromos.php");
+                            // redirect("https://php-back2books.azurewebsites.net/allPromos.php");
+                            redirect($HOME."allPromos.php");
                         } 
 
                         if (isset($_GET['action']) && $_GET['action'] == "add") {
@@ -144,10 +147,12 @@
                             echo '    </table></div>';
                         } else {
                             //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            redirect("https://php-back2books.azurewebsites.net/allPromos.php?fetch=err");
+                            // redirect("https://php-back2books.azurewebsites.net/allPromos.php?fetch=err");
+                            redirect($HOME."allPromos.php?fetch=err");
                         }                                
                     } else {
-                        redirect("https://php-back2books.azurewebsites.net/");
+                        // redirect("https://php-back2books.azurewebsites.net/");
+                        redirect($HOME);
                     }
                 ?>
         </div>

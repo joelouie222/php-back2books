@@ -3,8 +3,6 @@
   if (!isset($_SESSION['discountValue']) || $_SESSION['discountValue'] == 0){
     $_SESSION['discountValue'] = 0;
   }
-  
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,8 +32,6 @@
             include('../layout.php');
             include('../functions.php');
 
-
-            
             echo '<div class="cart">';
             if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
                 if ((isset($_POST['update'])) && $_POST['update'] == "update") {
@@ -50,11 +46,13 @@
 
                     $updateCart = sqlsrv_query($conn, $tsql);
                     if ($updateCart === false) {
-                        redirect("https://php-back2books.azurewebsites.net/pages/cart.php?update=err");
+                        // redirect("https://php-back2books.azurewebsites.net/pages/cart.php?update=err");
+                        redirect($HOME."pages/cart.php?update=err");
                     }
                     $newQuantity = "";
                     $cartItemId = "";
-                    redirect("https://php-back2books.azurewebsites.net/pages/cart.php");
+                    // redirect("https://php-back2books.azurewebsites.net/pages/cart.php");
+                    redirect($HOME."pages/cart.php");
                 }
 
                 if ((isset($_POST['placeOrder'])) && $_POST['placeOrder'] == "go") {
@@ -86,7 +84,8 @@
 
                     if($addOrder== false) {
                         //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                        redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                        // redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                        redirect($HOME."pages/cart.php?order=err");
                     } else {
                         // GET ORDER ID
                         $tsql = "SELECT TOP (1) ORDER_ID FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
@@ -96,7 +95,8 @@
                         if ($getOrderId == false) {
                             //echo '<p>$getOrderId</p>';
                             //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                            // redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                            redirect($HOME."pages/cart.php?order=err");
                         }
 
                         while($orderRow = sqlsrv_fetch_array($getOrderId , SQLSRV_FETCH_ASSOC)) {
@@ -111,7 +111,8 @@
                                if ($orderCart == false) {
                                 //echo '<p>$orderCart</p>';
                                 //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                                // redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                                redirect($HOME."pages/cart.php?order=err");
                                 }
 
                                while($cartRow = sqlsrv_fetch_array($orderCart, SQLSRV_FETCH_ASSOC)) {
@@ -262,7 +263,8 @@
                                                 echo '            <p> Stock left: '.$row['INV_QUANTITY'].'</p>';
                                                 echo '            </br>';
                                                 if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
-                                                    echo '           <a href="https://php-back2books.azurewebsites.net/removeCartItem.php?p='.$citemId.'">Remove</a>';
+                                                    echo '           <a href="'.$HOME.'removeCartItem.php?p='.$citemId.'">Remove</a>';
+
                                                 }
                                                 echo '        </td>';
                                                 echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
@@ -425,7 +427,8 @@
                         echo '</div>';
                     }
                 } else {
-                    redirect("https://php-back2books.azurewebsites.net/pages/login.php");
+                    // redirect("https://php-back2books.azurewebsites.net/pages/login.php");
+                    redirect($HOME."pages/login.php");
                 }                    
                 ?>
             </div>                    

@@ -3,7 +3,9 @@
   include('functions.php');
   include('config.php');
   if (!isset($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] != true || $_SESSION["admin"] != true) {
-    redirect("https://php-back2books.azurewebsites.net/");
+    // redirect("https://php-back2books.azurewebsites.net/");
+    // dev server
+    redirect($HOME);
   }
   //$userId = $_SESSION["userId"];
   $sortSQL = "SELECT * FROM ORDERS ORDER BY ORDER_DATE DESC";
@@ -70,7 +72,7 @@
                               
         <div class="products">
             <center>
-                <h1> A L L &nbsp &nbsp O R D E RS </h1>
+                <h1> A L L &nbsp &nbsp O R D E R S </h1>
             </center>
             <div> 
                 <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
@@ -131,7 +133,7 @@
                                 if ($getOrderLines != null){
                                     echo '            <tr style="border: 1px solid;">';
                                     echo '                <td><div><h3>'.$orderId.'</h3></div>';
-                                    echo '                        <div style="margin: 10px 0px;"><a href="https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'">Edit</a></div>';
+                                    echo '                        <div style="margin: 10px 0px;"><a href="'.$HOME.'editOrder.php?id='.$orderId.'">Edit</a></div>';
                                     // echo '                        <div><a href="">Delete</a></div>';
                                     echo '                        </td>';
                                     echo '                <td>'.$userId.'</td>';
@@ -163,7 +165,9 @@
                                             
                                         } else {
                                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                            redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                                            // redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                                            // dev server
+                                            redirect($HOME."allOrders.php?fetch=err");
                                         }
                                     }
                                     echo '</td>';
@@ -177,14 +181,18 @@
 
                                 } else {
                                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                    redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                                    // redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                                    // dev server
+                                    redirect($HOME."allOrders.php?fetch=err");
                                 }                                
                             }
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
                             (print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                            // redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                            // dev server
+                            redirect($HOME."allOrders.php?fetch=err");
                         }
 
                     }

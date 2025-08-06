@@ -2,7 +2,8 @@
   session_start();
   include("functions.php");
   if (!isset($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] != true || $_SESSION["admin"] != true) {
-    redirect("https://php-back2books.azurewebsites.net/");
+    // redirect("https://php-back2books.azurewebsites.net/");
+    redirect($HOME);
   }
   
 ?>
@@ -28,8 +29,8 @@
 </head>
 
 <body id="home">
-    <?php include('layout.php');
-    
+    <?php 
+      include('layout.php');
     ?>  
       
     <div class="container">
@@ -61,7 +62,8 @@
                   if ($updateOrder === false) {
                       die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                   }
-                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id=$orderid");
+                  // redirect("https://php-back2books.azurewebsites.net/editOrder.php?id=$orderid");
+                  redirect($HOME."editOrder.php?id=$orderid");
                }
 
                if (isset($_POST["orderLineUpdate"]) && $_POST["orderLineUpdate"] == "go") {
@@ -87,7 +89,8 @@
                   if ($updateOrderLine === false) {
                     die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                   }
-                  redirect("https://php-back2books.azurewebsites.net/editOrder.php?id=$orderid");
+                  //redirect("https://php-back2books.azurewebsites.net/editOrder.php?id=$orderid");
+                  redirect($HOME."editOrder.php?id=$orderid");
                 }
 
 

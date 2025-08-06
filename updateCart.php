@@ -6,5 +6,6 @@
         
 
     }
-    redirect("https://php-back2books.azurewebsites.net/");
+    // redirect("https://php-back2books.azurewebsites.net/");
+    redirect($HOME);
 ?>

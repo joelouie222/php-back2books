@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-include '../layout.php'
+    include('../layout.php');
 ?>
 <html lang="us">
 
@@ -16,7 +16,7 @@ include '../layout.php'
 
     <!-- OUR CSS -->
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../logo-style.css">
+    <!-- <link rel="stylesheet" href="../logo-style.css"> -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 

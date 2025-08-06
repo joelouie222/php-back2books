@@ -20,7 +20,7 @@
 
     <!-- OUR CSS -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="logo-style.css">
+    <!-- <link rel="stylesheet" href="logo-style.css"> -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
@@ -29,6 +29,7 @@
         // Include the configuration file
         include('layout.php');
     ?>
+
     <div class="container">
         <div id="content">
             <div class="window">
@@ -52,6 +53,7 @@
                 <img src="images/welcome.gif" id="welcome">
                 </br>
             </div>
+
             <center>
             <div class="window search">
                 <form action="../pages/search.php" method="POST">
@@ -67,6 +69,7 @@
                 </form>
             </div>
             </center>
+            
             <div class="window">
                 <div class="gallery-container-carousel">
                     <!--prev button-->
@@ -108,7 +111,9 @@
             </div>
         </div>
     </div>
-    <script>
+
+
+    <script> 
     document.addEventListener("DOMContentLoaded", function() {
         const cardContainer = document.querySelector(".card-container-carousel");
         const cards = document.querySelectorAll(".card-carousel");
@@ -139,6 +144,7 @@
         showCard(currentIndex);
     });
     </script>
+
 </body>
 
 

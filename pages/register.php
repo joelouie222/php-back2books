@@ -18,14 +18,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- OUR CSS -->    
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/logo-style.css">
+    <!-- <link rel="stylesheet" href="/logo-style.css"> -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
 <body id="home">
     <?php
         include('../layout.php');
-        include('../config.php');
         include('../functions.php');
     ?>  
     <div class="container">
@@ -113,7 +112,8 @@
                     // echo '<h1>session-sa: '.$_SESSION['securityAnswer'].' </h1>';
 
                     if ($userPassword != $userPassword2) {
-                      redirect("https://php-back2books.azurewebsites.net/pages/register.php?pass2=mismatch");
+                      // redirect("https://php-back2books.azurewebsites.net/pages/register.php?pass2=mismatch");
+                      redirect($HOME."pages/register.php?pass2=mismatch");
                     } else {
                       $hashedPassword = md5($userPassword);
                     }
@@ -140,14 +140,17 @@
 
                     if($addUser == false) {
                       sqlsrv_free_stmt($addUser);
-                      redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
+                      // redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
+                      redirect($HOME."pages/register.php?reg=failed");
                     } else {
                       sqlsrv_free_stmt($addUser);
-                      redirect("https://php-back2books.azurewebsites.net/pages/login.php?reg=success");
+                      // redirect("https://php-back2books.azurewebsites.net/pages/login.php?reg=success");
+                      redirect($HOME."pages/login.php?reg=success");
                     }
                   }
                   else {
-                    redirect("https://php-back2books.azurewebsites.net/pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
+                    // redirect("https://php-back2books.azurewebsites.net/pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
+                    redirect($HOME."pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
                   }
               
 

@@ -51,7 +51,7 @@
 
     <!-- OUR CSS -->    
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/logo-style.css">
+    <!-- <link rel="stylesheet" href="/logo-style.css"> -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
@@ -163,7 +163,8 @@
                                             
                                         } else {
                                             //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                            redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                                            // redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                                            redirect($HOME."pages/myOrders.php?fetch=err");
                                         }
                                     }
                                     echo '</td>';
@@ -177,14 +178,16 @@
 
                                 } else {
                                     // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                    redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                                    // redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                                    redirect($HOME."pages/myOrders.php?fetch=err");
                                 }                                
                             }
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
                             // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                            // redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
+                            redirect($HOME."pages/myOrders.php?fetch=err");
                         }
 
                     }

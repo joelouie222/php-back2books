@@ -3,7 +3,9 @@
   include('functions.php');
   include('config.php');
   if (!isset($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] != true || $_SESSION["admin"] != true) {
-    redirect("https://php-back2books.azurewebsites.net/");
+    // redirect("https://php-back2books.azurewebsites.net/");
+    // dev server
+    redirect($HOME);
   }
 ?>
 <!DOCTYPE html>
@@ -79,7 +81,8 @@
                             die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                         }
 
-                        redirect("https://php-back2books.azurewebsites.net/allProducts.php");
+                        // redirect("https://php-back2books.azurewebsites.net/allProducts.php");
+                        redirect($HOME);
 
                         // INSERT GENRE
 
@@ -243,7 +246,8 @@
                             //redirect("https://php-back2books.azurewebsites.net/allProducts.php?fetch=err");
                         }                                
                     } else {
-                        redirect("https://php-back2books.azurewebsites.net/");
+                        //redirect("https://php-back2books.azurewebsites.net/");
+                        redirect($HOME);
                     }
                 ?>
         </div>
