@@ -3,32 +3,32 @@
   include('../functions.php');
   include('../config.php');
   $userId = $_SESSION["userId"];
-  $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
+  $sortSQL = "SELECT * FROM [ORDER] WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
 
   if (isset($_POST['sortBtn']) && $_POST['sortBtn'] == "apply"){
     switch ($_POST['sortVal']) {
         case "dateAsc":
-            $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE";
+            $sortSQL = "SELECT * FROM [ORDER] WHERE USER_ID = '$userId' ORDER BY ORDER_DATE";
             break;
         case "priceDesc":
-            $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
+            $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM [ORDER] AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
             WHERE USER_ID = '$userId'
             ORDER BY SUBQ.TOTAL_AMOUNT DESC";
             break;
         case "priceAsc":
-            $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
+            $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM [ORDER] AS O
             INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
                 ON O.ORDER_ID = SUBQ.ORDER_ID
             WHERE USER_ID = '$userId'
             ORDER BY SUBQ.TOTAL_AMOUNT";
             break;
         case "dateDesc":
-            $sortSQL = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
+            $sortSQL = "SELECT * FROM [ORDER] WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
             break;
         default:
-            $sortSQL  = "SELECT * FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
+            $sortSQL  = "SELECT * FROM [ORDER] WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
     }
   }
 ?>
@@ -52,7 +52,7 @@
     <!-- OUR CSS -->    
     <link rel="stylesheet" href="/style.css">
     <!-- <link rel="stylesheet" href="/logo-style.css"> -->
-    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico">
 </head>
 
 <body id="home">
@@ -101,10 +101,12 @@
                         echo '            </tr>';
                         echo '        </thead>';
                         echo '        <tbody>';
+                    
                         // echo '<div class="products">';
                         if (isset($_GET['fetch']) && $_GET['fetch'] == "err") {
                             echo '<div><h3> There was an error fetching your order history. Please try again later. </h3><div>';
-                        } 
+                            die();
+                        }
 
                         if ($getMyOrders != null){
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
@@ -162,7 +164,7 @@
                                             }
                                             
                                         } else {
-                                            //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                            // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                             // redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                                             redirect($HOME."pages/myOrders.php?fetch=err");
                                         }
@@ -189,7 +191,6 @@
                             // redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?fetch=err");
                             redirect($HOME."pages/myOrders.php?fetch=err");
                         }
-
                     }
                 ?>
 

@@ -1,7 +1,10 @@
 <?php
   session_start();
-  if (!isset($_SESSION['discountValue']) || $_SESSION['discountValue'] == 0){
-    $_SESSION['discountValue'] = 0;
+  if (!isset($_SESSION['discountValue'])) {
+      $_SESSION['discountValue'] = 0;
+  }
+  if (!isset($_SESSION['discountCode'])) {
+      $_SESSION['discountCode'] = '';
   }
 ?>
 <!DOCTYPE html>
@@ -10,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Back2Books</title>
+    <title>Shopping Cart - Back2Books</title>
 
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,8 +25,8 @@
 
     <!-- OUR CSS -->    
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/logo-style.css">
-    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
+    <!-- <link rel="stylesheet" href="/logo-style.css"> -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico">
 </head>
 
 <body id="home">
@@ -34,160 +37,171 @@
 
             echo '<div class="cart">';
             if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+
+                $userId = (int) $_SESSION['userId'];
+
+                //=============================================================
+                // UPDATE CART ITEMS LOGIC
+                //=============================================================
                 if ((isset($_POST['update'])) && $_POST['update'] == "update") {
-                    echo '<p>citemId: '.$_POST['citemId'].'</p>';
-                    echo '<p>productId: '.$_POST['productId'].'</p>';
-                    echo '<p>quantity: '.$_POST['quantity'].'</p>';
+                    $cartItemId = (int) $_POST['citemId'];
+                    $newQuantity = (int) $_POST['quantity'];
 
-                    $cartItemId = $_POST['citemId'];
-                    $newQuantity = $_POST['quantity'];
+                    $tsql = "UPDATE cart_items SET item_quantity = ? WHERE citem_id = ?";
 
-                    $tsql = "UPDATE CART_ITEMS SET ITEM_QUANTITY = '$newQuantity' WHERE CITEM_ID = '$cartItemId'";
+                    $updateCart = sqlsrv_query($conn, $tsql, array($newQuantity, $cartItemId));
 
-                    $updateCart = sqlsrv_query($conn, $tsql);
                     if ($updateCart === false) {
-                        // redirect("https://php-back2books.azurewebsites.net/pages/cart.php?update=err");
                         redirect($HOME."pages/cart.php?update=err");
                     }
+
+                    // On successful update, refresh the cart
                     $newQuantity = "";
                     $cartItemId = "";
-                    // redirect("https://php-back2books.azurewebsites.net/pages/cart.php");
                     redirect($HOME."pages/cart.php");
                 }
 
-                if ((isset($_POST['placeOrder'])) && $_POST['placeOrder'] == "go") {
-                    // echo '<p>placeOrder is a '.$_POST['placeOrder'].'!</p>';
-                    // echo '<p>Street Add: '.$_POST['streetAddress1'].'!</p>';
-                    // echo '<p>Street Add2: '.$_POST['streetAddress2'].'!</p>';
-                    // echo '<p>City: '.$_POST['city'].'!</p>';
-                    // echo '<p>State: '.$_POST['state'].'!</p>';
-                    // echo '<p>Zip: '.$_POST['zipCode'].'!</p>';
-                    // echo '<p>Payment: '.$_POST['payment'].'!</p>';
+                //=============================================================
+                // APPLY DISCOUNT CODE LOGIC
+                //=============================================================
+                if (isset($_POST['coupon']) && isset($_POST['discountCode'])) {
+                    $discountCode = $_POST['discountCode'];
 
+                    $tsql_get_discount = "SELECT discount_code, discount_value FROM discount WHERE ACTIVE = 1 AND discount_code = ?";
+                    $getDiscount = sqlsrv_query($conn, $tsql_get_discount, array($discountCode));
+
+                    if ($getDiscount && sqlsrv_has_rows($getDiscount)) {
+                        $row = sqlsrv_fetch_array($getDiscount, SQLSRV_FETCH_ASSOC);
+                        $_SESSION['discountCode'] = $row['discount_code'];
+                        $_SESSION['discountValue'] = (float) $row['discount_value'];
+                    } else {
+                        $_SESSION['discountCode'] = "Invalid Code";
+                        $_SESSION['discountValue'] = 0;
+                    }
+                }
+
+                //=============================================================
+                // PLACE ORDER LOGIC
+                //=============================================================
+                if ((isset($_POST['placeOrder'])) && $_POST['placeOrder'] == "go") {
+
+                    // Define variables that will be used to create the order
                     $address = ''.$_POST['streetAddress1'].', '.$_POST['streetAddress2'].', '.$_POST['city'].', '.$_POST['state'].' '.$_POST['zipCode'].'';
                     $payment = $_POST['payment'];
-                    $currentDate = date('Y-m-d H:i:s');                    
-                    $orderDiscount = $_SESSION['DISCOUNT'];
-                    
-                    
-                    // echo '<p>address: '.$address.'</p>';
-                    // echo '<p>payment: '.$payment.'</p>';
-                    // echo '<p>currentDate: '.$currentDate.'</p>';
-                    // echo '<p>orderDiscount: '.$orderDiscount.'</p>';
-                    // echo '<p>userId: '.$userId.'</p>';
-                    // echo '<p>bookId: '..'</p>';
+                    $currentDate = date('Y-m-d H:i:s');
+                    $orderDiscount = (float) $_SESSION['discount'];
 
-                    $tsql = "INSERT INTO ORDERS (USER_ID, ORDER_DATE, ORDER_DISCOUNT, SHIP_ADDR, PAY_METHOD, BILL_ADDR) 
-                    VALUES ('$userId', '$currentDate', '$orderDiscount', '$address', '$payment', '$address')";
+                    // Prepare parametized query to prevent SQL injection
+                    $tsql_insert_order = "INSERT INTO [order] (user_id, order_date, order_discount, ship_addr, pay_method, bill_addr) VALUES (?, ?, ?, ?, ?, ?)";
 
-                    $addOrder = sqlsrv_query($conn, $tsql);   
+                    // create an array of parameters in correct order
+                    $params = array($userId, $currentDate, $orderDiscount, $address, $payment, $address);
 
-                    if($addOrder== false) {
-                        //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                        // redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                    // Execute the query
+                    $addOrder = sqlsrv_query($conn, $tsql_insert_order, $params);
+
+                    if($addOrder === false) {
+                        die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                         redirect($HOME."pages/cart.php?order=err");
                     } else {
-                        // GET ORDER ID
-                        $tsql = "SELECT TOP (1) ORDER_ID FROM ORDERS WHERE USER_ID = '$userId' ORDER BY ORDER_DATE DESC";
-                        
-                        $getOrderId = sqlsrv_query($conn, $tsql);
+                        // GET THE ORDER ID
+                        $tsql_get_id = "SELECT TOP (1) order_id FROM [order] WHERE USER_ID = ? ORDER BY order_date DESC";
+                        $getOrderId = sqlsrv_query($conn, $tsql_get_id, array($userId));
 
-                        if ($getOrderId == false) {
-                            //echo '<p>$getOrderId</p>';
-                            //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            // redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                        if ($getOrderId === false) {
+                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                             redirect($HOME."pages/cart.php?order=err");
                         }
 
-                        while($orderRow = sqlsrv_fetch_array($getOrderId , SQLSRV_FETCH_ASSOC)) {
-                            $orderId = $orderRow['ORDER_ID'];
+                        if ($orderRow = sqlsrv_fetch_array($getOrderId, SQLSRV_FETCH_ASSOC)) {
+                            $orderId = $orderRow['order_id'];
 
-                            if($orderId != false) {
-                                // GET CART ITEMS
-                                $tsql = "SELECT * FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
+                            // GET CART ITEMS 
+                            $tsql_cart = "SELECT * FROM cart_items WHERE cart_id = (SELECT cart_id FROM cart WHERE user_id = ?)";
+                            $orderCart = sqlsrv_query($conn, $tsql_cart, array($userId));
 
-                               $orderCart = sqlsrv_query($conn, $tsql);
-
-                               if ($orderCart == false) {
-                                //echo '<p>$orderCart</p>';
-                                //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                // redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
+                            if ($orderCart === false) {
+                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                 redirect($HOME."pages/cart.php?order=err");
-                                }
-
-                               while($cartRow = sqlsrv_fetch_array($orderCart, SQLSRV_FETCH_ASSOC)) {
-                                    // CONVERT CART ITEMS INTO ORDER LINES (NEED ORDER_ID, BOOK_ID, PRICE, QUANTITY)
-                                    $transferBOOKID = $cartRow['BOOK_ID'];
-                                    $transferPRICE = $cartRow['PRICE'];
-                                    $transferQTY = $cartRow['ITEM_QUANTITY'];
-
-                                    $tsql = "INSERT INTO ORDER_LINES (ORDER_ID, BOOK_ID, PRICE, ORDER_QUANTITY)
-                                            VALUES ('$orderId', '$transferBOOKID', '$transferPRICE', '$transferQTY')";
-
-                                    $addOrderLine = sqlsrv_query($conn, $tsql);
-
-                                    if ($addOrderLine == false) {
-                                        //echo '<p>$addOrderLine</p>';
-                                        //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                        redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
-                                    }
-
-                                    // UPDATE STOCK in PRODUCT INVENTORY (NEED BOOK ID)
-                                    $tsql = "UPDATE PRODUCT_INVENTORY SET INV_QUANTITY = (INV_QUANTITY - '$transferQTY') WHERE BOOK_ID = '$transferBOOKID'";
-
-                                    $updateProductQty = sqlsrv_query($conn, $tsql);
-
-                                    if ($updateProductQty == false) {
-                                        //echo '<p>$updateProductQty</p>';
-                                        //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                        redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
-                                    }
-
-                                    // DELETE CART ITEMS (NEED CITEM_ID)
-                                    $deleteCItemId = $cartRow['CITEM_ID'];
-                                    $tsql = "DELETE FROM CART_ITEMS WHERE CITEM_id = '$deleteCItemId'";
-
-                                    $deleteCI = sqlsrv_query($conn, $tsql);
-                                    if ($deleteCI == false) {
-                                        //echo '<p>$deleteCI</p>';
-                                        //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                        redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
-                                    }
-                                }
-                            } else {
-                                //die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                redirect("https://php-back2books.azurewebsites.net/pages/cart.php?order=err");
                             }
+
+                            // LOOP THROUGH CART ITEMS AND ADD THEM TO ORDER LINES
+                            while($cartRow = sqlsrv_fetch_array($orderCart, SQLSRV_FETCH_ASSOC)) {
+                                // CHECK IF ITEM QUANTITY IS ZERO OR LESS
+                                if (empty($cartRow['item_quantity']) || $cartRow['item_quantity'] <= 0) {
+                                    die("Item quantity is zero or less. Cannot process order for this item.");
+                                    continue; 
+                                }
+
+                                // Get the book ID and quantity to process
+                                $bookIdToProcess = $cartRow['book_id'];
+                                $quantityToProcess = $cartRow['item_quantity'];
+
+                                // Get the price of the book table
+                                $tsql_price = "SELECT price FROM book WHERE book_id = ?";
+                                $stmt_price = sqlsrv_query($conn, $tsql_price, array($bookIdToProcess));
+
+                                if ($stmt_price === false) {
+                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    redirect($HOME."pages/cart.php?order=err");
+                                }
+
+                                $bookPrice = 0; // Default price
+                                if ($priceRow = sqlsrv_fetch_array($stmt_price, SQLSRV_FETCH_ASSOC)) {
+                                    $bookPrice = $priceRow['price'];
+                                }
+
+                                sqlsrv_free_stmt($stmt_price);
+
+                                // INSERT ORDER LINE 
+                                $tsql_order_line = "INSERT INTO order_lines (order_id, book_id, price, order_quantity) VALUES (?, ?, ?, ?)";
+                                $params_order_line = array($orderId, $bookIdToProcess, $bookPrice, $quantityToProcess);
+                                $addOrderLine = sqlsrv_query($conn, $tsql_order_line, $params_order_line);
+
+                                if ($addOrderLine === false) {
+                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    redirect($HOME."pages/cart.php?order=err");
+                                }
+
+                                // UPDATE STOCK in PRODUCT INVENTORY (NEED BOOK ID)
+                                $tsql_inv = "UPDATE product_inventory SET inv_quantity = (inv_quantity - ?) WHERE book_id = ?";
+                                $params_inv = array($quantityToProcess, $bookIdToProcess);
+                                $updateProductQty = sqlsrv_query($conn, $tsql_inv, $params_inv);
+
+                                if ($updateProductQty === false) {
+                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    redirect($HOME."pages/cart.php?order=err");
+                                }
+
+                                // DELETE CART ITEMS (NEED CITEM_ID)
+                                $tsql_del = "DELETE FROM cart_items WHERE citem_id = ?";
+                                $params_del = array($cartRow['citem_id']);
+                                $deleteCI = sqlsrv_query($conn, $tsql_del, $params_del);
+
+                                if ($deleteCI === false) {
+                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information                                
+                                    redirect($HOME."pages/cart.php?order=err");
+                                }
+                            }
+
+                            sqlsrv_free_stmt($getOrderId);
+                            sqlsrv_free_stmt($orderCart);
                             // ORDER CREATION SUCCESS REDIRECT TO MY ORDERS
                             $_SESSION['discountValue'] = 0;
-                            $_SESSION['DISCOUNT'] = "";
+                            $_SESSION['discount'] = "";
                             $_SESSION['discountCode'] = "";
                             $_SESSION['numInCart'] = "";
-                            redirect("https://php-back2books.azurewebsites.net/pages/myOrders.php?order=success");
-                            
+                            redirect($HOME."pages/myOrders.php?order=success");
+                        } else {
+                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            redirect($HOME."pages/cart.php?order=err");
                         }
                     }   
                 }                    
+            } else { // NOT LOGGED IN redirect to login page
+                redirect($HOME."pages/login.php");
             }
             echo '</div>';
-
-            if (isset($_POST['discountCode'])) {
-                $found = false;
-                $tsql = "SELECT DISCOUNT_CODE, DISCOUNT_TAG FROM DISCOUNT WHERE ACTIVE = 1";
-                $getDiscount = sqlsrv_query($conn, $tsql);
-                if ($getDiscount != false){
-                    while (($row = sqlsrv_fetch_array($getDiscount, SQLSRV_FETCH_ASSOC)) && $found == false) {
-                        if (($row['DISCOUNT_CODE']) == $_POST['discountCode']) {
-                            $_SESSION['discountCode'] = $_POST['discountCode'];
-                            $_SESSION['discountValue'] = ($row['DISCOUNT_TAG'] / 100);
-                            $found = true;
-                        }
-                    }
-                } else {
-                    $_SESSION['discountCode'] = "Invalid Code";
-                    $_SESSION['discountValue'] = 0;
-                }
-            }
         ?>   
 
         <div class="cart">
@@ -207,240 +221,236 @@
 
             <div>
                 <?php
-                if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
-                    echo '<form action="" method="post">';
-                    echo '   <table style="width: 100%">';
-                    echo '        <thead>';
-                    echo '            <tr>';
-                    echo '                <th colspan="2" style="text-align: left; padding: 10px 0px 10px 0px"><h3>Product<h3></th>';
-                    echo '                <th style="text-align: left;"><h3>Price</h3></th>';
-                    echo '                <th style="text-align: left;"><h3>Quantity<h3></th>';
-                    echo '                <th style="text-align: right;"><h3>Total</h3></th>';
-                    echo '            </tr>';
-                    echo '        </thead>';
-                    echo '        <tbody>';
-                              
-                                if ($_SESSION['numInCart'] == 0 )
-                                    echo '<tr><td colspan="5" style="text-align:center;"><h3> You have no products added in your Shopping Cart</h3></td></tr>';
-                                else {
-                                    $subtotal = 0;
-                                    $discount = 0;
-                                    $shipping = 6.99;
-                                    $tsql = "SELECT CITEM_ID, BOOK_ID, ITEM_QUANTITY FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
+                    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+                        echo '<form action="" method="post">';
+                        echo '   <table style="width: 100%">';
+                        echo '        <thead>';
+                        echo '            <tr>';
+                        echo '                <th colspan="2" style="text-align: left; padding: 10px 0px 10px 0px"><h3>Product<h3></th>';
+                        echo '                <th style="text-align: left;"><h3>Price</h3></th>';
+                        echo '                <th style="text-align: left;"><h3>Quantity<h3></th>';
+                        echo '                <th style="text-align: right;"><h3>Total</h3></th>';
+                        echo '            </tr>';
+                        echo '        </thead>';
+                        echo '        <tbody>';
+                        
+                        // =============================================================
+                        // DISPLAY CART CONTENTS
+                        // =============================================================
+                        if (!isset($_SESSION['numInCart']) || $_SESSION['numInCart'] == 0) {
+                            echo '<tr><td colspan="5" style="text-align:center;"><h3> You have no products added in your Shopping Cart</h3></td></tr>';
+                        } else {
+                            $subtotal = 0;
 
-                                    $getCart = sqlsrv_query($conn, $tsql);
+                            $tsql = "SELECT
+                                    ci.citem_id,
+                                    ci.item_quantity,
+                                    b.book_id,
+                                    b.book_title,
+                                    b.book_isbn,
+                                    b.price,
+                                    bi.image_link,
+                                    pi.inv_quantity
+                                FROM cart_items ci
+                                JOIN book b ON ci.book_id = b.book_id
+                                JOIN book_image bi ON b.book_id = bi.book_id
+                                JOIN product_inventory pi ON b.book_id = pi.book_id
+                                WHERE ci.cart_id = (SELECT cart_id FROM cart WHERE user_id = ?)";
 
-                                    if ($getCart === false) {
-                                        die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                    } else {
-                                        while($row = sqlsrv_fetch_array($getCart, SQLSRV_FETCH_ASSOC)) {
-                                            $citemId = $row['CITEM_ID'];
-                                            $bookId = $row['BOOK_ID'];
-                                            $quantity = $row['ITEM_QUANTITY'];
-                                            
-                                            $tsql = "SELECT B.BOOK_TITLE, B.BOOK_ISBN, B.PRICE, BI.IMAGE_LINK, PI.INV_QUANTITY
-                                                     FROM BOOKS B 
-                                                     INNER JOIN BOOK_IMAGE BI ON B.BOOK_ID = BI.BOOK_ID
-                                                     INNER JOIN PRODUCT_INVENTORY PI ON PI.BOOK_ID = B.BOOK_ID
-                                                     WHERE B.BOOK_ID = '$bookId'";
+                            $getCartDetails = sqlsrv_query($conn, $tsql, array($userId));
 
-                                            $getBook = sqlsrv_query($conn, $tsql);
+                            if ($getCartDetails === false) {
+                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            }
+                            
+                            while($row = sqlsrv_fetch_array($getCartDetails, SQLSRV_FETCH_ASSOC)) {
+                                echo '<tr>';
+                                echo '<td><img src="'.htmlspecialchars($row['image_link']).'" alt="Cover of '.htmlspecialchars($row['book_title']).'" height="100" width="75"></td>';
+                                echo '<td>';
+                                echo '<p>'.htmlspecialchars($row['book_title']).'</p>';
+                                echo '<p> ISBN: '.htmlspecialchars($row['book_isbn']).'</p>';
+                                echo '<p> Stock left: '.htmlspecialchars($row['inv_quantity']).'</p>';
+                                echo '</br>';
 
+                                if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
+                                    echo '<a href="'.$HOME.'removeCartItem.php?p='.urlencode($row['citem_id']).'">Remove</a>';
+                                }
+                                echo '</td>';
 
-                                            if ($getBook === false) {
-                                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                            }
-
-                                            if ($getBook != false) {
-                                                while($row = sqlsrv_fetch_array($getBook, SQLSRV_FETCH_ASSOC)){
-                                                echo '    <tr>';
-                                                echo '        <td class="">';
-                                                echo '            <img src="'.$row['IMAGE_LINK'].'" alt="Image of Book '.$row['BOOK_TITLE'].'" height="100" width="75">';
-                                                echo '        </td>';
-                                                echo '        <td>';
-                                                echo '            <p>'.$row['BOOK_TITLE'].'</p>';
-                                                echo '            <p> ISBN: '.$row['BOOK_ISBN'].'</p>';
-                                                echo '            <p> Stock left: '.$row['INV_QUANTITY'].'</p>';
-                                                echo '            </br>';
-                                                if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
-                                                    echo '           <a href="'.$HOME.'removeCartItem.php?p='.$citemId.'">Remove</a>';
-
-                                                }
-                                                echo '        </td>';
-                                                echo '        <td class="" style="text-align: left;"><p>$ '.$row['PRICE'].'</p></td>';
-                                                echo '        <td class="" style="text-align: left;">';
-                                                if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
-                                                    echo '<p>'.$quantity.'</p>';
-                                                } else {
-                                                    echo '        <form method="post" action="">';
-                                                    echo '                  <input type="hidden" name="citemId" value="'.$citemId.'">';
-                                                    echo '                  <input type="hidden" name="productId" value="'.$bookId.'">';
-                                                    echo '            <input type="number" name="quantity" min="1" max="'.$row['INV_QUANTITY'].'" value="'.$quantity.'" required>';
-                                                    echo '            <button type="submit" name="update" value="update">Update</button>';
-                                                    echo '         </form>';
-                                                }
-                                                
-                                                echo '        </td>';
-                                                echo '        <td class="" style="text-align: right;"><p>$ '.number_format(($row['PRICE'] * $quantity), 2).'</p></td>';
-                                                echo '    </tr>';
-                                                $subtotal = $subtotal + ($row['PRICE'] * $quantity);
-                                                }
-                                            }
-                                            //sqlsrv_free_stmt($getBook);
-                                        }   
-                                    }                             
-                                    sqlsrv_free_stmt($getCart);
-                                    echo '</tbody>';
-                                    echo '</table>';
+                                echo '<td style="text-align: left;"><p>$ '.number_format($row['PRICE'], 2).'</p></td>';
+                                
+                                echo '<td class="" style="text-align: left;">';
+                                // If the user is checking out, display quantity as text
+                                if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
+                                    echo '<p>'.htmlspecialchars($row['item_quantity']).'</p>';
+                                } else {
+                                    echo '<form method="post" action="">';
+                                    echo '<input type="hidden" name="citemId" value="'.htmlspecialchars($row['citem_id']).'">';
+                                    echo '<input type="hidden" name="productId" value="'.htmlspecialchars($row['book_id']).'">';
+                                    echo '<input type="number" name="quantity" min="1" max="'.htmlspecialchars($row['inv_quantity']).'" value="'.htmlspecialchars($row['item_quantity']).'" required>';
+                                    echo '<button type="submit" name="update" value="update">Update</button>';
                                     echo '</form>';
-                                    echo '<div>';
-                                    if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
-                                        echo '<form method="post" action="">';
-                                        echo '    <input type="text" name="discountCode" placeholder="Discount Code" value="'.$_SESSION['discountCode'].'"></input>';
-                                        echo '    <button type="submit" name="coupon" value="apply">Apply</button>';
-                                        echo '</form>';
-                                    }
-                                    echo '</div>';
-                                    echo '<div> <h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';    
-                                    $_SESSION['DISCOUNT'] = ($subtotal * $_SESSION['discountValue']);
-                                    echo '<div><h3>DISCOUNT: - $ '.number_format($_SESSION['DISCOUNT'], 2).'</h3></div>';                                    
-                                    echo '<div><h3>TAX (8.25%): $ '.number_format(($subtotal * 0.0825), 2).' </h3></div>';
-                                    echo '<div><h3>SHIPPING: $ '.$shipping.'</h3></div>';
-                                    echo '<div><h3>TOTAL: $ '.number_format(($subtotal - ($subtotal * $_SESSION['discountValue']) + ($subtotal * 0.0825) + $shipping), 2).'</h3></div>';
-                                    if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
-                                        echo '<div><button type="submit" value="go" name="checkout">CHECKOUT</button></div>';
-                                    }
-                                    echo '<div class="">';
-                                }            
-                    echo '</div>';  
-                    
-                    if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
-                        echo '<div class="checkout">';
-                        echo '<div style="margin: 10px 0px 10px 0px"> <h1>Shipping/Billing Information</h1> <div>';
-                        echo '<form name="shippingInfo" id="shippingInfo" method="post" action="">';
-                        
-                        // <!-- StreetAddress1 input -->
-                        echo '                        
-                        <div class="form-group">
-                            <label for="streetAddress1">Street Address: </label>
-                            <input name="streetAddress1" type="text" class="form-control" id="streetAddress1" placeholder="Street Address" required>
-                            <p id="streetAddress1Status"></p>
-                        </div>';
-                        
-                         // <!-- StreetAddress2 input -->
-                        echo '
-                        <div class="form-group">
-                            <label for="streetAddress2">Street Address 2: </label>
-                            <input name="streetAddress2" type="text" class="form-control" id="streetAddress2" placeholder="(Optional)">
-                            <p id="streetAddress2Status"></p>
-                        </div>';
+                                }                                    
+                                echo '</td>';
 
-                        // <!-- City input -->
-                        echo '
-                        <div class="form-group">
-                            <label for="city">City: </label>
-                            <input name="city" type="text" class="form-control" id="city" placeholder="City" required>
-                            <p id="cityStatus"></p>
-                        </div>';
-
-                        // <!-- State input -->
-                        echo '
-                        <div class="form-group">
-                        <label for="state">State: </label>
-                        <select name="state" id="state">
-                                <option selected value="AL">Alabama</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AZ">Arizona</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="CA">California</option>
-                                <option value="CO">Colorado</option>
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="DC">District Of Columbia</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="ID">Idaho</option>
-                                <option value="IL">Illinois</option>
-                                <option value="IN">Indiana</option>
-                                <option value="IA">Iowa</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                                <option value="LA">Louisiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
-                                <option value="MA">Massachusetts</option>
-                                <option value="MI">Michigan</option>
-                                <option value="MN">Minnesota</option>
-                                <option value="MS">Mississippi</option>
-                                <option value="MO">Missouri</option>
-                                <option value="MT">Montana</option>
-                                <option value="NE">Nebraska</option>
-                                <option value="NV">Nevada</option>
-                                <option value="NH">New Hampshire</option>
-                                <option value="NJ">New Jersey</option>
-                                <option value="NM">New Mexico</option>
-                                <option value="NY">New York</option>
-                                <option value="NC">North Carolina</option>
-                                <option value="ND">North Dakota</option>
-                                <option value="OH">Ohio</option>
-                                <option value="OK">Oklahoma</option>
-                                <option value="OR">Oregon</option>
-                                <option value="PA">Pennsylvania</option>
-                                <option value="RI">Rhode Island</option>
-                                <option value="SC">South Carolina</option>
-                                <option value="SD">South Dakota</option>
-                                <option value="TN">Tennessee</option>
-                                <option value="TX">Texas</option>
-                                <option value="UT">Utah</option>
-                                <option value="VT">Vermont</option>
-                                <option value="VA">Virginia</option>
-                                <option value="WA">Washington</option>
-                                <option value="WV">West Virginia</option>
-                                <option value="WI">Wisconsin</option>
-                                <option value="WY">Wyoming </option>
-                        </select>
-                        </div>';
-
-                        // <!-- Zipcode input -->
-                        echo '
-                        <div class="form-group">
-                            <label for="zipCode">Zipcode: </label>
-                            <input id="zipCode" maxlength="5" name="zipCode" type="text" required>
-                        </div>';
-
-                        // <!-- Payment Method input -->
-                        echo '<div class="form-group">
-                            <label for="payment">Payment Method: </label>
-                            <select name="payment" id="payment">
-                                <option selected value="CREDIT CARD">CREDIT CARD</option>
-                                <option value="PAYPAL">PAYPAL</option>
-                                <option value="GOOGLE PAY">GOOGLE PAY</option>
-                                <option value="AMAZON PAY">AMAZON PAY</option>
-                                <option value="APPLE PAY">APPLE PAY</option>
-                            </select>
-                        </div>';
-
-                        // <!-- Submit button input -->
-                        echo '<div><button type="submit" value="go" name="placeOrder">PLACE ORDER</button></div>';
+                                echo '<td style="text-align: right;"><p>$ '.number_format(($row['price'] * $row['item_quantity']), 2).'</p></td>';
+                                echo '</tr>';
+                                $subtotal += ($row['price'] * $row['item_quantity']);
+                            }
+                            sqlsrv_free_stmt($getCartDetails);
+                        } 
+                                                                    
+                        echo '</tbody>';
+                        echo '</table>';
                         echo '</form>';
+
+                        // Coupon form
+                        echo '<div>';
+                        if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
+                            echo '<form method="post" action="">';
+                            echo '<input type="text" name="discountCode" placeholder="Discount Code" value="'.htmlspecialchars($_SESSION['discountCode']).'"></input>';
+                            echo '<button type="submit" name="coupon" value="apply">Apply</button>';
+                            echo '</form>';
+                        }                    
                         echo '</div>';
-                    }
-                } else {
-                    // redirect("https://php-back2books.azurewebsites.net/pages/login.php");
-                    redirect($HOME."pages/login.php");
-                }                    
+                        
+                        // Total calculations
+                        $_SESSION['discount'] = ($subtotal * $_SESSION['discountValue']);
+                        $tax = $subtotal * 0.0825;
+                        $shipping = ($subtotal > 0) ? 6.99 : 0;
+                        $total = $subtotal - $_SESSION['discount'] + $tax + $shipping;
+
+                        echo '<div><h3>SUBTOTAL: $ '.number_format($subtotal, 2).'</h3></div>';    
+                        echo '<div><h3>DISCOUNT: - $ '.number_format($_SESSION['discount'], 2).'</h3></div>';  
+                        echo '<div><h3>TAX (8.25%): $ '.number_format($tax, 2).' </h3></div>';
+                        echo '<div><h3>SHIPPING: $ '.number_format($shipping, 2).'</h3></div>';
+                        echo '<div><h3>TOTAL: $ '.number_format($total, 2).'</h3></div>';
+
+                        if (!(isset($_POST['checkout'])) && $_POST['checkout'] != "go") {
+                            echo '<div><button type="submit" value="go" name="checkout">CHECKOUT</button></div>';
+                        }
+                        
+                        if ((isset($_POST['checkout'])) && $_POST['checkout'] == "go") {
+                            echo '<div class="checkout">';
+                            echo '<div style="margin: 10px 0px 10px 0px"> <h1>Shipping/Billing Information</h1> <div>';
+                            echo '<form name="shippingInfo" id="shippingInfo" method="post" action="">';
+                            
+                            // <!-- StreetAddress1 input -->
+                            echo '                        
+                            <div class="form-group">
+                                <label for="streetAddress1">Street Address: </label>
+                                <input name="streetAddress1" type="text" class="form-control" id="streetAddress1" placeholder="Street Address" required>
+                                <p id="streetAddress1Status"></p>
+                            </div>';
+                            
+                            // <!-- StreetAddress2 input -->
+                            echo '
+                            <div class="form-group">
+                                <label for="streetAddress2">Street Address 2: </label>
+                                <input name="streetAddress2" type="text" class="form-control" id="streetAddress2" placeholder="(Optional)">
+                                <p id="streetAddress2Status"></p>
+                            </div>';
+
+                            // <!-- City input -->
+                            echo '
+                            <div class="form-group">
+                                <label for="city">City: </label>
+                                <input name="city" type="text" class="form-control" id="city" placeholder="City" required>
+                                <p id="cityStatus"></p>
+                            </div>';
+
+                            // <!-- State input -->
+                            echo '
+                            <div class="form-group">
+                            <label for="state">State: </label>
+                            <select name="state" id="state">
+                                    <option selected value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="DC">District Of Columbia</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming </option>
+                            </select>
+                            </div>';
+
+                            // <!-- Zipcode input -->
+                            echo '
+                            <div class="form-group">
+                                <label for="zipCode">Zipcode: </label>
+                                <input id="zipCode" maxlength="5" name="zipCode" type="text" required>
+                            </div>';
+
+                            // <!-- Payment Method input -->
+                            echo '<div class="form-group">
+                                <label for="payment">Payment Method: </label>
+                                <select name="payment" id="payment">
+                                    <option selected value="CREDIT CARD">CREDIT CARD</option>
+                                    <option value="PAYPAL">PAYPAL</option>
+                                    <option value="GOOGLE PAY">GOOGLE PAY</option>
+                                    <option value="AMAZON PAY">AMAZON PAY</option>
+                                    <option value="APPLE PAY">APPLE PAY</option>
+                                </select>
+                            </div>';
+
+                            // <!-- Submit button input -->
+                            echo '<div><button type="submit" value="go" name="placeOrder">PLACE ORDER</button></div>';
+                            echo '</form>';
+                            echo '</div>';
+                        }
+                    } else { // NOT LOGGED IN redirect to login page
+                        // redirect("https://php-back2books.azurewebsites.net/pages/login.php");
+                        redirect($HOME."pages/login.php");
+                    }                    
                 ?>
-            </div>                    
-        <!-- <div class="cart-summary">
-                <div><span>SUBTOTAL: </span> <span> $$$$ </span> </div>
-                <div><span>DISCOUNT: </span> <span> - $$$ </span> </div>
-                <div><span>SHIPPING: </span> <span> $$$$ </span> </div>
-                <div><span>TAX: </span> <span> $$$$ </span> </div>
-                <div><span>SHIPPING: </span> <span> $$$$ </span> </div>
-                <div><button>CHECK OUT</button></div>
-        </div> -->
-</body>
+            </div>                   
+        </div> <!-- End of cart div -->
+    </div> <!-- End of container div -->
+</body> <!-- End of body -->
 
 <script src="js/scripts.js"></script>
 

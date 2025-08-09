@@ -118,7 +118,7 @@
                       $hashedPassword = md5($userPassword);
                     }
 
-                    echo '<h1>hashPassword = '.$hashedPassword.'</h1>';
+                    // echo '<h1>hashPassword = '.$hashedPassword.'</h1>';
 
                     $fname = $_SESSION['fname'];                  
                     $lname = $_SESSION['lname'];                  
