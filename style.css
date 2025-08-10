@@ -314,13 +314,6 @@ button, input, optgroup, select, textarea {
     padding: 10px;
 }
 
-.about-us {
-    /* background-color: antiquewhite; */
-    margin: 20px;
-    padding: 10px;
-    flex-direction: column;
-}
-
 .cart {
   background-color: antiquewhite;
   margin: 20px;
@@ -814,6 +807,16 @@ button, input, optgroup, select, textarea {
   width: 300px;
   height: 275px;
 }
+
+/* -------------------------------------- ABOUT US ---------------------------------- */
+.about-us {
+    /* background-color: antiquewhite; */
+    margin: 20px;
+    padding: 10px;
+    flex-direction: column;
+}
+
+
 
 
 /* --------------------------------- MEDIA QUERIES------------------------------------------ */
