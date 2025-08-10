@@ -61,64 +61,69 @@
                   if(empty(trim($_POST["fname"]))){
                     $fnameError = "&fname=empty";
                   } else {
-                    $_SESSION['fname'] = str_replace(" ", "", $_POST["fname"]);
+                    // delete spaces
+                    $_SESSION['fname'] = str_replace(" ", "", $_POST['fname']);
+                    // delete invalid sql characters
+                    $_SESSION['fname'] = preg_replace('/[\'\";#]/', '', $_SESSION['fname']);
                   }
 
                   if(empty(trim($_POST["lname"]))){
                     $lnameError = "&lname=empty";
                   } else {
+                    // delete spaces
                     $_SESSION['lname'] = str_replace(" ", "", $_POST["lname"]);
+                    // delete invalid sql characters
+                    $_SESSION['lname'] = preg_replace('/[\'\";#]/', '', $_SESSION['lname']);
                   }
 
                   if(empty(trim($_POST["registerEmail"]))){
                     $emailErr = "&email=empty";
                   } else {
+                    // delete spaces
                     $_SESSION['registerEmail'] = str_replace(" ", "", $_POST["registerEmail"]);
+                    // delete invalid sql characters
+                    $_SESSION['registerEmail'] = preg_replace('/[\'\";#]/', '', $_SESSION['registerEmail']);
                   }
 
                   if(empty(trim($_POST["registerPassword"]))){
                     $passwordErr = "&pass=empty";
                   } else {
+                    // delete spaces
                     $userPassword = str_replace(" ", "", $_POST["registerPassword"]);
                   }
 
                   if(empty(trim($_POST["registerPassword2"]))){
                     $password2Err = "&pass2=empty";
                   } else {
+                    // delete spaces
                     $userPassword2 = str_replace(" ", "", $_POST["registerPassword2"]);
                   }
 
                   if(empty(trim($_POST["securityQuestion"]))){
                     $questionError = "&question=empty";
                   } else {
+                    // delete spaces
                     $secretQuestion = (trim($_POST["securityQuestion"]));
+                    // delete invalid sql characters
+                    $secretQuestion = preg_replace('/[\'\";#]/', '', $secretQuestion);
                   }
 
                   if(empty(trim($_POST["securityAnswer"]))){
                     $answerErr = "&answer=empty";
                   } else {
+                    // delete spaces
                     $_SESSION['securityAnswer'] = str_replace(" ", "", $_POST["securityAnswer"]);
+                    // delete invalid sql characters
+                    $_SESSION['securityAnswer'] = preg_replace('/[\'\";#]/', '', $_SESSION['securityAnswer']);
                   }
 
                   if(empty($fnameError) && empty($lnameError) && empty($emailErr) && empty($passwordErr) && empty($password2Err) && empty($questionError) && empty($password2Err)){
-                    // echo '<h1>fname: '.$_SESSION['fname'].' </h1>';
-                    // echo '<h1>lname: '.$_SESSION['lname'].' </h1>';
-                    // echo '<h1>email: '.$_SESSION['registerEmail'].' </h1>';
-                    // echo '<h1>p1: '.$userPassword.' </h1>';
-                    // echo '<h1>p2: '.$userPassword2.' </h1>';
-                    // echo '<h1>post-qa: '.$_POST['securityQuestion'].' </h1>';
-                    // echo '<h1>session-qa: '.$_SESSION['securityQuestion'].' </h1>';
-                    // echo '<h1>post-sa: '.$_POST['securityAnswer'].' </h1>';
-                    // echo '<h1>session-sa: '.$_SESSION['securityAnswer'].' </h1>';
 
                     if ($userPassword != $userPassword2) {
-                      // redirect("https://php-back2books.azurewebsites.net/pages/register.php?pass2=mismatch");
                       redirect($HOME."pages/register.php?pass2=mismatch");
                     } else {
                       $hashedPassword = md5($userPassword);
                     }
-
-                    // echo '<h1>hashPassword = '.$hashedPassword.'</h1>';
 
                     $fname = $_SESSION['fname'];                  
                     $lname = $_SESSION['lname'];                  
@@ -126,35 +131,31 @@
                     $secretAnswer = $_SESSION['securityAnswer'];
                     $currentDate = date('Y-m-d');
 
-                    // echo '<h1>$fname : '.$fname .' </h1>';
-                    // echo '<h1>$lname: '.$lname.' </h1>';
-                    // echo '<h1>$userEmail: '.$userEmail.' </h1>';
-                    // echo '<h1>$secretQuestion: '.$secretQuestion .' </h1>';
-                    // echo '<h1>$secretAnswer: '.$secretAnswer.' </h1>';
+                    // check if email already exists
+                    $tsql = "SELECT user_email FROM b2buser WHERE user_email = ?";
+                    $checkEmail = sqlsrv_query($conn, $tsql, array($userEmail));
+                    if (sqlsrv_fetch($checkEmail)) {
+                      sqlsrv_free_stmt($checkEmail);
+                      redirect($HOME."pages/register.php?email=exists");
+                    }
 
-                    $tsql = "INSERT INTO B2BUSER (USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_SQ, USER_SA) 
-                    VALUES ('$userEmail', '$hashedPassword', '$fname', '$lname', '$secretQuestion', '$secretAnswer'); 
-                    INSERT INTO CART (USER_ID, CART_CREATE_DATE) VALUES ((SELECT USER_ID FROM B2BUSER WHERE USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'), '$currentDate');";
-                    
-                    $addUser = sqlsrv_query($conn, $tsql);
+                    $tsql = "INSERT INTO b2buser (user_email, user_password, user_fname, user_lname, user_sq, user_sa) 
+                    VALUES (?, ?, ?, ?, ?, ?); 
+                    INSERT INTO cart (user_id, cart_create_date) VALUES ((SELECT user_id FROM b2buser WHERE user_email LIKE ? AND user_password LIKE ?), ?);";
 
-                    if($addUser == false) {
+                    $addUser = sqlsrv_query($conn, $tsql, array($userEmail, $hashedPassword, $fname, $lname, $secretQuestion, $secretAnswer, $userEmail, $hashedPassword, $currentDate));
+
+                    if($addUser === false) {
                       sqlsrv_free_stmt($addUser);
-                      // redirect("https://php-back2books.azurewebsites.net/pages/register.php?reg=failed");
                       redirect($HOME."pages/register.php?reg=failed");
                     } else {
                       sqlsrv_free_stmt($addUser);
-                      // redirect("https://php-back2books.azurewebsites.net/pages/login.php?reg=success");
                       redirect($HOME."pages/login.php?reg=success");
                     }
                   }
                   else {
-                    // redirect("https://php-back2books.azurewebsites.net/pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
                     redirect($HOME."pages/register.php?err=true$fnameError$lnameError$emailErr$passwordErr$password2Err$questionError$answerErr");
                   }
-              
-
-                 
                 }
               ?>
             </div>
@@ -163,6 +164,25 @@
 
             <div>
                 <form method="post" action="">
+                      <div style="margin: 1rem 0;"><h2>Register</h2></div>
+
+                      <! -- Email already exists -->
+                      <?php
+                        if (isset($_GET['email']) && $_GET['email'] == "exists") {
+                          echo '<div style="margin-bottom: 1rem;"><p style="color: red;">Email already exists. Please try another email.</p></div>';
+                        } else if (isset($_GET['reg']) && $_GET['reg'] == "failed") {
+                          echo '<div style="margin-bottom: 1rem;"><p style="color: red;">Registration failed. Please try again.</p></div>';
+                        } else if (isset($_GET['reg']) && $_GET['reg'] == "success") {
+                          echo '<div style="margin-bottom: 1rem;"><p style="color: green;">Registration successful! Please log in.</p></div>';
+                        }
+                      ?>
+
+                      <!-- FUTURE: Add a link to recover password -->
+                      <!-- <h4>Or, <a href="/pages/forgotPassword.php">recover your password</a></h4> -->
+
+                      <div style="margin-bottom: 1rem;"><p>Please fill in this form to create an account.</p></div>
+
+
                       <!-- First Name input -->
                       <?php
                         if (isset($_SESSION['fname'])) {
@@ -307,6 +327,8 @@
                       <button name="submit" type="submit" value="submit">Submit</button>
                       </div>
                 </form>
+
+                <div style="margin: 2rem 0;"><p>Already have an account? <a href="/pages/login.php">Sign In</a></p></div>
             </div>
             </div>
         </center>
