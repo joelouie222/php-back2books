@@ -22,7 +22,7 @@
     <!-- OUR CSS -->    
     <link rel="stylesheet" href="/style.css">
     <!-- <link rel="stylesheet" href="/logo-style.css"> -->
-    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico">
 </head>
 
 <body>
@@ -39,72 +39,46 @@
             $passwordErr = "";
             //$loginErr = "";
 
-            if(empty(trim($_POST["loginEmail"]))){
+            if(empty(trim($_POST['loginEmail']))){
               $emailErr = "emptyEmail";
-              // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=empty");
               redirect($HOME."pages/login.php?verify=empty");
             } else {
-              $userEmail = trim($_POST["loginEmail"]);
+              $userEmail = trim($_POST['loginEmail']);
             }
           
-            if(empty(trim($_POST["loginPassword"]))){
+            if(empty(trim($_POST['loginPassword']))){
               $passwordErr = "emptyPassword";
-              // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=empty");
               redirect($HOME."pages/login.php?verify=empty");
             } else {
-              $userPassword = trim($_POST["loginPassword"]);
+              $userPassword = trim($_POST['loginPassword']);
             }
           
             $hashedPassword = md5($userPassword);
             
             if(empty($emailErr) && empty($passwordErr)){
-              $tsql = "SELECT USER_ID, USER_FNAME, USER_LNAME, USER_ADMIN FROM B2BUSER 
-                      WHERE USER_ACTIVE = 1
-                      AND USER_EMAIL LIKE '$userEmail' AND USER_PASSWORD LIKE '$hashedPassword'";
-              $getUser = sqlsrv_query($conn, $tsql);
-
-              // echo "<h1>getUser: '.$getUser.' </h1>";
+              $tsql = "SELECT user_id, user_fname, user_lname, user_admin FROM b2buser 
+                      WHERE user_active = 1
+                      AND user_email LIKE ? AND user_password LIKE ?";
+              $getUser = sqlsrv_query($conn, $tsql, array($userEmail, $hashedPassword));
 
               if( $getUser == false ) { 
-                // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
                 redirect($HOME."pages/login.php?verify=failed");
               } else {
                 $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC); 
-                  if ($user == null) {
-                    // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
-                    redirect($HOME."pages/login.php?verify=failed");
-                  } else {
-                    if ($user["USER_FNAME"] == null || $user["USER_LNAME"] = null) {
-                      // redirect("https://php-back2books.azurewebsites.net/pages/login.php?verify=failed");
-                      redirect($HOME."pages/login.php?verify=failed");
-                    } else {
-                      $_SESSION["loggedIn"] = true;
-                      $_SESSION["fname"] = $user["USER_FNAME"];
-                      $_SESSION['lname'] = $user["USER_LNAME"];
-                      $_SESSION["admin"] = $user["USER_ADMIN"];
-                      $_SESSION["userId"] = $user["USER_ID"];
-                      $_SESSION["loginEmail"] = $userEmail;
-                      $_SESSION["hashedPassword"] = $hashedPassword;
-                      sqlsrv_free_stmt($getUser);
-                      //sqlsrv_free_stmt($user);
-                      // redirect("https://php-back2books.azurewebsites.net/");
-                      redirect($HOME);
-                    }
-                  }
-                
-                // $user = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC);
-                // if ($user == null)
-                //   echo "<h1>user is null</h1>";
-                // if ($user == false)
-                //   echo "<h1>user is false</h1>";
-                // if ($user == '..')
-                //   echo "<h1>user is ..</h1>";
-                // echo "<h1>user: '.$user.' </h1>";
-                // echo "<h1>getUser: '.$user[USER_FNAME].' </h1>";
-                // echo "<h1>getUser: '.$user[USER_LNAME].' </h1>";
-                // echo "<h1>getUser: '.$user[USER_ADMIN].' </h1>";
+                if ($user == null) {
+                  redirect($HOME."pages/login.php?verify=failed");
+                } else {
+                  $_SESSION['loggedIn'] = true;
+                  $_SESSION['fname'] = $user['user_fname'];
+                  $_SESSION['lname'] = $user['user_lname'];
+                  $_SESSION['admin'] = $user['user_admin'];
+                  $_SESSION['userId'] = $user['user_id'];
+                  $_SESSION['loginEmail'] = $userEmail;
+                  $_SESSION['hashedPassword'] = $hashedPassword;
+                  sqlsrv_free_stmt($getUser);
+                  redirect($HOME);
+                }
               }
-              
             }
           }
         ?>  
@@ -129,7 +103,7 @@
             </div>
 
             <div>
-                <form method="post" action="">
+                <form method="post" action="login.php">
                   <!-- Email input -->
                   <div class="form-group">
                     <label for="loginEmail">Email Address</label>
@@ -164,4 +138,4 @@
 </body>
 
 </html>
-<script src="/js/login_validation.js"></script>  
+<script src="../js/login_validation.js"></script>
