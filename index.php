@@ -32,28 +32,23 @@
 
     <div class="container">
         <div id="content">
+            <!----------- Welcome Message ----------->
+            <center
             <div class="window">
-                <?php
-                    // if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true)
-                    //     echo '<h3> Wecome to Back 2 Books, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</h3>';
-                    // else
-                    //     echo '<h3> Wecome to Back 2 Books!</h3>';
-
-                    // if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1)
-                    //     echo '<h3> You are an ADMIN! </h3>';
-                    // else
-                    //     echo '<h3> You are NOT an admin! </h3>';
-                    // echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
-                    // echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
-                    // echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
-                    // echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
-                    // echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"].'<p>';
-                    // echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"].'<p>';
-                ?> 
                 <img src="images/welcome.gif" id="welcome">
+                <?php
+                    if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true)
+                        echo '<h3> Welcome to Back 2 Books, '.htmlspecialchars($_SESSION['fname']).' '.htmlspecialchars($_SESSION['lname']).'!</h3>';
+                    else if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1)
+                        echo '<h3> Welcome to Back 2 Books, Admin!</h3>';
+                    else
+                        echo '<h3> Welcome to Back 2 Books!</h3>';
+                ?> 
                 </br>
             </div>
+            </center>
 
+            <!----------- Search Bar ----------->
             <center>
             <div class="window search">
                 <form action="../pages/search.php" method="POST">
@@ -70,6 +65,7 @@
             </div>
             </center>
             
+            <!----------- Carousel ----------->
             <div class="window">
                 <div class="gallery-container-carousel">
                     <!--prev button-->
