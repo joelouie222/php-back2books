@@ -277,7 +277,7 @@
                                 }
                                 echo '</td>';
 
-                                echo '<td style="text-align: left;"><p>$ '.number_format($row['PRICE'], 2).'</p></td>';
+                                echo '<td style="text-align: left;"><p>$ '.number_format($row['price'], 2).'</p></td>';
                                 
                                 echo '<td class="" style="text-align: left;">';
                                 // If the user is checking out, display quantity as text
