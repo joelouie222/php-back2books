@@ -51,8 +51,15 @@
             <!----------- Search Bar ----------->
             <center>
             <div class="window search">
+                <h2>Search for books</h2>
+                <br />
+                <p>Search for books, authors, or ISBNs. You can also sort the results by price or availability.</p>
+                <br />
+                <p>Note: The search is case-insensitive and will match any part of the book title, author name, or ISBN.</p>
+                <p>Use the search bar below to find books.</p>
+                <br />
                 <form action="../pages/search.php" method="POST">
-                    <input type="text" id="search" name="search" placeholder="Search" required>
+                    <input type="text" id="search" name="search" placeholder="Books title, author, ISBN..." required>
                     <button type="submit"><i class="fa fa-search"></i></button><br />
                 <label for="sortBy">Sort By:</label>
                 <select id="sortBy" name="sortBy">

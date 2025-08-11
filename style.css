@@ -614,7 +614,7 @@ button, input, optgroup, select, textarea {
 .search-cover {
     flex-shrink: 0;
     /* margin-right:20px; */
-    max-width: 100%;
+    max-width: 50%;
 }
 
 .book-info-container {
