@@ -36,7 +36,7 @@
                 <h1> Book Catalog </h1>
                 <?php
                     // ===========================================================
-                    // ADD TO CART LOGIC
+                    // ADD TO CART LOGIC (SAME AS IN PRODUCT PAGE)
                     // ===========================================================
                     if((isset($_POST['submit'])) && $_POST['submit']=="ADDTOCART") {
                         // IF USER IS LOGGED IN
