@@ -27,42 +27,62 @@
         <?php 
             include('../layout.php');
         ?>
+        <div class="about-us window" style="padding: 2rem;">
 
-        <div class="about-us window">
-            <center>
-                <img src="/images/b2b-logo-horizontal-concept-transparent.png" width="300" height="150">
-                <br><br>
-                <p>
-                    This is a class project for the course CS 3773 Software Engineering at University
-                    of Texas at San Antonio (UTSA).
-                    <br><br>
-                    Back 2 Books is an retro/Y2K-style online shopping site that enables users to buy or sell books,
-                    stationary, and other merchandise!
-                    <br><br>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <img src="/images/b2b-logo-horizontal-concept-transparent.png" alt="Back 2 Books Logo" style="max-width: 300px; height: auto;">
+            </div>
+
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <h2 style="margin-bottom: 1rem; border-bottom: 2px solid #ccc; display: inline-block; padding-bottom: 0.5rem;">Our Story</h2>
+                <p style="line-height: 1.6; max-width: 800px; margin: 0 auto;">
+                    What began as a software engineering project at the University of Texas at San Antonio has grown into a passion for connecting readers. Back 2 Books is a unique online marketplace inspired by the vibrant Y2K aesthetic, designed for users to buy and sell pre-loved books, custom stationery, and unique literary merchandise.
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <h2 style="margin-bottom: 1rem; border-bottom: 2px solid #ccc; display: inline-block; padding-bottom: 0.5rem;">Our Mission</h2>
+                <p style="line-height: 1.6; max-width: 800px; margin: 0 auto;">
                     Our mission is to give old books new life. We believe in creating a sustainable and affordable community where students and creatives can earn from their old textbooks and supplies, and buyers can discover unique items without breaking the bank.
-                    <br><br>
-                    Back 2 Books was brought to life by a dedicated team of student developers, each bringing a unique skill set to the project.
-                    <br><br>
                 </p>
-                <h2 style="margin: 10px 0;">The Team</h2>
-                <ul>
-                    <li><strong>Kip Roberts-Lemus</strong> | <span><i>Product Owner </i></span>
-                    </li>
-                    <li><strong>Bernardo Vazquez De La Cruz</strong> |
-                        <span><i> Scrum Master </i></span>
-                    </li>
-                    <li><strong>Andrea Mendez</strong> | <span><i>Developer</i> </span></li>
-                    <li><strong>Daniel Hwang</strong> | <span><i>Developer</i>
-                        </span></li>
-                    <li><strong>Joe Louie Corporal</strong> | <span><i>Developer</i>
-                        </span></li>
-                </ul>
-                <br>Thank you for coming to our website! This is all about empowering others to be able to make some extra
-                cash from old textbooks, cool custom stationary supplies, or other related items.<br>
-                </p>
-            </center>
-        </div>
+            </div>
 
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <h2 style="margin-bottom: 1rem; border-bottom: 2px solid #ccc; display: inline-block; padding-bottom: 0.5rem;">Meet the Team</h2>
+                <p style="line-height: 1.6; max-width: 800px; margin: 0 auto 2rem auto;">
+                    Back 2 Books was brought to life by a dedicated team of student developers, each bringing a unique skill set to the project.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto;">
+                    <div style="text-align: center;">
+                        <img src="/images/avatar-placeholder.png" alt="Team member avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem; border: 3px solid #ddd;">
+                        <h3 style="margin: 0.5rem 0; font-size: 1.1rem;">Kip Roberts-Lemus</h3>
+                        <p style="color: #555; font-style: italic; margin: 0;">Product Owner</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="/images/avatar-placeholder.png" alt="Team member avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem; border: 3px solid #ddd;">
+                        <h3 style="margin: 0.5rem 0; font-size: 1.1rem;">Bernardo Vazquez De La Cruz</h3>
+                        <p style="color: #555; font-style: italic; margin: 0;">Scrum Master</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="/images/avatar-placeholder.png" alt="Team member avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem; border: 3px solid #ddd;">
+                        <h3 style="margin: 0.5rem 0; font-size: 1.1rem;">Andrea Mendez</h3>
+                        <p style="color: #555; font-style: italic; margin: 0;">Developer</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="/images/avatar-placeholder.png" alt="Team member avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem; border: 3px solid #ddd;">
+                        <h3 style="margin: 0.5rem 0; font-size: 1.1rem;">Daniel Hwang</h3>
+                        <p style="color: #555; font-style: italic; margin: 0;">Developer</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="/images/avatar-placeholder.png" alt="Team member avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem; border: 3px solid #ddd;">
+                        <h3 style="margin: 0.5rem 0; font-size: 1.1rem;">Joe Louie Corporal</h3>
+                        <p style="color: #555; font-style: italic; margin: 0;">Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

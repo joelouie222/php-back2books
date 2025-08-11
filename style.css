@@ -810,14 +810,10 @@ button, input, optgroup, select, textarea {
 
 /* -------------------------------------- ABOUT US ---------------------------------- */
 .about-us {
-    /* background-color: antiquewhite; */
+    background-color: antiquewhite;
     margin: 20px;
     padding: 10px;
-    flex-direction: column;
 }
-
-
-
 
 /* --------------------------------- MEDIA QUERIES------------------------------------------ */
 @media screen and (max-height: 450px) {
