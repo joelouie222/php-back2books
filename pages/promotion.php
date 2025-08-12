@@ -19,14 +19,13 @@
 
     <!-- OUR CSS -->    
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/logo-style.css">
+    <!-- <link rel="stylesheet" href="/logo-style.css"> -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
 <body id="home">
     <?php
         include('../layout.php');
-        include('../config.php');
     ?>
     <div class="container">
         <div class="about-us">
@@ -37,17 +36,10 @@
             </center>
 
             <?php
-                $tsql = "SELECT DISCOUNT_TAG, DISCOUNT_NAME, DISCOUNT_CODE, DISCOUNT_DESC FROM DISCOUNT WHERE ACTIVE = 1";
+                $tsql = "SELECT discount_tag, discount_name, discount_code, discount_desc FROM discount WHERE active = 1";
                 $getDiscounts = sqlsrv_query($conn, $tsql);
 
-                // echo "connectionInfo: ($connectionInfo)";
-                // echo "</br>";
-                // echo "serverName: ($serverName)";
-                // echo "</br>";
-                // echo "conn: ($conn)";
-                // echo "</br>";
-
-                if( $getDiscounts == false ) {  
+                if( $getDiscounts === false ) {  
                     echo "Error in statement preparation/execution.\n";  
                     die( print_r( sqlsrv_errors(), true));
                 }
@@ -56,16 +48,16 @@
                     echo '<article class="promo-card">';
                     echo '    <div class="promo-card-box">';
                     echo '        <div class="discount-box">';
-                    echo '        <div> SAVE <h2>'.$row["DISCOUNT_TAG"].'% OFF</h2></div>';
+                    echo '        <div> SAVE <h2>'.htmlspecialchars($row["discount_tag"]).'% OFF</h2></div>';
                     echo '        <div> AT CHECK OUT</div>';
                     echo '    </div>';
                     echo '<div class="promo-details">';
-                    echo '    <div class="promo-name"><span> '.$row["DISCOUNT_NAME"].'</span></div>';
-                    echo '    <h3 class="coupon-desc">'.$row["DISCOUNT_DESC"].'</h3>';
+                    echo '    <div class="promo-name"><span> '.htmlspecialchars($row["discount_name"]).'</span></div>';
+                    echo '    <h3 class="coupon-desc">'.htmlspecialchars($row["discount_desc"]).'</h3>';
                     echo '</div>';
                     echo '<div class="promo-code-box">';
                     echo '    <div class="coupon-code">';
-                    echo '        <h3>'.$row["DISCOUNT_CODE"].'</h3>';
+                    echo '        <h3>'.htmlspecialchars($row["discount_code"]).'</h3>';
                     echo '    </div>';
                     echo '    <div></div>';
                     echo '</article>';

@@ -3,7 +3,7 @@
   include('functions.php');
   include('config.php');
   if (!isset($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] != true || $_SESSION["admin"] != true) {
-    redirect("https://php-back2books.azurewebsites.net/");
+    redirect($HOME);
   }
 ?>
 <!DOCTYPE html>
@@ -28,7 +28,8 @@
 </head>
 
 <body id="home">
-    <?php include('layout.php');
+    <?php 
+        include('layout.php');
     ?>  
       
     <div class="container">
@@ -40,68 +41,62 @@
             </center>
             <?php
                     if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
-
+                        // ==============================================
+                        // UPDATE USER LOGIC
+                        // ==============================================
                         if (isset($_POST["userUpdate"]) && $_POST["userUpdate"] == "go") {
-                            $userid = $_POST['userid'];
-                            $useremail =$_POST['useremail'];
+                            $userid = (int) preg_replace('/[\'\";#]/', '', trim($_POST['userid']));
+                            $useremail = preg_replace('/[\'\";#]/', '', trim($_POST['useremail']));
                             $userpass = md5($_POST['userpass']);
-                            $userfname =$_POST['fname'];
-                            $userlname = $_POST['lname'];
-                            $useractive = $_POST['useractive'];
-                            $usersq = $_POST['usersq'];
-                            $usersa = $_POST['usersa'];
+                            $userfname = preg_replace('/[\'\";#]/', '', trim($_POST['fname']));
+                            $userlname = preg_replace('/[\'\";#]/', '', trim($_POST['lname']));
+                            $useractive = preg_replace('/[\'\";#]/', '', trim($_POST['useractive']));
+                            $usersq = preg_replace('/[\'\";#]/', '', trim($_POST['usersq']));
+                            $usersa = preg_replace('/[\'\";#]/', '', trim($_POST['usersa']));
 
-                            // echo 'userid: '.$userid.'';
-                            // echo 'useremail: '.$useremail.'';
-                            // echo 'userpass: '.$userpass.'';
-                            // echo 'userfname: '.$userfname.'';
-                            // echo 'userlname: '.$userlname.'';
-                            // echo 'useractive: '.$useractive.'';
-                            // echo 'usersq: '.$usersq.'';
-                            // echo 'usersa: '.$usersa.'';
-
-                            $tsql = "UPDATE B2BUSER
-                            SET
-                            USER_EMAIL = '$useremail', 
-                            USER_PASSWORD = '$userpass',
-                            USER_FNAME = '$userfname',
-                            USER_LNAME = '$userlname',
-                            USER_ACTIVE = '$useractive',
-                            USER_SQ = '$usersq',
-                            USER_SA = '$usersa'
-                            WHERE USER_ID = '$userid'";
-
-                            $updateUser = sqlsrv_query($conn, $tsql);
+                            $tsql = "UPDATE b2buser
+                                SET
+                                user_email = ?, 
+                                user_password = ?,
+                                user_fname = ?,
+                                user_lname = ?,
+                                user_active = ?,
+                                user_sq = ?,
+                                user_sa = ?
+                                WHERE USER_ID = '$userid'";
+                            $params = array($useremail, $userpass, $userfname, $userlname, $useractive, $usersq, $usersa);
+                            $updateUser = sqlsrv_query($conn, $tsql, $params);
           
                             if ($updateUser === false) {
                                 die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                redirect($HOME."allUsers.php?msg=usrUpdateErr");
                             }
-                            redirect("https://php-back2books.azurewebsites.net/allUsers.php");
+                            redirect($HOME."allUsers.php");
                         }
 
-
-
+                        // ==============================================
+                        // UPDATE USER FORM
+                        // ==============================================
                         if (isset($_GET['id'])) {
-                            $userid = $_GET['id'];
+                            $userid = (int) preg_replace('/[\'\";#]/', '', trim($_GET['id']));
 
-                            $tsql = "SELECT * FROM B2BUSER WHERE USER_ID = '$userid'";
+                            $tsql = "SELECT * FROM b2buser WHERE user_id = '$userid'";
                             $getUser = sqlsrv_query($conn, $tsql);
 
                             if ($getUser == NULL) {
-                                die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                //redirect("https://php-back2books.azurewebsites.net/allUsers.php?fetch=err");
+                                redirect($HOME."allUsers.php?msg=usrNotFound");
                             }
 
                             while($userInfo = sqlsrv_fetch_array($getUser, SQLSRV_FETCH_ASSOC)) {
-                                $userid = $userInfo['USER_ID'];
-                                $useremail = $userInfo['USER_EMAIL'];
-                                $userpass = $userInfo['USER_PASS'];
-                                $userfname = $userInfo['USER_FNAME'];
-                                $userlname = $userInfo['USER_LNAME'];
+                                $userid = $userInfo['user_id'];
+                                $useremail = $userInfo['user_email'];
+                                $userpass = $userInfo['user_pass'];
+                                $userfname = $userInfo['user_fname'];
+                                $userlname = $userInfo['user_lname'];
                                 // $useradmin = 
-                                $useractive = $userInfo['USER_ACTIVE'];
-                                $usersq = $userInfo['USER_SQ'];
-                                $usersa = $userInfo['USER_SA'];
+                                $useractive = $userInfo['user_active'];
+                                $usersq = $userInfo['user_sq'];
+                                $usersa = $userInfo['user_sa'];
 
                             }
                             echo ' <hr><center>';
@@ -119,8 +114,8 @@
                             echo '  </div>';
 
                             echo '  <div class="form-group">';
-                            echo '    <label for="userpass">User Password: </label>';
-                            echo '    <input required name="userpass" type="password" value="**************">';
+                            echo '    <label for="userpass">NEW User Password: </label>';
+                            echo '    <input required name="userpass" type="password" value="">';
                             echo '  </div>';
 
                             echo '  <div class="form-group">';
@@ -155,8 +150,10 @@
                             echo ' </br></center><hr>';
                         }
 
-
-                        $tsql = "SELECT * FROM B2BUSER WHERE USER_ADMIN = 0";
+                        // ==============================================
+                        // DISPLAY USERS
+                        // ==============================================
+                        $tsql = "SELECT * FROM b2buser WHERE user_admin = 0";
                         $getUsers = sqlsrv_query($conn, $tsql);
 
                         echo '    <div class="products">
@@ -177,36 +174,36 @@
 
                         if ($getUsers != null){
                             while($userRow = sqlsrv_fetch_array($getUsers, SQLSRV_FETCH_ASSOC)) {
-                                $userId = $userRow['USER_ID'];
-                                $userEmail = $userRow['USER_EMAIL'];
+                                $userId = $userRow['user_id'];
+                                $userEmail = $userRow['user_email'];
                                 // $userPassword = $userRow['USER_PASSWORD'];
-                                $userFName = $userRow['USER_FNAME'];
-                                $userLName = $userRow['USER_LNAME'];
-                                $userActive = $userRow['USER_ACTIVE'];
-                                $userSQ = $userRow['USER_SQ'];
+                                $userFName = $userRow['user_fname'];
+                                $userLName = $userRow['user_lname'];
+                                $userActive = $userRow['user_active'];
+                                $userSQ = $userRow['user_sq'];
                                 // $userSA = $userRow['USER_SA'];
 
                                 echo '            <tr style="border: 1px solid;">';
-                                echo '                <td><div><h3>'.$userId.'</h3></div>';
-                                echo '                        <div style="margin: 10px 0px;"><a href="/allUsers.php?id='.$userId.'">Edit</a></div>';
+                                echo '                <td><div><h3>'.htmlspecialchars($userId).'</h3></div>';
+                                echo '                        <div style="margin: 10px 0px;"><a href="/allUsers.php?id='.urlencode($userId).'">Edit</a></div>';
                                 echo '                        </td>'; 
-                                echo '                <td>'.$userActive.'</td>';
-                                echo '                <td>'.$userEmail.'</td>';
+                                echo '                <td>'.htmlspecialchars($userActive).'</td>';
+                                echo '                <td>'.htmlspecialchars($userEmail).'</td>';
                                 echo '                <td> ********** </td>';
-                                echo '                <td>'.$userFName.'</td>';
-                                echo '                <td>'.$userLName.'</td>';
-                                echo '                <td>'.$userSQ.'</td>';
+                                echo '                <td>'.htmlspecialchars($userFName).'</td>';
+                                echo '                <td>'.htmlspecialchars($userLName).'</td>';
+                                echo '                <td>'.htmlspecialchars($userSQ).'</td>';
                                 echo '                <td> ********** </td>';
                                 echo '            </tr>';
                             }
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
-                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            //redirect("https://php-back2books.azurewebsites.net/allUsers.php?fetch=err");
+                            redirect($HOME."allUsers.php?fetch=err");
                         }                                
                     } else {
-                        redirect("https://php-back2books.azurewebsites.net/");
+                        // redirect("https://php-back2books.azurewebsites.net/");
+                        redirect($HOME."pages/login.php");
                     }
                 ?>
         </div>

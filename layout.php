@@ -1,5 +1,8 @@
 <?php
     include('config.php');
+
+
+// ================= HEADER/NAVBAR AREA ============================== //
     echo '<header class="header">';
     echo '<div class="logo-container">';
     echo '  <a href="/"><img src="/images/b2b-logo-header.png" width="549" height="142" alt="Back to Books Logo"></a>';
@@ -10,10 +13,10 @@
     // echo '</div>';
     // echo '  <div class="favorites-container"><a href="/pages/favorites.php"><i class="fa fa-heart fa-4x"></i></a></div>';
     echo '  <div class="cart-container">';
-    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
-        $userId = $_SESSION["userId"];
-        $tsql = "SELECT COUNT(DISTINCT BOOK_ID) AS numInCart FROM CART_ITEMS WHERE CART_ID = (SELECT CART_ID FROM CART WHERE USER_ID = '$userId')";
-        $getCartNum = sqlsrv_query($conn, $tsql);
+    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
+        $userId = $_SESSION['userId'];
+        $tsql = "SELECT COUNT(DISTINCT book_id) AS numInCart FROM cart_items WHERE cart_id = (SELECT cart_id FROM cart WHERE user_id = ?)";
+        $getCartNum = sqlsrv_query($conn, $tsql, array($userId));
 
         $num = sqlsrv_fetch_array($getCartNum, SQLSRV_FETCH_ASSOC);
         if ($num != null) {
@@ -26,11 +29,12 @@
             </div>';
     echo '</header>';
 
+// ================= SIDE BAR ================================== //
     echo '<div class="sidebar">';
     
     echo '  <a href="/"><i class="fa fa-fw fa-home"></i> Home </a>';
-    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
-        if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
+    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
+        if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
             echo '<p Welcome back ADMIN, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</p>';
             echo '<a href="/allOrders.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ALL ORDERS </a>';
             echo '<a href="/allUsers.php"><i class="fa fa-users" aria-hidden="true"></i>ALL USERS </a>';
@@ -54,4 +58,6 @@
     echo '  <a href="/pages/about.php"><i class="fa fa-fw fa-info-circle"></i> About Us </a>';
     echo '  <a href="/pages/contact.php"><i class="fa fa-fw fa-envelope"></i> Contact</a>';
     echo '</div>';
+
+    
 ?>

@@ -1,27 +1,25 @@
 <?php
+// Define the HOME URL dynamically based on the server's host and protocol
+$host = $_SERVER['HTTP_HOST']; // Includes port if present
 
-// PHP Data Objects(PDO) Sample Code:
-// try {
-//     $AZURE_SQL_DATABASE = getenv('AZURE_SQL_DATABASE');
-//     $AZURE_SQL_PWD = getenv('AZURE_SQL_PWD');
-//     $AZURE_SQL_SERVERNAME = getenv('AZURE_SQL_SERVERNAME');
-//     $AZURE_SQL_UID = getenv('AZURE_SQL_UID');
+// Determine if the request is secure (HTTPS) or not (HTTP)
+// proxy servers may set HTTP_X_FORWARDED_PROTO to 'https' for secure requests for applications running behind load balancers or reverse proxies.
+$scheme = (
+    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') 
+) ? 'https' : 'http';
 
-//     $conn = new PDO("sqlsrv:server = tcp:$AZURE_SQL_SERVERNAME; Database = $AZURE_SQL_DATABASE", $AZURE_SQL_UID, $AZURE_SQL_PWD);
-//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// }
-// catch (PDOException $e) {
-//     print("Error connecting to SQL Server.");
-//     die(print_r($e));
-// }
+// Construct the HOME URL
+$HOME = $scheme . '://' . $host . '/';
 
 
-// SQL Server Extension Sample Code:
+// Get environment variables for Azure SQL Database connection
 $AZURE_SQL_DATABASE = getenv('AZURE_SQL_DATABASE');
 $AZURE_SQL_PWD = getenv('AZURE_SQL_PWD');
 $AZURE_SQL_SERVERNAME = getenv('AZURE_SQL_SERVERNAME');
 $AZURE_SQL_UID = getenv('AZURE_SQL_UID');
 
+// SQL Server Extension Sample Code:
 $connectionInfo = array(
     "UID" => $AZURE_SQL_UID, 
     "pwd" => $AZURE_SQL_PWD, 
@@ -31,12 +29,9 @@ $connectionInfo = array(
     "TrustServerCertificate" => 0);
 $serverName = "tcp:" . $AZURE_SQL_SERVERNAME;
 
-// $connectionOptions = array("Database"=>$AZURE_SQL_DATABASE,"Uid"=>$AZURE_SQL_UID, "PWD"=>$AZURE_SQL_PWD);
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 if (!$conn) {
     die("Connection failed: " . print_r(sqlsrv_errors(), true));
 }
-
-
 
 ?>

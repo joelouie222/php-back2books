@@ -20,7 +20,7 @@
 
     <!-- OUR CSS -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="logo-style.css">
+    <!-- <link rel="stylesheet" href="logo-style.css"> -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon-16x16.png">
 </head>
 
@@ -29,33 +29,37 @@
         // Include the configuration file
         include('layout.php');
     ?>
+
     <div class="container">
         <div id="content">
+            <!----------- Welcome Message ----------->
+            <center
             <div class="window">
-                <?php
-                    // if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true)
-                    //     echo '<h3> Wecome to Back 2 Books, '.$_SESSION['fname'].' '.$_SESSION['lname'].'!</h3>';
-                    // else
-                    //     echo '<h3> Wecome to Back 2 Books!</h3>';
-
-                    // if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1)
-                    //     echo '<h3> You are an ADMIN! </h3>';
-                    // else
-                    //     echo '<h3> You are NOT an admin! </h3>';
-                    // echo '<p> SESSION-loggedIn: '.$_SESSION["loggedIn"].'<p>';
-                    // echo '<p> SESSION-USER_FNAME: '.$_SESSION["fname"].'<p>';
-                    // echo '<p> SESSION-USER_LNAME: '.$_SESSION['lname'].'<p>';
-                    // echo '<p> SESSION-USER_ADMIN: '.$_SESSION["admin"].'<p>';
-                    // echo '<p> SESSION-loginEmail: '.$_SESSION["loginEmail"].'<p>';
-                    // echo '<p> SESSION-hashedPassword: '.$_SESSION["hashedPassword"].'<p>';
-                ?> 
                 <img src="images/welcome.gif" id="welcome">
+                <?php
+                    if (isset($_SESSION["loggedIn"]) AND $_SESSION["loggedIn"] == true)
+                        echo '<h3> Welcome to Back 2 Books, '.htmlspecialchars($_SESSION['fname']).' '.htmlspecialchars($_SESSION['lname']).'!</h3>';
+                    else if (isset($_SESSION["admin"]) AND $_SESSION["admin"] == 1)
+                        echo '<h3> Welcome to Back 2 Books, Admin!</h3>';
+                    else
+                        echo '<h3> Welcome to Back 2 Books!</h3>';
+                ?> 
                 </br>
             </div>
+            </center>
+
+            <!----------- Search Bar ----------->
             <center>
             <div class="window search">
+                <h2>Search for books</h2>
+                <br />
+                <p>Search for books, authors, or ISBNs. You can also sort the results by price or availability.</p>
+                <br />
+                <p>Note: The search is case-insensitive and will match any part of the book title, author name, or ISBN.</p>
+                <p>Use the search bar below to find books.</p>
+                <br />
                 <form action="../pages/search.php" method="POST">
-                    <input type="text" id="search" name="search" placeholder="Search" required>
+                    <input type="text" id="search" name="search" placeholder="Books title, author, ISBN..." required>
                     <button type="submit"><i class="fa fa-search"></i></button><br />
                 <label for="sortBy">Sort By:</label>
                 <select id="sortBy" name="sortBy">
@@ -67,6 +71,8 @@
                 </form>
             </div>
             </center>
+            
+            <!----------- Carousel ----------->
             <div class="window">
                 <div class="gallery-container-carousel">
                     <!--prev button-->
@@ -103,12 +109,14 @@
                 </div>
             </div>
             </br>
-            <div class="window about-us">
+            <center><div class="window about-us">
                 <p>Copyright 2023 Back 2 Books (B2B)</p>
-            </div>
+            </div></center>
         </div>
     </div>
-    <script>
+
+
+    <script> 
     document.addEventListener("DOMContentLoaded", function() {
         const cardContainer = document.querySelector(".card-container-carousel");
         const cards = document.querySelectorAll(".card-carousel");
@@ -139,6 +147,7 @@
         showCard(currentIndex);
     });
     </script>
+
 </body>
 
 

@@ -1,43 +1,45 @@
 <?php
-  session_start();
-  include('functions.php');
-  include('config.php');
-  if (!isset($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] != true || $_SESSION["admin"] != true) {
-    redirect("https://php-back2books.azurewebsites.net/");
-  }
-  //$userId = $_SESSION["userId"];
-  $sortSQL = "SELECT * FROM ORDERS ORDER BY ORDER_DATE DESC";
+    session_start();
+    include('functions.php');
+    include('config.php');
 
-  if (isset($_POST['sortBtn']) && $_POST['sortBtn'] == "apply"){
-    switch ($_POST['sortVal']) {
-        case "dateAsc":
-            $sortSQL = "SELECT * FROM ORDERS ORDER BY ORDER_DATE";
-            break;
-        case "priceDesc":
-            $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
-            INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
-                ON O.ORDER_ID = SUBQ.ORDER_ID
-            ORDER BY SUBQ.TOTAL_AMOUNT DESC";
-            break;
-        case "priceAsc":
-            $sortSQL = "SELECT O.*, SUBQ.TOTAL_AMOUNT FROM ORDERS AS O
-            INNER JOIN (SELECT ORDER_ID, SUM(PRICE * ORDER_QUANTITY) AS TOTAL_AMOUNT FROM ORDER_LINES GROUP BY ORDER_ID) AS SUBQ
-                ON O.ORDER_ID = SUBQ.ORDER_ID
-            ORDER BY SUBQ.TOTAL_AMOUNT";
-            break;
-        case "userDesc":
-            $sortSQL = "SELECT * FROM ORDERS ORDER BY USER_ID DESC";
-            break;
-        case "userAsc":
-            $sortSQL = "SELECT * FROM ORDERS ORDER BY USER_ID";
-            break;
-        case "dateDesc":
-            $sortSQL = "SELECT * FROM ORDERS ORDER BY ORDER_DATE DESC";
-            break;
-        default:
-            $sortSQL  = "SELECT * FROM ORDERS ORDER BY ORDER_DATE DESC";
+    // REDIRECT TO HOME if not logged in, or logged in but not admin
+    if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] != true || $_SESSION['admin'] != true) {
+        redirect($HOME);
     }
-  }
+
+    $sortSQL = "SELECT * FROM [order] ORDER BY order_date DESC";
+
+    if (isset($_POST['sortBtn']) && $_POST['sortBtn'] == "apply"){
+        switch ($_POST['sortVal']) {
+            case "dateAsc":
+                $sortSQL = "SELECT * FROM [order] ORDER BY order_date";
+                break;
+            case "priceDesc":
+                $sortSQL = "SELECT O.*, SUBQ.total_amount FROM [order] AS O
+                INNER JOIN (SELECT order_id, SUM(price * order_quantity) AS total_amount FROM order_lines GROUP BY order_id) AS SUBQ
+                    ON O.order_id = SUBQ.order_id
+                ORDER BY SUBQ.total_amount DESC";
+                break;
+            case "priceAsc":
+                $sortSQL = "SELECT O.*, SUBQ.total_amount FROM [order] AS O
+                INNER JOIN (SELECT order_id, SUM(price * order_quantity) AS total_amount FROM order_lines GROUP BY order_id) AS SUBQ
+                    ON O.order_id = SUBQ.order_id
+                ORDER BY SUBQ.total_amount";
+                break;
+            case "userDesc":
+                $sortSQL = "SELECT * FROM [order] ORDER BY user_id DESC";
+                break;
+            case "userAsc":
+                $sortSQL = "SELECT * FROM [order] ORDER BY USER_ID";
+                break;
+            case "dateDesc":
+                $sortSQL = "SELECT * FROM [order] ORDER BY order_date DESC";
+                break;
+            default:
+                $sortSQL  = "SELECT * FROM [order] ORDER BY order_date DESC";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +72,7 @@
                               
         <div class="products">
             <center>
-                <h1> A L L &nbsp &nbsp O R D E RS </h1>
+                <h1> A L L &nbsp &nbsp O R D E R S </h1>
             </center>
             <div> 
                 <div style="float: right; margin: 10px 50px 10px 0px;"><form method="post" action="">
@@ -88,7 +90,7 @@
                 </select></form></div>
 
                 <?php
-                    if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && $_SESSION["admin"] == true) {
+                    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true && $_SESSION['admin'] == true) {
                         $tsql = $sortSQL;
                         $getMyOrders = sqlsrv_query($conn, $tsql);
 
@@ -112,49 +114,55 @@
                         // echo '<div class="products">';
                         if (isset($_GET['fetch']) && $_GET['fetch'] == "err") {
                             echo '<div><h3> There was an error fetching your order history. Please try again later. </h3><div>';
+                            echo '<a href="'.$HOME.'allOrders.php">Click here to refresh</a>';
+                            die();
                         }
                         if ($getMyOrders != null){
+
+                            // get the lines for each order by looping through the orders (need order_id) 
                             while($orderRow = sqlsrv_fetch_array($getMyOrders, SQLSRV_FETCH_ASSOC)) {
-                                $orderId = $orderRow['ORDER_ID'];
-                                $userId = $orderRow['USER_ID'];
-                                $orderDate = $orderRow['ORDER_DATE']->format('Y-m-d');
-                                $orderDiscount = $orderRow['ORDER_DISCOUNT'];
-                                $orderShipAddr = $orderRow['SHIP_ADDR'];
-                                $orderPayment = $orderRow['PAY_METHOD'];
-                                $shipping = 6.99;
+                                $orderId = $orderRow['order_id'];
+                                $userId = $orderRow['user_id'];
+                                $orderDate = $orderRow['order_date']->format('Y-m-d');
+                                $orderDiscount = $orderRow['order_discount'];
+                                $orderShipAddr = $orderRow['ship_addr'];
+                                $orderPayment = $orderRow['pay_method'];
                                 $subTotal = 0;
 
-                                $tsql = "SELECT * FROM ORDER_LINES WHERE ORDER_ID = '$orderId'";
-
-                                $getOrderLines = sqlsrv_query($conn, $tsql);
+                                // =========================================================
+                                // GET ALL THE ORDER LINES FOR THE ORDER
+                                // =========================================================
+                                $tsql = "SELECT * FROM order_lines WHERE order_id = ?";
+                                $params = array($orderId);
+                                $getOrderLines = sqlsrv_query($conn, $tsql, $params);
                                 
                                 if ($getOrderLines != null){
                                     echo '            <tr style="border: 1px solid;">';
                                     echo '                <td><div><h3>'.$orderId.'</h3></div>';
-                                    echo '                        <div style="margin: 10px 0px;"><a href="https://php-back2books.azurewebsites.net/editOrder.php?id='.$orderId.'">Edit</a></div>';
+                                    echo '                    <div style="margin: 10px 0px;"><a href="'.$HOME.'editOrder.php?id='.$orderId.'">Edit</a></div>';
                                     // echo '                        <div><a href="">Delete</a></div>';
-                                    echo '                        </td>';
+                                    echo '                </td>';
                                     echo '                <td>'.$userId.'</td>';
                                     echo '                <td>'.$orderDate.'</td>';
                                     echo '                <td>'.$orderShipAddr.'</td>';
                                     echo '<td colspan="2">';
+
+                                    // Loop through the order lines to get book details 
                                     while($orderLines = sqlsrv_fetch_array($getOrderLines, SQLSRV_FETCH_ASSOC)) {
-                                        $bookId = $orderLines['BOOK_ID'];
-                                        $bookPrice = $orderLines['PRICE'];
-                                        $bookQty = $orderLines['ORDER_QUANTITY'];
+                                        $bookId = $orderLines['book_id'];
+                                        $bookPrice = $orderLines['price'];
+                                        $bookQty = $orderLines['order_quantity'];
 
                                         $subTotal = ($subTotal + ($bookPrice * $bookQty));
 
-                                        $tsql = "SELECT BOOK_TITLE, BOOK_ISBN FROM BOOKS WHERE BOOK_ID = '$bookId'";
+                                        $tsql = "SELECT book_title, book_isbn FROM book WHERE book_id = ?";
+                                        $params = array($bookId);
+                                        $getBookInfo = sqlsrv_query($conn, $tsql, $params);
 
-                                        $getBookInfo = sqlsrv_query($conn, $tsql);
-
-                                        if ($getOrderLines != null){
-
-                                            
+                                        if ($getBookInfo != null){
                                             while($bookInfo  = sqlsrv_fetch_array($getBookInfo , SQLSRV_FETCH_ASSOC)) {
-                                                $bookTitle = $bookInfo['BOOK_TITLE'];
-                                                $bookISBN = $bookInfo['BOOK_ISBN'];
+                                                $bookTitle = $bookInfo['book_title'];
+                                                $bookISBN = $bookInfo['book_isbn'];
                                                 
                                                 echo '<span> '.$bookTitle.' ['.$bookISBN.'] <span></br>
                                                         <span>'.$bookQty.'</span>                                                        
@@ -162,37 +170,41 @@
                                             }
                                             
                                         } else {
-                                            die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                            redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                                            // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                            redirect($HOME."allOrders.php?fetch=err");
                                         }
                                     }
+
+                                    $tax = ($subTotal * 0.0825); // 8.25% tax
+                                    $shipping = ($subTotal > 0) ? 6.99 : 0;
+
                                     echo '</td>';
                                     echo '                <td>'.number_format($subTotal, 2).'</td>';
                                     echo '                <td> - $ '.number_format($orderDiscount, 2).'</td>';
                                     echo '                <td>'.$orderPayment.'</td>';
-                                    echo '                <td><p style="margin-top: 5px;">Tax</br>$ '.number_format(($subTotal * 0.0825), 2).'</p></br>
-                                                             <p style="margin-bottom: 5px;">Shipping</br>$ '.$shipping.'</p></td>';
-                                    echo '                <td colspan="2">$ '.number_format(($subTotal - $orderDiscount + ($subTotal * 0.0825) + $shipping), 2).'</td>';
+                                    echo '                <td><p style="margin-top: 5px;">Tax</br>$ '.number_format(($tax), 2).'</p></br>
+                                                             <p style="margin-bottom: 5px;">Shipping</br>$ '.number_format(($shipping), 2).'</p></td>';
+                                    echo '                <td colspan="2">$ '.number_format(($subTotal - $orderDiscount + ($tax) + $shipping), 2).'</td>';
                                     echo '            </tr>';
 
                                 } else {
-                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
-                                    redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                                    // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    redirect($HOME."allOrders.php?fetch=err");
                                 }                                
                             }
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
-                            (print_r(sqlsrv_errors(), true));  // Print detailed error information
-                            redirect("https://php-back2books.azurewebsites.net/allOrders.php?fetch=err");
+                            // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            redirect($HOME."allOrders.php?fetch=err");
                         }
-
+                    } else { // NOT LOGGED IN redirect to login page
+                        redirect($HOME."pages/login.php");
                     }
                 ?>
-
-
             </div>
-        </div>
+        </div> <!-- end of products -->
+    </div> <!-- end of container -->
 </body>
 
 </html>
