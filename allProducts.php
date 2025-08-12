@@ -265,7 +265,7 @@
                         $tsql = "SELECT * FROM book";
                         $getBooks = sqlsrv_query($conn, $tsql);
 
-                        echo '     <div><center><a href="/allProducts.php?action=add"><button style="padding: 10px">ADD NEW PRODUCT</button></a></center></div>';
+                        echo '     <div><center><a href="/allProducts.php?action=add"><button style="padding: 10px color: green;">ADD NEW PRODUCT</button></a></center></div>';
                         echo '    <div class="products">
                                     <table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;">';
                         echo '        <thead>';
@@ -297,7 +297,10 @@
 
                                 echo '            <tr style="border: 1px solid;">';
                                 echo '                <td><div><h3>'.htmlspecialchars($bookId).'</h3></div>';
-                                echo '                        <div style="margin: 10px 0px;"><a href="">Edit</a></div>';
+                                // echo '                        <div style="margin: 10px 0px;"><a href="">Edit</a></div>';  //FUTURE IMPLEMENTATION
+                                // echo '                        <div style="margin: 10px 0px;"><a href="">Delete</a></div>';  //FUTURE IMPLEMENTATION
+                                // echo '                        <div style="margin: 10px 0px;"><a href="">Inactive</a></div>';  //FUTURE IMPLEMENTATION
+                                echo '                        <div style="margin: 10px 0px;"><a href="'.$HOME.'/pages/product.php?isbn='.urlencode($bookISBN).'" target="_blank">View</a></div>';
                                 echo '                        </td>'; 
                                 echo '                <td>'.htmlspecialchars($bookTitle).'</td>';
                                 echo '                <td>'.htmlspecialchars($bookISBN).'</td>';
