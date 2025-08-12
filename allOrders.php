@@ -188,14 +188,14 @@
                                     echo '            </tr>';
 
                                 } else {
-                                    die(print_r(sqlsrv_errors(), true));  // Print detailed error information
+                                    // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                                     redirect($HOME."allOrders.php?fetch=err");
                                 }                                
                             }
                             echo '        </tbody>';
                             echo '    </table></div>';
                         } else {
-                            (print_r(sqlsrv_errors(), true));  // Print detailed error information
+                            // die(print_r(sqlsrv_errors(), true));  // Print detailed error information
                             redirect($HOME."allOrders.php?fetch=err");
                         }
                     } else { // NOT LOGGED IN redirect to login page
