@@ -209,6 +209,9 @@
                 if (isset($_GET['update']) && $_GET['update'] == "err") {
                     echo '<h3 style="color: red"> Unable to update product quantity. Please try again later. </h3>';
                 }
+                if (isset($_GET['rem']) && $_GET['rem'] == "err") {
+                    echo '<h3 style="color: red"> Unable to remove product from cart. Please try again later. </h3>';
+                }
                 if (isset($_GET['order']) && $_GET['order'] == "err") {
                     echo '<h3 style="color: red"> There was a problem submitting your order. Please try again later. </h3>';
                 }
