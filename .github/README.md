@@ -203,13 +203,13 @@ Instructor: [Ali Dogru](mailto:alihikmet.dogru@utsa.edu)
 
 ## 🧩 Design Artifacts
 
-- 📊 [Lucidchart UML Design](https://lucid.app/lucidchart/invitations/accept/inv_5f1aa998-0f6d-45c3-b788-fbce3e6d0cd3)
+- 📊 [Lucidchart UML Design](https://lucid.app/lucidchart/invitations/accept/inv_5f1aa998-0f6d-45c3-b788-fbce3e6d0cd3)  
+  [📄 View UML Design as PDF](docs/lucidchart-uml.pdf)
 
+- 🖼️ [Google Drive Wireframe Folder](https://drive.google.com/drive/folders/1vGtIzw8nxCOGdjlfECfqK5tEcCy9Dy1C)  
 
-- 🖼️ [Google Drive Wireframe Folder](https://drive.google.com/drive/folders/1vGtIzw8nxCOGdjlfECfqK5tEcCy9Dy1C)
-
-
-- 🎨 [Figma Wireframe](https://www.figma.com/file/3CZV9JxNnTz4GMnEIf0u3d/Back2Books-Wireframe?type=design&node-id=0%3A1&mode=design&t=ZYBhj8Wr3YwOL20S-1)
+- 🎨 [Figma Wireframe](https://www.figma.com/file/3CZV9JxNnTz4GMnEIf0u3d/Back2Books-Wireframe?type=design&node-id=0%3A1&mode=design&t=ZYBhj8Wr3YwOL20S-1)  
+  [📄 View Figma Wireframe as PDF](docs/figma-wireframe.pdf)
 
 <br />
 
